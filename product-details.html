@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="View product details for GLOBALSTEPPER streetwear."
+    >
+
+    <title>Product Details | GLOBALSTEPPER</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="images/logo.png"
+    >
+</head>
+
+<body>
+
+  <header class="site-header">
+
+    <nav class="navbar" aria-label="Main navigation">
+
+        <a
+            href="index.html"
+            class="logo"
+            aria-label="GLOBALSTEPPER home page"
+        >
+            <img
+                src="images/logo.png"
+                alt="GLOBALSTEPPER logo"
+            >
+        </a>
+
+        <button
+            class="menu-toggle"
+            id="menu-toggle"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="nav-links"
+        >
+            ☰
+        </button>
+
+        <ul class="nav-links" id="nav-links">
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="products.html" aria-current="page">
+                    Shop
+                </a>
+            </li>
+
+            <li>
+                <a href="about.html">
+                    About
+                </a>
+            </li>
+
+            <li>
+                <a href="contact.html">
+                    Contact
+                </a>
+            </li>
+
+            <li>
+                <a href="wishlist.html" class="wishlist-link">
+                    Wishlist
+                    <span id="wishlist-count">0</span>
+                </a>
+            </li>
+
+            <li>
+                <button
+                    class="theme-toggle"
+                    id="theme-toggle"
+                    type="button"
+                    aria-label="Switch to dark mode"
+                    aria-pressed="false"
+                >
+                    <span aria-hidden="true">☾</span>
+                    <span class="theme-toggle-text">Dark</span>
+                </button>
+            </li>
+
+            <li>
+                <a href="cart.html" class="cart-link">
+                    Cart
+                    <span
+                        id="cart-count"
+                        aria-label="items in cart"
+                    >
+                        0
+                    </span>
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+    <main class="product-detail-page">
+
+        <nav
+            class="breadcrumb"
+            aria-label="Breadcrumb"
+        >
+            <a href="index.html">Home</a>
+            <span aria-hidden="true">/</span>
+            <a href="products.html">Shop</a>
+            <span aria-hidden="true">/</span>
+            <span id="breadcrumb-product">Product</span>
+        </nav>
+
+        <section
+            class="product-detail-container"
+            aria-labelledby="detail-product-name"
+        >
+
+            <div class="product-detail-image">
+
+                <img
+                    id="detail-product-image"
+                    src="images/global tracksuit 1.jpeg"
+                    alt="GLOBALSTEPPER product"
+                >
+
+            </div>
+
+            <div class="product-detail-content">
+
+                <p
+                    class="product-category"
+                    id="detail-product-category"
+                >
+                    Tracksuits
+                </p>
+
+                <h1 id="detail-product-name">
+                    Grey No Love Lost Tracksuit
+                </h1>
+
+                <p
+                    class="product-detail-price"
+                    id="detail-product-price"
+                >
+                    £185.99
+                </p>
+
+                <p
+                    class="product-detail-description"
+                    id="detail-product-description"
+                >
+                    Premium unisex streetwear designed for comfort,
+                    confidence and everyday wear.
+                </p>
+
+                <ul class="product-feature-list">
+                    <li>Premium unisex fit</li>
+                    <li>Comfortable everyday fabric</li>
+                    <li>Exclusive GLOBALSTEPPER design</li>
+                    <li>UK delivery available</li>
+                </ul>
+
+                <div class="product-option">
+
+                    <label for="product-size">
+                        Select size
+                    </label>
+
+                    <select id="product-size">
+
+                        <option value="">
+                            Choose a size
+                        </option>
+
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+
+                    </select>
+
+                </div>
+
+                <div class="product-option">
+
+                    <label for="product-quantity">
+                        Quantity
+                    </label>
+
+                    <input
+                        type="number"
+                        id="product-quantity"
+                        min="1"
+                        max="10"
+                        value="1"
+                    >
+
+                </div>
+
+                <button
+                    class="detail-add-to-cart-btn"
+                    id="detail-add-to-cart"
+                    type="button"
+                >
+                    Add to Cart
+                </button>
+
+                <p
+                    class="detail-form-message"
+                    id="detail-form-message"
+                    aria-live="polite"
+                ></p>
+
+                <a
+                    href="products.html"
+                    class="text-link"
+                >
+                    Return to all products
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+
+                <img
+                    src="images/logo.png"
+                    alt="GLOBALSTEPPER logo"
+                >
+
+                <p>
+                    Premium streetwear representing ambition,
+                    confidence and progression.
+                </p>
+
+            </div>
+
+            <div class="footer-links">
+
+                <h2>Quick Links</h2>
+
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+
+            </div>
+
+            <div class="footer-links">
+
+                <h2>Customer Support</h2>
+
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="cart.html">Shopping Cart</a></li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+                &copy; <span id="current-year"></span>
+                GLOBALSTEPPER. All rights reserved.
+            </p>
+
+            <p>
+                Student e-commerce project developed using HTML,
+                CSS and JavaScript.
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

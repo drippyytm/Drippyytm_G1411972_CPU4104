@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wishlist | GLOBALSTEPPER</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="images/logo.png"
+    >
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <nav class="navbar" aria-label="Main navigation">
+
+        <a
+            href="index.html"
+            class="logo"
+            aria-label="GLOBALSTEPPER home page"
+        >
+            <img
+                src="images/logo.png"
+                alt="GLOBALSTEPPER logo"
+            >
+        </a>
+
+        <button
+            class="menu-toggle"
+            id="menu-toggle"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="nav-links"
+        >
+            ☰
+        </button>
+
+        <ul class="nav-links" id="nav-links">
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="products.html">
+                    Shop
+                </a>
+            </li>
+
+            <li>
+                <a href="about.html">
+                    About
+                </a>
+            </li>
+
+            <li>
+                <a href="contact.html">
+                    Contact
+                </a>
+            </li>
+
+            <li>
+                <a
+                    href="wishlist.html"
+                    class="wishlist-link"
+                    aria-current="page"
+                >
+                    Wishlist
+                    <span id="wishlist-count">0</span>
+                </a>
+            </li>
+
+            <li>
+                <button
+                    class="theme-toggle"
+                    id="theme-toggle"
+                    type="button"
+                    aria-label="Switch to dark mode"
+                    aria-pressed="false"
+                >
+                    <span aria-hidden="true">☾</span>
+                    <span class="theme-toggle-text">Dark</span>
+                </button>
+            </li>
+
+            <li>
+                <a href="cart.html" class="cart-link">
+                    Cart
+                    <span
+                        id="cart-count"
+                        aria-label="items in cart"
+                    >
+                        0
+                    </span>
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+<section class="shop-header wishlist-hero reveal">
+
+    <div class="container">
+
+        <h1>Wishlist</h1>
+
+        <p>Your saved GLOBALSTEPPER products.</p>
+
+    </div>
+
+
+</section>
+
+
+<main class="shop-page">
+
+   <div
+    id="wishlist-products"
+    class="all-products-grid wishlist-grid reveal"
+>
+
+</div>
+
+   <div
+    id="empty-wishlist"
+    class="empty-wishlist reveal"
+>
+    <h2>Your wishlist is empty</h2>
+
+    <p>
+        Save your favourite GLOBALSTEPPER pieces and they'll appear here.
+    </p>
+
+    <a href="products.html" class="btn">
+        Shop Collection
+    </a>
+</div> 
+
+</main>
+
+<footer class="site-footer">
+
+    <div class="footer-grid">
+
+        <!-- BRAND -->
+        <div class="footer-brand">
+
+            <img
+                src="images/logo.png"
+                alt="GLOBALSTEPPER logo"
+            >
+
+            <p>
+                Premium streetwear representing ambition,
+                confidence and progression.
+            </p>
+
+            <div class="footer-socials">
+
+                <p class="footer-social-title">
+                    FOLLOW GLOBALSTEPPER
+                </p>
+
+                <div class="social-links">
+
+                    <a
+                        href="#"
+                        class="social-link"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        Instagram
+                    </a>
+
+                    <a
+                        href="#"
+                        class="social-link"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        TikTok
+                    </a>
+
+                    <a
+                        href="#"
+                        class="social-link"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        YouTube
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUICK LINKS -->
+        <div class="footer-links">
+
+            <h2>
+                Quick Links
+            </h2>
+
+            <ul>
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="products.html">
+                        Shop
+                    </a>
+                </li>
+
+                <li>
+                    <a href="about.html">
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contact.html">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- CUSTOMER SUPPORT -->
+        <div class="footer-links">
+
+            <h2>
+                Customer Support
+            </h2>
+
+            <ul>
+
+                <li>
+                    <a href="contact.html">
+                        Contact Us
+                    </a>
+                </li>
+
+                <li>
+                    <a href="wishlist.html">
+                        Wishlist
+                    </a>
+                </li>
+
+                <li>
+                    <a href="cart.html">
+                        Shopping Cart
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <!-- BOTTOM -->
+    <div class="footer-bottom">
+
+        <p>
+            © <span id="current-year"></span>
+            GLOBALSTEPPER. All rights reserved.
+        </p>
+
+        <p>
+            Student e-commerce project developed using HTML,
+            CSS and JavaScript.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

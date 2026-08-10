@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Review and manage your GLOBALSTEPPER shopping cart."
+    >
+
+    <title>Shopping Cart | GLOBALSTEPPER</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="images/logo.png"
+    >
+</head>
+
+<body>
+
+ <header class="site-header">
+
+    <nav class="navbar" aria-label="Main navigation">
+
+        <a
+            href="index.html"
+            class="logo"
+            aria-label="GLOBALSTEPPER home page"
+        >
+            <img
+                src="images/logo.png"
+                alt="GLOBALSTEPPER logo"
+            >
+        </a>
+
+        <button
+            class="menu-toggle"
+            id="menu-toggle"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="nav-links"
+        >
+            ☰
+        </button>
+
+        <ul class="nav-links" id="nav-links">
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="products.html">
+                    Shop
+                </a>
+            </li>
+
+            <li>
+                <a href="about.html">
+                    About
+                </a>
+            </li>
+
+            <li>
+                <a href="contact.html">
+                    Contact
+                </a>
+            </li>
+
+            <li>
+                <a href="wishlist.html" class="wishlist-link">
+                    Wishlist
+                    <span id="wishlist-count">0</span>
+                </a>
+            </li>
+
+            <li>
+                <button
+                    class="theme-toggle"
+                    id="theme-toggle"
+                    type="button"
+                    aria-label="Switch to dark mode"
+                    aria-pressed="false"
+                >
+                    <span aria-hidden="true">☾</span>
+                    <span class="theme-toggle-text">Dark</span>
+                </button>
+            </li>
+
+            <li>
+                <a
+                    href="cart.html"
+                    class="cart-link"
+                    aria-current="page"
+                >
+                    Cart
+                    <span
+                        id="cart-count"
+                        aria-label="items in cart"
+                    >
+                        0
+                    </span>
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+    <main class="cart-page">
+
+        <section class="cart-header">
+
+            <p class="section-label">
+                YOUR ORDER
+            </p>
+
+            <h1>
+                Shopping Cart
+            </h1>
+
+            <p>
+                Review your selected GLOBALSTEPPER products.
+            </p>
+
+        </section>
+
+        <section class="cart-layout">
+
+            <div class="cart-items-section">
+
+                <h2>
+                    Cart Items
+                </h2>
+
+                <div
+                    id="cart-items"
+                    class="cart-items"
+                    aria-live="polite"
+                ></div>
+
+                <div
+                    id="empty-cart-message"
+                    class="empty-cart-message"
+                    hidden
+                >
+                    <h3>Your cart is empty</h3>
+
+                    <p>
+                        Add some GLOBALSTEPPER products before checking out.
+                    </p>
+
+                    <a
+                        href="products.html"
+                        class="btn"
+                    >
+                        Continue Shopping
+                    </a>
+                </div>
+
+            </div>
+
+            <aside
+                class="cart-summary"
+                aria-labelledby="order-summary-heading"
+            >
+
+                <h2 id="order-summary-heading">
+                    Order Summary
+                </h2>
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <span id="cart-subtotal">
+                        £0.00
+                    </span>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>
+                        Delivery
+                    </span>
+
+                    <span>
+                        Free
+                    </span>
+
+                </div>
+
+                <div class="summary-row summary-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <span id="cart-total">
+                        £0.00
+                    </span>
+
+                </div>
+
+                <button
+                    class="checkout-button"
+                    id="checkout-button"
+                    type="button"
+                >
+                    Proceed to Checkout
+                </button>
+
+                <button
+                    class="clear-cart-button"
+                    id="clear-cart-button"
+                    type="button"
+                >
+                    Clear Cart
+                </button>
+
+                <p
+                    id="cart-page-message"
+                    class="cart-page-message"
+                    aria-live="polite"
+                ></p>
+
+                <p class="cart-disclaimer">
+                    This is a front-end student project. No real payment
+                    will be processed.
+                </p>
+
+            </aside>
+
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+
+                <img
+                    src="images/logo.png"
+                    alt="GLOBALSTEPPER logo"
+                >
+
+                <p>
+                    Premium streetwear representing ambition,
+                    confidence and progression.
+                </p>
+
+            </div>
+
+            <div class="footer-links">
+
+                <h2>Quick Links</h2>
+
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+
+            </div>
+
+            <div class="footer-links">
+
+                <h2>Customer Support</h2>
+
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="cart.html">Shopping Cart</a></li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+                &copy; <span id="current-year"></span>
+                GLOBALSTEPPER. All rights reserved.
+            </p>
+
+            <p>
+                Student e-commerce project developed using HTML,
+                CSS and JavaScript.
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

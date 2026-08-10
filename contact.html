@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Contact GLOBALSTEPPER for product and customer service enquiries."
+    >
+
+    <title>Contact | GLOBALSTEPPER</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="images/logo.png"
+    >
+</head>
+
+<body>
+
+    <header class="site-header">
+
+        <nav
+            class="navbar"
+            aria-label="Main navigation"
+        >
+
+            <a
+                href="index.html"
+                class="logo"
+                aria-label="GLOBALSTEPPER home page"
+            >
+                <img
+                    src="images/logo.png"
+                    alt="GLOBALSTEPPER logo"
+                >
+            </a>
+
+            <button
+                class="menu-toggle"
+                id="menu-toggle"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+                aria-controls="nav-links"
+            >
+                ☰
+            </button>
+
+            <ul
+                class="nav-links"
+                id="nav-links"
+            >
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+
+                <li>
+                    <a
+                        href="contact.html"
+                        aria-current="page"
+                    >
+                        Contact
+                    </a>
+                </li>
+
+              <li>
+    <a href="wishlist.html" class="wishlist-link">
+        Wishlist
+        <span id="wishlist-count">0</span>
+    </a>
+</li>
+                    
+               
+<li>
+    <button
+        class="theme-toggle"
+        id="theme-toggle"
+        type="button"
+        aria-label="Switch to dark mode"
+        aria-pressed="false"
+    >
+        <span aria-hidden="true">☾</span>
+        <span class="theme-toggle-text">Dark</span>
+    </button>
+</li>
+
+
+                <li>
+                    <a
+                        href="cart.html"
+                        class="cart-link"
+                    >
+                        Cart
+                        <span
+                            id="cart-count"
+                            aria-label="items in cart"
+                        >
+                            0
+                        </span>
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+
+    </header>
+
+    <main class="contact-page">
+
+        <section class="contact-hero">
+
+            <p class="section-label">
+                GET IN TOUCH
+            </p>
+
+            <h1>
+                GLOBALSTEPPER
+            </h1>
+
+            <p>
+                Questions, collaborations or support.
+                         We're here to help.
+            </p>
+
+        </section>
+
+        <section class="contact-layout">
+
+            <div class="contact-information">
+
+                <p class="section-label">
+                    CUSTOMER SUPPORT
+                </p>
+
+                <h2>
+                    We’re Here to Help
+                </h2>
+
+                <p>
+                    Complete the contact form and a member of the
+                    GLOBALSTEPPER team will respond as soon as possible.
+                </p>
+
+                <div class="contact-detail-card">
+
+                    <h3>Email</h3>
+
+                    <p>
+                        support@globalstepper.co.uk
+                    </p>
+
+                </div>
+
+                <div class="contact-detail-card">
+
+                    <h3>Response time</h3>
+
+                    <p>
+                        Within two working days
+                    </p>
+
+                </div>
+
+                <div class="contact-detail-card">
+
+                    <h3>Business hours</h3>
+
+                    <p>
+                        Monday to Friday, 9:00am–5:00pm
+                    </p>
+
+                </div>
+
+            </div>
+
+            <form
+                id="contact-form"
+                class="contact-form"
+                novalidate
+            >
+
+                <div class="form-group">
+
+                    <label for="contact-name">
+                        Full name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="contact-name"
+                        name="name"
+                        autocomplete="name"
+                        required
+                    >
+
+                    <p
+                        class="field-error"
+                        id="name-error"
+                        aria-live="polite"
+                    ></p>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="contact-email">
+                        Email address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="contact-email"
+                        name="email"
+                        autocomplete="email"
+                        required
+                    >
+
+                    <p
+                        class="field-error"
+                        id="email-error"
+                        aria-live="polite"
+                    ></p>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="contact-subject">
+                        Subject
+                    </label>
+
+                    <select
+                        id="contact-subject"
+                        name="subject"
+                        required
+                    >
+                        <option value="">
+                            Choose a subject
+                        </option>
+
+                        <option value="product">
+                            Product enquiry
+                        </option>
+
+                        <option value="sizing">
+                            Sizing enquiry
+                        </option>
+
+                        <option value="delivery">
+                            Delivery enquiry
+                        </option>
+
+                        <option value="general">
+                            General enquiry
+                        </option>
+                    </select>
+
+                    <p
+                        class="field-error"
+                        id="subject-error"
+                        aria-live="polite"
+                    ></p>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="contact-message">
+                        Message
+                    </label>
+
+                    <textarea
+                        id="contact-message"
+                        name="message"
+                        rows="7"
+                        maxlength="500"
+                        required
+                    ></textarea>
+
+                    <div class="message-information">
+
+                        <p
+                            class="field-error"
+                            id="message-error"
+                            aria-live="polite"
+                        ></p>
+
+                        <p id="character-count">
+                            0 / 500
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group checkbox-group">
+
+                    <input
+                        type="checkbox"
+                        id="contact-consent"
+                        name="consent"
+                    >
+
+                    <label for="contact-consent">
+                        I agree that my details may be used to respond to
+                        this enquiry.
+                    </label>
+
+                </div>
+
+                <p
+                    class="field-error"
+                    id="consent-error"
+                    aria-live="polite"
+                ></p>
+
+                <button
+                    type="submit"
+                    class="contact-submit-button"
+                >
+                    Send Message
+                </button>
+
+                <p
+                    id="contact-form-message"
+                    class="contact-form-message"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+
+                <img
+                    src="images/logo.png"
+                    alt="GLOBALSTEPPER logo"
+                >
+
+                <p>
+                    Premium streetwear representing ambition,
+                    confidence and progression.
+                </p>
+
+            </div>
+
+            <div class="footer-links">
+
+                <h2>Quick Links</h2>
+
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Shop</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+
+            </div>
+
+            <div class="footer-links">
+
+                <h2>Customer Support</h2>
+
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="cart.html">Shopping Cart</a></li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+                &copy; <span id="current-year"></span>
+                GLOBALSTEPPER. All rights reserved.
+            </p>
+
+            <p>
+                Student e-commerce project developed using HTML,
+                CSS and JavaScript.
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
