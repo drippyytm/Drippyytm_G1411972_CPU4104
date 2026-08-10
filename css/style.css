@@ -497,7 +497,7 @@ textarea:focus-visible {
     overflow: hidden;
     color: var(--colour-white);
     background-color: var(--colour-black);
-    background-image: url("../images/hero.jpeg");
+    background-image: url("../images/hero-small.jpeg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
