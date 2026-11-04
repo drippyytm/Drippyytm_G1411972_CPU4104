@@ -291,7 +291,7 @@ const products = [
         id: "1",
         name: "Grey No Love Lost Tracksuit",
         price: 185.99,
-        image: "images/global tracksuit 1.jpeg",
+        image: "media/images/global tracksuit 1.jpeg",
         category: "Tracksuits",
         description:
             "A premium grey tracksuit featuring the GLOBALSTEPPER No Love Lost design."
@@ -300,7 +300,7 @@ const products = [
         id: "2",
         name: "Black Been Da Goat Tracksuit",
         price: 185.99,
-        image: "images/global tracksuit 2.jpeg",
+        image: "media/images/global tracksuit 2.jpeg",
         category: "Tracksuits",
         description:
             "A statement black tracksuit featuring the GLOBALSTEPPER Been Da Goat design."
@@ -309,7 +309,7 @@ const products = [
         id: "3",
         name: "Signature Tracksuit",
         price: 179.99,
-        image: "images/global tracksuit 3.jpeg",
+        image: "media/images/global tracksuit 3.jpeg",
         category: "Tracksuits",
         description:
             "A signature GLOBALSTEPPER tracksuit made for a bold streetwear look."
@@ -318,7 +318,7 @@ const products = [
         id: "4",
         name: "Grey Logo Short Set",
         price: 125.99,
-        image: "images/shortset.jpeg",
+        image: "media/images/shortset.jpeg",
         category: "Short Sets",
         description:
             "A matching grey T-shirt and shorts set with GLOBALSTEPPER branding."
@@ -327,7 +327,7 @@ const products = [
         id: "5",
         name: "Limited Edition Green Tracksuit",
         price: 189.99,
-        image: "images/limited-green-tracksuit.jpeg",
+        image: "media/images/limited-green-tracksuit.jpeg",
         category: "Tracksuits",
         description:
             "A green limited-edition tracksuit featuring bold front and back graphics."
@@ -336,7 +336,7 @@ const products = [
         id: "6",
         name: "Limited Edition Black Tracksuit",
         price: 189.99,
-        image: "images/limited-black-tracksuit.jpeg",
+        image: "media/images/limited-black-tracksuit.jpeg",
         category: "Tracksuits",
         description:
             "A black limited-edition tracksuit with bold GLOBALSTEPPER graphics."
@@ -345,7 +345,7 @@ const products = [
         id: "7",
         name: "Rich of Pain Black T-Shirt",
         price: 64.99,
-        image: "images/rich-of-pain-black.jpeg",
+        image: "media/images/rich-of-pain-black.jpeg",
         category: "T-Shirts",
         description:
             "A black oversized T-shirt with Rich of Pain artwork."
@@ -354,7 +354,7 @@ const products = [
         id: "8",
         name: "Rich of Pain Grey T-Shirt",
         price: 64.99,
-        image: "images/rich-of-pain-grey.jpeg",
+        image: "media/images/rich-of-pain-grey.jpeg",
         category: "T-Shirts",
         description:
             "A grey oversized T-shirt with contrasting Rich of Pain artwork."
@@ -363,7 +363,7 @@ const products = [
         id: "9",
         name: "Money Not Friends Black T-Shirt",
         price: 64.99,
-        image: "images/money-not-friends-black.jpeg",
+        image: "media/images/money-not-friends-black.jpeg",
         category: "T-Shirts",
         description:
             "A black statement T-shirt featuring the Money Not Friends design."
@@ -372,7 +372,7 @@ const products = [
         id: "10",
         name: "Money Not Friends Grey T-Shirt",
         price: 64.99,
-        image: "images/money-not-friends-grey.jpeg",
+        image: "media/images/money-not-friends-grey.jpeg",
         category: "T-Shirts",
         description:
             "A grey statement T-shirt featuring the Money Not Friends design."
@@ -381,7 +381,7 @@ const products = [
         id: "11",
         name: "Too Gucci Grey T-Shirt",
         price: 69.99,
-        image: "images/too-gucci-grey.jpeg",
+        image: "media/images/too-gucci-grey.jpeg",
         category: "T-Shirts",
         description:
             "A grey oversized T-shirt featuring the Too Gucci graphic."
@@ -390,7 +390,7 @@ const products = [
         id: "12",
         name: "Too Gucci Black T-Shirt",
         price: 69.99,
-        image: "images/too-gucci-black.jpeg",
+        image: "media/images/too-gucci-black.jpeg",
         category: "T-Shirts",
         description:
             "A black oversized T-shirt featuring the Too Gucci graphic."
@@ -642,7 +642,7 @@ function initialiseCartPage() {
                             data-item-id="${itemIdentifier}"
                             aria-label="Decrease quantity of ${item.name}"
                         >
-                            -
+                            −
                         </button>
 
                         <span
@@ -1339,6 +1339,7 @@ function initialiseCartDrawer() {
     const emptyMessage = document.querySelector("#cart-drawer-empty");
     const subtotalElement = document.querySelector("#cart-drawer-subtotal");
     const checkoutButton = document.querySelector("#cart-drawer-checkout");
+    const floatingCartButton = document.querySelector("#floating-cart-button");
 
     if (
         !drawer ||
@@ -1352,8 +1353,6 @@ function initialiseCartDrawer() {
     }
 
     function openDrawer() {
-        console.log("Drawer opened");
-        
         renderDrawer();
         drawer.classList.add("open");
         drawer.setAttribute("aria-hidden", "false");
@@ -1437,7 +1436,7 @@ function initialiseCartDrawer() {
                             data-item-id="${itemIdentifier}"
                             aria-label="Decrease quantity of ${item.name}"
                         >
-                            
+                            −
                         </button>
 
                         <span>
@@ -1585,15 +1584,9 @@ function initialiseCartDrawer() {
         openDrawer
     );
 
-    const floatingCartButton =
-    document.querySelector("#floating-cart-button");
-
-if (floatingCartButton) {
-    floatingCartButton.addEventListener("click", () => {
-        openDrawer();
-    });
-}
-
+    if (floatingCartButton) {
+        floatingCartButton.addEventListener("click", openDrawer);
+    }
 
     if (checkoutButton) {
         checkoutButton.addEventListener(
@@ -1606,27 +1599,24 @@ if (floatingCartButton) {
 }
 
 
-/* ---------- PAGE LOADER ---------- */
+
+/* GLOBALSTEPPER LOADING SCREEN */
 
 function initialisePageLoader() {
-    const pageLoader =
-        document.querySelector("#page-loader");
+  const pageLoader = document.querySelector("#page-loader");
 
-    if (!pageLoader) {
-        return;
-    }
+  if (!pageLoader) return;
 
-    function hideLoader() {
-        window.setTimeout(() => {
-            pageLoader.classList.add("hidden");
-        }, 100);
-    }
+  // Keep the intro visible for 3 seconds.
+  window.setTimeout(() => {
+    pageLoader.classList.add("hidden");
 
-    if (document.readyState === "complete") {
-        hideLoader();
-    } else {
-        window.addEventListener("load", hideLoader);
-    }
+    // Remove it after the fade-out.
+    window.setTimeout(() => {
+      pageLoader.remove();
+    }, 700);
+
+  }, 3000);
 }
 
 /* ---------- QUICK VIEW ---------- */
@@ -1768,14 +1758,11 @@ if (originalAddButton) {
         }
     }
 
-quickViewButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-
-        openQuickView(button);
+    quickViewButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            openQuickView(button);
+        });
     });
-});
 
     closeButton.addEventListener(
         "click",
@@ -2125,6 +2112,193 @@ function initialiseLiveSearchSuggestions() {
     });
 }
 
+/* ===========================================================
+   PREMIUM ABOUT PAGE EFFECTS
+=========================================================== */
+
+function initialiseAboutPageEffects() {
+
+    const aboutPage =
+        document.querySelector(".about-page");
+
+    if (!aboutPage) {
+        return;
+    }
+
+
+    /* ---------- MOUSE GLOW ---------- */
+
+    aboutPage.addEventListener("mousemove", (event) => {
+
+        aboutPage.style.setProperty(
+            "--mouse-x",
+            `${event.clientX}px`
+        );
+
+        aboutPage.style.setProperty(
+            "--mouse-y",
+            `${event.clientY}px`
+        );
+
+    });
+
+
+    /* ---------- SCROLL REVEAL ---------- */
+
+    const revealElements =
+        document.querySelectorAll(
+            ".about-story-section, " +
+            ".mission-card, " +
+            ".brand-values-section .section-heading, " +
+            ".value-card, " +
+            ".about-cta"
+        );
+
+    revealElements.forEach((element) => {
+        element.classList.add("reveal-premium");
+    });
+
+
+    const revealObserver =
+        new IntersectionObserver(
+            (entries, observer) => {
+
+                entries.forEach((entry) => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add(
+                            "visible"
+                        );
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+
+    revealElements.forEach((element) => {
+        revealObserver.observe(element);
+    });
+
+
+    /* ---------- 3D TILT ---------- */
+
+    const tiltCards =
+        document.querySelectorAll(
+            ".about-logo-card, " +
+            ".mission-card, " +
+            ".value-card"
+        );
+
+
+    tiltCards.forEach((card) => {
+
+        card.addEventListener(
+            "mousemove",
+            (event) => {
+
+                if (
+                    window.matchMedia(
+                        "(max-width: 700px)"
+                    ).matches
+                ) {
+                    return;
+                }
+
+                const rect =
+                    card.getBoundingClientRect();
+
+                const x =
+                    event.clientX -
+                    rect.left;
+
+                const y =
+                    event.clientY -
+                    rect.top;
+
+                const centerX =
+                    rect.width / 2;
+
+                const centerY =
+                    rect.height / 2;
+
+                const rotateX =
+                    ((y - centerY) /
+                    centerY) * -4;
+
+                const rotateY =
+                    ((x - centerX) /
+                    centerX) * 4;
+
+
+                card.style.transform =
+                    `perspective(1000px)
+                     rotateX(${rotateX}deg)
+                     rotateY(${rotateY}deg)
+                     translateY(-6px)`;
+
+            }
+        );
+
+
+        card.addEventListener(
+            "mouseleave",
+            () => {
+
+                card.style.transform =
+                    "perspective(1000px) rotateX(0) rotateY(0) translateY(0)";
+
+            }
+        );
+
+    });
+
+
+    /* ---------- HERO PARALLAX ---------- */
+
+    const hero =
+        document.querySelector(".about-hero");
+
+    if (hero) {
+
+        window.addEventListener(
+            "scroll",
+            () => {
+
+                const scrollPosition =
+                    window.scrollY;
+
+                const movement =
+                    Math.min(
+                        scrollPosition * 0.08,
+                        35
+                    );
+
+                hero.style.transform =
+                    `translateY(${movement}px)`;
+
+            },
+            {
+                passive: true
+            }
+        );
+
+    }
+
+}
+
+
+
 /* ---------- PAGE INITIALISATION ---------- */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -2144,8 +2318,9 @@ document.addEventListener("DOMContentLoaded", () => {
     initialiseScrollReveal();
     initialiseThemeToggle();
     initialiseLiveSearchSuggestions();
-
+    initialiseAboutPageEffects();
     updateCartCount();
     updateWishlistCount();
     displayCurrentYear();
+    initialiseAboutPageEffects();
 });
