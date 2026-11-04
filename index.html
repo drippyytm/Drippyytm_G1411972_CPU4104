@@ -224,6 +224,79 @@ content="GLOBALSTEPPER premium unisex streetwear. Every journey begins with one 
     }
 }
 
+
+/* FALLING GLOBALSTEPPER GLOBES */
+
+#gs-intro {
+    overflow: hidden !important;
+    isolation: isolate;
+}
+
+#falling-globes {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+#gs-intro .gs-intro-content {
+    position: relative;
+    z-index: 2;
+}
+
+.falling-globe {
+    position: absolute;
+    top: -130px;
+    left: 0;
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    opacity: 0;
+    filter: grayscale(1);
+    animation: globeRain linear forwards;
+    will-change: transform;
+}
+
+@keyframes globeRain {
+    0% {
+        transform: translate3d(0, -100px, 0)
+                   rotate(0deg);
+        opacity: 0;
+    }
+
+    12% {
+        opacity: 0.45;
+    }
+
+    85% {
+        opacity: 0.45;
+    }
+
+    100% {
+        transform: translate3d(
+            70px,
+            calc(100vh + 260px),
+            0
+        ) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .falling-globe {
+        width: 42px;
+        height: 42px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .falling-globe {
+        animation: none !important;
+        display: none;
+    }
+}
+    
 </style>
 </head>
 
@@ -232,6 +305,10 @@ content="GLOBALSTEPPER premium unisex streetwear. Every journey begins with one 
 <!-- GLOBALSTEPPER LOADING SCREEN -->
 
 <div id="gs-intro" aria-label="GLOBALSTEPPER loading">
+
+    
+<!-- FALLING GLOBALSTEPPER GLOBE LOGOS -->
+<div id="falling-globes" aria-hidden="true"></div>
 
     <div class="gs-intro-content">
 
@@ -940,5 +1017,86 @@ content="GLOBALSTEPPER premium unisex streetwear. Every journey begins with one 
 })();
 </script>
 
+
+<script>
+(function () {
+
+    const container =
+        document.getElementById("falling-globes");
+
+    const intro =
+        document.getElementById("gs-intro");
+
+    if (!container || !intro) return;
+
+    if (window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches) return;
+
+    const globeImage =
+        "media/images/globe-logo.png";
+
+    let count = 0;
+    const maxGlobes = 22;
+
+    function createGlobe() {
+
+        if (!intro.isConnected) return;
+        if (count >= maxGlobes) return;
+
+        const globe = document.createElement("img");
+
+        globe.src = globeImage;
+        globe.alt = "";
+        globe.className = "falling-globe";
+
+        globe.style.left =
+            Math.random() * 100 + "%";
+
+        globe.style.width =
+            (30 + Math.random() * 65) + "px";
+
+        globe.style.height = globe.style.width;
+
+        globe.style.animationDuration =
+            (2.5 + Math.random() * 2) + "s";
+
+        globe.style.animationDelay = "0s";
+
+        container.appendChild(globe);
+
+        count++;
+
+        globe.addEventListener(
+            "animationend",
+            function () {
+                globe.remove();
+            },
+            { once: true }
+        );
+    }
+
+    // Start with several logos already falling
+    for (let i = 0; i < 8; i++) {
+        setTimeout(createGlobe, i * 120);
+    }
+
+    // Keep dropping logos during the intro
+    const rainInterval = setInterval(
+        function () {
+            if (!intro.isConnected ||
+                intro.classList.contains("gs-finished")) {
+                clearInterval(rainInterval);
+                return;
+            }
+
+            createGlobe();
+        },
+        140
+    );
+
+})();
+</script>
+    
 </body>
 </html>
