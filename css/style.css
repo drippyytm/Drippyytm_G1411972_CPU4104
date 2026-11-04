@@ -341,56 +341,15 @@ textarea:focus-visible {
 }
 
 .logo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 105px;
-    height: 64px;
+    display: inline-block;
+    width: 74px;
 }
 
 .logo img {
     width: 100%;
-    height: 64px;
+    height: 54px;
     object-fit: contain;
-
-    transition: transform 0.25s ease;
 }
-
-.logo:active img {
-    animation: globalstepperLogoShake 0.4s ease;
-}
-
-@keyframes globalstepperLogoShake {
-    0% {
-        transform: translateX(0);
-    }
-
-    20% {
-        transform: translateX(-7px) rotate(-2deg);
-    }
-
-    40% {
-        transform: translateX(7px) rotate(2deg);
-    }
-
-    60% {
-        transform: translateX(-5px) rotate(-1deg);
-    }
-
-    80% {
-        transform: translateX(5px) rotate(1deg);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-}
-
-    .logo:hover img {
-    transform: scale(1.08);
-}
-
 
 .menu-toggle {
     min-width: 44px;
@@ -497,10 +456,6 @@ textarea:focus-visible {
     overflow: hidden;
     color: var(--colour-white);
     background-color: var(--colour-black);
-    background-image: url("../images/hero-small.jpeg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
 .hero-video {
@@ -724,14 +679,13 @@ textarea:focus-visible {
 
 /* ---------- BRAND STORY ---------- */
 
-.brand-story{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    align-items:center;
-    gap:6rem;
-    max-width:1400px;
-    margin:0 auto;
-    padding:7rem 4rem;
+.brand-story {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
 .brand-story-content h2 {
@@ -745,82 +699,37 @@ textarea:focus-visible {
     color: var(--colour-grey);
 }
 
-.text-link{
-
-    position:relative;
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:.6rem;
-
-    margin-top:1.5rem;
-
-    font-weight:700;
+.text-link {
+    display: inline-block;
+    margin-top: 0.7rem;
+    padding-bottom: 0.2rem;
+    font-weight: 700;
+    border-bottom: 2px solid var(--colour-black);
 }
 
-.text-link::after{
-
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-8px;
-    width:100%;
-    height:2px;
-    background:white;
-    transition:.3s;
+.text-link:hover {
+    opacity: 0.65;
 }
 
-body:not(.dark-theme) .text-link::after{
-
-    background:black;
+.brand-story-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 330px;
+    padding: 3rem;
+    background-color: var(--colour-black);
+    border-radius: var(--border-radius);
 }
 
-.text-link:hover{
-
-    color:#8a2be2;
+.brand-story-image img {
+     display: block;
+    width: min(100%, 520px);
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+    filter: none;
 }
 
-.brand-story-image{
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    position:relative;
-    min-height:550px;
-    background:transparent;
-    border-radius:0;
-    overflow:hidden;
-}
-
-.brand-story-image img{
-
-    width:100%;
-    max-width:560px;
-    transition:.4s ease;
-    position:relative;
-    z-index:2;
-}
-
-.brand-story-image::before{
-
-    content:"";
-    position:absolute;
-    width:420px;
-    height:420px;
-    border-radius:50%;
-    background:radial-gradient(circle,
-        rgba(255,255,255,.08),
-        transparent 70%);
-    filter:blur(40px);
-    z-index:1;
-}
-
-.brand-story-image:hover img{
-
-    transform:scale(1.03);
-}
 
 /* ---------- NEWSLETTER ---------- */
 
@@ -942,20 +851,20 @@ body:not(.dark-theme) .text-link::after{
 
 .live-search-wrapper {
     position: relative;
-    z-index: 9999;
 }
 
 .search-suggestions {
     position: absolute;
-    top: calc(100% + 10px);
+    top: calc(100% + 0.5rem);
+    right: 0;
     left: 0;
-    width: 100%;
-    background: #fff;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,.15);
-
-    z-index: 9999;
+    z-index: 100;
+    max-height: 360px;
+    overflow-y: auto;
+    background-color: var(--surface-background, #ffffff);
+    border: 1px solid var(--border-colour, #dddddd);
+    border-radius: 12px;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18);
 }
 
 .search-suggestion {
@@ -1045,59 +954,308 @@ body:not(.dark-theme) .text-link::after{
 
 /* ---------- Filters ---------- */
 
+/* ===========================================================
+   SHOP CONTROLS
+=========================================================== */
+
 .shop-controls {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    max-width: 1100px;
-    padding: 2rem 1.5rem;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1000;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-areas:
+        "filter sort"
+        "search search"
+        "count count" !important;
+
+    gap: 1.5rem 2rem !important;
+    align-items: end !important;
+
+    width: min(92%, 1300px);
+    margin: 0 auto 3rem;
+    padding: 2rem;
+
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 22px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
 }
 
-.filter-group,
-.search-group,
+.filter-group {
+    grid-area: filter !important;
+}
+
 .sort-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    grid-area: sort !important;
 }
 
-.filter-group label,
-.search-group label,
-.sort-group label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.filter-group select,
-.search-group input,
-.sort-group select {
-    min-height: 52px;
-    padding: 14px 18px;
-    font-size: 16px;
-    color: var(--colour-black);
-    background: var(--colour-white);
-    border: 2px solid var(--colour-black);
-    border-radius: 12px;
-    transition: 0.3s ease;
-}
-
-.filter-group select:focus,
-.search-group input:focus,
-.sort-group select:focus {
-    outline: none;
-    border-color: #555;
+.search-group {
+    grid-area: search !important;
+    width: min(100%, 700px);
+    margin: 0 auto;
 }
 
 .product-count {
-    margin-top: 10px;
-    font-size: 1rem;
-    font-weight: 700;
+    grid-area: count !important;
+    justify-self: center !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    width: auto !important;
+    height: auto !important;
+
+    margin: 0 !important;
+    padding: 0.6rem 1rem !important;
+
+    color: #ffffff !important;
+    background: #000000 !important;
+
+    border-radius: 999px;
+
+    font-size: 0.85rem;
+    font-weight: 800;
+
+    white-space: nowrap;
 }
+
+
+/* ---------- GROUPS ---------- */
+
+.filter-group,
+.sort-group,
+.search-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    width: 100%;
+}
+
+
+/* ---------- LABELS ---------- */
+
+.filter-group label,
+.sort-group label,
+.search-group label {
+    margin: 0;
+
+    color: #111111;
+
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 0.16rem;
+
+    text-transform: uppercase;
+}
+
+
+/* ---------- CONTROLS ---------- */
+
+.filter-group select,
+.sort-group select,
+.search-group input {
+    width: 100%;
+    height: 58px;
+    min-height: 58px;
+
+    padding: 0 1.1rem;
+
+    color: #111111;
+    background: #fafafa;
+
+    border: 1px solid #dddddd;
+    border-radius: 14px;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    outline: none;
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* ---------- HOVER ---------- */
+
+.filter-group select:hover,
+.sort-group select:hover,
+.search-group input:hover {
+    background: #ffffff;
+    border-color: #000000;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.10);
+}
+
+
+/* ---------- FOCUS ---------- */
+
+.filter-group select:focus,
+.sort-group select:focus,
+.search-group input:focus {
+    background: #ffffff;
+    border-color: #000000;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 0, 0, 0.08),
+        0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ---------- SEARCH ---------- */
+
+.search-group input::placeholder {
+    color: #999999;
+    font-weight: 500;
+}
+
+.live-search-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+
+/* ===========================================================
+   DARK MODE
+=========================================================== */
+
+body.dark-theme .shop-controls {
+    background: #151515 !important;
+    border-color: #333333 !important;
+}
+
+body.dark-theme .filter-group label,
+body.dark-theme .sort-group label,
+body.dark-theme .search-group label {
+    color: #ffffff !important;
+}
+
+body.dark-theme .filter-group select,
+body.dark-theme .sort-group select,
+body.dark-theme .search-group input {
+    color: #ffffff !important;
+    background: #1d1d1d !important;
+    border-color: #383838 !important;
+}
+
+body.dark-theme .filter-group select:hover,
+body.dark-theme .sort-group select:hover,
+body.dark-theme .search-group input:hover {
+    background: #242424 !important;
+    border-color: #ffffff !important;
+}
+
+body.dark-theme .product-count {
+    color: #000000 !important;
+    background: #ffffff !important;
+}
+
+
+/* ===========================================================
+   MOBILE
+=========================================================== */
+
+@media (max-width: 700px) {
+    .shop-controls {
+        grid-template-columns: 1fr !important;
+        grid-template-areas:
+            "filter"
+            "sort"
+            "search"
+            "count" !important;
+
+        width: calc(100% - 2rem);
+        gap: 1.2rem !important;
+        padding: 1.4rem;
+    }
+
+    .search-group {
+        width: 100%;
+    }
+
+    .product-count {
+        justify-self: start !important;
+    }
+}
+
+
+/* ===========================================================
+   DARK MODE
+=========================================================== */
+
+body.dark-theme .shop-controls {
+    background:
+        linear-gradient(
+            135deg,
+            #171717,
+            #101010
+        );
+
+    border-color: #333333;
+}
+
+body.dark-theme .filter-group label,
+body.dark-theme .sort-group label,
+body.dark-theme .search-group label {
+    color: #ffffff;
+}
+
+body.dark-theme .filter-group select,
+body.dark-theme .sort-group select,
+body.dark-theme .search-group input {
+    color: #ffffff;
+    background: #1c1c1c;
+    border-color: #3a3a3a;
+}
+
+body.dark-theme .product-count {
+    color: #000000;
+    background: #ffffff;
+}
+
+/* ===========================================================
+   DARK MODE
+=========================================================== */
+
+body.dark-theme .shop-controls {
+    background-color: #171717;
+
+    border-color: #343434;
+}
+
+
+body.dark-theme .filter-group label,
+body.dark-theme .sort-group label,
+body.dark-theme .search-group label {
+    color: #ffffff;
+}
+
+
+body.dark-theme .filter-group select,
+body.dark-theme .sort-group select,
+body.dark-theme .search-group input {
+    color: #ffffff;
+    background-color: #111111;
+
+    border-color: #343434;
+}
+
+
+body.dark-theme .search-group input::placeholder {
+    color: #888888;
+}
+
+
+body.dark-theme .product-count {
+    color: #b7b7b7;
+}
+
+
+
 
 /* ---------- Product Grid ---------- */
 
@@ -1805,7 +1963,6 @@ body.dark-theme .floating-cart-button {
     max-width: 1200px;
     padding: 0;
     margin: 0 auto;
-    align-items: start;
 }
 
 .product-detail-image {
@@ -1936,10 +2093,13 @@ body.dark-theme .floating-cart-button {
 
 .cart-layout {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1.7fr) minmax(300px, 0.8fr);
     gap: 2rem;
+
     max-width: 1250px;
     margin: 0 auto;
+
+    align-items: start;
 }
 
 .cart-items-section h2,
@@ -2057,76 +2217,198 @@ body.dark-theme .floating-cart-button {
     color: var(--colour-grey);
 }
 
+/* ---------- ORDER SUMMARY ---------- */
+
 .cart-summary {
-    padding: 1.5rem;
-    background-color: var(--colour-white);
+    position: sticky;
+    top: 110px;
+
+    align-self: start;
+
+    margin-top: -25px;
+
+    padding: 1.8rem;
+
+    background: #ffffff;
     border: 1px solid #dddddd;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-small);
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
+
+.cart-summary:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.12);
+}
+
+.cart-summary h2 {
+    margin-bottom: 1.4rem;
+
+    font-size: 1.6rem;
+    line-height: 1.1;
+}
+
+
+/* ---------- SUMMARY ROWS ---------- */
 
 .summary-row {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+
     gap: 1rem;
-    padding: 0.9rem 0;
-    border-bottom: 1px solid #dddddd;
+
+    padding: 1rem 0;
+
+    border-bottom: 1px solid #e5e5e5;
+
+    font-size: 0.95rem;
 }
+
+.summary-row span:last-child {
+    font-weight: 700;
+}
+
+
+/* ---------- TOTAL ---------- */
 
 .summary-total {
-    margin-bottom: 1.2rem;
-    font-size: 1.25rem;
-    font-weight: 700;
+    margin-bottom: 1.3rem;
+
+    padding-top: 1.2rem;
+
     border-bottom: 0;
+
+    font-size: 1.15rem;
+    font-weight: 900;
 }
 
-.checkout-button,
+.summary-total span:last-child {
+    font-size: 1.3rem;
+}
+
+
+/* ---------- CHECKOUT BUTTON ---------- */
+
+.checkout-button {
+    width: 100%;
+    min-height: 54px;
+
+    margin-bottom: 0.8rem;
+
+    color: #ffffff;
+    background: #000000;
+
+    border: 2px solid #000000;
+    border-radius: 12px;
+
+    font-size: 0.95rem;
+    font-weight: 800;
+
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.checkout-button:not(:disabled):hover {
+    transform: translateY(-3px);
+
+    background: #222222;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.16);
+}
+
+
+/* ---------- DISABLED CHECKOUT ---------- */
+
+.checkout-button:disabled {
+    color: #ffffff;
+    background: #aaaaaa;
+
+    border-color: #aaaaaa;
+
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+
+/* ---------- CLEAR CART ---------- */
+
 .clear-cart-button {
     width: 100%;
     min-height: 50px;
-    padding: 0.8rem 1rem;
-    border-radius: var(--border-radius);
-    font-weight: 700;
-}
 
-.checkout-button {
-    margin-bottom: 0.7rem;
-    color: var(--colour-white);
-    background-color: var(--colour-black);
-    border: 2px solid var(--colour-black);
-}
-
-.checkout-button:hover {
-    color: var(--colour-black);
-    background-color: var(--colour-white);
-}
-
-.checkout-button:disabled {
-    cursor: not-allowed;
-    opacity: 0.45;
-}
-
-.clear-cart-button {
     color: #a40000;
-    background-color: var(--colour-white);
+    background: transparent;
+
     border: 2px solid #a40000;
+    border-radius: 12px;
+
+    font-weight: 800;
+
+    transition:
+        color 0.25s ease,
+        background-color 0.25s ease,
+        transform 0.25s ease;
 }
 
 .clear-cart-button:hover {
-    color: var(--colour-white);
-    background-color: #a40000;
+    color: #ffffff;
+    background: #a40000;
+
+    transform: translateY(-2px);
 }
 
-.cart-page-message {
-    min-height: 26px;
-    margin-top: 0.8rem;
-    font-weight: 700;
-}
+
+/* ---------- DISCLAIMER ---------- */
 
 .cart-disclaimer {
-    margin-top: 1rem;
-    color: var(--colour-grey);
-    font-size: 0.82rem;
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+
+    color: #777777;
+
+    border-top: 1px solid #eeeeee;
+
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+
+/* ---------- DARK MODE ---------- */
+
+body.dark-theme .cart-summary {
+    color: #ffffff;
+    background: #171717;
+    border-color: #343434;
+}
+
+body.dark-theme .summary-row {
+    border-color: #343434;
+}
+
+body.dark-theme .cart-disclaimer {
+    color: #aaaaaa;
+    border-color: #343434;
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 850px) {
+    .cart-summary {
+        position: static;
+        top: auto;
+    }
 }
 
 /* ---------- ABOUT PAGE ---------- */
@@ -2771,26 +3053,19 @@ body.dark-theme .floating-cart-button {
         height: 400px;
     }
     .product-detail-container {
-        grid-template-columns: 1.05fr 0.95fr;
-        align-items: start;
-    }
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    padding: 0;
+    margin: 0 auto;
 
-    .product-detail-content {
-    position: static;
-    top: auto;
-    padding: 2.2rem;
-    align-self: start;
-    }
-
-        .cart-layout {
-        grid-template-columns: minmax(0, 1.6fr) minmax(300px, 0.8fr);
-        align-items: start;
+    align-items: start;
     }
 
     .cart-summary {
-    position: static;
-    top: auto;
-    align-self: start;
+        position: sticky;
+        top: 110px;
     }
 
     .cart-item {
@@ -2874,742 +3149,98 @@ body.dark-theme .floating-cart-button {
 }
 
 
+
 /* ===========================================================
-   PREMIUM PRODUCT DETAILS PAGE
+   ABOUT PAGE VISUAL EFFECTS
 =========================================================== */
 
-.product-detail-content {
+/* ---------- HERO ---------- */
+
+.about-hero {
     position: relative;
     overflow: hidden;
-
-    padding: 2.5rem;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #fafafa
-        );
-
-    border: 1px solid #e1e1e1;
-    border-radius: 24px;
-
-    box-shadow:
-        0 18px 50px rgba(0, 0, 0, 0.08);
-
-    transition:
-        transform 0.35s ease,
-        box-shadow 0.35s ease;
 }
 
-
-/* subtle hover */
-
-.product-detail-content:hover {
-    transform: translateY(-5px);
-
-    box-shadow:
-        0 28px 65px rgba(0, 0, 0, 0.12);
-}
-
-
-/* ===========================================================
-   CATEGORY
-=========================================================== */
-
-.product-category {
-    display: inline-block;
-
-    margin-bottom: 1rem;
-    padding: 0.45rem 0.8rem;
-
-    color: #ffffff;
-    background: #111111;
-
-    border-radius: 999px;
-
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 0.15rem;
-    text-transform: uppercase;
-}
-
-
-/* ===========================================================
-   PRODUCT NAME
-=========================================================== */
-
-.product-detail-content h1 {
-    max-width: 900px;
-
-    margin-bottom: 1rem;
-
-    font-size: clamp(2.7rem, 5vw, 4.5rem);
-    font-weight: 900;
-    line-height: 0.98;
-
-    letter-spacing: -0.04em;
-}
-
-
-/* ===========================================================
-   PRICE
-=========================================================== */
-
-.product-detail-price {
-    display: inline-flex;
-    align-items: center;
-
-    margin: 0 0 1.8rem;
-    padding: 0.7rem 1rem;
-
-    color: #ffffff;
-    background: #000000;
-
-    border-radius: 12px;
-
-    font-size: 1.4rem;
-    font-weight: 900;
-}
-
-
-/* ===========================================================
-   DESCRIPTION
-=========================================================== */
-
-.product-detail-description {
-    max-width: 720px;
-
-    margin-bottom: 1.7rem;
-
-    color: #666666;
-
-    font-size: 1.05rem;
-    line-height: 1.7;
-}
-
-
-/* ===========================================================
-   FEATURES
-=========================================================== */
-
-.product-feature-list {
-    display: flex;
-    flex-wrap: wrap;
-
-    gap: 0.7rem;
-
-    margin: 0 0 2rem;
-    padding: 0;
-
-    list-style: none;
-}
-
-.product-feature-list li {
-    position: relative;
-
-    margin: 0;
-    padding: 0.65rem 1rem 0.65rem 2rem;
-
-    background: #f1f1f1;
-
-    border: 1px solid #dddddd;
-    border-radius: 999px;
-
-    font-size: 0.85rem;
-    font-weight: 700;
-
-    transition:
-        transform 0.25s ease,
-        color 0.25s ease,
-        background-color 0.25s ease;
-}
-
-.product-feature-list li::before {
-    content: "✓";
-
-    position: absolute;
-
-    left: 0.8rem;
-    top: 50%;
-
-    transform: translateY(-50%);
-
-    font-weight: 900;
-}
-
-.product-feature-list li:hover {
-    color: #ffffff;
-    background: #111111;
-
-    transform: translateY(-3px);
-}
-
-
-/* ===========================================================
-   PRODUCT OPTIONS AREA
-=========================================================== */
-
-.product-option {
-    display: flex;
-    flex-direction: column;
-
-    gap: 0.55rem;
-
-    margin-bottom: 1.2rem;
-}
-
-.product-option label {
-    font-size: 0.8rem;
-    font-weight: 900;
-
-    letter-spacing: 0.08rem;
-    text-transform: uppercase;
-}
-
-
-/* ===========================================================
-   SIZE + QUANTITY CONTROLS
-=========================================================== */
-
-.product-option select,
-.product-option input {
-    width: 100%;
-    min-height: 58px;
-
-    padding: 0 1rem;
-
-    color: #111111;
-    background: #f8f8f8;
-
-    border: 1px solid #d5d5d5;
-    border-radius: 14px;
-
-    font-size: 1rem;
-    font-weight: 600;
-
-    outline: none;
-
-    transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease,
-        background-color 0.25s ease;
-}
-
-.product-option select:hover,
-.product-option input:hover {
-    background: #ffffff;
-    border-color: #000000;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.08);
-}
-
-.product-option select:focus,
-.product-option input:focus {
-    border-color: #000000;
-
-    box-shadow:
-        0 0 0 3px rgba(0, 0, 0, 0.08);
-}
-
-
-/* ===========================================================
-   ADD TO CART
-=========================================================== */
-
-.detail-add-to-cart-btn {
-    position: relative;
-    overflow: hidden;
-
-    width: 100%;
-    min-height: 60px;
-
-    margin-top: 0.4rem;
-    margin-bottom: 2rem;
-
-    color: #ffffff;
-    background: #000000;
-
-    border: 2px solid #000000;
-    border-radius: 14px;
-
-    font-size: 1rem;
-    font-weight: 900;
-
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease,
-        background-color 0.3s ease;
-}
-
-.detail-add-to-cart-btn:hover {
-    color: #ffffff;
-    background: #222222;
-
-    transform: translateY(-4px);
-
-    box-shadow:
-        0 14px 30px rgba(0, 0, 0, 0.2);
-}
-
-
-/* moving shine */
-
-.detail-add-to-cart-btn::before {
+.about-hero::before {
     content: "";
-
     position: absolute;
-
-    top: -80%;
-    left: -60%;
-
-    width: 30%;
-    height: 250%;
-
+    inset: 0;
     background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.25),
-            transparent
+        radial-gradient(
+            circle at center,
+            rgba(255, 255, 255, 0.08),
+            transparent 55%
         );
-
-    transform: rotate(20deg);
-
-    transition: left 0.7s ease;
+    pointer-events: none;
 }
 
-.detail-add-to-cart-btn:hover::before {
-    left: 130%;
-}
-
-
-/* ===========================================================
-   RETURN LINK
-=========================================================== */
-
-.product-detail-content .text-link {
+.about-hero > * {
     position: relative;
+    z-index: 2;
+}
 
+.about-hero h1 {
+    transition:
+        transform 0.4s ease,
+        letter-spacing 0.4s ease;
+}
+
+.about-hero:hover h1 {
+    transform: scale(1.03);
+    letter-spacing: 0.03em;
+}
+
+.about-hero .section-label {
+    transition:
+        letter-spacing 0.35s ease,
+        opacity 0.35s ease;
+}
+
+.about-hero:hover .section-label {
+    letter-spacing: 0.28rem;
+    opacity: 0.85;
+}
+
+
+/* ---------- STORY SECTION ---------- */
+
+.about-story-section {
+    position: relative;
+}
+
+.about-story-text {
+    transition:
+        transform 0.4s ease,
+        opacity 0.4s ease;
+}
+
+.about-story-text:hover {
+    transform: translateY(-6px);
+}
+
+.about-story-text h2 {
+    position: relative;
     display: inline-block;
-
-    margin-top: 0.5rem;
-
-    padding: 0.55rem 0;
-
-    border-bottom: 2px solid #111111;
-
-    font-weight: 800;
-
-    transition:
-        transform 0.25s ease,
-        opacity 0.25s ease;
 }
 
-.product-detail-content .text-link:hover {
-    opacity: 1;
+.about-story-text h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
 
-    transform: translateX(-5px);
+    width: 0;
+    height: 4px;
+
+    background: #000000;
+
+    transition: width 0.4s ease;
 }
 
-
-/* ===========================================================
-   DARK MODE
-=========================================================== */
-
-body.dark-theme .product-detail-content {
-    background:
-        linear-gradient(
-            145deg,
-            #191919,
-            #111111
-        );
-
-    border-color: #343434;
+.about-story-text:hover h2::after {
+    width: 100%;
 }
 
-body.dark-theme .product-feature-list li {
-    color: #ffffff;
-    background: #222222;
-    border-color: #3b3b3b;
-}
-
-body.dark-theme .product-feature-list li:hover {
-    color: #000000;
-    background: #ffffff;
-}
-
-body.dark-theme .product-option select,
-body.dark-theme .product-option input {
-    color: #ffffff;
-    background: #1c1c1c;
-
-    border-color: #3a3a3a;
-}
-
-body.dark-theme .product-detail-content .text-link {
-    border-color: #ffffff;
-}
-
-
-/* ===========================================================
-   MOBILE
-=========================================================== */
-
-@media (max-width: 700px) {
-
-    .product-detail-content {
-        padding: 1.5rem;
-        border-radius: 18px;
-    }
-
-    .product-detail-content h1 {
-        font-size: clamp(2rem, 10vw, 3rem);
-    }
-
-    .product-feature-list {
-        flex-direction: column;
-    }
-
-    .product-feature-list li {
-        width: 100%;
-    }
-}
-
-
-/* ===========================================================
-   PREMIUM WISHLIST PAGE
-=========================================================== */
-
-/* Wishlist cards */
-.wishlist-card{
-    position:relative;
-    overflow:hidden;
-    background:#fff;
-    border:1px solid #e8e8e8;
-    border-radius:24px;
-    transition:.35s ease;
-    box-shadow:0 12px 30px rgba(0,0,0,.06);
-}
-
-.wishlist-card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 30px 60px rgba(0,0,0,.15);
-}
-
-/* Image */
-.wishlist-card img{
-    transition:transform .6s ease;
-}
-
-.wishlist-card:hover img{
-    transform:scale(1.06);
-}
-
-/* Product name */
-.wishlist-card h3{
-    font-size:1.4rem;
-    margin-bottom:.6rem;
-}
-
-/* Price */
-.wishlist-card .product-price{
-    font-size:1.5rem;
-    font-weight:800;
-    margin-bottom:1rem;
-}
-
-/* Buttons */
-.wishlist-card .btn,
-.wishlist-card button{
-    border-radius:999px;
-    transition:.3s;
-}
-
-.wishlist-card .btn:hover,
-.wishlist-card button:hover{
-    transform:translateY(-3px);
-    box-shadow:0 14px 25px rgba(0,0,0,.18);
-}
-
-/* Remove button */
-.wishlist-remove-button{
-    transition:.3s;
-}
-
-.wishlist-remove-button:hover{
-    transform:scale(1.15) rotate(10deg);
-}
-
-/* Empty wishlist */
-.empty-wishlist{
-    text-align:center;
-    padding:5rem 2rem;
-    animation:floatWishlist 4s ease-in-out infinite;
-}
-
-@keyframes floatWishlist{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-10px);}
-}
-
-
-/* ============================
-   WISHLIST PAGE
-============================ */
-
-.wishlist-grid{
-    align-items:stretch;
-}
-
-.wishlist-card{
-    background:#fff;
-    border-radius:24px;
-    overflow:hidden;
-    border:1px solid #e9e9e9;
-    box-shadow:0 10px 30px rgba(0,0,0,.06);
-    transition:.35s;
-}
-
-.wishlist-card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 25px 60px rgba(0,0,0,.15);
-}
-
-.wishlist-card img{
-    transition:.5s;
-}
-
-.wishlist-card:hover img{
-    transform:scale(1.05);
-}
-
-.wishlist-remove-button:hover{
-    transform:scale(1.15) rotate(12deg);
-}
-
-.empty-wishlist{
-    padding:100px 20px;
-    text-align:center;
-}
-
-.empty-wishlist h2{
-    font-size:2.4rem;
-    margin-bottom:15px;
-}
-
-.empty-wishlist p{
-    color:#666;
-    margin-bottom:30px;
-}
-
-.empty-wishlist .btn{
-    border-radius:999px;
-    padding:16px 40px;
-}
-
-
-/* =========================================
-   WISHLIST HERO EFFECT
-========================================= */
-
-.wishlist-hero h1 {
-    transition:
-        transform 0.7s ease,
-        opacity 0.7s ease;
-}
-
-.wishlist-hero.revealed h1 {
-    animation: wishlistTitleEntrance 0.8s ease both;
-}
-
-.wishlist-hero.revealed p {
-    animation: wishlistTitleEntrance 0.8s 0.12s ease both;
-}
-
-@keyframes wishlistTitleEntrance {
-    from {
-        opacity: 0;
-        transform: translateY(28px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ===========================================================
-   SHOP CONTROLS ANIMATION
-=========================================================== */
-
-.shop-controls {
-    opacity: 0;
-    transform: translateY(35px);
-    animation: shopControlsEnter 0.8s 0.15s ease forwards;
-}
-
-@keyframes shopControlsEnter {
-    from {
-        opacity: 0;
-        transform: translateY(35px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-/* Individual controls */
-
-.filter-group,
-.sort-group,
-.search-group {
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-.filter-group:hover,
-.sort-group:hover,
-.search-group:hover {
-    transform: translateY(-5px);
-}
-
-
-/* Select + search boxes */
-
-.filter-group select,
-.sort-group select,
-.search-group input {
-    transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease,
-        background-color 0.25s ease;
-}
-
-.filter-group select:hover,
-.sort-group select:hover,
-.search-group input:hover {
-    transform: translateY(-2px);
-    border-color: #000;
-
-    box-shadow:
-        0 10px 24px rgba(0, 0, 0, 0.10);
-}
-
-.filter-group select:focus,
-.sort-group select:focus,
-.search-group input:focus {
-    outline: none;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 0 0 3px rgba(0,0,0,.08),
-        0 10px 24px rgba(0,0,0,.10);
-}
-
-
-/* Labels animate slightly */
-
-.filter-group label,
-.sort-group label,
-.search-group label {
-    display: inline-block;
-
-    transition:
-        transform 0.25s ease,
-        letter-spacing 0.25s ease;
-}
-
-.filter-group:hover label,
-.sort-group:hover label,
-.search-group:hover label {
-    transform: translateX(4px);
-    letter-spacing: 1.5px;
-}
-
-
-/* Product counter */
-
-.product-count {
-    display: inline-block;
-
-    transition:
-        transform 0.3s ease,
-        color 0.3s ease;
-}
-
-.product-count:hover {
-    transform: scale(1.04);
-}
-
-
-/* Search box pulse when focused */
-
-.search-group input:focus {
-    animation: searchPulse 1.4s ease infinite alternate;
-}
-
-@keyframes searchPulse {
-    from {
-        box-shadow:
-            0 0 0 0 rgba(0,0,0,.04);
-    }
-
-    to {
-        box-shadow:
-            0 0 0 5px rgba(0,0,0,.08);
-    }
-}
-
-
-/* Dark mode */
-
-body.dark-theme .filter-group select:hover,
-body.dark-theme .sort-group select:hover,
-body.dark-theme .search-group input:hover {
-    border-color: #ffffff;
-
-    box-shadow:
-        0 10px 24px rgba(0,0,0,.35);
-}
-
-.shop-header h1 {
-    animation: shopTitleEnter 0.8s ease both;
-}
-
-.shop-header .section-label {
-    animation: shopTitleEnter 0.7s ease both;
-}
-
-.shop-header p:last-child {
-    animation: shopTitleEnter 0.8s 0.12s ease both;
-}
-
-@keyframes shopTitleEnter {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ===========================================================
-   PREMIUM ABOUT PAGE EFFECTS
-=========================================================== */
 
 /* ---------- LOGO CARD ---------- */
 
@@ -3629,50 +3260,42 @@ body.dark-theme .search-group input:hover {
         0 25px 60px rgba(0, 0, 0, 0.22);
 }
 
-
-/* shine across logo card */
-
 .about-logo-card::before {
     content: "";
-
     position: absolute;
+    top: -60%;
+    left: -80%;
 
-    top: -70%;
-    left: -90%;
-
-    width: 45%;
-    height: 250%;
+    width: 55%;
+    height: 220%;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(255, 255, 255, 0.18),
+            rgba(255, 255, 255, 0.16),
             transparent
         );
 
     transform: rotate(20deg);
 
     transition: left 0.8s ease;
-
-    pointer-events: none;
-
-    z-index: 3;
 }
 
 .about-logo-card:hover::before {
-    left: 145%;
+    left: 140%;
 }
 
 
-/* logo zoom */
+/* ---------- LOGO ANIMATION ---------- */
 
 .about-logo-card img {
     position: relative;
     z-index: 2;
 
     transition:
-        transform 0.5s ease;
+        transform 0.5s ease,
+        filter 0.5s ease;
 }
 
 .about-logo-card:hover img {
@@ -3680,65 +3303,546 @@ body.dark-theme .search-group input:hover {
 }
 
 
+/* ---------- TEXT INSIDE CARD ---------- */
+
+.about-logo-card h2,
+.about-logo-card h3,
+.about-logo-card p {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* ---------- STORY PARAGRAPHS ---------- */
+
+.about-story-text p {
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.about-story-text p:hover {
+    color: #111111;
+    transform: translateX(5px);
+}
+
+
+/* ---------- NAVIGATION LINKS ---------- */
+
+.nav-links a {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+
+    left: 50%;
+    bottom: 6px;
+
+    width: 0;
+    height: 2px;
+
+    background: currentColor;
+
+    transform: translateX(-50%);
+
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 55%;
+}
+
+
+/* ---------- LOGO HOVER ---------- */
+
+.logo img {
+    transition:
+        transform 0.35s ease,
+        opacity 0.35s ease;
+}
+
+.logo:hover img {
+    transform: scale(1.08) rotate(-2deg);
+}
+
+
+/* ---------- PAGE LOAD EFFECT ---------- */
+
+.about-hero,
+.about-story-section {
+    animation: aboutFadeUp 0.8s ease both;
+}
+
+.about-story-section {
+    animation-delay: 0.15s;
+}
+
+@keyframes aboutFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ---------- RESPECT REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .about-hero,
+    .about-story-section {
+        animation: none;
+    }
+
+    .about-hero h1,
+    .about-story-text,
+    .about-logo-card,
+    .about-logo-card img,
+    .about-story-text p,
+    .logo img {
+        transition: none;
+    }
+}
+
+
+
 /* ===========================================================
-   MISSION + VISION
+   MISSION / VISION CARDS
 =========================================================== */
 
-.mission-card {
+.mission-card{
+    position:relative;
+    overflow:hidden;
+    transition:all .35s ease;
+    cursor:pointer;
+}
+
+.mission-card:hover{
+    transform:translateY(-12px);
+    box-shadow:0 25px 55px rgba(0,0,0,.18);
+}
+
+.mission-card::before{
+    content:"";
+    position:absolute;
+    top:-60%;
+    left:-120%;
+    width:50%;
+    height:240%;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.18),
+        transparent
+    );
+    transform:rotate(18deg);
+    transition:left .8s ease;
+}
+
+.mission-card:hover::before{
+    left:140%;
+}
+
+.mission-card h2{
+    transition:.3s;
+}
+
+.mission-card:hover h2{
+    transform:translateX(8px);
+}
+
+.mission-card p{
+    transition:.3s;
+}
+
+.mission-card:hover p{
+    color:#444;
+}
+
+
+/* ===========================================================
+   VALUES TITLE
+=========================================================== */
+
+.section-heading h2{
+    transition:.35s;
+}
+
+.section-heading:hover h2{
+    transform:scale(1.03);
+    letter-spacing:.02em;
+}
+
+
+/* ===========================================================
+   VALUE CARDS
+=========================================================== */
+
+.value-card{
+
+    position:relative;
+    overflow:hidden;
+
+    transition:
+    transform .35s,
+    box-shadow .35s,
+    background .35s,
+    color .35s;
+
+    cursor:pointer;
+}
+
+.value-card:hover{
+
+    background:#111;
+
+    color:white;
+
+    transform:translateY(-12px);
+
+    box-shadow:
+    0 25px 55px rgba(0,0,0,.18);
+
+}
+
+.value-card span{
+
+    transition:.35s;
+
+}
+
+.value-card:hover span{
+
+    transform:scale(1.2);
+
+    display:inline-block;
+
+}
+
+.value-card h3{
+
+    transition:.3s;
+
+}
+
+.value-card:hover h3{
+
+    color:white;
+
+    transform:translateX(6px);
+
+}
+
+.value-card p{
+
+    transition:.3s;
+
+}
+
+.value-card:hover p{
+
+    color:#d0d0d0;
+
+}
+
+.value-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    bottom:0;
+
+    left:0;
+
+    width:0;
+
+    height:4px;
+
+    background:white;
+
+    transition:.35s;
+
+}
+
+.value-card:hover::after{
+
+    width:100%;
+
+}
+
+
+/* ===========================================================
+   STAGGER ANIMATION
+=========================================================== */
+
+.value-card:nth-child(1){
+
+    animation:fadeUp .6s ease .05s both;
+
+}
+
+.value-card:nth-child(2){
+
+    animation:fadeUp .6s ease .15s both;
+
+}
+
+.value-card:nth-child(3){
+
+    animation:fadeUp .6s ease .25s both;
+
+}
+
+.value-card:nth-child(4){
+
+    animation:fadeUp .6s ease .35s both;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+} 
+
+/* ===========================================================
+   GLOBALSTEPPER PREMIUM ABOUT EFFECTS
+=========================================================== */
+
+
+/* ---------- SUBTLE PAGE GRAIN ---------- */
+
+.about-page {
+    position: relative;
+    overflow: hidden;
+}
+
+.about-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+
+    opacity: 0.025;
+
+    background-image:
+        repeating-radial-gradient(
+            circle at 0 0,
+            #000 0,
+            #000 1px,
+            transparent 1px,
+            transparent 4px
+        );
+}
+
+
+/* ===========================================================
+   HERO PARALLAX
+=========================================================== */
+
+.about-hero {
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.about-hero::after {
+    content: "";
+    position: absolute;
+    inset: -20%;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255,255,255,.10),
+            transparent 55%
+        );
+
+    pointer-events: none;
+
+    transition: transform .2s ease-out;
+}
+
+.about-hero h1,
+.about-hero p {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* ===========================================================
+   MOUSE GLOW
+=========================================================== */
+
+.about-page {
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+}
+
+.about-page::after {
+    content: "";
+
+    position: fixed;
+
+    left: var(--mouse-x);
+    top: var(--mouse-y);
+
+    width: 420px;
+    height: 420px;
+
+    transform: translate(-50%, -50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(123,44,191,.10),
+            transparent 65%
+        );
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    transition:
+        left .08s linear,
+        top .08s linear;
+}
+
+
+/* ===========================================================
+   LOGO CARD GLOW
+=========================================================== */
+
+.about-logo-card {
     position: relative;
     overflow: hidden;
 
     transition:
-        transform 0.35s ease,
-        box-shadow 0.35s ease,
-        border-color 0.35s ease;
+        transform .35s ease,
+        box-shadow .35s ease;
 }
 
-.mission-card:hover {
-    transform: translateY(-10px);
+.about-logo-card::after {
+    content: "";
 
-    border-color: #111111;
+    position: absolute;
+    inset: -40%;
 
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.16),
+            transparent 55%
+        );
+
+    opacity: 0;
+
+    transition:
+        opacity .4s ease;
+
+    pointer-events: none;
+}
+
+.about-logo-card:hover::after {
+    opacity: 1;
+}
+
+.about-logo-card:hover {
     box-shadow:
-        0 22px 50px rgba(0, 0, 0, 0.16);
+        0 30px 70px rgba(0,0,0,.30);
 }
 
 
-/* shine */
+/* ===========================================================
+   SHINE EFFECT
+=========================================================== */
 
-.mission-card::before {
+.about-logo-card::before,
+.mission-card::before,
+.value-card::before {
     content: "";
 
     position: absolute;
 
-    top: -80%;
-    left: -100%;
+    top: -70%;
+    left: -120%;
 
-    width: 45%;
-    height: 260%;
+    width: 50%;
+    height: 250%;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(255, 255, 255, 0.6),
+            rgba(255,255,255,.16),
             transparent
         );
 
-    transform: rotate(20deg);
+    transform: rotate(18deg);
 
-    transition: left 0.75s ease;
+    transition:
+        left .85s ease;
 
     pointer-events: none;
+
+    z-index: 3;
 }
 
-.mission-card:hover::before {
+.about-logo-card:hover::before,
+.mission-card:hover::before,
+.value-card:hover::before {
     left: 150%;
 }
 
 
 /* ===========================================================
-   VALUES CARDS
+   3D CARD TILT
+=========================================================== */
+
+.about-logo-card,
+.mission-card,
+.value-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+
+    transition:
+        transform .18s ease,
+        box-shadow .35s ease;
+}
+
+.about-logo-card img,
+.mission-card h2,
+.value-card h3,
+.value-card span {
+    transform: translateZ(20px);
+}
+
+
+/* ===========================================================
+   VALUE CARDS
 =========================================================== */
 
 .value-card {
@@ -3746,33 +3850,37 @@ body.dark-theme .search-group input:hover {
     overflow: hidden;
 
     transition:
-        transform 0.35s ease,
-        background-color 0.35s ease,
-        color 0.35s ease,
-        box-shadow 0.35s ease;
+        background-color .35s ease,
+        color .35s ease,
+        box-shadow .35s ease,
+        transform .18s ease;
 }
 
 .value-card:hover {
-    transform: translateY(-12px);
-
     color: #ffffff;
-    background-color: #090909;
+    background-color: #080808;
 
     box-shadow:
-        0 25px 55px rgba(0, 0, 0, 0.18);
+        0 25px 55px rgba(0,0,0,.18);
 }
 
 .value-card span {
+    display: inline-block;
+
     transition:
-        transform 0.35s ease;
+        transform .35s ease;
 }
 
 .value-card:hover span {
-    transform: scale(1.15);
+    transform:
+        translateZ(30px)
+        scale(1.15);
 }
 
 .value-card h3 {
-    transition: color 0.3s ease;
+    transition:
+        transform .3s ease,
+        color .3s ease;
 }
 
 .value-card:hover h3 {
@@ -3780,7 +3888,8 @@ body.dark-theme .search-group input:hover {
 }
 
 .value-card p {
-    transition: color 0.3s ease;
+    transition:
+        color .3s ease;
 }
 
 .value-card:hover p {
@@ -3788,7 +3897,7 @@ body.dark-theme .search-group input:hover {
 }
 
 
-/* bottom animation line */
+/* animated bottom line */
 
 .value-card::after {
     content: "";
@@ -3803,7 +3912,8 @@ body.dark-theme .search-group input:hover {
 
     background-color: #ffffff;
 
-    transition: width 0.4s ease;
+    transition:
+        width .4s ease;
 }
 
 .value-card:hover::after {
@@ -3812,53 +3922,105 @@ body.dark-theme .search-group input:hover {
 
 
 /* ===========================================================
-   STORY TEXT
+   MISSION CARDS
 =========================================================== */
 
-.about-story-text p {
+.mission-card {
+    position: relative;
+    overflow: hidden;
+
     transition:
-        transform 0.3s ease,
-        color 0.3s ease;
+        transform .18s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
 }
 
-.about-story-text p:hover {
-    transform: translateX(6px);
+.mission-card:hover {
+    border-color: #111111;
 
-    color: #111111;
+    box-shadow:
+        0 25px 55px rgba(0,0,0,.15);
 }
 
 
 /* ===========================================================
-   HERO
+   SCROLL REVEAL
 =========================================================== */
 
-.about-hero h1 {
+.reveal-premium {
+    opacity: 0;
+
+    transform:
+        translateY(35px)
+        scale(.98);
+
     transition:
-        transform 0.4s ease,
-        letter-spacing 0.4s ease;
+        opacity .75s ease,
+        transform .75s cubic-bezier(.2,.8,.2,1);
 }
 
-.about-hero:hover h1 {
+.reveal-premium.visible {
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* stagger values */
+
+.value-card.reveal-premium:nth-child(1) {
+    transition-delay: .05s;
+}
+
+.value-card.reveal-premium:nth-child(2) {
+    transition-delay: .12s;
+}
+
+.value-card.reveal-premium:nth-child(3) {
+    transition-delay: .19s;
+}
+
+.value-card.reveal-premium:nth-child(4) {
+    transition-delay: .26s;
+}
+
+
+/* ===========================================================
+   VALUES HEADING
+=========================================================== */
+
+.brand-values-section .section-heading h2 {
+    transition:
+        transform .4s ease,
+        letter-spacing .4s ease;
+}
+
+.brand-values-section .section-heading:hover h2 {
     transform: scale(1.025);
-    letter-spacing: 0.015em;
+    letter-spacing: .02em;
 }
 
 
 /* ===========================================================
-   CTA BUTTON
+   CTA EFFECT
 =========================================================== */
 
 .about-cta .btn {
+    position: relative;
+    overflow: hidden;
+
     transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+        transform .3s ease,
+        box-shadow .3s ease;
 }
 
 .about-cta .btn:hover {
     transform: translateY(-4px);
 
     box-shadow:
-        0 15px 30px rgba(255, 255, 255, 0.15);
+        0 14px 30px rgba(0,0,0,.18);
 }
 
 
@@ -3885,328 +4047,747 @@ body.dark-theme .value-card::after {
 
 
 /* ===========================================================
-   GLOBAL SHINE EFFECTS
-   Adds shine without replacing existing hover animations
+   MOBILE / ACCESSIBILITY
 =========================================================== */
 
-/* Elements that should have shine */
-.product-card,
-.shop-product-card,
-.benefit-card,
-.mission-card,
-.value-card,
-.contact-detail-card,
-.cart-summary,
-.product-detail-content,
-.wishlist-card,
-.about-logo-card {
+@media (max-width: 700px) {
+
+    .about-page::after {
+        display: none;
+    }
+
+    .about-logo-card,
+    .mission-card,
+    .value-card {
+        transform: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .reveal-premium {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .about-logo-card,
+    .mission-card,
+    .value-card {
+        transform: none !important;
+        transition: none;
+    }
+}
+
+/* ===========================================================
+   GLOBALSTEPPER PREMIUM ABOUT EFFECTS
+=========================================================== */
+
+
+/* ---------- SUBTLE PAGE GRAIN ---------- */
+
+.about-page {
     position: relative;
     overflow: hidden;
 }
 
+.about-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
 
-/* Shine layer */
+    opacity: 0.025;
+
+    background-image:
+        repeating-radial-gradient(
+            circle at 0 0,
+            #000 0,
+            #000 1px,
+            transparent 1px,
+            transparent 4px
+        );
+}
+
+
+/* ===========================================================
+   HERO PARALLAX
+=========================================================== */
+
+.about-hero {
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.about-hero::after {
+    content: "";
+    position: absolute;
+    inset: -20%;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255,255,255,.10),
+            transparent 55%
+        );
+
+    pointer-events: none;
+
+    transition: transform .2s ease-out;
+}
+
+.about-hero h1,
+.about-hero p {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* ===========================================================
+   MOUSE GLOW
+=========================================================== */
+
+.about-page {
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+}
+
+.about-page::after {
+    content: "";
+
+    position: fixed;
+
+    left: var(--mouse-x);
+    top: var(--mouse-y);
+
+    width: 420px;
+    height: 420px;
+
+    transform: translate(-50%, -50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(123,44,191,.10),
+            transparent 65%
+        );
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    transition:
+        left .08s linear,
+        top .08s linear;
+}
+
+
+/* ===========================================================
+   LOGO CARD GLOW
+=========================================================== */
+
+.about-logo-card {
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+}
+
+.about-logo-card::after {
+    content: "";
+
+    position: absolute;
+    inset: -40%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.16),
+            transparent 55%
+        );
+
+    opacity: 0;
+
+    transition:
+        opacity .4s ease;
+
+    pointer-events: none;
+}
+
+.about-logo-card:hover::after {
+    opacity: 1;
+}
+
+.about-logo-card:hover {
+    box-shadow:
+        0 30px 70px rgba(0,0,0,.30);
+}
+
+
+/* ===========================================================
+   SHINE EFFECT
+=========================================================== */
+
+.about-logo-card::before,
+.mission-card::before,
+.value-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: -70%;
+    left: -120%;
+
+    width: 50%;
+    height: 250%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.16),
+            transparent
+        );
+
+    transform: rotate(18deg);
+
+    transition:
+        left .85s ease;
+
+    pointer-events: none;
+
+    z-index: 3;
+}
+
+.about-logo-card:hover::before,
+.mission-card:hover::before,
+.value-card:hover::before {
+    left: 150%;
+}
+
+
+/* ===========================================================
+   3D CARD TILT
+=========================================================== */
+
+.about-logo-card,
+.mission-card,
+.value-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+
+    transition:
+        transform .18s ease,
+        box-shadow .35s ease;
+}
+
+.about-logo-card img,
+.mission-card h2,
+.value-card h3,
+.value-card span {
+    transform: translateZ(20px);
+}
+
+
+/* ===========================================================
+   VALUE CARDS
+=========================================================== */
+
+.value-card {
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        background-color .35s ease,
+        color .35s ease,
+        box-shadow .35s ease,
+        transform .18s ease;
+}
+
+.value-card:hover {
+    color: #ffffff;
+    background-color: #080808;
+
+    box-shadow:
+        0 25px 55px rgba(0,0,0,.18);
+}
+
+.value-card span {
+    display: inline-block;
+
+    transition:
+        transform .35s ease;
+}
+
+.value-card:hover span {
+    transform:
+        translateZ(30px)
+        scale(1.15);
+}
+
+.value-card h3 {
+    transition:
+        transform .3s ease,
+        color .3s ease;
+}
+
+.value-card:hover h3 {
+    color: #ffffff;
+}
+
+.value-card p {
+    transition:
+        color .3s ease;
+}
+
+.value-card:hover p {
+    color: #cccccc;
+}
+
+
+/* animated bottom line */
+
+.value-card::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 4px;
+
+    background-color: #ffffff;
+
+    transition:
+        width .4s ease;
+}
+
+.value-card:hover::after {
+    width: 100%;
+}
+
+
+/* ===========================================================
+   MISSION CARDS
+=========================================================== */
+
+.mission-card {
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform .18s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+.mission-card:hover {
+    border-color: #111111;
+
+    box-shadow:
+        0 25px 55px rgba(0,0,0,.15);
+}
+
+
+/* ===========================================================
+   SCROLL REVEAL
+=========================================================== */
+
+.reveal-premium {
+    opacity: 0;
+
+    transform:
+        translateY(35px)
+        scale(.98);
+
+    transition:
+        opacity .75s ease,
+        transform .75s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal-premium.visible {
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* stagger values */
+
+.value-card.reveal-premium:nth-child(1) {
+    transition-delay: .05s;
+}
+
+.value-card.reveal-premium:nth-child(2) {
+    transition-delay: .12s;
+}
+
+.value-card.reveal-premium:nth-child(3) {
+    transition-delay: .19s;
+}
+
+.value-card.reveal-premium:nth-child(4) {
+    transition-delay: .26s;
+}
+
+
+/* ===========================================================
+   VALUES HEADING
+=========================================================== */
+
+.brand-values-section .section-heading h2 {
+    transition:
+        transform .4s ease,
+        letter-spacing .4s ease;
+}
+
+.brand-values-section .section-heading:hover h2 {
+    transform: scale(1.025);
+    letter-spacing: .02em;
+}
+
+
+/* ===========================================================
+   CTA EFFECT
+=========================================================== */
+
+.about-cta .btn {
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+
+.about-cta .btn:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 14px 30px rgba(0,0,0,.18);
+}
+
+
+/* ===========================================================
+   DARK MODE
+=========================================================== */
+
+body.dark-theme .value-card:hover {
+    color: #000000;
+    background-color: #ffffff;
+}
+
+body.dark-theme .value-card:hover h3 {
+    color: #000000;
+}
+
+body.dark-theme .value-card:hover p {
+    color: #555555;
+}
+
+body.dark-theme .value-card::after {
+    background-color: #000000;
+}
+
+
+/* ===========================================================
+   MOBILE / ACCESSIBILITY
+=========================================================== */
+
+@media (max-width: 700px) {
+
+    .about-page::after {
+        display: none;
+    }
+
+    .about-logo-card,
+    .mission-card,
+    .value-card {
+        transform: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .reveal-premium {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .about-logo-card,
+    .mission-card,
+    .value-card {
+        transform: none !important;
+        transition: none;
+    }
+} 
+
+
+/* ===========================================================
+   GLOBAL PREMIUM WEBSITE EFFECTS
+=========================================================== */
+
+
+/* ---------- SCROLL REVEAL ---------- */
+
+.premium-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(.2,.8,.2,1);
+}
+
+.premium-reveal.premium-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ---------- STAGGERED CARDS ---------- */
+
+.premium-reveal:nth-child(2) {
+    transition-delay: 0.08s;
+}
+
+.premium-reveal:nth-child(3) {
+    transition-delay: 0.16s;
+}
+
+.premium-reveal:nth-child(4) {
+    transition-delay: 0.24s;
+}
+
+
+/* ===========================================================
+   PREMIUM CARD HOVER
+=========================================================== */
+
+.product-card,
+.shop-product-card,
+.value-card,
+.mission-card,
+.benefit-card,
+.contact-detail-card,
+.product-detail-content,
+.about-logo-card {
+    position: relative;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+.product-card:hover,
+.shop-product-card:hover,
+.value-card:hover,
+.mission-card:hover,
+.benefit-card:hover,
+.contact-detail-card:hover,
+.product-detail-content:hover,
+.about-logo-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 22px 55px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ===========================================================
+   IMAGE ZOOM
+=========================================================== */
+
+.product-card img,
+.shop-product-card img,
+.product-detail-image img,
+.about-logo-card img,
+.brand-story-image img {
+    transition:
+        transform 0.5s ease;
+}
+
+.product-card:hover img,
+.shop-product-card:hover img,
+.product-detail-image:hover img,
+.about-logo-card:hover img,
+.brand-story-image:hover img {
+    transform: scale(1.05);
+}
+
+
+/* ===========================================================
+   SHINE EFFECT
+=========================================================== */
+
+.product-card,
+.shop-product-card,
+.value-card,
+.mission-card,
+.benefit-card,
+.about-logo-card {
+    overflow: hidden;
+}
+
 .product-card::before,
 .shop-product-card::before,
-.benefit-card::before,
-.mission-card::before,
 .value-card::before,
-.contact-detail-card::before,
-.cart-summary::before,
-.product-detail-content::before,
-.wishlist-card::before,
+.mission-card::before,
+.benefit-card::before,
 .about-logo-card::before {
     content: "";
 
     position: absolute;
 
     top: -80%;
-    left: -100%;
+    left: -120%;
 
-    width: 40%;
+    width: 45%;
     height: 260%;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(255, 255, 255, 0.22),
+            rgba(255, 255, 255, 0.15),
             transparent
         );
 
     transform: rotate(20deg);
 
-    transition: left 0.8s ease;
+    transition:
+        left 0.8s ease;
 
     pointer-events: none;
 
-    z-index: 5;
+    z-index: 10;
 }
 
-
-/* Move shine across on hover */
 .product-card:hover::before,
 .shop-product-card:hover::before,
-.benefit-card:hover::before,
-.mission-card:hover::before,
 .value-card:hover::before,
-.contact-detail-card:hover::before,
-.cart-summary:hover::before,
-.product-detail-content:hover::before,
-.wishlist-card:hover::before,
+.mission-card:hover::before,
+.benefit-card:hover::before,
 .about-logo-card:hover::before {
     left: 150%;
 }
 
 
-/* Dark cards need a brighter shine */
-.about-logo-card::before,
-body.dark-theme .product-card::before,
-body.dark-theme .shop-product-card::before,
-body.dark-theme .benefit-card::before,
-body.dark-theme .mission-card::before,
-body.dark-theme .value-card::before,
-body.dark-theme .contact-detail-card::before,
-body.dark-theme .cart-summary::before,
-body.dark-theme .product-detail-content::before,
-body.dark-theme .wishlist-card::before {
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.16),
-            transparent
-        );
-}
-
-
-/* =========================================
-   LIVE SEARCH STACKING FIX
-========================================= */
-
-/* Header must always stay above the shop page */
-.site-header {
-    z-index: 5000;
-}
-
-/* Shop controls stay above products, but below header */
-.shop-controls {
-    position: relative;
-    z-index: 100;
-    overflow: visible;
-}
-
-.search-group {
-    position: relative;
-    z-index: 110;
-    overflow: visible;
-}
-
-.live-search-wrapper {
-    position: relative;
-    z-index: 120;
-    overflow: visible;
-}
-
-/* Suggestions stay above product cards */
-.search-suggestions {
-    z-index: 130;
-}
-
-/* Product grid stays underneath search */
-.all-products-grid {
-    position: relative;
-    z-index: 1;
-}
-
-
 /* ===========================================================
-   EXTRA HOVER + SHINE EFFECTS
+   BUTTON EFFECTS
 =========================================================== */
 
-.contact-form,
-.brand-story-image,
-.cart-item,
-.newsletter-content,
-.empty-cart-message,
-.product-detail-image {
+.btn,
+.product-button,
+.add-to-cart-btn,
+.checkout-button,
+.detail-add-to-cart-btn {
     position: relative;
     overflow: hidden;
-
-    transition:
-        transform 0.35s ease,
-        box-shadow 0.35s ease;
-}
-
-
-/* Hover lift */
-.contact-form:hover,
-.brand-story-image:hover,
-.cart-item:hover,
-.newsletter-content:hover,
-.empty-cart-message:hover,
-.product-detail-image:hover {
-    transform: translateY(-6px);
-
-    box-shadow:
-        0 20px 45px rgba(0, 0, 0, 0.14);
-}
-
-
-/* Shine layer */
-.contact-form::before,
-.brand-story-image::before,
-.cart-item::before,
-.newsletter-content::before,
-.empty-cart-message::before,
-.product-detail-image::before {
-    content: "";
-
-    position: absolute;
-
-    top: -80%;
-    left: -100%;
-
-    width: 38%;
-    height: 260%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.24),
-            transparent
-        );
-
-    transform: rotate(20deg);
-
-    transition: left 0.8s ease;
-
-    pointer-events: none;
-
-    z-index: 5;
-}
-
-
-/* Sweep shine across */
-.contact-form:hover::before,
-.brand-story-image:hover::before,
-.cart-item:hover::before,
-.newsletter-content:hover::before,
-.empty-cart-message:hover::before,
-.product-detail-image:hover::before {
-    left: 150%;
-}
-
-
-/* Dark sections need visible shine */
-.brand-story-image::before,
-.newsletter-content::before {
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.18),
-            transparent
-        );
-}
-
-
-/* Don't let form controls get affected */
-.contact-form input,
-.contact-form select,
-.contact-form textarea,
-.contact-form button {
-    position: relative;
-    z-index: 6;
-}
-
-
-/* Cart buttons stay clickable */
-.cart-item button {
-    position: relative;
-    z-index: 6;
-}
-
-/* ===========================================================
-   PREMIUM FOOTER
-=========================================================== */
-
-.site-footer {
-    position: relative;
-    overflow: hidden;
-}
-
-.footer-brand {
-    max-width: 380px;
-}
-
-.footer-brand img {
-    transition:
-        transform 0.35s ease,
-        filter 0.35s ease;
-}
-
-.footer-brand img:hover {
-    transform: scale(1.08) rotate(-2deg);
-}
-
-.footer-socials {
-    margin-top: 1.6rem;
-}
-
-.footer-social-title {
-    margin-bottom: 0.8rem;
-    color: #ffffff !important;
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 0.12rem;
-    text-transform: uppercase;
-}
-
-.social-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem;
-}
-
-.social-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 42px;
-    padding: 0.65rem 1rem;
-
-    color: #ffffff !important;
-    background: #222222;
-
-    border: 1px solid #3a3a3a;
-    border-radius: 999px;
-
-    font-size: 0.85rem;
-    font-weight: 700;
 
     transition:
         transform 0.3s ease,
+        box-shadow 0.3s ease,
         background-color 0.3s ease,
-        box-shadow 0.3s ease;
+        color 0.3s ease;
 }
 
-.social-link:hover {
-    color: #ffffff !important;
-    background: #7b2cbf;
-
-    transform: translateY(-4px);
+.btn:hover,
+.product-button:hover,
+.add-to-cart-btn:hover,
+.checkout-button:hover,
+.detail-add-to-cart-btn:hover {
+    transform: translateY(-3px);
 
     box-shadow:
-        0 10px 25px rgba(123, 44, 191, 0.3);
-
-    text-decoration: none;
+        0 12px 25px rgba(0, 0, 0, 0.16);
 }
 
 
-/* Footer navigation links */
+/* ===========================================================
+   NAVIGATION
+=========================================================== */
+
+.nav-links a {
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        color 0.25s ease;
+}
+
+.nav-links a:hover {
+    transform: translateY(-2px);
+}
+
+
+/* ---------- LOGO ---------- */
+
+.logo img {
+    transition:
+        transform 0.35s ease;
+}
+
+.logo:hover img {
+    transform:
+        scale(1.08)
+        rotate(-2deg);
+}
+
+
+/* ===========================================================
+   PAGE HEADERS
+=========================================================== */
+
+.hero h1,
+.shop-header h1,
+.cart-header h1,
+.about-hero h1 {
+    transition:
+        transform 0.4s ease,
+        letter-spacing 0.4s ease;
+}
+
+.hero:hover h1,
+.shop-header:hover h1,
+.cart-header:hover h1,
+.about-hero:hover h1 {
+    transform: scale(1.025);
+}
+
+
+/* ===========================================================
+   PRODUCT WISHLIST BUTTON
+=========================================================== */
+
+.wishlist-button {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease;
+}
+
+.wishlist-button:hover {
+    transform:
+        scale(1.12)
+        rotate(-6deg);
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.20);
+}
+
+
+/* ===========================================================
+   FOOTER LINKS
+=========================================================== */
 
 .footer-links a {
     display: inline-block;
@@ -4218,3518 +4799,357 @@ body.dark-theme .wishlist-card::before {
 
 .footer-links a:hover {
     transform: translateX(5px);
-    text-decoration: none;
 }
 
 
-/* Footer bottom */
+/* ===========================================================
+   MOBILE
+=========================================================== */
 
-.footer-bottom {
-    margin-top: 2rem;
-    padding-top: 1.8rem;
+@media (max-width: 700px) {
+
+    .product-card:hover,
+    .shop-product-card:hover,
+    .value-card:hover,
+    .mission-card:hover,
+    .benefit-card:hover {
+        transform: none;
+    }
 }
 
 
-/* Subtle top shine */
+/* ===========================================================
+   ACCESSIBILITY
+=========================================================== */
 
-.site-footer::before {
-    content: "";
+@media (prefers-reduced-motion: reduce) {
 
-    position: absolute;
-    top: 0;
-    left: -40%;
+    .premium-reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 
-    width: 30%;
-    height: 2px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.8),
-            transparent
-        );
-
-    animation: footerShine 6s linear infinite;
-
-    pointer-events: none;
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+    }
 }
 
-@keyframes footerShine {
+
+/* GLOBALSTEPPER LOADING SCREEN */
+
+.page-loader {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+.page-loader-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+}
+
+/* BIG ANIMATED LOGO */
+
+.page-loader-logo {
+  display: block;
+  width: 90%;
+  max-width: 1100px;
+  height: auto;
+  object-fit: contain;
+  animation: logoEntrance 1.8s ease-out both,
+             logoFloat 2.5s ease-in-out 1.8s infinite;
+}
+
+/* LOGO ENTRANCE */
+
+@keyframes logoEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+    filter: blur(12px);
+  }
+
+  70% {
+    opacity: 1;
+    transform: scale(1.08);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* FLOATING ANIMATION */
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* TAGLINE */
+
+.loader-tagline {
+  color: white;
+  font-size: 12px;
+  letter-spacing: 4px;
+  margin-top: 30px;
+  animation: taglineFade 2s ease-out both;
+}
+
+@keyframes taglineFade {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* LOADING PROGRESS LINE */
+
+.page-loader-line {
+  width: 180px;
+  height: 2px;
+  background: #333;
+  margin-top: 25px;
+  overflow: hidden;
+}
+
+.page-loader-line span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: white;
+  transform-origin: left;
+  animation: loadingProgress 2.5s ease-in-out forwards;
+}
+
+@keyframes loadingProgress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .page-loader-logo {
+    width: 96%;
+  }
+
+  .loader-tagline {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+  .page-loader-logo,
+  .loader-tagline,
+  .page-loader-line span {
+    animation: none;
+  }
+}
+
+
+/* FINAL GLOBALSTEPPER LOADER OVERRIDES */
+
+#page-loader {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .7s ease, visibility .7s ease;
+}
+
+#page-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#page-loader .page-loader-content {
+  width: 100%;
+  max-width: 1400px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#page-loader .page-loader-logo {
+  display: block;
+  width: 95%;
+  max-width: 1200px;
+  height: auto;
+  max-height: 55vh;
+  margin: 0 auto;
+  object-fit: contain;
+  animation: gsZoom 1.5s ease-out both,
+             gsFloat 2s ease-in-out 1.5s infinite;
+}
+
+@keyframes gsZoom {
+  0% {
+    opacity: 0;
+    transform: scale(.5);
+    filter: blur(10px);
+  }
+
+  75% {
+    opacity: 1;
+    transform: scale(1.08);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes gsFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+#page-loader .loader-tagline {
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-align: center;
+  margin: 25px 0;
+}
+
+#page-loader .page-loader-line {
+  width: 200px;
+  height: 3px;
+  background: #333;
+  overflow: hidden;
+}
+
+#page-loader .page-loader-line span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  transform-origin: left;
+  animation: gsProgress 3s linear forwards;
+}
+
+@keyframes gsProgress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@media (max-width: 600px) {
+  #page-loader .page-loader-logo {
+    width: 100%;
+  }
+
+  #page-loader .loader-tagline {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #page-loader .page-loader-logo,
+  #page-loader .page-loader-line span {
+    animation: none;
+  }
+}
+
+
+/* GLOBALSTEPPER HOMEPAGE GRAFFITI LOGO */
+
+.hero .hero-logo-heading {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 25px;
+    text-align: center;
+    white-space: normal;
+}
+
+.hero .hero-brand-logo {
+    display: block;
+    width: 100%;
+    max-width: 1100px;
+    height: auto;
+    max-height: 350px;
+    object-fit: contain;
+    margin: 0 auto;
+    animation: heroLogoReveal 1.5s ease-out both;
+}
+
+@keyframes heroLogoReveal {
     from {
-        left: -40%;
+        opacity: 0;
+        transform: scale(0.85);
     }
 
     to {
-        left: 120%;
+        opacity: 1;
+        transform: scale(1);
     }
 }
-
-/* ===========================================================
-   PREMIUM FOOTER LINK SECTIONS
-=========================================================== */
-
-.footer-links {
-    min-width: 220px;
-}
-
-.footer-links h2 {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 1.2rem;
-
-    color: #ffffff;
-    font-size: 1rem;
-    font-weight: 800;
-
-    letter-spacing: 0.04rem;
-}
-
-/* Small purple underline */
-.footer-links h2::after {
-    content: "";
-
-    position: absolute;
-    left: 0;
-    bottom: -8px;
-
-    width: 34px;
-    height: 3px;
-
-    background: #7b2cbf;
-    border-radius: 999px;
-
-    transition: width 0.3s ease;
-}
-
-.footer-links:hover h2::after {
-    width: 60px;
-}
-
-
-/* Link rows */
-
-.footer-links ul {
-    display: flex;
-    flex-direction: column;
-    gap: 0.45rem;
-}
-
-.footer-links li {
-    margin: 0;
-}
-
-.footer-links a {
-    position: relative;
-
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-
-    min-height: 42px;
-    padding: 0.55rem 0.8rem;
-
-    color: #c8c8c8;
-
-    border-radius: 10px;
-
-    transition:
-        color 0.25s ease,
-        background-color 0.25s ease,
-        transform 0.25s ease;
-}
-
-
-/* Arrow */
-.footer-links a::before {
-    content: "→";
-
-    color: #7b2cbf;
-
-    opacity: 0;
-
-    transform: translateX(-8px);
-
-    transition:
-        opacity 0.25s ease,
-        transform 0.25s ease;
-}
-
-
-/* Hover */
-.footer-links a:hover {
-    color: #ffffff;
-
-    background: rgba(255, 255, 255, 0.06);
-
-    transform: translateX(5px);
-
-    text-decoration: none;
-}
-
-.footer-links a:hover::before {
-    opacity: 1;
-
-    transform: translateX(0);
-}
-
-
-/* Wishlist count stays beside Wishlist */
-
-.site-footer .wishlist-link {
-    display: inline-flex !important;
-    justify-content: flex-start;
-    gap: 0.6rem;
-}
-
-.site-footer #wishlist-count {
-    min-width: 22px;
-    min-height: 22px;
-
-    margin-left: 0.2rem;
-
-    font-size: 0.7rem;
-}
-
-/* ===== DARK MODE TEXT FIXES ===== */
-
-body.dark-theme .section-heading h2 {
-    color: #ffffff;
-}
-
-body.dark-theme .section-description {
-    color: #d0d0d0;
-}
-
-body.dark-theme .product-category {
-    color: #bdbdbd;
-}
-
-body.dark-theme .benefit-card p,
-body.dark-theme .brand-story-content p,
-body.dark-theme .footer-brand p {
-    color: #cfcfcf;
-}
-
-body.dark-theme .product-card:hover,
-body.dark-theme .shop-product-card:hover {
-    box-shadow: 0 18px 45px rgba(255,255,255,0.08);
-}
-
-body.dark-theme .section-heading h2 {
-    text-shadow: 0 0 18px rgba(255,255,255,0.08);
-}
-
-/* =========================================
-   DARK MODE BENEFITS SECTION FIX
-========================================= */
-
-body.dark-theme .brand-benefits {
-    background-color: #111111;
-}
-
-body.dark-theme .brand-benefits .section-label {
-    color: #ffffff;
-}
-
-body.dark-theme .benefit-card {
-    color: #ffffff;
-    background-color: #171717;
-    border-color: #343434;
-}
-
-body.dark-theme .benefit-card h3 {
-    color: #ffffff;
-}
-
-body.dark-theme .benefit-card p {
-    color: #cfcfcf;
-}
-
-body.dark-theme .benefit-icon {
-    color: #ffffff;
-}
-
-body.dark-theme .benefit-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 45px rgba(255, 255, 255, 0.08);
-}
-
-/* =========================================
-   BRAND STORY DARK MODE + LOGO CLEANUP
-========================================= */
-
-/* Remove the heavy black box */
-.brand-story-image {
-    background: transparent;
-    box-shadow: none;
-    border-radius: 0;
-}
-
-/* Make the logo float naturally */
-.brand-story-image img {
-    width: min(90%, 560px);
-    transition:
-        transform 0.35s ease,
-        filter 0.35s ease;
-}
-
-.brand-story-image:hover img {
-    transform: scale(1.04);
-}
-
-/* Dark mode section */
-body.dark-theme .brand-story {
-    color: #ffffff;
-}
-
-/* Heading */
-body.dark-theme .brand-story-content h2 {
-    color: #ffffff;
-}
-
-/* Small ESTABLISHED text */
-body.dark-theme .brand-story-content .section-label {
-    color: #bdbdbd;
-}
-
-/* Paragraphs */
-body.dark-theme .brand-story-content p:not(.section-label) {
-    color: #d0d0d0;
-}
-
-/* Story link */
-body.dark-theme .brand-story-content .text-link {
-    color: #ffffff;
-    border-color: #ffffff;
-}
-
-/* Give the logo a soft glow in dark mode */
-body.dark-theme .brand-story-image img {
-    filter: drop-shadow(
-        0 15px 35px rgba(255,255,255,0.10)
-    );
-}
-
-/* =========================================
-   BRAND STORY DARK MODE FIX
-========================================= */
-
-body.dark-theme .brand-story {
-    background-color: #111111;
-    color: #ffffff;
-}
-
-/* Heading */
-body.dark-theme .brand-story-content h2 {
-    color: #ffffff;
-}
-
-/* Established label */
-body.dark-theme .brand-story-content .section-label {
-    color: #a8a8a8;
-}
-
-/* Paragraph text */
-body.dark-theme .brand-story-content p:not(.section-label) {
-    color: #cfcfcf;
-}
-
-/* Discover Our Story */
-body.dark-theme .brand-story-content .text-link {
-    color: #ffffff;
-    border-color: #ffffff;
-}
-
-body.dark-theme .brand-story-content .text-link:hover {
-    color: #b56cff;
-    border-color: #b56cff;
-}
-
-/* ===========================================================
-   PREMIUM DARK BRAND STORY
-   More Than Clothing
-=========================================================== */
-
-body.dark-theme .brand-story {
-    width: 100%;
-    max-width: none;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 5rem;
-
-    min-height: 680px;
-
-    padding:
-        7rem
-        max(5rem, calc((100% - 1400px) / 2));
-
-    margin: 0;
-
-    color: #ffffff;
-
-    background:
-        radial-gradient(
-            circle at 72% 48%,
-            rgba(255, 255, 255, 0.045),
-            transparent 30%
-        ),
-        #0d0d0d;
-}
-
-
-/* =========================
-   LEFT TEXT
-========================= */
-
-body.dark-theme .brand-story-content {
-    max-width: 680px;
-}
-
-
-/* Established 2022 */
-
-body.dark-theme
-.brand-story-content
-.section-label {
-    margin-bottom: 1.4rem;
-
-    color: #b9b9b9;
-
-    font-size: 0.82rem;
-    font-weight: 800;
-
-    letter-spacing: 0.2rem;
-    text-transform: uppercase;
-}
-
-
-/* Main heading */
-
-body.dark-theme
-.brand-story-content h2 {
-    margin-bottom: 1.5rem;
-
-    color: #ffffff;
-
-    font-size:
-        clamp(3rem, 5vw, 5rem);
-
-    font-weight: 900;
-    line-height: 0.98;
-
-    letter-spacing: -0.04em;
-
-    text-shadow:
-        0 10px 35px
-        rgba(0, 0, 0, 0.35);
-}
-
-
-/* Paragraphs */
-
-body.dark-theme
-.brand-story-content
-p:not(.section-label) {
-    max-width: 650px;
-
-    margin-bottom: 1.4rem;
-
-    color: #d2d2d2;
-
-    font-size:
-        clamp(1rem, 1.4vw, 1.15rem);
-
-    line-height: 1.75;
-}
-
-
-/* =========================
-   DISCOVER OUR STORY
-========================= */
-
-body.dark-theme
-.brand-story-content
-.text-link {
-    position: relative;
-
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-
-    margin-top: 0.7rem;
-    padding-bottom: 0.35rem;
-
-    color: #ffffff;
-
-    border-bottom:
-        2px solid #ffffff;
-
-    font-size: 1.05rem;
-    font-weight: 800;
-
-    transition:
-        color 0.3s ease,
-        border-color 0.3s ease,
-        transform 0.3s ease;
-}
-
-
-/* Purple arrow */
-
-body.dark-theme
-.brand-story-content
-.text-link::after {
-    content: "→";
-
-    color: #a33cff;
-
-    font-size: 1.35rem;
-
-    transition:
-        transform 0.3s ease;
-}
-
-
-body.dark-theme
-.brand-story-content
-.text-link:hover {
-    color: #ffffff;
-
-    border-color: #a33cff;
-
-    transform: translateX(3px);
-}
-
-
-body.dark-theme
-.brand-story-content
-.text-link:hover::after {
-    transform: translateX(7px);
-}
-
-
-/* =========================
-   LOGO SIDE
-========================= */
-
-body.dark-theme
-.brand-story-image {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 500px;
-
-    padding: 2rem;
-
-    background: transparent;
-
-    border: 0;
-    border-radius: 0;
-
-    box-shadow: none;
-
-    overflow: visible;
-}
-
-
-/* Glow behind logo */
-
-body.dark-theme
-.brand-story-image::after {
-    content: "";
-
-    position: absolute;
-
-    width: 70%;
-    height: 55%;
-
-    left: 50%;
-    top: 50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(255, 255, 255, 0.13),
-            rgba(255, 255, 255, 0.035) 45%,
-            transparent 72%
-        );
-
-    filter: blur(20px);
-
-    pointer-events: none;
-}
-
-
-/* Logo itself */
-
-body.dark-theme
-.brand-story-image img {
-    position: relative;
-
-    z-index: 2;
-
-    width:
-        min(100%, 620px);
-
-    height: auto;
-
-    object-fit: contain;
-
-    filter:
-        drop-shadow(
-            0 0 10px
-            rgba(255,255,255,0.18)
-        )
-        drop-shadow(
-            0 20px 35px
-            rgba(0,0,0,0.6)
-        );
-
-    transition:
-        transform 0.45s ease,
-        filter 0.45s ease;
-}
-
-
-/* Logo hover */
-
-body.dark-theme
-.brand-story-image:hover img {
-    transform:
-        scale(1.045)
-        translateY(-4px);
-
-    filter:
-        drop-shadow(
-            0 0 18px
-            rgba(255,255,255,0.28)
-        )
-        drop-shadow(
-            0 25px 45px
-            rgba(0,0,0,0.7)
-        );
-}
-
-
-/* =========================
-   TABLET / MOBILE
-========================= */
-
-@media (max-width: 900px) {
-
-    body.dark-theme .brand-story {
-        grid-template-columns: 1fr;
-
-        gap: 3rem;
-
-        min-height: auto;
-
-        padding:
-            5rem 1.5rem;
-
-        text-align: center;
-    }
-
-    body.dark-theme
-    .brand-story-content {
-        max-width: 700px;
-
-        margin: 0 auto;
-    }
-
-    body.dark-theme
-    .brand-story-content
-    p:not(.section-label) {
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    body.dark-theme
-    .brand-story-image {
-        min-height: 350px;
-
-        padding: 1rem;
-    }
-
-    body.dark-theme
-    .brand-story-image img {
-        width:
-            min(90%, 520px);
-    }
-}
-
-/* ===========================================================
-   FINAL BRAND STORY OVERRIDE
-   SAME LAYOUT IN LIGHT + DARK MODE
-=========================================================== */
-
-/* Remove the old diagonal shine completely */
-.brand-story-image::before {
-    display: none !important;
-}
-
-
-/* =========================
-   MAIN LAYOUT - BOTH THEMES
-========================= */
-
-.brand-story,
-body.dark-theme .brand-story {
-    width: 100%;
-    max-width: 1400px;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-
-    gap: 5rem;
-
-    min-height: 680px;
-
-    margin: 0 auto;
-    padding: 6rem 4rem;
-}
-
-
-/* =========================
-   LIGHT MODE
-========================= */
-
-.brand-story {
-    color: #080808;
-    background: #ffffff;
-}
-
-
-/* =========================
-   DARK MODE
-========================= */
-
-body.dark-theme .brand-story {
-    color: #ffffff;
-    background: #0d0d0d;
-}
-
-
-/* =========================
-   LEFT TEXT
-========================= */
-
-.brand-story-content {
-    max-width: 680px;
-}
-
-
-.brand-story-content .section-label {
-    margin-bottom: 1.4rem;
-
-    font-size: 0.82rem;
-    font-weight: 800;
-
-    letter-spacing: 0.2rem;
-    text-transform: uppercase;
-}
-
-
-.brand-story-content h2,
-body.dark-theme .brand-story-content h2 {
-    margin-bottom: 1.5rem;
-
-    font-size: clamp(3rem, 4.7vw, 4.8rem);
-    font-weight: 900;
-
-    line-height: 1;
-
-    letter-spacing: -0.04em;
-}
-
-
-/* Light text colours */
-
-.brand-story-content h2 {
-    color: #080808;
-}
-
-.brand-story-content .section-label {
-    color: #555555;
-}
-
-.brand-story-content p:not(.section-label) {
-    max-width: 650px;
-
-    margin-bottom: 1.4rem;
-
-    color: #666666;
-
-    font-size: 1.05rem;
-    line-height: 1.75;
-}
-
-
-/* Dark text colours */
-
-body.dark-theme .brand-story-content h2 {
-    color: #ffffff;
-}
-
-body.dark-theme .brand-story-content .section-label {
-    color: #b9b9b9;
-}
-
-body.dark-theme
-.brand-story-content
-p:not(.section-label) {
-    color: #d0d0d0;
-}
-
-
-/* =========================
-   STORY LINK
-========================= */
-
-.brand-story-content .text-link {
-    position: relative;
-
-    display: inline-flex;
-    align-items: center;
-
-    gap: 0.65rem;
-
-    margin-top: 0.6rem;
-    padding-bottom: 0.4rem;
-
-    border-bottom: 0;
-
-    font-weight: 800;
-
-    transition:
-        color 0.3s ease,
-        transform 0.3s ease;
-}
-
-
-/* Purple arrow */
-
-.brand-story-content .text-link::before {
-    content: none;
-}
-
-.brand-story-content .text-link::after {
-    content: "→";
-
-    position: static;
-
-    width: auto;
-    height: auto;
-
-    color: #8a2be2;
-    background: none;
-
-    font-size: 1.3rem;
-
-    transition: transform 0.3s ease;
-}
-
-
-/* Clean animated underline */
-
-.brand-story-content .text-link {
-    background-image:
-        linear-gradient(
-            #8a2be2,
-            #8a2be2
-        );
-
-    background-position: left bottom;
-    background-repeat: no-repeat;
-
-    background-size: 0 2px;
-
-    transition:
-        background-size 0.35s ease,
-        color 0.3s ease;
-}
-
-
-.brand-story-content .text-link:hover {
-    opacity: 1;
-
-    color: #8a2be2;
-
-    background-size: 100% 2px;
-}
-
-
-.brand-story-content
-.text-link:hover::after {
-    transform: translateX(6px);
-}
-
-
-/* =========================
-   LOGO AREA
-========================= */
-
-.brand-story-image,
-body.dark-theme .brand-story-image {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 520px;
-
-    padding: 2rem;
-
-    background: transparent;
-
-    border: 0;
-    border-radius: 0;
-
-    box-shadow: none;
-
-    overflow: visible;
-}
-
-
-/* New soft glow — NOT diagonal */
-
-.brand-story-image::after {
-    content: "";
-
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    width: 72%;
-    height: 58%;
-
-    transform: translate(-50%, -50%);
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(0, 0, 0, 0.09),
-            transparent 70%
-        );
-
-    filter: blur(28px);
-
-    pointer-events: none;
-}
-
-
-/* Dark glow */
-
-body.dark-theme
-.brand-story-image::after {
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(255,255,255,0.12),
-            transparent 70%
-        );
-}
-
-
-/* Logo */
-
-.brand-story-image img,
-body.dark-theme .brand-story-image img {
-    position: relative;
-    z-index: 2;
-
-    display: block;
-
-    width: min(100%, 620px);
-    height: auto;
-
-    margin: 0 auto;
-
-    object-fit: contain;
-
-    transition:
-        transform 0.4s ease,
-        filter 0.4s ease;
-}
-
-
-/* Logo movement */
-
-.brand-story-image:hover img {
-    transform:
-        translateY(-5px)
-        scale(1.035);
-}
-
-
-/* Dark logo glow */
-
-body.dark-theme
-.brand-story-image img {
-    filter:
-        drop-shadow(
-            0 0 14px
-            rgba(255,255,255,0.15)
-        );
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 900px) {
-
-    .brand-story,
-    body.dark-theme .brand-story {
-        grid-template-columns: 1fr;
-
-        gap: 2.5rem;
-
-        min-height: auto;
-
-        padding: 4rem 1.5rem;
-
-        text-align: center;
-    }
-
-    .brand-story-content {
-        margin: 0 auto;
-    }
-
-    .brand-story-content
-    p:not(.section-label) {
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    .brand-story-image,
-    body.dark-theme .brand-story-image {
-        min-height: 340px;
-    }
-
-    .brand-story-image img,
-    body.dark-theme
-    .brand-story-image img {
-        width: min(90%, 520px);
-    }
-}
-
-
-/* ===========================================================
-   FINAL BRAND STORY CLEANUP
-=========================================================== */
-
-/* Make the section truly full width */
-.brand-story,
-body.dark-theme .brand-story {
-    width: 100vw;
-    max-width: none;
-
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-
-    padding: 6rem max(5%, calc((100vw - 1400px) / 2));
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 5rem;
-
-    box-sizing: border-box;
-}
-
-/* LIGHT MODE */
-.brand-story {
-    background: #ffffff;
-    color: #080808;
-}
-
-/* DARK MODE */
-body.dark-theme .brand-story {
-    background: #0d0d0d;
-    color: #ffffff;
-}
-
-
-/* ===========================================================
-   REMOVE ALL OLD SHINE / BOX EFFECTS
-=========================================================== */
-
-.brand-story::before,
-.brand-story::after,
-.brand-story-image::before,
-.brand-story-image::after {
-    display: none !important;
-}
-
-
-/* Clean logo container */
-.brand-story-image,
-body.dark-theme .brand-story-image {
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 520px;
-
-    padding: 0;
-
-    background: transparent !important;
-
-    border: 0 !important;
-    border-radius: 0 !important;
-
-    box-shadow: none !important;
-
-    overflow: visible;
-}
-
-
-/* Logo itself */
-.brand-story-image img,
-body.dark-theme .brand-story-image img {
-    display: block;
-
-    width: min(100%, 620px);
-    height: auto;
-
-    margin: 0 auto;
-
-    background: transparent !important;
-
-    box-shadow: none !important;
-
-    transition:
-        transform 0.4s ease,
-        filter 0.4s ease;
-}
-
-
-/* LIGHT MODE LOGO */
-.brand-story-image img {
-    filter: none !important;
-}
-
-
-/* DARK MODE LOGO */
-body.dark-theme .brand-story-image img {
-    filter:
-        drop-shadow(
-            0 0 18px
-            rgba(255,255,255,0.14)
-        ) !important;
-}
-
-
-/* Simple premium hover instead of shine */
-.brand-story-image:hover img,
-body.dark-theme .brand-story-image:hover img {
-    transform: translateY(-6px) scale(1.035);
-}
-
-
-/* ===========================================================
-   TEXT
-=========================================================== */
-
-.brand-story-content {
-    max-width: 680px;
-}
-
-.brand-story-content h2 {
-    color: #080808;
-}
-
-body.dark-theme .brand-story-content h2 {
-    color: #ffffff;
-}
-
-.brand-story-content p:not(.section-label) {
-    color: #666666;
-}
-
-body.dark-theme
-.brand-story-content
-p:not(.section-label) {
-    color: #d0d0d0;
-}
-
-.brand-story-content .section-label {
-    color: #555555;
-}
-
-body.dark-theme
-.brand-story-content
-.section-label {
-    color: #b9b9b9;
-}
-
-
-/* ===========================================================
-   STORY LINK
-=========================================================== */
-
-.brand-story-content .text-link {
-    border: 0 !important;
-    background-image: none !important;
-
-    color: #080808;
-}
-
-body.dark-theme
-.brand-story-content .text-link {
-    color: #ffffff;
-}
-
-
-/* Arrow */
-.brand-story-content
-.text-link::after {
-    content: "→";
-
-    position: static;
-
-    width: auto;
-    height: auto;
-
-    margin-left: 0.5rem;
-
-    color: #8a2be2;
-
-    background: none !important;
-
-    font-size: 1.3rem;
-}
-
-
-/* No old lines */
-.brand-story-content
-.text-link::before {
-    display: none !important;
-}
-
-
-/* Hover */
-.brand-story-content
-.text-link:hover {
-    color: #8a2be2;
-
-    opacity: 1;
-}
-
-
-/* ===========================================================
-   MOBILE
-=========================================================== */
-
-@media (max-width: 900px) {
-
-    .brand-story,
-    body.dark-theme .brand-story {
-        grid-template-columns: 1fr;
-
-        gap: 3rem;
-
-        width: 100vw;
-
-        padding: 4rem 1.5rem;
-
-        text-align: center;
-    }
-
-    .brand-story-content {
-        margin: 0 auto;
-    }
-
-    .brand-story-image,
-    body.dark-theme .brand-story-image {
-        min-height: 340px;
-    }
-
-    .brand-story-image img,
-    body.dark-theme .brand-story-image img {
-        width: min(90%, 520px);
-    }
-}
-
-/* ===========================================================
-   GLOBALSTEPPER FINAL SHOP DESIGN
-   Shared layout for Light + Dark Mode
-=========================================================== */
-
-
-/* ===========================================================
-   SHOP PAGE
-=========================================================== */
-
-.shop-page {
-    min-height: 70vh;
-
-    color: #111111;
-
-    background:
-        radial-gradient(
-            circle at 50% 10%,
-            #ffffff 0%,
-            #f7f7f8 45%,
-            #f2f2f3 100%
-        );
-}
-
-
-body.dark-theme .shop-page {
-    color: #ffffff;
-
-    background:
-        radial-gradient(
-            circle at 50% 15%,
-            #151515 0%,
-            #0d0d0d 48%,
-            #090909 100%
-        );
-}
-
-
-/* ===========================================================
-   SHOP HEADER
-=========================================================== */
-
-.shop-header,
-body.dark-theme .shop-header {
-    padding-top: 5rem;
-    padding-bottom: 4.5rem;
-
-    text-align: center;
-
-    color: #ffffff;
-
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            #181818 0%,
-            #080808 55%,
-            #000000 100%
-        );
-
-    border-bottom: 1px solid #222222;
-}
-
-
-.shop-header .section-label {
-    margin-bottom: 1rem;
-
-    color: #bcbcbc;
-
-    font-size: 0.82rem;
-    font-weight: 800;
-
-    letter-spacing: 0.22rem;
-}
-
-
-.shop-header h1 {
-    margin-bottom: 1.25rem;
-
-    color: #ffffff;
-
-    font-size:
-        clamp(3.3rem, 6vw, 5.8rem);
-
-    font-weight: 900;
-
-    line-height: 0.95;
-
-    letter-spacing: -0.045em;
-}
-
-
-.shop-header p:last-child {
-    color: #c9c9c9;
-
-    font-size: 1.08rem;
-}
-
-
-/* ===========================================================
-   SHOP CONTROLS
-=========================================================== */
-
-.shop-controls,
-body.dark-theme .shop-controls {
-    display: grid !important;
-
-    grid-template-columns:
-        minmax(0, 1fr)
-        minmax(0, 1fr) !important;
-
-    grid-template-areas:
-        "filter sort"
-        "search count" !important;
-
-    column-gap: 2.5rem;
-    row-gap: 1.6rem;
-
-    width: 100%;
-    max-width: 1250px;
-
-    margin: 0 auto;
-
-    padding: 3.2rem 1.5rem 3.5rem;
-
-    position: relative;
-    z-index: 100;
-
-    overflow: visible;
-}
-
-
-/* Individual positions */
-
-.filter-group {
-    grid-area: filter;
-}
-
-.sort-group {
-    grid-area: sort;
-}
-
-.search-group {
-    grid-area: search;
-}
-
-.product-count {
-    grid-area: count;
-}
-
-
-/* Make every area same width */
-
-.filter-group,
-.sort-group,
-.search-group,
-.live-search-wrapper {
-    width: 100%;
-}
-
-
-/* ===========================================================
-   CONTROL LABELS
-=========================================================== */
-
-.filter-group label,
-.sort-group label,
-.search-group label {
-    display: block;
-
-    margin-bottom: 0.75rem;
-
-    color: #242424;
-
-    font-size: 0.78rem;
-    font-weight: 800;
-
-    line-height: 1;
-
-    letter-spacing: 0.12rem;
-
-    text-transform: uppercase;
-}
-
-
-body.dark-theme .filter-group label,
-body.dark-theme .sort-group label,
-body.dark-theme .search-group label {
-    color: #b9b9b9;
-}
-
-
-/* ===========================================================
-   SELECTS + SEARCH — IDENTICAL SIZE
-=========================================================== */
-
-.filter-group select,
-.sort-group select,
-.search-group input {
-    width: 100% !important;
-
-    height: 58px !important;
-    min-height: 58px !important;
-
-    box-sizing: border-box;
-
-    padding: 0 18px;
-
-    color: #111111;
-
-    background-color: #ffffff;
-
-    border: 1px solid #d7d7d7;
-
-    border-radius: 12px;
-
-    font-family: inherit;
-    font-size: 16px;
-
-    box-shadow:
-        0 5px 16px rgba(0, 0, 0, 0.045);
-
-    transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
-
-/* Safari dropdown reset */
-
-.filter-group select,
-.sort-group select {
-    -webkit-appearance: none;
-    appearance: none;
-
-    padding-right: 48px;
-
-    background-repeat: no-repeat;
-
-    background-position:
-        right 18px center;
-
-    background-size: 12px;
-
-    background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-}
-
-
-/* Light hover */
-
-.filter-group select:hover,
-.sort-group select:hover,
-.search-group input:hover {
-    border-color: #aaaaaa;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 8px 20px rgba(0,0,0,0.07);
-}
-
-
-/* Focus */
-
-.filter-group select:focus,
-.sort-group select:focus,
-.search-group input:focus {
-    outline: none;
-
-    border-color: #7b2cbf;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 0 0 3px rgba(123,44,191,0.12),
-        0 8px 20px rgba(0,0,0,0.08);
-}
-
-
-/* Placeholder */
-
-.search-group input::placeholder {
-    color: #999999;
-}
-
-
-/* ===========================================================
-   DARK CONTROLS
-=========================================================== */
-
-body.dark-theme .filter-group select,
-body.dark-theme .sort-group select,
-body.dark-theme .search-group input {
-    color: #ffffff;
-
-    background-color: #181818;
-
-    border-color: #353535;
-
-    box-shadow: none;
-}
-
-
-body.dark-theme .filter-group select,
-body.dark-theme .sort-group select {
-    background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-}
-
-
-body.dark-theme
-.search-group input::placeholder {
-    color: #858585;
-}
-
-
-body.dark-theme .filter-group select:hover,
-body.dark-theme .sort-group select:hover,
-body.dark-theme .search-group input:hover {
-    border-color: #555555;
-
-    box-shadow:
-        0 8px 25px rgba(0,0,0,0.32);
-}
-
-
-body.dark-theme .filter-group select:focus,
-body.dark-theme .sort-group select:focus,
-body.dark-theme .search-group input:focus {
-    border-color: #8a38cc;
-
-    box-shadow:
-        0 0 0 3px rgba(123,44,191,0.18);
-}
-
-
-/* ===========================================================
-   PRODUCT COUNT
-=========================================================== */
-
-.product-count,
-body.dark-theme .product-count {
-    align-self: center;
-
-    margin: 1.8rem 0 0;
-
-    font-size: 1rem;
-    font-weight: 800;
-}
-
-
-.product-count {
-    color: #222222;
-}
-
-
-body.dark-theme .product-count {
-    color: #d0d0d0;
-}
-
-
-/* ===========================================================
-   LIVE SEARCH
-=========================================================== */
-
-.live-search-wrapper {
-    position: relative;
-
-    z-index: 120;
-
-    overflow: visible;
-}
-
-
-.search-suggestions {
-    position: absolute;
-
-    top: calc(100% + 10px);
-    left: 0;
-
-    z-index: 500;
-
-    width: 100%;
-
-    overflow: hidden;
-
-    color: #111111;
-
-    background: #ffffff;
-
-    border: 1px solid #dddddd;
-
-    border-radius: 14px;
-
-    box-shadow:
-        0 20px 45px rgba(0,0,0,0.14);
-}
-
-
-body.dark-theme .search-suggestions {
-    color: #ffffff;
-
-    background: #171717;
-
-    border-color: #343434;
-
-    box-shadow:
-        0 22px 50px rgba(0,0,0,0.5);
-}
-
-
-body.dark-theme .search-suggestion {
-    color: #ffffff;
-
-    border-color: #303030;
-}
-
-
-body.dark-theme .search-suggestion:hover,
-body.dark-theme .search-suggestion.active {
-    background: #222222;
-}
-
-
-/* ===========================================================
-   PRODUCT GRID
-=========================================================== */
-
-.all-products-grid,
-body.dark-theme .all-products-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(300px, 1fr)
-        );
-
-    gap: 2rem;
-
-    max-width: 1350px;
-
-    padding:
-        1rem
-        1.5rem
-        5rem;
-
-    margin: 0 auto;
-}
-
-
-/* ===========================================================
-   PRODUCT CARD — SHARED STRUCTURE
-=========================================================== */
-
-.shop-product-card,
-body.dark-theme .shop-product-card {
-    position: relative;
-
-    overflow: hidden;
-
-    border-radius: 24px;
-
-    transition:
-        transform 0.4s ease,
-        border-color 0.4s ease,
-        box-shadow 0.4s ease;
-}
-
-
-/* LIGHT */
-
-.shop-product-card {
-    color: #111111;
-
-    background: #ffffff;
-
-    border: 1px solid #e2e2e2;
-
-    box-shadow:
-        0 12px 35px rgba(0,0,0,0.07);
-}
-
-
-/* DARK */
-
-body.dark-theme .shop-product-card {
-    color: #ffffff;
-
-    background:
-        linear-gradient(
-            145deg,
-            #191919,
-            #121212
-        );
-
-    border: 1px solid #303030;
-
-    box-shadow:
-        0 14px 35px rgba(0,0,0,0.32);
-}
-
-
-/* Hover */
-
-.shop-product-card:hover {
-    transform: translateY(-9px);
-
-    box-shadow:
-        0 28px 60px rgba(0,0,0,0.14);
-}
-
-
-body.dark-theme
-.shop-product-card:hover {
-    border-color: #474747;
-
-    box-shadow:
-        0 28px 60px rgba(0,0,0,0.55);
-}
-
-
-/* ===========================================================
-   PRODUCT IMAGE
-=========================================================== */
-
-.shop-product-image {
-    position: relative;
-
-    overflow: hidden;
-
-    background: #f1f1f1;
-}
-
-
-body.dark-theme
-.shop-product-image {
-    background: #151515;
-}
-
-
-.shop-product-image img {
-    display: block;
-
-    width: 100%;
-    height: 430px;
-
-    object-fit: contain;
-
-    transition:
-        transform 0.55s ease,
-        filter 0.55s ease;
-}
-
-
-.shop-product-card:hover
-.shop-product-image img {
-    transform: scale(1.045);
-}
-
-
-/* ===========================================================
-   PRODUCT CONTENT
-=========================================================== */
-
-.shop-product-info {
-    padding: 1.7rem;
-}
-
-
-.shop-product-info h2 {
-    min-height: 54px;
-
-    margin-bottom: 1rem;
-
-    color: #111111;
-
-    font-size: 1.35rem;
-    font-weight: 800;
-
-    line-height: 1.25;
-
-    letter-spacing: -0.02em;
-}
-
-
-body.dark-theme
-.shop-product-info h2 {
-    color: #ffffff;
-}
-
-
-/* Category pill */
-
-.shop-product-info
-.product-category {
-    display: inline-flex;
-
-    margin-bottom: 1rem;
-
-    padding:
-        0.45rem
-        0.85rem;
-
-    color: #ffffff;
-
-    background: #111111;
-
-    border-radius: 999px;
-
-    font-size: 0.72rem;
-    font-weight: 800;
-
-    letter-spacing: 0.12rem;
-
-    text-transform: uppercase;
-}
-
-
-body.dark-theme
-.shop-product-info
-.product-category {
-    color: #111111;
-
-    background: #ffffff;
-}
-
-
-/* Price */
-
-.shop-product-info
-.product-price {
-    margin-bottom: 1.5rem;
-
-    color: #080808;
-
-    font-size: 1.9rem;
-    font-weight: 900;
-
-    letter-spacing: -0.04em;
-}
-
-
-body.dark-theme
-.shop-product-info
-.product-price {
-    color: #ffffff;
-}
-
-
-/* ===========================================================
-   PRODUCT BUTTONS
-=========================================================== */
-
-.shop-product-info
-.product-actions {
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap: 0.75rem;
-}
-
-
-.shop-product-info
-.product-button,
-.shop-product-info
-.add-to-cart-btn {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    min-height: 52px;
-
-    padding:
-        0.8rem
-        1rem;
-
-    border-radius: 12px;
-
-    font-size: 0.9rem;
-    font-weight: 800;
-
-    transition:
-        transform 0.3s ease,
-        color 0.3s ease,
-        background-color 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-
-/* Light view button */
-
-.shop-product-info
-.product-button {
-    color: #080808;
-
-    background: #ffffff;
-
-    border: 2px solid #080808;
-}
-
-
-/* Dark view button */
-
-body.dark-theme
-.shop-product-info
-.product-button {
-    color: #ffffff;
-
-    background: transparent;
-
-    border-color: #555555;
-}
-
-
-/* View hover */
-
-.shop-product-info
-.product-button:hover {
-    color: #ffffff;
-
-    background: #080808;
-
-    transform: translateY(-3px);
-}
-
-
-body.dark-theme
-.shop-product-info
-.product-button:hover {
-    color: #000000;
-
-    background: #ffffff;
-
-    border-color: #ffffff;
-}
-
-
-/* Add cart */
-
-.shop-product-info
-.add-to-cart-btn {
-    color: #ffffff;
-
-    background: #080808;
-
-    border: 2px solid #080808;
-}
-
-
-body.dark-theme
-.shop-product-info
-.add-to-cart-btn {
-    border-color: #363636;
-}
-
-
-.shop-product-info
-.add-to-cart-btn:hover {
-    color: #ffffff;
-
-    background: #7b2cbf;
-
-    border-color: #7b2cbf;
-
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 12px 28px
-        rgba(123,44,191,0.25);
-}
-
-
-/* ===========================================================
-   WISHLIST HEART
-=========================================================== */
-
-.shop-product-card
-.wishlist-button {
-    top: 18px;
-    right: 18px;
-
-    width: 50px;
-    height: 50px;
-
-    border: 1px solid #e2e2e2;
-
-    box-shadow:
-        0 8px 22px rgba(0,0,0,0.12);
-}
-
-
-body.dark-theme
-.shop-product-card
-.wishlist-button {
-    color: #ffffff;
-
-    background:
-        rgba(15,15,15,0.94);
-
-    border-color: #555555;
-}
-
-
-.shop-product-card
-.wishlist-button:hover,
-.shop-product-card
-.wishlist-button.active {
-    color: #ffffff;
-
-    background: #7b2cbf;
-
-    border-color: #7b2cbf;
-
-    transform: scale(1.09);
-}
-
-
-/* ===========================================================
-   QUICK VIEW
-=========================================================== */
-
-.quick-view-button {
-    backdrop-filter: blur(8px);
-
-    box-shadow:
-        0 10px 28px
-        rgba(0,0,0,0.25);
-}
-
-
-body.dark-theme
-.quick-view-button {
-    color: #ffffff;
-
-    background:
-        rgba(10,10,10,0.94);
-
-    border-color: #444444;
-}
-
-
-body.dark-theme
-.quick-view-button:hover {
-    color: #000000;
-
-    background: #ffffff;
-
-    border-color: #ffffff;
-}
-
-
-/* ===========================================================
-   MOBILE
-=========================================================== */
-
-@media (max-width: 800px) {
-
-    .shop-controls,
-    body.dark-theme
-    .shop-controls {
-        grid-template-columns:
-            1fr !important;
-
-        grid-template-areas:
-            "filter"
-            "search"
-            "sort"
-            "count" !important;
-
-        gap: 1.25rem;
-
-        padding:
-            2rem
-            1.25rem
-            3rem;
-    }
-
-
-    .product-count,
-    body.dark-theme
-    .product-count {
-        margin-top: 0;
-    }
-
-
-    .shop-product-image img {
-        height: 360px;
-    }
-
-
-    .shop-product-info
-    .product-actions {
-        grid-template-columns: 1fr;
-    }
-
-}
-
-/* =========================================
-   DARK MODE CART ITEMS
-========================================= */
-
-body.dark-theme .cart-item {
-    color: #ffffff;
-    background: #181818;
-
-    border: 1px solid #343434;
-
-    box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.28);
-}
-
-body.dark-theme .cart-item-details h3 {
-    color: #ffffff;
-}
-
-body.dark-theme .cart-item-meta {
-    color: #aaaaaa;
-}
-
-body.dark-theme .cart-item-price,
-body.dark-theme .cart-item-total {
-    color: #ffffff;
-}
-
-body.dark-theme .cart-item-image {
-    background: #f2f2f2;
-}
-
-body.dark-theme .cart-item .product-category {
-    color: #111111;
-    background: #ffffff;
-}
-
-body.dark-theme .cart-item:hover {
-    border-color: #484848;
-
-    box-shadow:
-        0 20px 45px rgba(0, 0, 0, 0.42);
-}
-
-
-/* ===========================================================
-   FINAL ABOUT PAGE
-   SAME LAYOUT IN LIGHT + DARK MODE
-=========================================================== */
-
-
-/* =========================
-   PAGE
-========================= */
-
-.about-page {
-    background: #ffffff;
-    color: #111111;
-}
-
-body.dark-theme .about-page {
-    background: #0d0d0d;
-    color: #ffffff;
-}
-
-
-/* =========================
-   HERO - SAME IN BOTH MODES
-========================= */
-
-.about-hero,
-body.dark-theme .about-hero {
-    padding: 6rem 1.5rem;
-
-    text-align: center;
-
-    color: #ffffff;
-
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            #171717 0%,
-            #080808 60%,
-            #000000 100%
-        );
-}
-
-.about-hero .section-label {
-    color: #bcbcbc;
-}
-
-.about-hero h1 {
-    color: #ffffff;
-
-    font-size: clamp(3rem, 7vw, 6rem);
-    font-weight: 900;
-
-    line-height: 0.98;
-    letter-spacing: -0.04em;
-}
-
-.about-hero p:last-child {
-    color: #cccccc;
-}
-
-
-/* =========================
-   STORY SECTION
-========================= */
-
-.about-story-section,
-body.dark-theme .about-story-section {
-    display: grid;
-
-    grid-template-columns: 1.1fr 0.9fr;
-
-    align-items: center;
-
-    gap: 4rem;
-
-    max-width: 1250px;
-
-    margin: 0 auto;
-
-    padding: 6rem 1.5rem;
-}
-
-
-/* LIGHT */
-
-.about-story-section {
-    background: #ffffff;
-}
-
-.about-story-text h2 {
-    color: #111111;
-}
-
-.about-story-text p:not(.section-label) {
-    color: #666666;
-}
-
-
-/* DARK */
-
-body.dark-theme .about-story-section {
-    background: #0d0d0d;
-}
-
-body.dark-theme .about-story-text h2 {
-    color: #ffffff;
-}
-
-body.dark-theme
-.about-story-text
-p:not(.section-label) {
-    color: #c7c7c7;
-}
-
-
-/* =========================
-   LOGO CARD
-========================= */
-
-.about-logo-card,
-body.dark-theme .about-logo-card {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    min-height: 450px;
-
-    padding: 3rem;
-
-    color: #ffffff;
-
-    background: #080808;
-
-    border: 1px solid #2b2b2b;
-
-    border-radius: 20px;
-
-    box-shadow:
-        0 20px 45px rgba(0,0,0,0.14);
-
-    transition:
-        transform 0.35s ease,
-        box-shadow 0.35s ease,
-        border-color 0.35s ease;
-}
-
-
-.about-logo-card:hover {
-    transform: translateY(-7px);
-
-    border-color: #7b2cbf;
-
-    box-shadow:
-        0 28px 60px rgba(0,0,0,0.22);
-}
-
-
-.about-logo-card img {
-    width: min(80%, 360px);
-
-    margin: 0 auto 1.5rem;
-
-    filter:
-        drop-shadow(
-            0 0 20px
-            rgba(255,255,255,0.08)
-        );
-}
-
-
-.about-logo-card h2 {
-    color: #ffffff;
-}
-
-
-.about-logo-card p {
-    color: #bdbdbd;
-}
-
-
-/* =========================
-   MISSION + VISION SECTION
-========================= */
-
-.mission-vision-section,
-body.dark-theme .mission-vision-section {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 2rem;
-
-    padding:
-        5rem
-        max(1.5rem, calc((100% - 1200px) / 2));
-}
-
-
-/* LIGHT BACKGROUND */
-
-.mission-vision-section {
-    background: #f7f7f8;
-}
-
-
-/* DARK BACKGROUND */
-
-body.dark-theme .mission-vision-section {
-    background: #111111;
-}
-
-
-/* =========================
-   MISSION CARDS
-========================= */
-
-.mission-card,
-body.dark-theme .mission-card {
-    padding: 2.7rem;
-
-    border-radius: 18px;
-
-    transition:
-        transform 0.35s ease,
-        border-color 0.35s ease,
-        box-shadow 0.35s ease;
-}
-
-
-/* LIGHT */
-
-.mission-card {
-    color: #111111;
-
-    background: #ffffff;
-
-    border: 1px solid #dddddd;
-
-    box-shadow:
-        0 10px 28px rgba(0,0,0,0.06);
-}
-
-
-.mission-card p:last-child {
-    color: #666666;
-}
-
-
-/* DARK */
-
-body.dark-theme .mission-card {
-    color: #ffffff;
-
-    background: #181818;
-
-    border: 1px solid #343434;
-
-    box-shadow:
-        0 12px 30px rgba(0,0,0,0.28);
-}
-
-
-body.dark-theme
-.mission-card p:last-child {
-    color: #a8a8a8;
-}
-
-
-/* SAME HOVER IN BOTH */
-
-.mission-card:hover,
-body.dark-theme .mission-card:hover {
-    transform: translateY(-7px);
-
-    border-color: #7b2cbf;
-}
-
-
-body.dark-theme
-.mission-card:hover {
-    box-shadow:
-        0 24px 50px
-        rgba(0,0,0,0.45);
-}
-
-
-/* =========================
-   VALUES SECTION
-========================= */
-
-.brand-values-section,
-body.dark-theme .brand-values-section {
-    padding: 6rem 1.5rem;
-}
-
-
-/* LIGHT */
-
-.brand-values-section {
-    background: #ffffff;
-}
-
-
-/* DARK */
-
-body.dark-theme .brand-values-section {
-    background: #0d0d0d;
-}
-
-
-/* Heading */
-
-body.dark-theme
-.brand-values-section
-.section-heading {
-    color: #ffffff;
-}
-
-
-/* =========================
-   VALUES GRID
-========================= */
-
-.values-grid,
-body.dark-theme .values-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 1.5rem;
-
-    max-width: 1200px;
-
-    margin: 0 auto;
-}
-
-
-/* =========================
-   VALUE CARDS
-========================= */
-
-.value-card,
-body.dark-theme .value-card {
-    min-height: 280px;
-
-    padding: 2.4rem;
-
-    border-radius: 18px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    transition:
-        transform 0.35s ease,
-        border-color 0.35s ease,
-        box-shadow 0.35s ease,
-        background-color 0.35s ease;
-}
-
-
-/* LIGHT */
-
-.value-card {
-    color: #111111;
-
-    background: #ffffff;
-
-    border: 1px solid #dedede;
-
-    box-shadow:
-        0 10px 28px rgba(0,0,0,0.06);
-}
-
-
-.value-card p {
-    color: #666666;
-}
-
-
-/* DARK */
-
-body.dark-theme .value-card {
-    color: #ffffff;
-
-    background: #181818;
-
-    border: 1px solid #343434;
-
-    box-shadow:
-        0 12px 30px rgba(0,0,0,0.25);
-}
-
-
-body.dark-theme .value-card h3,
-body.dark-theme .value-card span {
-    color: #ffffff;
-}
-
-
-body.dark-theme .value-card p {
-    color: #a8a8a8;
-}
-
-
-/* IMPORTANT:
-   STOP DARK CARDS TURNING WHITE
-*/
-
-body.dark-theme .value-card:hover {
-    color: #ffffff !important;
-
-    background: #1c1c1c !important;
-
-    border-color: #7b2cbf !important;
-
-    transform: translateY(-10px);
-
-    box-shadow:
-        0 24px 50px
-        rgba(0,0,0,0.45);
-}
-
-
-body.dark-theme
-.value-card:hover h3,
-body.dark-theme
-.value-card:hover span {
-    color: #ffffff !important;
-}
-
-
-body.dark-theme
-.value-card:hover p {
-    color: #c7c7c7 !important;
-}
-
-
-/* LIGHT HOVER */
-
-.value-card:hover {
-    color: #111111;
-
-    background: #ffffff;
-
-    border-color: #7b2cbf;
-
-    transform: translateY(-10px);
-
-    box-shadow:
-        0 22px 45px
-        rgba(0,0,0,0.12);
-}
-
-
-.value-card:hover h3,
-.value-card:hover span {
-    color: #111111;
-}
-
-
-.value-card:hover p {
-    color: #555555;
-}
-
-
-/* Purple bottom line */
-
-.value-card::after,
-body.dark-theme .value-card::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: 0;
-
-    width: 0;
-    height: 4px;
-
-    background: #7b2cbf !important;
-
-    transition:
-        width 0.35s ease;
-}
-
-
-.value-card:hover::after,
-body.dark-theme
-.value-card:hover::after {
-    width: 100%;
-}
-
-
-/* =========================
-   REMOVE SHINE FROM ABOUT CARDS
-========================= */
-
-.mission-card::before,
-.value-card::before,
-.about-logo-card::before {
-    display: none !important;
-}
-
-
-/* =========================
-   CTA
-========================= */
-
-.about-cta,
-body.dark-theme .about-cta {
-    padding: 6rem 1.5rem;
-
-    color: #ffffff;
-
-    text-align: center;
-
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            #171717,
-            #050505 65%
-        );
-}
-
-
-.about-cta h2 {
-    color: #ffffff;
-}
-
-
-.about-cta > p:not(.section-label) {
-    color: #c8c8c8;
-}
-
-
-.about-cta .btn {
-    color: #111111;
-
-    background: #ffffff;
-
-    border-color: #ffffff;
-
-    border-radius: 12px;
-}
-
-
-.about-cta .btn:hover {
-    color: #ffffff;
-
-    background: #7b2cbf;
-
-    border-color: #7b2cbf;
-
-    transform: translateY(-4px);
-
-    box-shadow:
-        0 14px 30px
-        rgba(123,44,191,0.28);
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 900px) {
-
-    .about-story-section,
-    body.dark-theme
-    .about-story-section {
-        grid-template-columns: 1fr;
-
-        gap: 3rem;
-
-        padding: 4rem 1.5rem;
-    }
-
-
-    .mission-vision-section,
-    body.dark-theme
-    .mission-vision-section {
-        grid-template-columns: 1fr;
-
-        padding: 4rem 1.5rem;
-    }
-
-
-    .values-grid,
-    body.dark-theme .values-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-}
-
 
 @media (max-width: 600px) {
-
-    .values-grid,
-    body.dark-theme .values-grid {
-        grid-template-columns: 1fr;
-    }
-
-
-    .about-logo-card {
-        min-height: 350px;
-    }
-
-}
-
-
-/* ===========================================================
-   FINAL CONTACT PAGE
-   SAME LAYOUT - LIGHT + DARK MODE
-=========================================================== */
-
-
-/* =========================
-   PAGE BACKGROUND
-========================= */
-
-.contact-page {
-    min-height: 70vh;
-
-    background: #f7f7f8;
-
-    color: #111111;
-}
-
-body.dark-theme .contact-page {
-    background: #0d0d0d;
-
-    color: #ffffff;
-}
-
-
-/* =========================
-   CONTACT HERO
-   SAME IN BOTH THEMES
-========================= */
-
-.contact-hero,
-body.dark-theme .contact-hero {
-    padding: 5.5rem 1.5rem;
-
-    text-align: center;
-
-    color: #ffffff;
-
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            #171717 0%,
-            #080808 60%,
-            #000000 100%
-        );
-
-    border-bottom: 1px solid #222222;
-}
-
-
-.contact-hero .section-label {
-    color: #bdbdbd;
-
-    font-size: 0.8rem;
-    font-weight: 800;
-
-    letter-spacing: 0.2rem;
-}
-
-
-.contact-hero h1 {
-    margin-bottom: 1.3rem;
-
-    color: #ffffff;
-
-    font-size:
-        clamp(3.3rem, 7vw, 5.8rem);
-
-    font-weight: 900;
-
-    line-height: 0.98;
-
-    letter-spacing: -0.04em;
-}
-
-
-.contact-hero p:last-child {
-    max-width: 650px;
-
-    margin: 0 auto;
-
-    color: #cccccc;
-
-    font-size: 1.1rem;
-}
-
-
-/* =========================
-   MAIN CONTACT LAYOUT
-========================= */
-
-.contact-layout,
-body.dark-theme .contact-layout {
-    display: grid;
-
-    grid-template-columns:
-        0.9fr 1.1fr;
-
-    align-items: start;
-
-    gap: 3rem;
-
-    width: 100%;
-    max-width: 1250px;
-
-    margin: 0 auto;
-
-    padding: 5rem 1.5rem;
-}
-
-
-/* =========================
-   LEFT INFORMATION
-========================= */
-
-.contact-information .section-label {
-    margin-bottom: 1rem;
-
-    font-size: 0.8rem;
-    font-weight: 800;
-
-    letter-spacing: 0.18rem;
-}
-
-
-/* IMPORTANT HEADING FIX */
-
-.contact-information h2 {
-    margin-bottom: 1.2rem;
-
-    color: #111111;
-
-    font-size:
-        clamp(2.6rem, 4vw, 4rem);
-
-    font-weight: 900;
-
-    line-height: 1;
-
-    letter-spacing: -0.035em;
-}
-
-
-body.dark-theme
-.contact-information h2 {
-    color: #ffffff !important;
-}
-
-
-/* Description */
-
-.contact-information
-> p:not(.section-label) {
-    max-width: 520px;
-
-    margin-bottom: 2rem;
-
-    color: #666666;
-
-    font-size: 1rem;
-
-    line-height: 1.7;
-}
-
-
-body.dark-theme
-.contact-information
-> p:not(.section-label) {
-    color: #c5c5c5;
-}
-
-
-/* =========================
-   CONTACT DETAIL CARDS
-========================= */
-
-.contact-detail-card,
-body.dark-theme .contact-detail-card {
-    position: relative;
-
-    overflow: hidden;
-
-    margin-bottom: 1rem;
-
-    padding: 1.5rem;
-
-    border-radius: 14px;
-
-    transition:
-        transform 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-
-/* LIGHT */
-
-.contact-detail-card {
-    color: #111111;
-
-    background: #ffffff;
-
-    border: 1px solid #dddddd;
-
-    box-shadow:
-        0 8px 22px
-        rgba(0,0,0,0.05);
-}
-
-
-/* DARK */
-
-body.dark-theme
-.contact-detail-card {
-    color: #ffffff;
-
-    background: #181818;
-
-    border: 1px solid #343434;
-
-    box-shadow:
-        0 10px 25px
-        rgba(0,0,0,0.25);
-}
-
-
-.contact-detail-card h3 {
-    margin-bottom: 0.45rem;
-
-    color: #111111;
-
-    font-size: 1rem;
-    font-weight: 800;
-}
-
-
-body.dark-theme
-.contact-detail-card h3 {
-    color: #ffffff;
-}
-
-
-.contact-detail-card p {
-    color: #666666;
-}
-
-
-body.dark-theme
-.contact-detail-card p {
-    color: #999999;
-}
-
-
-/* Premium hover */
-
-.contact-detail-card:hover,
-body.dark-theme
-.contact-detail-card:hover {
-    transform: translateY(-5px);
-
-    border-color: #7b2cbf;
-}
-
-
-.contact-detail-card:hover {
-    box-shadow:
-        0 16px 35px
-        rgba(0,0,0,0.10);
-}
-
-
-body.dark-theme
-.contact-detail-card:hover {
-    box-shadow:
-        0 18px 40px
-        rgba(0,0,0,0.42);
-}
-
-
-/* =========================
-   REMOVE OLD SHINE
-========================= */
-
-.contact-detail-card::before,
-.contact-form::before {
-    display: none !important;
-}
-
-
-/* =========================
-   CONTACT FORM
-========================= */
-
-.contact-form,
-body.dark-theme .contact-form {
-    position: relative;
-
-    padding: 2.5rem;
-
-    border-radius: 20px;
-
-    transition:
-        transform 0.35s ease,
-        border-color 0.35s ease,
-        box-shadow 0.35s ease;
-}
-
-
-/* LIGHT */
-
-.contact-form {
-    color: #111111;
-
-    background: #ffffff;
-
-    border: 1px solid #dddddd;
-
-    box-shadow:
-        0 15px 40px
-        rgba(0,0,0,0.07);
-}
-
-
-/* DARK */
-
-body.dark-theme
-.contact-form {
-    color: #ffffff;
-
-    background: #181818;
-
-    border: 1px solid #343434;
-
-    box-shadow:
-        0 16px 40px
-        rgba(0,0,0,0.30);
-}
-
-
-/* Subtle form hover */
-
-.contact-form:hover,
-body.dark-theme
-.contact-form:hover {
-    transform: translateY(-4px);
-
-    border-color: #444444;
-}
-
-
-/* =========================
-   FORM GROUPS
-========================= */
-
-.form-group {
-    margin-bottom: 1.4rem;
-}
-
-
-.form-group label {
-    margin-bottom: 0.4rem;
-
-    color: #111111;
-
-    font-weight: 800;
-}
-
-
-body.dark-theme
-.form-group label {
-    color: #ffffff;
-}
-
-
-/* =========================
-   INPUTS / SELECT / TEXTAREA
-========================= */
-
-.contact-form input:not([type="checkbox"]),
-.contact-form select,
-.contact-form textarea {
-    width: 100%;
-
-    box-sizing: border-box;
-
-    color: #111111;
-
-    background: #f8f8f8;
-
-    border: 1px solid #d8d8d8;
-
-    border-radius: 12px;
-
-    font-family: inherit;
-
-    font-size: 1rem;
-
-    transition:
-        background-color 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease,
-        transform 0.25s ease;
-}
-
-
-.contact-form
-input:not([type="checkbox"]),
-.contact-form select {
-    min-height: 56px;
-
-    padding: 0 1rem;
-}
-
-
-.contact-form textarea {
-    min-height: 200px;
-
-    padding: 1rem;
-
-    resize: vertical;
-}
-
-
-/* DARK INPUTS */
-
-body.dark-theme
-.contact-form
-input:not([type="checkbox"]),
-body.dark-theme
-.contact-form select,
-body.dark-theme
-.contact-form textarea {
-    color: #ffffff;
-
-    background: #111111;
-
-    border-color: #3a3a3a;
-}
-
-
-/* Focus both modes */
-
-.contact-form
-input:not([type="checkbox"]):focus,
-.contact-form select:focus,
-.contact-form textarea:focus {
-    outline: none;
-
-    border-color: #7b2cbf;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(123,44,191,0.12);
-}
-
-
-body.dark-theme
-.contact-form
-input:not([type="checkbox"]):focus,
-body.dark-theme
-.contact-form select:focus,
-body.dark-theme
-.contact-form textarea:focus {
-    box-shadow:
-        0 0 0 3px
-        rgba(123,44,191,0.18);
-}
-
-
-/* =========================
-   CHARACTER COUNT
-========================= */
-
-#character-count {
-    color: #777777;
-
-    font-size: 0.85rem;
-}
-
-
-body.dark-theme
-#character-count {
-    color: #8f8f8f;
-}
-
-
-/* =========================
-   CHECKBOX
-========================= */
-
-.checkbox-group {
-    display: flex;
-
-    flex-direction: row;
-
-    align-items: center;
-
-    gap: 0.8rem;
-}
-
-
-.checkbox-group input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-
-    flex-shrink: 0;
-
-    accent-color: #7b2cbf;
-}
-
-
-.checkbox-group label {
-    margin: 0;
-
-    font-weight: 600;
-
-    line-height: 1.5;
-}
-
-
-/* =========================
-   SEND BUTTON
-========================= */
-
-.contact-submit-button {
-    width: 100%;
-
-    min-height: 58px;
-
-    color: #ffffff;
-
-    background: #080808;
-
-    border: 2px solid #080808;
-
-    border-radius: 12px;
-
-    font-size: 1rem;
-    font-weight: 800;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.3s ease,
-        background-color 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-
-.contact-submit-button:hover {
-    color: #ffffff;
-
-    background: #7b2cbf;
-
-    border-color: #7b2cbf;
-
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 12px 28px
-        rgba(123,44,191,0.25);
-}
-
-
-/* Dark button keeps same design */
-
-body.dark-theme
-.contact-submit-button {
-    color: #ffffff;
-
-    background: #080808;
-
-    border-color: #333333;
-}
-
-
-body.dark-theme
-.contact-submit-button:hover {
-    background: #7b2cbf;
-
-    border-color: #7b2cbf;
-}
-
-
-/* =========================
-   ERROR / SUCCESS MESSAGES
-========================= */
-
-.field-error {
-    color: #b40000;
-}
-
-
-body.dark-theme
-.field-error {
-    color: #ff7777;
-}
-
-
-.contact-form-message {
-    min-height: 25px;
-
-    margin-top: 1rem;
-
-    font-weight: 700;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 900px) {
-
-    .contact-layout,
-    body.dark-theme
-    .contact-layout {
-        grid-template-columns: 1fr;
-
-        gap: 2.5rem;
-
-        padding: 4rem 1.25rem;
-    }
-
-
-    .contact-form,
-    body.dark-theme
-    .contact-form {
-        padding: 1.5rem;
-    }
-
-}
-
-
-@media (max-width: 600px) {
-
-    .contact-hero,
-    body.dark-theme .contact-hero {
-        padding: 4rem 1.25rem;
-    }
-
-
-    .contact-hero h1 {
-        font-size:
-            clamp(2.7rem, 12vw, 4rem);
-    }
-
-}
-
-
-/* ===== BEHIND THE BRAND VIDEO ===== */
-
-.brand-video {
-    padding: 90px 5%;
-    text-align: center;
-    background: var(--colour-black);
-    color: var(--colour-white);
-}
-
-.brand-video .section-heading {
-    max-width: 700px;
-    margin: 0 auto 40px;
-}
-
-.brand-video-container {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    overflow: hidden;
-    border-radius: 12px;
-}
-
-.brand-video-container video {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 650px;
-    object-fit: cover;
-}
-
-/* Tablet */
-@media (max-width: 900px) {
-    .brand-video {
-        padding: 70px 30px;
+    .hero .hero-brand-logo {
+        width: 100%;
+        max-height: 180px;
     }
 }
 
-/* Mobile */
-@media (max-width: 600px) {
-    .brand-video {
-        padding: 50px 20px;
-    }
-
-    .brand-video-container {
-        border-radius: 8px;
+@media (prefers-reduced-motion: reduce) {
+    .hero .hero-brand-logo {
+        animation: none;
     }
 }
