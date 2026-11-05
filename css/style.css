@@ -5226,3 +5226,25 @@ body.dark-theme .value-card::after {
         animation: none;
     }
 }
+
+
+/* GLOBALSTEPPER - ENLARGE HERO GRAFFITI LOGO */
+
+.hero .hero-brand-logo {
+    width: 125% !important;
+    max-width: none !important;
+    max-height: none !important;
+    height: auto !important;
+    object-fit: contain;
+    position: relative;
+    left: 50%;
+    margin-left: -62.5%;
+}
+
+/* MOBILE SIZE */
+@media (max-width: 600px) {
+    .hero .hero-brand-logo {
+        width: 115% !important;
+        margin-left: -57.5%;
+    }
+}
