@@ -2127,6 +2127,67 @@
   }
 }
 
+
+/* ==========================================
+   GLOBALSTEPPER - FOOTER LOADER LOGO
+   DESKTOP / IPAD / MOBILE
+========================================== */
+
+.gs-footer-loader-logo {
+  display: block;
+  width: min(100%, 440px);
+  height: auto;
+  object-fit: contain;
+  object-position: left center;
+  margin: 24px 0 15px;
+
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
+}
+
+/* HOVER ANIMATION */
+
+@media (hover: hover) and (pointer: fine) {
+  .gs-footer-loader-logo:hover {
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 12px rgba(255,255,255,0.3));
+  }
+}
+
+/* IPADS AND TABLETS */
+
+@media (max-width: 1024px) {
+  .gs-footer-loader-logo {
+    width: min(100%, 350px);
+  }
+}
+
+/* MOBILE PHONES */
+
+@media (max-width: 600px) {
+  .gs-footer-loader-logo {
+    width: min(100%, 290px);
+    margin: 18px 0 12px;
+  }
+}
+
+/* SMALL MOBILE PHONES */
+
+@media (max-width: 360px) {
+  .gs-footer-loader-logo {
+    width: min(100%, 240px);
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .gs-footer-loader-logo {
+    transition: none;
+  }
+}
+
     
   </style>
 </head>
@@ -2651,10 +2712,14 @@
         >
       </a>
 
-      <h2 class="gs-footer-brand-name">
-        GLOBALSTEPPER
-      </h2>
-
+      
+<img
+  src="media/images/globalstepper-loader.png"
+  alt="GLOBALSTEPPER"
+  class="gs-footer-loader-logo"
+  loading="lazy"
+>
+      
       <p class="gs-footer-description">
         Premium streetwear representing ambition,
         confidence and progression.
