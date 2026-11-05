@@ -804,10 +804,15 @@ textarea:focus-visible {
     margin: 0 auto 2.5rem;
 }
 
+
 .footer-brand img {
-    width: 100px;
-    margin-bottom: 1rem;
-    filter: none;
+    display: block;
+    width: 110px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 20px;
+    filter: brightness(0) invert(1);
 }
 
 .footer-brand p {
