@@ -595,12 +595,12 @@
       <!-- PRODUCT 3: SIGNATURE TRACKSUIT -->
 
       <article
-        class="shop-product-card"
-        data-category="tracksuits"
-        data-name="globalstepper signature tracksuit"
-        data-price="179.99"
-      >
-
+  class="shop-product-card archive-product"
+  data-sold-out="true"
+  data-category="tracksuits"
+  data-name="globalstepper signature tracksuit"
+  data-price="179.99"
+>
         <button
           class="wishlist-button"
           type="button"
@@ -968,8 +968,8 @@
     document.addEventListener(
       "DOMContentLoaded",
       function () {
-        const soldOutIds = new Set(["1", "2", "4"]);
-
+       const soldOutIds = new Set(["1", "2", "3", "4"]);
+        
         function updateArchiveButtons() {
           document.querySelectorAll(
             ".add-to-cart-btn[data-id]"
