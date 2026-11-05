@@ -5674,3 +5674,23 @@ body {
 body.dark-theme .featured-products .section-heading h2 {
     color: #ffffff;
 }
+
+/* GLOBALSTEPPER GRAFFITI FEATURED TITLE */
+
+.featured-products .section-heading h2,
+.featured-products h2 {
+    font-family: 'Permanent Marker', cursive !important;
+    font-size: clamp(40px, 6vw, 78px) !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    line-height: 1.15 !important;
+    text-align: center !important;
+}
+
+@media (max-width: 600px) {
+    .featured-products .section-heading h2,
+    .featured-products h2 {
+        font-size: clamp(32px, 8vw, 48px) !important;
+    }
+}
