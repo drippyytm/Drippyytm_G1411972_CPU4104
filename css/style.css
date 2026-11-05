@@ -5782,3 +5782,102 @@ body.dark-theme .featured-products .section-heading h2 {
     height: auto;
   }
 }
+
+
+/* GLOBALSTEPPER HOME PRODUCT CARDS */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&display=swap');
+
+.featured-products .product-card {
+  background: #fff;
+  color: #080808;
+  border-radius: 0 0 24px 24px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+
+.featured-products .product-info {
+  padding: 26px 24px 28px;
+}
+
+.featured-products .product-category {
+  font-family: 'Barlow Condensed', Impact, sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.featured-products .product-info h3 {
+  font-family: 'Barlow Condensed', Impact, sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1.2;
+  min-height: 62px;
+  margin: 18px 0 30px;
+}
+
+.featured-products .product-price {
+  font-family: 'Barlow Condensed', Impact, sans-serif;
+  font-size: 42px;
+  font-weight: 900;
+  margin: 0 0 30px;
+}
+
+.featured-products .product-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.featured-products .product-button,
+.featured-products .add-to-cart-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 62px;
+  padding: 12px 8px;
+  border-radius: 7px;
+  font-family: 'Barlow Condensed', Impact, sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.featured-products .product-button {
+  background: #fff;
+  color: #000;
+  border: 2px solid #111;
+}
+
+.featured-products .add-to-cart-btn {
+  background: #e5e5e5;
+  color: #777;
+  border: 1px solid #ccc;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .featured-products .product-info {
+    padding: 22px 18px;
+  }
+
+  .featured-products .product-info h3 {
+    font-size: 24px;
+  }
+
+  .featured-products .product-price {
+    font-size: 36px;
+  }
+
+  .featured-products .product-button,
+  .featured-products .add-to-cart-btn {
+    font-size: 18px;
+    min-height: 54px;
+  }
+}
+
