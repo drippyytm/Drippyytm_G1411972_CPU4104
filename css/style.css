@@ -5729,3 +5729,16 @@ body.dark-theme .featured-products .section-heading h2 {
         width: 100%;
     }
 }
+
+/* GLOBALSTEPPER FOOTER LOGO */
+
+.site-footer .footer-brand img {
+    width: 110px;
+    max-width: 100%;
+    height: auto;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    filter: none !important;
+}
