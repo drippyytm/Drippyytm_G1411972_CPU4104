@@ -5742,3 +5742,43 @@ body.dark-theme .featured-products .section-heading h2 {
     border-radius: 0 !important;
     filter: none !important;
 }
+
+
+
+/* GLOBALSTEPPER INVENTORY HEADING */
+
+.inventory-heading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px;
+  box-sizing: border-box;
+}
+
+.inventory-logo {
+  display: block;
+  width: 100%;
+  max-width: 750px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .inventory-logo {
+    max-width: 600px;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 600px) {
+  .inventory-heading {
+    padding: 10px 12px;
+  }
+
+  .inventory-logo {
+    max-width: 100%;
+    height: auto;
+  }
+}
