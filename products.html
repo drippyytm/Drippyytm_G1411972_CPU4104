@@ -1449,6 +1449,181 @@
   }
 }
 
+
+/* ==========================================
+   GLOBALSTEPPER - ARCHIVE COLLECTION INDEX
+========================================== */
+
+.gs-collection-index {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  column-gap: 24px;
+  row-gap: 16px;
+
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto 30px;
+  padding: 12px 0 0;
+  box-sizing: border-box;
+
+  color: #111;
+  animation: gsIndexReveal 0.9s ease both;
+}
+
+.gs-index-left,
+.gs-index-right {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.gs-index-right {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.gs-index-eyebrow {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.gs-index-title {
+  margin: 0;
+  font-family: 'Barlow Condensed', Impact, sans-serif;
+  font-size: clamp(35px, 4vw, 58px);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.gs-index-numbers {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: 'Barlow Condensed', Impact, sans-serif;
+  font-size: clamp(35px, 4vw, 58px);
+  font-weight: 900;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.gs-index-divider {
+  color: #aaa;
+  font-size: 0.7em;
+  font-weight: 400;
+}
+
+.gs-index-line {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 1px;
+  background: #ccc;
+  transform-origin: left;
+  animation: gsIndexLine 1.1s ease 0.3s both;
+}
+
+.gs-index-footer-left,
+.gs-index-footer-right {
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.gs-index-footer-right {
+  justify-self: end;
+  text-align: right;
+}
+
+/* ANIMATIONS */
+
+@keyframes gsIndexReveal {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gsIndexLine {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* TABLETS */
+
+@media (max-width: 1024px) {
+  .gs-collection-index {
+    margin-bottom: 25px;
+  }
+}
+
+/* MOBILE PHONES */
+
+@media (max-width: 600px) {
+  .gs-collection-index {
+    column-gap: 10px;
+    row-gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .gs-index-eyebrow {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  .gs-index-title,
+  .gs-index-numbers {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+
+  .gs-index-numbers {
+    gap: 6px;
+  }
+
+  .gs-index-footer-left,
+  .gs-index-footer-right {
+    font-size: 8px;
+    letter-spacing: 0.7px;
+  }
+}
+
+/* VERY SMALL PHONES */
+
+@media (max-width: 360px) {
+  .gs-index-title,
+  .gs-index-numbers {
+    font-size: 26px;
+  }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+  .gs-collection-index,
+  .gs-index-line {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+    
   </style>
 </head>
 
@@ -1635,6 +1810,49 @@
     <!-- PRODUCT GRID -->
 
     <section
+
+
+<!-- GLOBALSTEPPER ARCHIVE COLLECTION COUNTER -->
+
+<div class="gs-collection-index" aria-label="Archive collection index">
+
+  <div class="gs-index-left">
+    <span class="gs-index-eyebrow">
+      GLOBALSTEPPER — PREVIOUS DROPS
+    </span>
+
+    <h2 class="gs-index-title">
+      THE ARCHIVE
+    </h2>
+  </div>
+
+  <div class="gs-index-right">
+    <span class="gs-index-eyebrow">
+      COLLECTION INDEX
+    </span>
+
+    <div class="gs-index-numbers">
+      <span class="gs-index-current">001</span>
+      <span class="gs-index-divider">/</span>
+      <span class="gs-index-total">004</span>
+    </div>
+  </div>
+
+  <div class="gs-index-line"></div>
+
+  <span class="gs-index-footer-left">
+    PAST COLLECTIONS
+  </span>
+
+  <span class="gs-index-footer-right">
+    FOUR ARCHIVED PIECES
+  </span>
+
+</div>
+
+<!-- END COLLECTION COUNTER -->
+
+      
       class="all-products-grid"
       id="all-products-grid"
       aria-label="GLOBALSTEPPER products"
