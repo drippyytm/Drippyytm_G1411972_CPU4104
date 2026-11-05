@@ -5153,3 +5153,27 @@ body.dark-theme .value-card::after {
         animation: none;
     }
 }
+
+
+/* GLOBALSTEPPER - BIGGER HERO LOGO */
+
+.gs-hero-title {
+  width: 100%;
+  max-width: 1450px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gs-hero-title img {
+  width: 100%;
+  max-height: 420px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .gs-hero-title img {
+    max-height: 260px;
+  }
+}
