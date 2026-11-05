@@ -15,32 +15,95 @@
     <link rel="icon" type="image/png" href="media/images/logo.png">
 
     <style>
-        /* CONTACT PAGE GRAFFITI LOGO */
+        /* GLOBALSTEPPER CONTACT PAGE */
 
-        .contact-hero {
+        /* MATCHING ABOUT PAGE HERO */
+
+        .contact-page .contact-hero {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+
+            min-height: 600px;
+            padding: 85px 24px 90px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
             text-align: center;
+            color: #ffffff;
+
+            background:
+                radial-gradient(
+                    ellipse at 50% 50%,
+                    rgba(95, 91, 103, 0.35) 0%,
+                    rgba(45, 43, 48, 0.55) 35%,
+                    rgba(10, 10, 10, 1) 85%
+                ),
+                #0a0a0a;
         }
 
-        .contact-hero .contact-graffiti-heading {
+        /* SOFT PURPLE GLOW */
+
+        .contact-page .contact-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+
+            background: radial-gradient(
+                ellipse at 50% 5%,
+                rgba(110, 64, 130, 0.15),
+                transparent 60%
+            );
+        }
+
+        /* GET IN TOUCH LABEL */
+
+        .contact-page .contact-hero .section-label {
+            margin: 0 0 45px;
+            color: #e8e4ec;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+        }
+
+        /* GRAFFITI LOGO */
+
+        .contact-page .contact-hero .contact-graffiti-heading {
             display: block;
             width: 100%;
-            max-width: 1000px;
-            margin: 20px auto;
+            max-width: 1100px;
+            margin: 0 auto 60px;
             padding: 0;
             line-height: 1;
             font-size: 0;
         }
 
-        .contact-hero .contact-graffiti-logo {
+        .contact-page .contact-hero .contact-graffiti-logo {
             display: block;
             width: 100%;
-            max-width: 900px;
-            max-height: 260px;
+            max-width: 1100px;
+            max-height: 300px;
             height: auto;
             margin: 0 auto;
             object-fit: contain;
             background: transparent !important;
             filter: none !important;
+        }
+
+        /* DESCRIPTION */
+
+        .contact-page .contact-hero > p:last-child {
+            max-width: 750px;
+            margin: 0 auto;
+            color: #c9c9c9;
+            font-size: clamp(16px, 2vw, 22px);
+            line-height: 1.6;
         }
 
         /* HEADER LOGO */
@@ -68,16 +131,31 @@
             filter: none !important;
         }
 
-        /* MOBILE */
+        /* MOBILE RESPONSIVENESS */
 
         @media (max-width: 768px) {
-            .contact-hero .contact-graffiti-heading {
-                margin: 15px auto;
+
+            .contact-page .contact-hero {
+                min-height: 420px;
+                padding: 65px 20px;
             }
 
-            .contact-hero .contact-graffiti-logo {
-                width: 100%;
-                max-height: 150px;
+            .contact-page .contact-hero .section-label {
+                font-size: 11px;
+                letter-spacing: 4px;
+                margin-bottom: 35px;
+            }
+
+            .contact-page .contact-hero .contact-graffiti-heading {
+                margin-bottom: 45px;
+            }
+
+            .contact-page .contact-hero .contact-graffiti-logo {
+                max-height: 180px;
+            }
+
+            .contact-page .contact-hero > p:last-child {
+                font-size: 15px;
             }
         }
     </style>
@@ -88,13 +166,17 @@
     <!-- HEADER -->
 
     <header class="site-header">
+
         <nav class="navbar" aria-label="Main navigation">
 
             <a href="index.html"
                class="logo"
                aria-label="GLOBALSTEPPER home page">
-                <img src="media/images/logo.png"
-                     alt="GLOBALSTEPPER logo">
+
+                <img
+                    src="media/images/logo.png"
+                    alt="GLOBALSTEPPER logo">
+
             </a>
 
             <button
@@ -141,21 +223,26 @@
                         type="button"
                         aria-label="Switch to dark mode"
                         aria-pressed="false">
+
                         <span aria-hidden="true">☾</span>
                         <span class="theme-toggle-text">Dark</span>
+
                     </button>
                 </li>
 
                 <li>
                     <a href="cart.html" class="cart-link">
                         Cart
-                        <span id="cart-count"
-                              aria-label="items in cart">0</span>
+                        <span
+                            id="cart-count"
+                            aria-label="items in cart">0</span>
                     </a>
                 </li>
 
             </ul>
+
         </nav>
+
     </header>
 
     <!-- MAIN CONTENT -->
@@ -171,10 +258,12 @@
             </p>
 
             <h1 class="contact-graffiti-heading">
+
                 <img
                     src="media/images/globalstepper-loader.png"
                     alt="GLOBALSTEPPER"
                     class="contact-graffiti-logo">
+
             </h1>
 
             <p>
@@ -225,7 +314,10 @@
                 class="contact-form"
                 novalidate>
 
+                <!-- FULL NAME -->
+
                 <div class="form-group">
+
                     <label for="contact-name">
                         Full name
                     </label>
@@ -237,12 +329,17 @@
                         autocomplete="name"
                         required>
 
-                    <p class="field-error"
-                       id="name-error"
-                       aria-live="polite"></p>
+                    <p
+                        class="field-error"
+                        id="name-error"
+                        aria-live="polite"></p>
+
                 </div>
 
+                <!-- EMAIL -->
+
                 <div class="form-group">
+
                     <label for="contact-email">
                         Email address
                     </label>
@@ -254,12 +351,17 @@
                         autocomplete="email"
                         required>
 
-                    <p class="field-error"
-                       id="email-error"
-                       aria-live="polite"></p>
+                    <p
+                        class="field-error"
+                        id="email-error"
+                        aria-live="polite"></p>
+
                 </div>
 
+                <!-- SUBJECT -->
+
                 <div class="form-group">
+
                     <label for="contact-subject">
                         Subject
                     </label>
@@ -291,10 +393,14 @@
 
                     </select>
 
-                    <p class="field-error"
-                       id="subject-error"
-                       aria-live="polite"></p>
+                    <p
+                        class="field-error"
+                        id="subject-error"
+                        aria-live="polite"></p>
+
                 </div>
+
+                <!-- MESSAGE -->
 
                 <div class="form-group">
 
@@ -311,9 +417,10 @@
 
                     <div class="message-information">
 
-                        <p class="field-error"
-                           id="message-error"
-                           aria-live="polite"></p>
+                        <p
+                            class="field-error"
+                            id="message-error"
+                            aria-live="polite"></p>
 
                         <p id="character-count">
                             0 / 500
@@ -323,6 +430,8 @@
 
                 </div>
 
+                <!-- CONSENT -->
+
                 <div class="form-group checkbox-group">
 
                     <input
@@ -331,15 +440,18 @@
                         name="consent">
 
                     <label for="contact-consent">
-                        I agree that my details may be used to respond
-                        to this enquiry.
+                        I agree that my details may be used
+                        to respond to this enquiry.
                     </label>
 
                 </div>
 
-                <p class="field-error"
-                   id="consent-error"
-                   aria-live="polite"></p>
+                <p
+                    class="field-error"
+                    id="consent-error"
+                    aria-live="polite"></p>
+
+                <!-- SUBMIT BUTTON -->
 
                 <button
                     type="submit"
@@ -367,11 +479,14 @@
 
             <div class="footer-brand">
 
-                <a href="index.html"
-                   aria-label="GLOBALSTEPPER home">
+                <a
+                    href="index.html"
+                    aria-label="GLOBALSTEPPER home">
+
                     <img
                         src="media/images/logo.png"
                         alt="GLOBALSTEPPER logo">
+
                 </a>
 
                 <p>
@@ -414,13 +529,14 @@
         <div class="footer-bottom">
 
             <p>
-                &copy; <span id="current-year">2026</span>
+                &copy;
+                <span id="current-year">2026</span>
                 GLOBALSTEPPER. All rights reserved.
             </p>
 
             <p>
-                Student e-commerce project developed using HTML,
-                CSS and JavaScript.
+                Student e-commerce project developed
+                using HTML, CSS and JavaScript.
             </p>
 
         </div>
@@ -433,3 +549,4 @@
 
 </body>
 </html>
+
