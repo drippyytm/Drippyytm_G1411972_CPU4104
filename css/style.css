@@ -716,18 +716,19 @@ textarea:focus-visible {
     align-items: center;
     justify-content: center;
     min-height: 330px;
-    padding: 3rem;
-    background-color: var(--colour-black);
-    border-radius: var(--border-radius);
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .brand-story-image img {
-     display: block;
+    display: block;
     width: min(100%, 520px);
     height: auto;
     margin: 0 auto;
     object-fit: contain;
-    filter: none;
 }
 
 
@@ -5881,3 +5882,33 @@ body.dark-theme .featured-products .section-heading h2 {
   }
 }
 
+/* GLOBALSTEPPER BRAND STORY UPDATE */
+
+.brand-story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 3rem;
+}
+
+.brand-story-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.brand-story-content h2 {
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .brand-story {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .brand-story-content {
+        text-align: center;
+        align-items: center;
+    }
+}
