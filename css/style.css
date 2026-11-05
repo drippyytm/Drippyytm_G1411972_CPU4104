@@ -5655,3 +5655,22 @@ body {
         max-width: 100%;
     }
 }
+
+/* GLOBALSTEPPER FEATURED STREETWEAR GRAFFITI */
+
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+.featured-products .section-heading h2 {
+    font-family: 'Permanent Marker', cursive !important;
+    font-size: clamp(38px, 6vw, 75px) !important;
+    font-weight: 400 !important;
+    line-height: 1.2 !important;
+    letter-spacing: -1px !important;
+    text-transform: uppercase;
+    color: #000000;
+    text-align: center;
+}
+
+body.dark-theme .featured-products .section-heading h2 {
+    color: #ffffff;
+}
