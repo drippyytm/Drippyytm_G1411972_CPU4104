@@ -385,6 +385,46 @@
         transform: scaleX(1);
       }
     }
+
+/* WHY SHOP WITH US - RESPONSIVE */
+
+.why-shop-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 20px auto 30px;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+.why-shop-logo {
+  display: block;
+  width: 100%;
+  max-width: 850px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .why-shop-logo {
+    max-width: 650px;
+  }
+}
+
+@media (max-width: 600px) {
+  .why-shop-heading {
+    margin: 15px auto 25px;
+    padding: 0 10px;
+  }
+
+  .why-shop-logo {
+    max-width: 100%;
+  }
+}
+
+    
   </style>
 </head>
 
@@ -695,12 +735,22 @@
 
     <section class="brand-benefits reveal">
 
-      <div class="section-heading">
-        <p class="section-label">
-          THE GLOBALSTEPPER STANDARD
-        </p>
-        <h2>Why Shop With Us?</h2>
-      </div>
+     
+<div class="section-heading">
+
+  <p class="section-label">
+    THE GLOBALSTEPPER STANDARD
+  </p>
+
+  <h2 class="why-shop-heading">
+    <img
+      src="media/images/why-shop.png"
+      alt="Why Shop With Us?"
+      class="why-shop-logo"
+    >
+  </h2>
+
+</div>
 
       <div class="benefits-grid">
 
