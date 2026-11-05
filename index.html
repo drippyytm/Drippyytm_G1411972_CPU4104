@@ -514,6 +514,92 @@
     max-width: 400px;
   }
 }
+
+
+/* GLOBALSTEPPER CENTRED BRAND STORY */
+
+.brand-story {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  min-height: 550px;
+  margin: 0 auto;
+  padding: 90px 20px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.brand-story-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.brand-story-content .section-label {
+  margin: 0 0 35px;
+  color: #000000;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+.brand-story-content .globalstepper-story-slogan {
+  display: block;
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  margin: 0 auto 40px;
+  object-fit: contain;
+}
+
+.brand-story-content .text-link {
+  display: inline-block;
+  width: fit-content;
+  margin: 0 auto;
+  padding-bottom: 6px;
+  color: #000000;
+  font-size: 20px;
+  font-weight: 800;
+  border-bottom: 2px solid #000000;
+  text-decoration: none;
+}
+
+.brand-story-content .text-link:hover {
+  opacity: 0.6;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+  .brand-story {
+    min-height: 380px;
+    padding: 65px 15px;
+  }
+
+  .brand-story-content .section-label {
+    margin-bottom: 25px;
+    font-size: 11px;
+    letter-spacing: 3px;
+  }
+
+  .brand-story-content .globalstepper-story-slogan {
+    max-width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .brand-story-content .text-link {
+    font-size: 16px;
+  }
+}
+
     
   </style>
 
@@ -888,6 +974,7 @@
     </section>
 
 
+
 <!-- BRAND STORY -->
 
 <section class="brand-story reveal-left">
@@ -908,15 +995,9 @@
 
   </div>
 
-  <div class="brand-story-image">
-    <img
-      src="images/GLOBAL STEPPER LOGO.png"
-      alt="GLOBALSTEPPER globe logo"
-      loading="lazy"
-    >
-  </div>
-
 </section>
+
+<!-- NEWSLETTER -->
 
     <!-- NEWSLETTER -->
 
