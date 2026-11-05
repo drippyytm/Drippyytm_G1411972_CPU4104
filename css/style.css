@@ -812,9 +812,10 @@ textarea:focus-visible {
     height: auto;
     object-fit: contain;
     margin-bottom: 20px;
-    filter: brightness(0) invert(1);
+    filter: none;
 }
 
+   
 .footer-brand p {
     max-width: 360px;
     color: #c8c8c8;
