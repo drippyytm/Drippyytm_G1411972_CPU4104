@@ -883,6 +883,389 @@
     margin-bottom: 30px;
   }
 }
+
+/* ==========================================
+   GLOBALSTEPPER — CINEMATIC ARCHIVE V2
+   DESKTOP / IPAD / MOBILE
+========================================== */
+
+/* CINEMATIC ENTRANCE */
+
+@keyframes gsCinematicReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(55px) scale(0.88);
+    filter: blur(12px);
+    letter-spacing: 8px;
+  }
+
+  65% {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    letter-spacing: 0;
+  }
+}
+
+/* MOVING SPOTLIGHT */
+
+@keyframes gsMovingLight {
+  0%, 100% {
+    transform: translateX(-22%) scale(1);
+    opacity: 0.25;
+  }
+
+  50% {
+    transform: translateX(22%) scale(1.2);
+    opacity: 0.65;
+  }
+}
+
+/* TEXT SHIMMER */
+
+@keyframes gsTextShimmer {
+  0%, 100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.18);
+  }
+}
+
+/* SUBTLE GLITCH */
+
+@keyframes gsGlitch {
+  0%, 93%, 100% {
+    transform: translate(0);
+    text-shadow: none;
+  }
+
+  94% {
+    transform: translate(-2px, 0);
+    text-shadow: 3px 0 rgba(255,255,255,0.3);
+  }
+
+  95% {
+    transform: translate(2px, 0);
+    text-shadow: -3px 0 rgba(255,255,255,0.25);
+  }
+
+  96% {
+    transform: translate(0);
+  }
+}
+
+/* FILTER PANEL ENTRANCE */
+
+@keyframes gsPanelEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(65px) scale(0.96);
+    filter: blur(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* ==========================================
+   ARCHIVE HERO
+========================================== */
+
+.shop-page .archive-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  background: #030303;
+
+  padding: clamp(55px, 7vw, 105px) 20px 100px;
+}
+
+/* ANIMATED BACKGROUND LIGHT */
+
+.shop-page .archive-hero::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  z-index: -1;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255,255,255,0.13) 0%,
+    rgba(255,255,255,0.035) 32%,
+    transparent 65%
+  );
+
+  pointer-events: none;
+
+  animation: gsMovingLight 10s ease-in-out infinite;
+}
+
+/* EDITORIAL GRID TEXTURE */
+
+.shop-page .archive-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 65px 65px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ==========================================
+   ANIMATED LETTERING
+========================================== */
+
+.shop-page .archive-eyebrow {
+  animation: gsFadeUp 0.8s ease both;
+  animation-delay: 0.1s;
+}
+
+.shop-page .archive-title {
+  position: relative;
+  display: block;
+
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 20px;
+
+  font-family: 'Barlow Condensed', Impact, sans-serif;
+  font-weight: 900;
+
+  font-size: clamp(54px, 10vw, 165px);
+  line-height: 0.95;
+
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+
+  animation:
+    gsCinematicReveal 1.4s cubic-bezier(.16,1,.3,1) both,
+    gsTextShimmer 6s ease-in-out 1.5s infinite,
+    gsGlitch 9s steps(1,end) 2s infinite;
+
+  text-shadow:
+    0 0 35px rgba(255,255,255,0.09),
+    0 12px 45px rgba(0,0,0,0.5);
+}
+
+.shop-page .archive-description {
+  animation: gsFadeUp 1s ease both;
+  animation-delay: 0.6s;
+}
+
+/* ==========================================
+   FLOATING FILTER PANEL
+========================================== */
+
+.shop-page .archive-filters {
+  position: relative;
+  z-index: 5;
+
+  margin-top: -40px;
+  margin-bottom: 55px;
+
+  border-radius: 28px;
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,0.06),
+    0 35px 90px rgba(0,0,0,0.10);
+
+  animation:
+    gsPanelEntrance 1.1s cubic-bezier(.16,1,.3,1) both;
+
+  animation-delay: 0.45s;
+}
+
+/* INTERACTIVE FILTERS */
+
+.shop-page .archive-filters select,
+.shop-page .archive-filters input {
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .shop-page .archive-filters select:hover,
+  .shop-page .archive-filters input:hover {
+    transform: translateY(-2px);
+    border-color: #111;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+  }
+}
+
+/* PRODUCT COUNT GLOW */
+
+.shop-page .archive-filters .product-count {
+  box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .shop-page .archive-filters .product-count:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+  }
+}
+
+/* ==========================================
+   PRODUCT CARD ANIMATIONS
+========================================== */
+
+.shop-page #all-products-grid .shop-product-card {
+  transition:
+    transform 0.45s cubic-bezier(.16,1,.3,1),
+    box-shadow 0.45s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .shop-page #all-products-grid .shop-product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 28px 60px rgba(0,0,0,0.17);
+  }
+
+  .shop-page #all-products-grid .shop-product-card:hover
+  .shop-product-image img {
+    transform: scale(1.075);
+  }
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1024px) {
+  .shop-page .archive-hero {
+    padding: 65px 20px 95px;
+  }
+
+  .shop-page .archive-title {
+    font-size: clamp(60px, 10vw, 110px);
+  }
+
+  .shop-page .archive-filters {
+    margin-top: -35px;
+  }
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 600px) {
+  .shop-page .archive-hero {
+    padding: 55px 14px 75px;
+  }
+
+  .shop-page .archive-title {
+    font-size: clamp(45px, 12vw, 75px);
+    line-height: 1;
+    animation:
+      gsCinematicReveal 1s ease both,
+      gsTextShimmer 6s ease-in-out 1s infinite;
+  }
+
+  .shop-page .archive-filters {
+    margin-top: -25px;
+    margin-bottom: 35px;
+    border-radius: 20px;
+  }
+
+  .shop-page #all-products-grid .shop-product-card {
+    transition-duration: 0.3s;
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITY
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-page .archive-hero::before,
+  .shop-page .archive-title,
+  .shop-page .archive-eyebrow,
+  .shop-page .archive-description,
+  .shop-page .archive-filters,
+  .shop-page #all-products-grid .shop-product-card {
+    animation: none !important;
+    filter: none !important;
+  }
+
+  .shop-page #all-products-grid .shop-product-card,
+  .shop-page .archive-filters select,
+  .shop-page .archive-filters input {
+    transition: none !important;
+  }
+}
+
+
+/* ANIMATED ACCENT LINE */
+
+@keyframes gsLineReveal {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.shop-page .archive-accent-line {
+  width: clamp(80px, 12vw, 180px);
+  height: 3px;
+  margin: 0 auto 25px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #fff,
+    transparent
+  );
+
+  transform-origin: center;
+
+  animation: gsLineReveal 1s ease 1s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-page .archive-accent-line {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+    
   </style>
 </head>
 
@@ -981,7 +1364,8 @@
     <h1 class="archive-title">
       THE ARCHIVE
     </h1>
-
+<div class="archive-accent-line" aria-hidden="true"></div>
+    
     <p class="archive-description">
       Explore previous GLOBALSTEPPER collections.
       Exclusive pieces from past drops,
