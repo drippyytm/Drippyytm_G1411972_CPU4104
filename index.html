@@ -264,14 +264,16 @@
 
 /* GLOBALSTEPPER INVENTORY LOGO */
 
+
+/* GLOBALSTEPPER INVENTORY - RESPONSIVE */
+
 .inventory-heading {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 100%;
-  margin: 20px auto 25px;
-  padding: 0 16px;
+  margin: 15px auto 25px;
+  padding: 0 15px;
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -281,29 +283,32 @@
   width: 100%;
   max-width: 850px;
   height: auto;
+  max-height: 180px;
   object-fit: contain;
+  object-position: center;
 }
 
 /* TABLETS */
 @media (max-width: 1024px) {
   .inventory-logo {
     max-width: 650px;
+    max-height: 140px;
   }
 }
 
-/* MOBILE PHONES */
+/* MOBILE */
 @media (max-width: 600px) {
   .inventory-heading {
-    margin: 12px auto 18px;
+    margin: 10px auto 18px;
     padding: 0 10px;
   }
 
   .inventory-logo {
-    width: 100%;
     max-width: 100%;
-    height: auto;
+    max-height: 100px;
   }
 }
+
 
 /* SMALL PHONES */
 @media (max-width: 375px) {
@@ -486,13 +491,14 @@
 
     <p class="section-label">LATEST DROP</p>
 
-    <h2 id="featured-heading" class="inventory-heading">
-      <img
-        src="media/images/inventory.png"
-        alt="INVENTORY"
-        class="inventory-logo"
-      >
-    </h2>
+    
+<h2 id="featured-heading" class="inventory-heading">
+  <img
+    src="media/images/inventory.png"
+    alt="INVENTORY"
+    class="inventory-logo"
+  >
+</h2>
 
     <p class="section-description">
       Discover selected pieces from the latest
