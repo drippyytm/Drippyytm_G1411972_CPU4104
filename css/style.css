@@ -6017,3 +6017,146 @@ body.dark-theme .featured-products .section-heading h2 {
         font-size: 20px;
     }
 }
+
+
+/* ==========================================
+   GLOBALSTEPPER UNIVERSAL BRAND STYLE
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+:root {
+  --gs-display-font: 'Anton', Impact, sans-serif;
+}
+
+/* HEADINGS */
+
+h1, h2, h3, h4,
+.product-card h3,
+.product-info h3,
+.hero-text,
+.section-heading h2 {
+  font-family: var(--gs-display-font);
+  font-weight: 400;
+}
+
+/* PRODUCT PRICES */
+
+.product-price,
+.product-info .product-price {
+  font-family: var(--gs-display-font);
+  font-size: 34px;
+  font-weight: 400;
+  color: #000;
+}
+
+/* CATEGORY LABELS */
+
+.product-category {
+  font-family: var(--gs-display-font);
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #777;
+}
+
+/* UNIVERSAL BUTTON TYPOGRAPHY */
+
+.btn,
+.product-button,
+.add-to-cart-btn,
+button[type="submit"] {
+  font-family: var(--gs-display-font);
+  font-weight: 400;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+/* PRODUCT BUTTONS */
+
+.product-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 62px;
+  padding: 14px 24px;
+  background: #fff;
+  color: #000;
+  border: 3px solid #000;
+  border-radius: 9px;
+  text-decoration: none;
+  transition: 0.25s ease;
+}
+
+.product-button:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* SOLD OUT BUTTON */
+
+.add-to-cart-btn:disabled,
+.add-to-cart-btn[disabled],
+.add-to-cart-btn.sold-out {
+  background: #e5e5e5;
+  color: #808080;
+  border: 1px solid #ccc;
+  border-radius: 9px;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* GENERAL BUTTON SHAPE */
+
+.btn,
+button[type="submit"] {
+  border-radius: 9px;
+  min-height: 58px;
+  padding: 14px 26px;
+  transition: 0.25s ease;
+}
+
+/* HOMEPAGE HERO BUTTONS */
+
+.hero .hero-actions .btn {
+  font-family: var(--gs-display-font);
+  font-size: 21px;
+  border: 3px solid #fff;
+  border-radius: 9px;
+  background: #fff;
+  color: #000;
+}
+
+.hero .hero-actions .btn-outline {
+  background: transparent;
+  color: #fff;
+}
+
+.hero .hero-actions .btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+.hero .hero-actions .btn-outline:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .product-price {
+    font-size: 28px;
+  }
+
+  .product-button,
+  .add-to-cart-btn,
+  .btn {
+    font-size: 17px;
+  }
+
+  .hero .hero-actions .btn {
+    font-size: 19px;
+  }
+}
