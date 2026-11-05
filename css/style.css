@@ -5333,3 +5333,325 @@ html, body {
         margin: 0 auto !important;
     }
 }
+
+/* ==========================================
+   GLOBALSTEPPER HOMEPAGE
+   RESPONSIVE HERO + LOGO FIX
+   ========================================== */
+
+/* Prevent horizontal scrolling */
+html,
+body {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+/* HERO SECTION */
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 78vh;
+    min-height: 78svh;
+    padding: 70px 20px;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+}
+
+/* BACKGROUND VIDEO */
+.hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+}
+
+/* DARK VIDEO OVERLAY */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.35),
+        rgba(0, 0, 0, 0.55)
+    );
+}
+
+/* HERO CONTENT */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+}
+
+/* PREMIUM UNISEX STREETWEAR */
+.hero-label {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(11px, 1.4vw, 15px);
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+/* GLOBALSTEPPER GRAFFITI LOGO */
+.hero h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    margin: 10px auto;
+    padding: 0;
+    overflow: visible;
+    line-height: 1;
+    white-space: normal;
+}
+
+/* Keep logo effects and animations */
+.hero h1 img,
+.hero-logo,
+.hero-logo-image,
+.hero-title-image {
+    display: block;
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+    transform-origin: center;
+}
+
+/* SLOGAN */
+.hero-text {
+    max-width: 700px;
+    margin: 0;
+    color: #fff;
+    font-size: clamp(16px, 2vw, 23px);
+    line-height: 1.5;
+}
+
+/* BUTTON CONTAINER */
+.hero-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    width: 100%;
+    max-width: none;
+    margin: 10px auto 0;
+}
+
+/* BUTTONS */
+.hero-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 170px;
+    min-height: 52px;
+    padding: 13px 25px;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* HEADER LOGO */
+.site-header .logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    flex-shrink: 0;
+}
+
+.site-header .logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 75px;
+    object-fit: contain;
+}
+
+/* ==========================================
+   IPAD AND TABLET
+   ========================================== */
+
+@media (min-width: 601px) and (max-width: 1024px) {
+
+    .hero {
+        min-height: 75svh;
+        padding: 65px 24px;
+    }
+
+    .hero-content {
+        gap: 22px;
+        max-width: 100%;
+    }
+
+    .hero h1 {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .hero h1 img,
+    .hero-logo,
+    .hero-logo-image,
+    .hero-title-image {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .hero-label {
+        font-size: 13px;
+        letter-spacing: 3px;
+    }
+
+    .hero-text {
+        font-size: 19px;
+    }
+
+    .site-header .logo {
+        width: 95px;
+    }
+}
+
+/* ==========================================
+   IPHONE AND MOBILE
+   ========================================== */
+
+@media (max-width: 600px) {
+
+    .hero {
+        width: 100%;
+        min-height: 75svh;
+        padding: 55px 16px;
+    }
+
+    .hero-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 100%;
+        gap: 22px;
+        padding: 0;
+    }
+
+    .hero-label {
+        width: 100%;
+        margin: 0;
+        font-size: clamp(10px, 2.8vw, 13px);
+        letter-spacing: 2px;
+        line-height: 1.5;
+    }
+
+    /* LOGO FULLY VISIBLE ON IPHONE */
+    .hero h1 {
+        width: 100%;
+        max-width: 100%;
+        margin: 8px auto;
+        padding: 0;
+        overflow: visible;
+    }
+
+    .hero h1 img,
+    .hero-logo,
+    .hero-logo-image,
+    .hero-title-image {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: none;
+        margin: 0 auto;
+        object-fit: contain;
+    }
+
+    .hero-text {
+        width: 100%;
+        max-width: 340px;
+        margin: 0 auto;
+        font-size: 17px;
+        line-height: 1.5;
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        width: 100%;
+        max-width: 340px;
+        margin: 8px auto 0;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+        min-width: 0;
+        min-height: 54px;
+        padding: 14px 18px;
+        font-size: 16px;
+    }
+
+    .site-header .logo {
+        width: 90px;
+    }
+
+    .site-header .logo img {
+        width: 100%;
+        height: auto;
+        max-height: 65px;
+    }
+}
+
+/* ==========================================
+   SMALL IPHONES
+   ========================================== */
+
+@media (max-width: 375px) {
+
+    .hero {
+        padding: 45px 12px;
+    }
+
+    .hero-content {
+        gap: 18px;
+    }
+
+    .hero-label {
+        font-size: 10px;
+        letter-spacing: 1.5px;
+    }
+
+    .hero-text {
+        font-size: 15px;
+    }
+
+    .hero-actions {
+        max-width: 100%;
+    }
+}
