@@ -18,6 +18,13 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/archive.css?v=3">
 
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  
   <style>
     /* GLOBALSTEPPER RESPONSIVE SHOP */
 
@@ -1624,6 +1631,138 @@
 }
 
     
+/* ==========================================
+   GLOBALSTEPPER — PRODUCT TYPOGRAPHY
+   ALL FOUR ARCHIVE PRODUCT CARDS
+   DESKTOP / TABLET / MOBILE
+========================================== */
+
+/* PRODUCT CARD TYPOGRAPHY */
+
+.shop-page #all-products-grid .shop-product-card {
+  font-family: 'Barlow Condensed', Impact, sans-serif;
+}
+
+/* PRODUCT CATEGORY */
+
+.shop-page #all-products-grid .shop-product-card
+.shop-product-category {
+  font-family: 'Barlow Condensed', Impact, sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: #666;
+}
+
+/* PRODUCT NAME */
+
+.shop-page #all-products-grid .shop-product-card
+.shop-product-name {
+  font-family: 'Barlow Condensed', Impact, sans-serif;
+  font-size: clamp(26px, 2.3vw, 36px);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: #111;
+  overflow-wrap: break-word;
+}
+
+/* PRODUCT PRICE */
+
+.shop-page #all-products-grid .shop-product-card
+.shop-product-price {
+  font-family: 'Barlow Condensed', Impact, sans-serif;
+  font-size: clamp(30px, 2.8vw, 43px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 0;
+  color: #000;
+  font-variant-numeric: tabular-nums;
+}
+
+/* PRODUCT BUTTONS */
+
+.shop-page #all-products-grid .shop-product-card
+.product-actions a,
+.shop-page #all-products-grid .shop-product-card
+.product-actions button {
+  font-family: 'Barlow Condensed', Impact, sans-serif;
+  font-size: clamp(18px, 1.5vw, 23px);
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-align: center;
+  min-height: 58px;
+  padding: 12px 10px;
+  box-sizing: border-box;
+}
+
+/* SOLD OUT BUTTON */
+
+.shop-page #all-products-grid .shop-product-card
+.product-actions button:disabled {
+  background: #e5e5e5;
+  color: #777;
+  border: 1px solid #ccc;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* SOLD OUT BADGE */
+
+.shop-page #all-products-grid .shop-product-card
+.archive-badge {
+  font-family: 'Barlow Condensed', Impact, sans-serif;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* TABLET */
+
+@media (max-width: 1024px) {
+  .shop-page #all-products-grid .shop-product-card
+  .shop-product-name {
+    font-size: 29px;
+  }
+
+  .shop-page #all-products-grid .shop-product-card
+  .shop-product-price {
+    font-size: 35px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .shop-page #all-products-grid .shop-product-card
+  .shop-product-category {
+    font-size: 17px;
+  }
+
+  .shop-page #all-products-grid .shop-product-card
+  .shop-product-name {
+    font-size: 28px;
+  }
+
+  .shop-page #all-products-grid .shop-product-card
+  .shop-product-price {
+    font-size: 34px;
+  }
+
+  .shop-page #all-products-grid .shop-product-card
+  .product-actions a,
+  .shop-page #all-products-grid .shop-product-card
+  .product-actions button {
+    font-size: 19px;
+    min-height: 52px;
+  }
+}
   </style>
 </head>
 
