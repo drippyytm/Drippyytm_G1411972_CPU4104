@@ -2324,3 +2324,81 @@ document.addEventListener("DOMContentLoaded", () => {
     displayCurrentYear();
     initialiseAboutPageEffects();
 });
+
+
+/* ==========================================
+   GLOBALSTEPPER
+   KEEP ONLY FIRST FOUR PRODUCTS
+========================================== */
+
+(function () {
+    "use strict";
+
+    const allowedProductIds = new Set([
+        "1",
+        "2",
+        "3",
+        "4"
+    ]);
+
+    function updateShopProducts() {
+        const productGrid = document.querySelector(
+            "#all-products-grid"
+        );
+
+        if (!productGrid) {
+            return;
+        }
+
+        const productCards = Array.from(
+            productGrid.querySelectorAll(
+                ".shop-product-card"
+            )
+        );
+
+        productCards.forEach((card) => {
+            const addButton = card.querySelector(
+                ".add-to-cart-btn"
+            );
+
+            const productLink = card.querySelector(
+                'a[href*="product-details.html"]'
+            );
+
+            let productId = addButton?.dataset.id;
+
+            if (!productId && productLink) {
+                const url = new URL(
+                    productLink.href,
+                    window.location.href
+                );
+
+                productId = url.searchParams.get("id");
+            }
+
+            if (!allowedProductIds.has(productId)) {
+                card.remove();
+            }
+        });
+
+        const remainingProducts =
+            productGrid.querySelectorAll(
+                ".shop-product-card"
+            );
+
+        const productCount = document.querySelector(
+            "#product-count"
+        );
+
+        if (productCount) {
+            productCount.textContent =
+                `Showing ${remainingProducts.length} products`;
+        }
+    }
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        updateShopProducts
+    );
+
+})();
