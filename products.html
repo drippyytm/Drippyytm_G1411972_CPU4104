@@ -1,913 +1,1026 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description"
+        content="Explore GLOBALSTEPPER premium streetwear and previous collections.">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+  <title>THE ARCHIVE | GLOBALSTEPPER</title>
 
-    <meta
-        name="description"
-        content="Shop the GLOBALSTEPPER premium unisex streetwear collection."
-    >
-
-    <meta
-        property="og:title"
-        content="Shop GLOBALSTEPPER Streetwear"
-    >
-
-    <meta
-        property="og:description"
-        content="Discover premium tracksuits and short sets from GLOBALSTEPPER."
-    >
-
-    <meta
-        property="og:image"
-        content="images/logo.png"
-    >
-
-    <title>Shop | GLOBALSTEPPER</title>
-
-    <link rel="stylesheet" href="css/style.css">
-
-    <link
-        rel="icon"
+  <link rel="icon"
         type="image/png"
-        href="images/logo.png"
-    >
+        href="media/images/logo.png">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/archive.css?v=3">
+
+  <style>
+    /* GLOBALSTEPPER RESPONSIVE SHOP */
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    body {
+      margin: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .shop-page {
+      width: 100%;
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 40px clamp(15px, 4vw, 55px);
+    }
+
+    /* ARCHIVE HEADING */
+
+    .shop-header {
+      text-align: center;
+      padding: 40px 10px 50px;
+    }
+
+    .shop-header .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+
+    .shop-header h1 {
+      font-size: clamp(40px, 8vw, 100px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin: 15px 0 20px;
+    }
+
+    .shop-header > p:last-child {
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* SEARCH AND FILTERS */
+
+    .shop-controls {
+      display: grid;
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 35px;
+    }
+
+    .shop-controls > div {
+      min-width: 0;
+    }
+
+    .shop-controls label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .shop-controls input,
+    .shop-controls select {
+      width: 100%;
+      min-width: 0;
+      min-height: 46px;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: #fff;
+      color: #111;
+    }
+
+    .live-search-wrapper {
+      position: relative;
+    }
+
+    .product-count {
+      grid-column: 1 / -1;
+      margin: 0;
+      font-size: 13px;
+    }
+
+    /* PRODUCT GRID */
+
+    #all-products-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+      gap: 28px;
+      width: 100%;
+      align-items: stretch;
+    }
+
+    #all-products-grid .shop-product-card {
+      position: relative;
+      min-width: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #all-products-grid .shop-product-image {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #all-products-grid .shop-product-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    #all-products-grid .shop-product-info {
+      min-width: 0;
+      padding: 18px 0;
+    }
+
+    #all-products-grid .shop-product-info h2 {
+      overflow-wrap: anywhere;
+      line-height: 1.3;
+    }
+
+    /* SOLD OUT BADGES */
+
+    .archive-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      z-index: 5;
+      padding: 10px 16px;
+      background: #000;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      border-radius: 3px;
+      pointer-events: none;
+    }
+
+    .archive-product .shop-product-image img {
+      filter: grayscale(15%);
+    }
+
+    /* PRODUCT BUTTONS */
+
+    .product-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .product-actions > * {
+      flex: 1 1 130px;
+      min-width: 0;
+      min-height: 44px;
+    }
+
+    .archive-product .add-to-cart-btn:disabled,
+    .add-to-cart-btn:disabled {
+      background: #e5e5e5 !important;
+      color: #777 !important;
+      border: 1px solid #ccc !important;
+      opacity: 1 !important;
+      cursor: not-allowed !important;
+    }
+
+    /* MODAL AND DRAWER SAFETY */
+
+    .quick-view-dialog,
+    .cart-drawer-panel {
+      max-width: 100vw;
+    }
+
+    .quick-view-content {
+      min-width: 0;
+    }
+
+    .quick-view-image-container img {
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* TABLETS */
+
+    @media (max-width: 1024px) {
+      #all-products-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .shop-controls {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* MOBILE PHONES */
+
+    @media (max-width: 600px) {
+      .shop-page {
+        padding: 20px 14px;
+      }
+
+      .shop-header {
+        padding: 25px 5px 35px;
+      }
+
+      .shop-header h1 {
+        font-size: clamp(35px, 10vw, 55px);
+        letter-spacing: -1px;
+      }
+
+      .shop-controls {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 15px;
+      }
+
+      #all-products-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 25px;
+      }
+
+      .archive-badge {
+        top: 12px;
+        left: 12px;
+        padding: 9px 12px;
+        font-size: 10px;
+      }
+
+      .product-actions {
+        flex-direction: column;
+      }
+
+      .product-actions > * {
+        width: 100%;
+        flex: none;
+      }
+
+      .quick-view-content {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .shop-page {
+        padding: 16px 10px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <!-- NAVIGATION -->
+  <!-- NAVIGATION -->
 
-    <header class="site-header">
+  <header class="site-header">
+    <nav class="navbar"
+         aria-label="Main navigation">
 
-        <nav class="navbar" aria-label="Main navigation">
+      <a href="index.html"
+         class="logo"
+         aria-label="GLOBALSTEPPER homepage">
+        <img
+          src="media/images/logo.png"
+          alt="GLOBALSTEPPER logo"
+          style="width:100px;height:auto;object-fit:contain;"
+        >
+      </a>
 
-            <a
-                href="index.html"
-                class="logo"
-                aria-label="GLOBALSTEPPER home page"
+      <button
+        class="menu-toggle"
+        id="menu-toggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="nav-links"
+      >☰</button>
+
+      <ul class="nav-links" id="nav-links">
+        <li>
+          <a href="index.html">Home</a>
+        </li>
+
+        <li>
+          <a href="products.html"
+             aria-current="page">Shop</a>
+        </li>
+
+        <li>
+          <a href="about.html">About</a>
+        </li>
+
+        <li>
+          <a href="contact.html">Contact</a>
+        </li>
+
+        <li>
+          <a href="wishlist.html"
+             class="wishlist-link">
+            Wishlist
+            <span id="wishlist-count">0</span>
+          </a>
+        </li>
+
+        <li>
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            type="button"
+            aria-label="Switch to dark mode"
+            aria-pressed="false"
+          >
+            <span aria-hidden="true">☾</span>
+            <span class="theme-toggle-text">Dark</span>
+          </button>
+        </li>
+
+        <li>
+          <a href="cart.html"
+             class="cart-link">
+            Cart <span id="cart-count">0</span>
+          </a>
+        </li>
+      </ul>
+
+    </nav>
+  </header>
+
+  <!-- THE ARCHIVE -->
+
+  <main class="shop-page">
+
+    <section class="shop-header">
+      <p class="section-label">
+        PREVIOUS COLLECTIONS
+      </p>
+
+      <h1>THE ARCHIVE</h1>
+
+      <p>
+        Explore previous GLOBALSTEPPER collections.
+        Exclusive pieces from past drops,
+        alongside our signature designs.
+      </p>
+    </section>
+
+    <!-- SEARCH AND FILTERS -->
+
+    <section class="shop-controls"
+             aria-label="Product search and filters">
+
+      <div class="filter-group">
+        <label for="category-filter">
+          Filter by category
+        </label>
+
+        <select id="category-filter">
+          <option value="all">All Products</option>
+          <option value="tracksuits">Tracksuits</option>
+          <option value="short-sets">Short Sets</option>
+        </select>
+      </div>
+
+      <div class="sort-group">
+        <label for="product-sort">
+          Sort products
+        </label>
+
+        <select id="product-sort">
+          <option value="default">Featured</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="name-az">Name: A to Z</option>
+          <option value="name-za">Name: Z to A</option>
+        </select>
+      </div>
+
+      <div class="search-group">
+        <label for="product-search">
+          Search products
+        </label>
+
+        <div class="live-search-wrapper">
+          <input
+            type="search"
+            id="product-search"
+            placeholder="Search products..."
+            autocomplete="off"
+            aria-controls="search-suggestions"
+            aria-expanded="false"
+          >
+
+          <div
+            id="search-suggestions"
+            class="search-suggestions"
+            role="listbox"
+            hidden
+          ></div>
+        </div>
+      </div>
+
+      <p id="product-count"
+         class="product-count"
+         aria-live="polite">
+        Showing 4 products
+      </p>
+
+    </section>
+
+    <!-- PRODUCT GRID -->
+
+    <section
+      class="all-products-grid"
+      id="all-products-grid"
+      aria-label="GLOBALSTEPPER products"
+    >
+
+      <!-- PRODUCT 1: SOLD OUT -->
+
+      <article
+        class="shop-product-card archive-product"
+        data-sold-out="true"
+        data-category="tracksuits"
+        data-name="grey no love lost tracksuit"
+        data-price="185.99"
+      >
+
+        <button
+          class="wishlist-button"
+          type="button"
+          data-product-id="1"
+          aria-label="Add Grey No Love Lost Tracksuit to wishlist"
+          aria-pressed="false"
+        >♡</button>
+
+        <div class="shop-product-image">
+          <span class="archive-badge">
+            SOLD OUT
+          </span>
+
+          <button
+            class="quick-view-button"
+            type="button"
+            data-product-id="1"
+          >Quick View</button>
+
+          <a href="product-details.html?id=1">
+            <img
+              src="images/global tracksuit 1.jpeg"
+              alt="Grey No Love Lost Tracksuit"
+              loading="lazy"
             >
-               
-<img
-    src="media/images/logo.png"
-    alt="GLOBALSTEPPER logo"
-    style="width: 100px; height: auto; object-fit: contain;"
->
+          </a>
+        </div>
+
+        <div class="shop-product-info">
+          <p class="product-category">
+            Tracksuits
+          </p>
+
+          <h2>Grey No Love Lost Tracksuit</h2>
+
+          <p class="product-price">£185.99</p>
+
+          <div class="product-actions">
+            <a href="product-details.html?id=1"
+               class="product-button">
+              View Product
             </a>
 
             <button
-                class="menu-toggle"
-                id="menu-toggle"
-                type="button"
-                aria-label="Open navigation menu"
-                aria-expanded="false"
-                aria-controls="nav-links"
+              class="add-to-cart-btn"
+              type="button"
+              data-id="1"
+              disabled
+              aria-disabled="true"
+            >SOLD OUT</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- PRODUCT 2: SOLD OUT -->
+
+      <article
+        class="shop-product-card archive-product"
+        data-sold-out="true"
+        data-category="tracksuits"
+        data-name="black been da goat tracksuit"
+        data-price="185.99"
+      >
+
+        <button
+          class="wishlist-button"
+          type="button"
+          data-product-id="2"
+          aria-label="Add Black Been Da Goat Tracksuit to wishlist"
+          aria-pressed="false"
+        >♡</button>
+
+        <div class="shop-product-image">
+          <span class="archive-badge">
+            SOLD OUT
+          </span>
+
+          <button
+            class="quick-view-button"
+            type="button"
+            data-product-id="2"
+          >Quick View</button>
+
+          <a href="product-details.html?id=2">
+            <img
+              src="images/global tracksuit 2.jpeg"
+              alt="Black Been Da Goat Tracksuit"
+              loading="lazy"
             >
-                ☰
-            </button>
-
-            <ul class="nav-links" id="nav-links">
-
-                <li>
-                    <a href="index.html">Home</a>
-                </li>
-
-                <li>
-                    <a
-                        href="products.html"
-                        aria-current="page"
-                    >
-                        Shop
-                    </a>
-                </li>
-
-                <li>
-                    <a href="about.html">About</a>
-                </li>
-
-                <li>
-                    <a href="contact.html">Contact</a>
-                </li>
-
-                <li>
-                    <a
-                        href="wishlist.html"
-                        class="wishlist-link"
-                    >
-                        Wishlist
-                        <span id="wishlist-count">0</span>
-                    </a>
-                </li>
-
-                <li>
-                    <button
-                        class="theme-toggle"
-                        id="theme-toggle"
-                        type="button"
-                        aria-label="Switch to dark mode"
-                        aria-pressed="false"
-                    >
-                        <span aria-hidden="true">☾</span>
-                        <span class="theme-toggle-text">
-                            Dark
-                        </span>
-                    </button>
-                </li>
-
-                <li>
-                    <a
-                        href="cart.html"
-                        class="cart-link"
-                    >
-                        Cart
-                        <span
-                            id="cart-count"
-                            aria-label="items in cart"
-                        >
-                            0
-                        </span>
-                    </a>
-                </li>
-
-            </ul>
-
-        </nav>
-
-    </header>
-
-    <!-- SHOP PAGE -->
-
-    <main class="shop-page">
-
-        <section class="shop-header">
-
-            <p class="section-label">
-                GLOBALSTEPPER COLLECTION
-            </p>
-
-            <h1>Shop All Products</h1>
-
-            <p>
-                Explore premium unisex tracksuits
-                and short sets.
-            </p>
-
-        </section>
-
-        <!-- SEARCH AND FILTERS -->
-
-        <section
-            class="shop-controls"
-            aria-label="Product search and filters"
-        >
-
-            <div class="filter-group">
-
-                <label for="category-filter">
-                    Filter by category
-                </label>
-
-                <select id="category-filter">
-
-                    <option value="all">
-                        All Products
-                    </option>
-
-                    <option value="tracksuits">
-                        Tracksuits
-                    </option>
-
-                    <option value="short-sets">
-                        Short Sets
-                    </option>
-
-                </select>
-
-            </div>
-
-            <div class="sort-group">
-
-                <label for="product-sort">
-                    Sort products
-                </label>
-
-                <select id="product-sort">
-                    <option value="default">Featured</option>
-                    <option value="price-low">
-                        Price: Low to High
-                    </option>
-                    <option value="price-high">
-                        Price: High to Low
-                    </option>
-                    <option value="name-az">
-                        Name: A to Z
-                    </option>
-                    <option value="name-za">
-                        Name: Z to A
-                    </option>
-                </select>
-
-            </div>
-
-            <div class="search-group">
-
-                <label for="product-search">
-                    Search products
-                </label>
-
-                <div class="live-search-wrapper">
-
-                    <input
-                        type="search"
-                        id="product-search"
-                        placeholder="Search by product name..."
-                        autocomplete="off"
-                        aria-controls="search-suggestions"
-                        aria-expanded="false"
-                    >
-
-                    <div
-                        id="search-suggestions"
-                        class="search-suggestions"
-                        role="listbox"
-                        hidden
-                    ></div>
-
-                </div>
-
-            </div>
-
-            <p
-                id="product-count"
-                class="product-count"
-                aria-live="polite"
-            >
-                Showing 4 products
-            </p>
-
-        </section>
-
-        <!-- PRODUCT GRID -->
-
-        <section
-            class="all-products-grid"
-            id="all-products-grid"
-            aria-label="GLOBALSTEPPER products"
-        >
-
-            <!-- PRODUCT 1 -->
-
-            <article
-                class="shop-product-card"
-                data-category="tracksuits"
-                data-name="grey no love lost tracksuit"
-                data-price="185.99"
-            >
-
-                <span class="product-badge best-seller">
-                    Best Seller
-                </span>
-
-                <button
-                    class="wishlist-button"
-                    type="button"
-                    data-product-id="1"
-                    aria-label="Add Grey No Love Lost Tracksuit to wishlist"
-                    aria-pressed="false"
-                >
-                    ♡
-                </button>
-
-                <div class="shop-product-image">
-
-                    <button
-                        class="quick-view-button"
-                        type="button"
-                        data-product-id="1"
-                    >
-                        Quick View
-                    </button>
-
-                    <a href="product-details.html?id=1">
-
-                        <img
-                            src="images/global tracksuit 1.jpeg"
-                            alt="Grey GLOBALSTEPPER No Love Lost Tracksuit"
-                            loading="lazy"
-                        >
-
-                    </a>
-
-                </div>
-
-                <div class="shop-product-info">
-
-                    <p class="product-category">
-                        Tracksuits
-                    </p>
-
-                    <h2>
-                        Grey No Love Lost Tracksuit
-                    </h2>
-
-                    <p class="product-price">
-                        £185.99
-                    </p>
-
-                    <div class="product-actions">
-
-                        <a
-                            href="product-details.html?id=1"
-                            class="product-button"
-                        >
-                            View Product
-                        </a>
-
-                        <button
-                            class="add-to-cart-btn"
-                            type="button"
-                            data-id="1"
-                            data-name="Grey No Love Lost Tracksuit"
-                            data-price="185.99"
-                            data-image="images/global tracksuit 1.jpeg"
-                            data-category="Tracksuits"
-                        >
-                            Add to Cart
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-            <!-- PRODUCT 2 -->
-
-            <article
-                class="shop-product-card"
-                data-category="tracksuits"
-                data-name="black been da goat tracksuit"
-                data-price="185.99"
-            >
-
-                <button
-                    class="wishlist-button"
-                    type="button"
-                    data-product-id="2"
-                    aria-label="Add Black Been Da Goat Tracksuit to wishlist"
-                    aria-pressed="false"
-                >
-                    ♡
-                </button>
-
-                <div class="shop-product-image">
-
-                    <button
-                        class="quick-view-button"
-                        type="button"
-                        data-product-id="2"
-                    >
-                        Quick View
-                    </button>
-
-                    <a href="product-details.html?id=2">
-
-                        <img
-                            src="images/global tracksuit 2.jpeg"
-                            alt="Black GLOBALSTEPPER Been Da Goat Tracksuit"
-                            loading="lazy"
-                        >
-
-                    </a>
-
-                </div>
-
-                <div class="shop-product-info">
-
-                    <p class="product-category">
-                        Tracksuits
-                    </p>
-
-                    <h2>
-                        Black Been Da Goat Tracksuit
-                    </h2>
-
-                    <p class="product-price">
-                        £185.99
-                    </p>
-
-                    <div class="product-actions">
-
-                        <a
-                            href="product-details.html?id=2"
-                            class="product-button"
-                        >
-                            View Product
-                        </a>
-
-                        <button
-                            class="add-to-cart-btn"
-                            type="button"
-                            data-id="2"
-                            data-name="Black Been Da Goat Tracksuit"
-                            data-price="185.99"
-                            data-image="images/global tracksuit 2.jpeg"
-                            data-category="Tracksuits"
-                        >
-                            Add to Cart
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-            <!-- PRODUCT 3 -->
-
-            <article
-                class="shop-product-card"
-                data-category="tracksuits"
-                data-name="globalstepper signature tracksuit"
-                data-price="179.99"
-            >
-
-                <button
-                    class="wishlist-button"
-                    type="button"
-                    data-product-id="3"
-                    aria-label="Add Signature Tracksuit to wishlist"
-                    aria-pressed="false"
-                >
-                    ♡
-                </button>
-
-                <div class="shop-product-image">
-
-                    <button
-                        class="quick-view-button"
-                        type="button"
-                        data-product-id="3"
-                    >
-                        Quick View
-                    </button>
-
-                    <a href="product-details.html?id=3">
-
-                        <img
-                            src="images/global tracksuit 3.jpeg"
-                            alt="GLOBALSTEPPER Signature Tracksuit"
-                            loading="lazy"
-                        >
-
-                    </a>
-
-                </div>
-
-                <div class="shop-product-info">
-
-                    <p class="product-category">
-                        Tracksuits
-                    </p>
-
-                    <h2>
-                        Signature Tracksuit
-                    </h2>
-
-                    <p class="product-price">
-                        £179.99
-                    </p>
-
-                    <div class="product-actions">
-
-                        <a
-                            href="product-details.html?id=3"
-                            class="product-button"
-                        >
-                            View Product
-                        </a>
-
-                        <button
-                            class="add-to-cart-btn"
-                            type="button"
-                            data-id="3"
-                            data-name="Signature Tracksuit"
-                            data-price="179.99"
-                            data-image="images/global tracksuit 3.jpeg"
-                            data-category="Tracksuits"
-                        >
-                            Add to Cart
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-            <!-- PRODUCT 4 -->
-
-            <article
-                class="shop-product-card"
-                data-category="short-sets"
-                data-name="grey logo short set"
-                data-price="125.99"
-            >
-
-                <button
-                    class="wishlist-button"
-                    type="button"
-                    data-product-id="4"
-                    aria-label="Add Grey Logo Short Set to wishlist"
-                    aria-pressed="false"
-                >
-                    ♡
-                </button>
-
-                <div class="shop-product-image">
-
-                    <button
-                        class="quick-view-button"
-                        type="button"
-                        data-product-id="4"
-                    >
-                        Quick View
-                    </button>
-
-                    <a href="product-details.html?id=4">
-
-                        <img
-                            src="images/shortset.jpeg"
-                            alt="Grey GLOBALSTEPPER Logo Short Set"
-                            loading="lazy"
-                        >
-
-                    </a>
-
-                </div>
-
-                <div class="shop-product-info">
-
-                    <p class="product-category">
-                        Short Sets
-                    </p>
-
-                    <h2>
-                        Grey Logo Short Set
-                    </h2>
-
-                    <p class="product-price">
-                        £125.99
-                    </p>
-
-                    <div class="product-actions">
-
-                        <a
-                            href="product-details.html?id=4"
-                            class="product-button"
-                        >
-                            View Product
-                        </a>
-
-                        <button
-                            class="add-to-cart-btn"
-                            type="button"
-                            data-id="4"
-                            data-name="Grey Logo Short Set"
-                            data-price="125.99"
-                            data-image="images/shortset.jpeg"
-                            data-category="Short Sets"
-                        >
-                            Add to Cart
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-        </section>
-
-        <p
-            id="no-products-message"
-            class="no-products-message"
-            hidden
-        >
-            No products match your search.
-        </p>
-
-    </main>
-
-    <!-- FOOTER -->
-
-    <footer class="site-footer">
-
-        <div class="footer-grid">
-
-            <div class="footer-brand">
-
-               
-<img
-    src="media/images/logo.png"
-    alt="GLOBALSTEPPER Logo"
-    class="footer-logo"
->
-
-                <p>
-                    Premium streetwear representing ambition,
-                    confidence and progression.
-                </p>
-
-            </div>
-
-            <div class="footer-links">
-
-                <h2>Quick Links</h2>
-
-                <ul>
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a href="products.html">Shop</a>
-                    </li>
-                    <li>
-                        <a href="about.html">About</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
-                </ul>
-
-            </div>
-
-            <div class="footer-links">
-
-                <h2>Customer Support</h2>
-
-                <ul>
-                    <li>
-                        <a href="contact.html">Contact Us</a>
-                    </li>
-                    <li>
-                        <a href="cart.html">Shopping Cart</a>
-                    </li>
-                </ul>
-
-            </div>
-
+          </a>
         </div>
 
-        <div class="footer-bottom">
+        <div class="shop-product-info">
+          <p class="product-category">
+            Tracksuits
+          </p>
 
-            <p>
-                &copy;
-                <span id="current-year"></span>
-                GLOBALSTEPPER. All rights reserved.
-            </p>
+          <h2>Black Been Da Goat Tracksuit</h2>
 
-            <p>
-                Student e-commerce project developed using
-                HTML, CSS and JavaScript.
-            </p>
+          <p class="product-price">£185.99</p>
 
-        </div>
-
-    </footer>
-
-    <!-- SLIDE-OUT CART -->
-
-    <div
-        class="cart-drawer"
-        id="cart-drawer"
-        aria-hidden="true"
-    >
-
-        <div
-            class="cart-drawer-overlay"
-            id="cart-drawer-overlay"
-        ></div>
-
-        <aside
-            class="cart-drawer-panel"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="cart-drawer-title"
-        >
-
-            <div class="cart-drawer-header">
-
-                <div>
-
-                    <p class="section-label">
-                        YOUR BAG
-                    </p>
-
-                    <h2 id="cart-drawer-title">
-                        Shopping Cart
-                    </h2>
-
-                </div>
-
-                <button
-                    class="cart-drawer-close"
-                    id="cart-drawer-close"
-                    type="button"
-                    aria-label="Close shopping cart"
-                >
-                    ×
-                </button>
-
-            </div>
-
-            <div
-                class="cart-drawer-items"
-                id="cart-drawer-items"
-                aria-live="polite"
-            ></div>
-
-            <div
-                class="cart-drawer-empty"
-                id="cart-drawer-empty"
-                hidden
-            >
-
-                <p>Your cart is empty.</p>
-
-                <a
-                    href="products.html"
-                    class="product-button"
-                >
-                    Continue Shopping
-                </a>
-
-            </div>
-
-            <div class="cart-drawer-footer">
-
-                <div class="cart-drawer-total">
-
-                    <span>Subtotal</span>
-
-                    <strong id="cart-drawer-subtotal">
-                        £0.00
-                    </strong>
-
-                </div>
-
-                <a
-                    href="cart.html"
-                    class="btn cart-drawer-view-cart"
-                >
-                    View Full Cart
-                </a>
-
-                <button
-                    class="cart-drawer-checkout"
-                    id="cart-drawer-checkout"
-                    type="button"
-                >
-                    Checkout
-                </button>
-
-                <p class="cart-drawer-note">
-                    Student demonstration only.
-                    No real payment is processed.
-                </p>
-
-            </div>
-
-        </aside>
-
-    </div>
-
-    <!-- QUICK VIEW MODAL -->
-
-    <div
-        class="quick-view-modal"
-        id="quick-view-modal"
-        aria-hidden="true"
-    >
-
-        <div
-            class="quick-view-overlay"
-            id="quick-view-overlay"
-        ></div>
-
-        <div
-            class="quick-view-dialog"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="quick-view-title"
-        >
+          <div class="product-actions">
+            <a href="product-details.html?id=2"
+               class="product-button">
+              View Product
+            </a>
 
             <button
-                class="quick-view-close"
-                id="quick-view-close"
-                type="button"
-                aria-label="Close quick view"
-            >
-                ×
-            </button>
-
-            <div class="quick-view-content">
-
-                <div class="quick-view-image-container">
-
-                    <img
-                        id="quick-view-image"
-                        src=""
-                        alt=""
-                    >
-
-                </div>
-
-                <div class="quick-view-information">
-
-                    <p
-                        class="product-category"
-                        id="quick-view-category"
-                    ></p>
-
-                    <h2 id="quick-view-title"></h2>
-
-                    <p
-                        class="product-price"
-                        id="quick-view-price"
-                    ></p>
-
-                    <p id="quick-view-description">
-                        Premium GLOBALSTEPPER streetwear
-                        designed for comfort, confidence
-                        and everyday wear.
-                    </p>
-
-                    <div class="quick-view-actions">
-
-                        <a
-                            id="quick-view-product-link"
-                            href="product-details.html"
-                            class="product-button"
-                        >
-                            View Full Product
-                        </a>
-
-                        <button
-                            id="quick-view-add-to-cart"
-                            class="add-to-cart-btn"
-                            type="button"
-                        >
-                            Add to Cart
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
+              class="add-to-cart-btn"
+              type="button"
+              data-id="2"
+              disabled
+              aria-disabled="true"
+            >SOLD OUT</button>
+          </div>
         </div>
+      </article>
+
+      <!-- PRODUCT 3: SIGNATURE TRACKSUIT -->
+
+      <article
+        class="shop-product-card"
+        data-category="tracksuits"
+        data-name="globalstepper signature tracksuit"
+        data-price="179.99"
+      >
+
+        <button
+          class="wishlist-button"
+          type="button"
+          data-product-id="3"
+          aria-label="Add Signature Tracksuit to wishlist"
+          aria-pressed="false"
+        >♡</button>
+
+        <div class="shop-product-image">
+          <button
+            class="quick-view-button"
+            type="button"
+            data-product-id="3"
+          >Quick View</button>
+
+          <a href="product-details.html?id=3">
+            <img
+              src="images/global tracksuit 3.jpeg"
+              alt="GLOBALSTEPPER Signature Tracksuit"
+              loading="lazy"
+            >
+          </a>
+        </div>
+
+        <div class="shop-product-info">
+          <p class="product-category">
+            Tracksuits
+          </p>
+
+          <h2>Signature Tracksuit</h2>
+
+          <p class="product-price">£179.99</p>
+
+          <div class="product-actions">
+            <a href="product-details.html?id=3"
+               class="product-button">
+              View Product
+            </a>
+
+            <button
+              class="add-to-cart-btn"
+              type="button"
+              data-id="3"
+              data-name="Signature Tracksuit"
+              data-price="179.99"
+              data-image="images/global tracksuit 3.jpeg"
+              data-category="Tracksuits"
+            >Add to Cart</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- PRODUCT 4: SOLD OUT -->
+
+      <article
+        class="shop-product-card archive-product"
+        data-sold-out="true"
+        data-category="short-sets"
+        data-name="grey logo short set"
+        data-price="125.99"
+      >
+
+        <button
+          class="wishlist-button"
+          type="button"
+          data-product-id="4"
+          aria-label="Add Grey Logo Short Set to wishlist"
+          aria-pressed="false"
+        >♡</button>
+
+        <div class="shop-product-image">
+          <span class="archive-badge">
+            SOLD OUT
+          </span>
+
+          <button
+            class="quick-view-button"
+            type="button"
+            data-product-id="4"
+          >Quick View</button>
+
+          <a href="product-details.html?id=4">
+            <img
+              src="images/shortset.jpeg"
+              alt="Grey GLOBALSTEPPER Logo Short Set"
+              loading="lazy"
+            >
+          </a>
+        </div>
+
+        <div class="shop-product-info">
+          <p class="product-category">
+            Short Sets
+          </p>
+
+          <h2>Grey Logo Short Set</h2>
+
+          <p class="product-price">£125.99</p>
+
+          <div class="product-actions">
+            <a href="product-details.html?id=4"
+               class="product-button">
+              View Product
+            </a>
+
+            <button
+              class="add-to-cart-btn"
+              type="button"
+              data-id="4"
+              disabled
+              aria-disabled="true"
+            >SOLD OUT</button>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <p
+      id="no-products-message"
+      class="no-products-message"
+      hidden
+    >
+      No products match your search.
+    </p>
+
+  </main>
+
+  <!-- FOOTER -->
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <img
+          src="media/images/logo.png"
+          alt="GLOBALSTEPPER Logo"
+          class="footer-logo"
+        >
+
+        <p>
+          Premium streetwear representing ambition,
+          confidence and progression.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <h2>Quick Links</h2>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h2>Customer Support</h2>
+        <ul>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="wishlist.html">Wishlist</a></li>
+          <li><a href="cart.html">Shopping Cart</a></li>
+        </ul>
+      </div>
 
     </div>
 
-    <!-- FLOATING CART BUTTON -->
+    <div class="footer-bottom">
+      <p>
+        &copy; <span id="current-year">2026</span>
+        GLOBALSTEPPER. All rights reserved.
+      </p>
 
-    <button
-        class="floating-cart-button"
-        id="floating-cart-button"
-        type="button"
-        aria-label="Open shopping cart"
+      <p>
+        Student e-commerce project developed
+        using HTML, CSS and JavaScript.
+      </p>
+    </div>
+  </footer>
+
+  <!-- SLIDE-OUT CART -->
+
+  <div
+    class="cart-drawer"
+    id="cart-drawer"
+    aria-hidden="true"
+  >
+    <div
+      class="cart-drawer-overlay"
+      id="cart-drawer-overlay"
+    ></div>
+
+    <aside
+      class="cart-drawer-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cart-drawer-title"
     >
+      <div class="cart-drawer-header">
+        <div>
+          <p class="section-label">YOUR BAG</p>
+          <h2 id="cart-drawer-title">
+            Shopping Cart
+          </h2>
+        </div>
 
-        <span
-            class="floating-cart-icon"
-            aria-hidden="true"
+        <button
+          class="cart-drawer-close"
+          id="cart-drawer-close"
+          type="button"
+          aria-label="Close shopping cart"
+        >×</button>
+      </div>
+
+      <div
+        class="cart-drawer-items"
+        id="cart-drawer-items"
+        aria-live="polite"
+      ></div>
+
+      <div
+        class="cart-drawer-empty"
+        id="cart-drawer-empty"
+        hidden
+      >
+        <p>Your cart is empty.</p>
+
+        <a href="products.html"
+           class="product-button">
+          Continue Shopping
+        </a>
+      </div>
+
+      <div class="cart-drawer-footer">
+        <div class="cart-drawer-total">
+          <span>Subtotal</span>
+          <strong id="cart-drawer-subtotal">
+            £0.00
+          </strong>
+        </div>
+
+        <a href="cart.html"
+           class="btn cart-drawer-view-cart">
+          View Full Cart
+        </a>
+
+        <button
+          class="cart-drawer-checkout"
+          id="cart-drawer-checkout"
+          type="button"
         >
-            🛒
-        </span>
+          Checkout
+        </button>
 
-        <span
-            class="floating-cart-count"
-            id="floating-cart-count"
-            aria-label="items in shopping cart"
-        >
-            0
-        </span>
+        <p class="cart-drawer-note">
+          Student demonstration only.
+          No real payment is processed.
+        </p>
+      </div>
+    </aside>
+  </div>
 
-    </button>
+  <!-- QUICK VIEW MODAL -->
 
-    <!-- MAIN JAVASCRIPT -->
+  <div
+    class="quick-view-modal"
+    id="quick-view-modal"
+    aria-hidden="true"
+  >
+    <div
+      class="quick-view-overlay"
+      id="quick-view-overlay"
+    ></div>
 
-    <script src="js/script.js"></script>
+    <div
+      class="quick-view-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="quick-view-title"
+    >
+      <button
+        class="quick-view-close"
+        id="quick-view-close"
+        type="button"
+        aria-label="Close quick view"
+      >×</button>
+
+      <div class="quick-view-content">
+        <div class="quick-view-image-container">
+          <img
+            id="quick-view-image"
+            src=""
+            alt=""
+          >
+        </div>
+
+        <div class="quick-view-information">
+          <p
+            class="product-category"
+            id="quick-view-category"
+          ></p>
+
+          <h2 id="quick-view-title"></h2>
+
+          <p
+            class="product-price"
+            id="quick-view-price"
+          ></p>
+
+          <p id="quick-view-description">
+            Premium GLOBALSTEPPER streetwear
+            designed for comfort, confidence
+            and everyday wear.
+          </p>
+
+          <div class="quick-view-actions">
+            <a
+              id="quick-view-product-link"
+              href="product-details.html"
+              class="product-button"
+            >
+              View Full Product
+            </a>
+
+            <button
+              id="quick-view-add-to-cart"
+              class="add-to-cart-btn"
+              type="button"
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING CART BUTTON -->
+
+  <button
+    class="floating-cart-button"
+    id="floating-cart-button"
+    type="button"
+    aria-label="Open shopping cart"
+  >
+    <span
+      class="floating-cart-icon"
+      aria-hidden="true"
+    >🛒</span>
+
+    <span
+      class="floating-cart-count"
+      id="floating-cart-count"
+      aria-label="items in shopping cart"
+    >0</span>
+  </button>
+
+  <!-- EXISTING GLOBALSTEPPER JAVASCRIPT -->
+
+  <script src="js/script.js"></script>
+
+  <!-- ARCHIVE AVAILABILITY DISPLAY -->
+
+  <script>
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+        const soldOutIds = new Set(["1", "2", "4"]);
+
+        function updateArchiveButtons() {
+          document.querySelectorAll(
+            ".add-to-cart-btn[data-id]"
+          ).forEach(function (button) {
+            if (soldOutIds.has(button.dataset.id)) {
+              button.disabled = true;
+              button.textContent = "SOLD OUT";
+              button.setAttribute(
+                "aria-disabled",
+                "true"
+              );
+            }
+          });
+        }
+
+        updateArchiveButtons();
+
+        document.querySelectorAll(
+          ".quick-view-button"
+        ).forEach(function (button) {
+          button.addEventListener(
+            "click",
+            function () {
+              const id = button.dataset.productId;
+              const addButton =
+                document.getElementById(
+                  "quick-view-add-to-cart"
+                );
+
+              if (!addButton) return;
+
+              if (soldOutIds.has(id)) {
+                addButton.disabled = true;
+                addButton.textContent = "SOLD OUT";
+                addButton.setAttribute(
+                  "aria-disabled",
+                  "true"
+                );
+              } else {
+                addButton.disabled = false;
+                addButton.textContent = "Add to Cart";
+                addButton.removeAttribute(
+                  "aria-disabled"
+                );
+              }
+            }
+          );
+        });
+      }
+    );
+  </script>
 
 </body>
-
 </html>
