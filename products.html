@@ -2188,6 +2188,89 @@
   }
 }
 
+
+/* ==========================================
+   GLOBALSTEPPER - FOOTER REFINEMENT
+   GRAFFITI LOGO + MATCHING TYPOGRAPHY
+========================================== */
+
+/* ALIGN ALL THREE FOOTER COLUMNS */
+
+.gs-footer-container {
+  align-items: start;
+}
+
+/* MOVE GRAFFITI LOGO TO TOP */
+
+.gs-footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.gs-footer-loader-logo {
+  display: block;
+  width: min(100%, 440px);
+  height: auto;
+  margin: 0 0 20px !important;
+  padding: 0;
+  object-fit: contain;
+  object-position: left top;
+}
+
+/* MATCH DESCRIPTION FONT TO THE WEBSITE */
+
+.gs-footer-description {
+  max-width: 440px;
+  margin: 0 !important;
+
+  font-family: 'Barlow Condensed', Impact, sans-serif !important;
+  font-size: 23px !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0.3px;
+  color: #bdbdbd;
+}
+
+/* TABLETS */
+
+@media (max-width: 1024px) {
+  .gs-footer-loader-logo {
+    width: min(100%, 350px);
+  }
+
+  .gs-footer-description {
+    font-size: 21px !important;
+  }
+}
+
+/* MOBILE PHONES */
+
+@media (max-width: 700px) {
+  .gs-footer-loader-logo {
+    width: min(100%, 290px);
+    margin-bottom: 16px !important;
+  }
+
+  .gs-footer-description {
+    font-size: 19px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* SMALL MOBILE PHONES */
+
+@media (max-width: 360px) {
+  .gs-footer-loader-logo {
+    width: min(100%, 240px);
+  }
+
+  .gs-footer-description {
+    font-size: 18px !important;
+  }
+}
+
     
   </style>
 </head>
@@ -2703,14 +2786,7 @@
     <!-- BRAND SECTION -->
     <div class="gs-footer-brand">
 
-      <a href="index.html" class="gs-footer-logo-link">
-        <img
-          src="media/images/logo.png"
-          alt="GLOBALSTEPPER"
-          class="gs-footer-logo"
-          loading="lazy"
-        >
-      </a>
+      
 
       
 <img
