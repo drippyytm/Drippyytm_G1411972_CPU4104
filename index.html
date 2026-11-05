@@ -425,6 +425,95 @@
   }
 }
 
+/* GLOBALSTEPPER BRAND STORY REDESIGN */
+
+.brand-story {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 50px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 90px 5%;
+  background: #fff;
+}
+
+.brand-story-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.brand-story-content .section-label {
+  margin-bottom: 25px;
+  color: #000;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.globalstepper-story-slogan {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 0 35px;
+}
+
+.brand-story-content .text-link {
+  display: inline-block;
+  margin-top: 0;
+  color: #000;
+  font-weight: 800;
+  border-bottom: 2px solid #000;
+}
+
+.brand-story-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  padding: 0;
+  background: transparent !important;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.brand-story-image img {
+  display: block;
+  width: 100%;
+  max-width: 550px;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 768px) {
+  .brand-story {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding: 60px 20px;
+  }
+
+  .brand-story-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .globalstepper-story-slogan {
+    max-width: 500px;
+    margin-bottom: 25px;
+  }
+
+  .brand-story-image img {
+    max-width: 400px;
+  }
+}
     
   </style>
 
@@ -798,47 +887,36 @@
       </div>
     </section>
 
-    <!-- BRAND STORY -->
 
-    <section class="brand-story reveal-left">
+<!-- BRAND STORY -->
 
-      <div class="brand-story-content">
+<section class="brand-story reveal-left">
 
-        <p class="section-label">ESTABLISHED 2022</p>
+  <div class="brand-story-content">
 
-       
-<img
-  src="media/images/the-world-is-yours.png"
-  alt="The World Is Yours. Step Into It."
-  class="globalstepper-story-slogan"
->
+    <p class="section-label">ESTABLISHED 2022</p>
 
-        <p>
-          Every journey starts somewhere.
-          Ours began in 2022, with designs we wanted to wear and a name we wanted to build.
-          Globalstepper was and is still growing.
-          Shaped by every collection and everyone who chooses to wear it. 
-          Wherever you're heading,take us with you.
+    <img
+      src="media/images/the-world-is-yours.png"
+      alt="The World Is Yours. Step Into It."
+      class="globalstepper-story-slogan"
+    >
 
-        <p>
-          Whatever you're doing keep it stepping...
-        </p>
+    <a href="about.html" class="text-link">
+      Discover Our Story
+    </a>
 
-        <a href="about.html" class="text-link">
-          Discover Our Story
-        </a>
+  </div>
 
-      </div>
+  <div class="brand-story-image">
+    <img
+      src="images/GLOBAL STEPPER LOGO.png"
+      alt="GLOBALSTEPPER globe logo"
+      loading="lazy"
+    >
+  </div>
 
-      <div class="brand-story-image">
-        <img
-          src="images/GLOBAL STEPPER LOGO.png"
-          alt="GLOBALSTEPPER globe logo"
-          loading="lazy"
-        >
-      </div>
-
-    </section>
+</section>
 
     <!-- NEWSLETTER -->
 
