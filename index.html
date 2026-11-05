@@ -260,6 +260,58 @@
     transform: scaleX(1);
   }
 }
+
+
+/* GLOBALSTEPPER INVENTORY LOGO */
+
+.inventory-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  margin: 20px auto 25px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.inventory-logo {
+  display: block;
+  width: 100%;
+  max-width: 850px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* TABLETS */
+@media (max-width: 1024px) {
+  .inventory-logo {
+    max-width: 650px;
+  }
+}
+
+/* MOBILE PHONES */
+@media (max-width: 600px) {
+  .inventory-heading {
+    margin: 12px auto 18px;
+    padding: 0 10px;
+  }
+
+  .inventory-logo {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* SMALL PHONES */
+@media (max-width: 375px) {
+  .inventory-heading {
+    padding: 0 6px;
+  }
+}
+  
 </style>
 </head>
 
