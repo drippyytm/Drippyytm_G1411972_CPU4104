@@ -1265,6 +1265,162 @@
   }
 }
 
+/* ==========================================
+   GLOBALSTEPPER ARCHIVE — FINAL POLISH
+   CINEMATIC ANIMATION + RESPONSIVE DESIGN
+========================================== */
+
+@keyframes gsArchiveLetterReveal {
+  from {
+    opacity: 0;
+    transform: translateY(55px) rotateX(-35deg);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes gsArchiveLight {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes gsArchiveLineGlow {
+  0%, 100% {
+    opacity: 0.45;
+    box-shadow: 0 0 8px rgba(255,255,255,.25);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 22px rgba(255,255,255,.7);
+  }
+}
+
+/* TIGHTER BLACK BANNER */
+
+.shop-page .archive-hero {
+  padding: 55px 20px 95px;
+  background:
+    radial-gradient(
+      ellipse at 50% 65%,
+      #171717 0%,
+      #080808 48%,
+      #000 100%
+    );
+  background-size: 150% 150%;
+  animation: gsArchiveLight 12s ease-in-out infinite;
+}
+
+/* TITLE */
+
+.shop-page .archive-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: .23em;
+  row-gap: 0;
+  width: 100%;
+  margin: 0 auto 18px;
+  animation: none;
+  filter: none;
+  letter-spacing: 0;
+}
+
+.shop-page .archive-title .gs-word {
+  display: inline-flex;
+  white-space: nowrap;
+  perspective: 800px;
+}
+
+.shop-page .archive-title .gs-letter {
+  display: inline-block;
+  animation: gsArchiveLetterReveal .85s
+    cubic-bezier(.16,1,.3,1) both;
+  animation-delay: calc(var(--letter-index) * 65ms);
+}
+
+/* GLOWING UNDERLINE */
+
+.shop-page .archive-accent-line {
+  animation:
+    gsLineReveal 1s ease 1s both,
+    gsArchiveLineGlow 3s ease-in-out 2s infinite;
+}
+
+/* MORE CONNECTED FILTER PANEL */
+
+.shop-page .archive-filters {
+  margin-top: -45px;
+  margin-bottom: 38px;
+  border-radius: 26px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+/* PRODUCT CARD HOVER */
+
+@media (hover: hover) and (pointer: fine) {
+  .shop-page #all-products-grid .shop-product-card {
+    transition:
+      transform .4s cubic-bezier(.16,1,.3,1),
+      box-shadow .4s ease;
+  }
+
+  .shop-page #all-products-grid .shop-product-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 28px 65px rgba(0,0,0,.18);
+  }
+}
+
+/* TABLET */
+
+@media (max-width: 1024px) {
+  .shop-page .archive-hero {
+    padding: 50px 18px 85px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .shop-page .archive-hero {
+    padding: 45px 12px 70px;
+  }
+
+  .shop-page .archive-title {
+    font-size: clamp(42px, 11vw, 68px);
+    column-gap: .18em;
+    line-height: 1;
+  }
+
+  .shop-page .archive-filters {
+    margin-top: -28px;
+    margin-bottom: 30px;
+    padding: 22px 17px;
+    border-radius: 20px;
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-page .archive-hero,
+  .shop-page .archive-title .gs-letter,
+  .shop-page .archive-accent-line {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}
     
   </style>
 </head>
@@ -2014,6 +2170,49 @@
       }
     );
   </script>
+
+
+<script>
+/* GLOBALSTEPPER - ANIMATED ARCHIVE LETTERING */
+
+document.addEventListener("DOMContentLoaded", function () {
+  const title = document.querySelector(".archive-title");
+
+  if (!title || title.dataset.animated === "true") return;
+
+  const originalText = title.textContent.trim();
+  const words = originalText.split(/\s+/);
+
+  title.setAttribute("aria-label", originalText);
+  title.dataset.animated = "true";
+  title.textContent = "";
+
+  let letterIndex = 0;
+
+  words.forEach(function (word) {
+    const wordSpan = document.createElement("span");
+    wordSpan.className = "gs-word";
+    wordSpan.setAttribute("aria-hidden", "true");
+
+    Array.from(word).forEach(function (letter) {
+      const letterSpan = document.createElement("span");
+      letterSpan.className = "gs-letter";
+      letterSpan.textContent = letter;
+      letterSpan.style.setProperty(
+        "--letter-index",
+        letterIndex
+      );
+
+      wordSpan.appendChild(letterSpan);
+      letterIndex++;
+    });
+
+    title.appendChild(wordSpan);
+  });
+});
+</script>
+
+  
 
 </body>
 </html>
