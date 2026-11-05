@@ -1763,6 +1763,133 @@
     min-height: 52px;
   }
 }
+
+
+/* ==========================================
+   GLOBALSTEPPER - PRODUCT CARD SPACING FIX
+   ALL FOUR ARCHIVE PRODUCTS
+   DESKTOP / TABLET / MOBILE
+========================================== */
+
+/* KEEP PRODUCT CARDS CONSISTENT */
+
+.shop-page #all-products-grid .shop-product-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* PRODUCT INFORMATION */
+
+.shop-page #all-products-grid .shop-product-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  padding: 22px 20px 24px;
+  box-sizing: border-box;
+}
+
+/* CATEGORY */
+
+.shop-page #all-products-grid .shop-product-category {
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+
+/* PRODUCT NAME */
+
+.shop-page #all-products-grid .shop-product-name {
+  margin: 0 0 16px;
+  line-height: 1.12;
+  min-height: 0;
+}
+
+/* PRICE */
+
+.shop-page #all-products-grid .shop-product-price {
+  margin: 0 0 22px;
+  line-height: 1.1;
+}
+
+/* BUTTON ALIGNMENT */
+
+.shop-page #all-products-grid .product-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  margin-top: auto;
+}
+
+.shop-page #all-products-grid .product-actions a,
+.shop-page #all-products-grid .product-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  min-height: 56px;
+  padding: 10px 8px;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 1.1;
+}
+
+/* TABLET */
+
+@media (max-width: 1024px) {
+  .shop-page #all-products-grid .shop-product-info {
+    padding: 20px 17px 22px;
+  }
+
+  .shop-page #all-products-grid .product-actions {
+    gap: 10px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .shop-page #all-products-grid .shop-product-info {
+    padding: 18px 16px 20px;
+  }
+
+  .shop-page #all-products-grid .shop-product-category {
+    margin-bottom: 8px;
+  }
+
+  .shop-page #all-products-grid .shop-product-name {
+    margin-bottom: 12px;
+  }
+
+  .shop-page #all-products-grid .shop-product-price {
+    margin-bottom: 18px;
+  }
+
+  .shop-page #all-products-grid .product-actions {
+    gap: 8px;
+  }
+
+  .shop-page #all-products-grid .product-actions a,
+  .shop-page #all-products-grid .product-actions button {
+    min-height: 52px;
+    font-size: 18px;
+  }
+}
+
+/* SMALL MOBILE PHONES */
+
+@media (max-width: 360px) {
+  .shop-page #all-products-grid .product-actions a,
+  .shop-page #all-products-grid .product-actions button {
+    font-size: 16px;
+    padding: 10px 5px;
+  }
+}
+    
   </style>
 </head>
 
