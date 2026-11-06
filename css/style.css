@@ -6727,3 +6727,15 @@ button[type="submit"] {
     drop-shadow(0 0 2px #666666)
     drop-shadow(0 0 5px rgba(110,110,110,0.5));
 }
+
+/* GLOBALSTEPPER IMAGE GLOW */
+
+.gs-chrome-art img {
+  -webkit-filter:
+    drop-shadow(0 0 5px rgba(100,100,100,.45))
+    drop-shadow(0 0 14px rgba(100,100,100,.35));
+
+  filter:
+    drop-shadow(0 0 5px rgba(100,100,100,.45))
+    drop-shadow(0 0 14px rgba(100,100,100,.35));
+}
