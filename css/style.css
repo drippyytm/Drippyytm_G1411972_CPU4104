@@ -6160,3 +6160,99 @@ button[type="submit"] {
     font-size: 19px;
   }
 }
+
+
+/* ==========================================
+   GLOBALSTEPPER PREMIUM CHROME ANIMATION
+   ========================================== */
+
+.gs-chrome-art {
+    position: relative;
+    isolation: isolate;
+    width: min(100%, 1100px);
+    margin-inline: auto;
+    padding: 12px;
+}
+
+.gs-chrome-art img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+
+    filter:
+        drop-shadow(0 0 3px rgba(255,255,255,.95))
+        drop-shadow(0 0 9px rgba(0,0,0,.45))
+        drop-shadow(0 12px 17px rgba(0,0,0,.35));
+
+    animation: gsChromeGlow 4s ease-in-out infinite;
+}
+
+/* Sweeping silver shine */
+.gs-chrome-art::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+
+    background: linear-gradient(
+        110deg,
+        transparent 35%,
+        rgba(255,255,255,0) 43%,
+        rgba(255,255,255,.95) 49%,
+        rgba(255,255,255,.2) 53%,
+        transparent 60%
+    );
+
+    transform: translateX(-160%) skewX(-15deg);
+    animation: gsChromeSweep 5s ease-in-out infinite;
+    mix-blend-mode: screen;
+}
+
+@keyframes gsChromeGlow {
+    0%, 100% {
+        filter:
+            drop-shadow(0 0 3px white)
+            drop-shadow(0 0 8px rgba(0,0,0,.35))
+            drop-shadow(0 10px 15px rgba(0,0,0,.3));
+    }
+
+    50% {
+        filter:
+            drop-shadow(0 0 7px white)
+            drop-shadow(0 0 16px rgba(0,0,0,.65))
+            drop-shadow(0 15px 22px rgba(0,0,0,.4));
+    }
+}
+
+@keyframes gsChromeSweep {
+    0%, 15% {
+        transform: translateX(-160%) skewX(-15deg);
+    }
+    55%, 100% {
+        transform: translateX(160%) skewX(-15deg);
+    }
+}
+
+/* Mobile and tablet */
+@media (max-width: 768px) {
+    .gs-chrome-art {
+        width: 100%;
+        padding: 6px;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .gs-chrome-art img,
+    .gs-chrome-art::after {
+        animation: none;
+    }
+
+    .gs-chrome-art::after {
+        display: none;
+    }
+}
