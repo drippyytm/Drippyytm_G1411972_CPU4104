@@ -6741,19 +6741,21 @@ button[type="submit"] {
 }
 
 
-/* GLOBALSTEPPER PREMIUM GREY FOOTER */
 
-.site-footer {
-  background-color: #353535 !important;
-  color: #ffffff;
+/* GLOBALSTEPPER GREY FOOTER */
+
+footer.site-footer {
+  background: #555555 !important;
+  background-color: #555555 !important;
+  color: #ffffff !important;
 }
 
-.site-footer .footer-links a,
-.site-footer .footer-brand p {
-  color: #e0e0e0;
+footer.site-footer .footer-brand p,
+footer.site-footer .footer-links a {
+  color: #eeeeee !important;
 }
 
-.site-footer .footer-bottom {
-  border-top: 1px solid #666666;
-  color: #cccccc;
+footer.site-footer .footer-bottom {
+  border-top: 1px solid #888888;
+  color: #dddddd;
 }
