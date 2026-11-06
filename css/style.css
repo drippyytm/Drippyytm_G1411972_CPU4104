@@ -6689,3 +6689,41 @@ button[type="submit"] {
     transform: translate(-50%, -50%);
   }
 }
+
+
+/* GLOBALSTEPPER SILVER OUTLINE GLOW */
+
+.gs-chrome-art .gs-star {
+  background: linear-gradient(
+    135deg,
+    #555555 0%,
+    #999999 25%,
+    #ffffff 50%,
+    #888888 75%,
+    #444444 100%
+  );
+
+  filter:
+    drop-shadow(0 0 2px #555555)
+    drop-shadow(0 0 5px #888888)
+    drop-shadow(0 0 9px rgba(100,100,100,0.55));
+}
+
+/* Larger diamonds get a stronger glow */
+.gs-chrome-art .star-1,
+.gs-chrome-art .star-2,
+.gs-chrome-art .star-3 {
+  filter:
+    drop-shadow(0 0 2px #444444)
+    drop-shadow(0 0 6px #777777)
+    drop-shadow(0 0 12px rgba(90,90,90,0.6));
+}
+
+/* Smaller glitter gets a softer glow */
+.gs-chrome-art .star-4,
+.gs-chrome-art .star-5,
+.gs-chrome-art .star-6 {
+  filter:
+    drop-shadow(0 0 2px #666666)
+    drop-shadow(0 0 5px rgba(110,110,110,0.5));
+}
