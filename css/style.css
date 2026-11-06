@@ -6759,3 +6759,21 @@ footer.site-footer .footer-bottom {
   border-top: 1px solid #888888;
   color: #dddddd;
 }
+
+/* GLOBALSTEPPER PURPLE INVENTORY LOGO */
+
+.inventory-purple {
+  display: block;
+  max-width: 100%;
+  height: auto;
+
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(20%)
+    sepia(83%)
+    saturate(2322%)
+    hue-rotate(258deg)
+    brightness(88%)
+    contrast(105%);
+}
