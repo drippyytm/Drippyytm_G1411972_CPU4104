@@ -6788,3 +6788,39 @@ footer.site-footer .footer-bottom {
     max-width: 90% !important;
   }
 }
+
+
+/* GLOBALSTEPPER HERO LOGO SIZE FIX */
+
+/* Desktop and Mac */
+.hero-logo-heading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-brand-logo {
+  display: block;
+  width: 78% !important;
+  max-width: 1150px !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  object-fit: contain;
+}
+
+/* iPad and tablets */
+@media (max-width: 1024px) {
+  .hero-brand-logo {
+    width: 85% !important;
+  }
+}
+
+/* iPhone and mobile devices */
+@media (max-width: 600px) {
+  .hero-brand-logo {
+    width: 92% !important;
+  }
+}
