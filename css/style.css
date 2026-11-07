@@ -6760,3 +6760,31 @@ footer.site-footer .footer-bottom {
   color: #dddddd;
 }
 
+
+/* GLOBALSTEPPER HOMEPAGE LOGO SIZE */
+
+.hero-logo img,
+.hero-logo {
+  max-width: 75% !important;
+  width: 100%;
+  height: auto;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .hero-logo img,
+  .hero-logo {
+    max-width: 80% !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .hero-logo img,
+  .hero-logo {
+    max-width: 90% !important;
+  }
+}
