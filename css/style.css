@@ -6847,3 +6847,47 @@ footer.site-footer .footer-bottom {
   }
 
 }
+
+
+/* ==========================================
+   GLOBALSTEPPER RESPONSIVE HERO LOGO
+   ========================================== */
+
+.hero .hero-logo-heading {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 10px auto 25px !important;
+    padding: 0 !important;
+}
+
+.hero .hero-logo-heading > img.hero-brand-logo {
+    display: block !important;
+    position: static !important;
+    width: 75% !important;
+    max-width: 850px !important;
+    max-height: 50vh !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    object-fit: contain !important;
+}
+
+/* iPad and tablets */
+@media (min-width: 601px) and (max-width: 1099px) {
+    .hero .hero-logo-heading > img.hero-brand-logo {
+        width: 85% !important;
+        max-width: 100% !important;
+        max-height: 260px !important;
+    }
+}
+
+/* iPhone and mobile */
+@media (max-width: 600px) {
+    .hero .hero-logo-heading > img.hero-brand-logo {
+        width: 92% !important;
+        max-width: 100% !important;
+        max-height: 180px !important;
+    }
+}
