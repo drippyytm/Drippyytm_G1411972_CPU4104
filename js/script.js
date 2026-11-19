@@ -346,13 +346,14 @@ function initialiseMobileNavigation() {
   });
 
   window.addEventListener("resize", () => {
-    if (window.innerWidth >= 900) {
+    if (window.innerWidth >= 800) {
       closeMenu();
     }
   });
 }
 
 /* ==========================================
+   PART 2
    PRODUCT FILTERS, SEARCH AND SORT
 ========================================== */
 
@@ -390,7 +391,9 @@ function initialiseProductFilters() {
   const originalOrder = [...cards];
 
   function updateProducts() {
-    const category = categoryFilter?.value || "all";
+    const category = (
+      categoryFilter?.value || "all"
+    ).trim().toLowerCase();
 
     const search = (
       searchInput?.value || ""
@@ -399,13 +402,24 @@ function initialiseProductFilters() {
     const sort = sortSelect?.value || "default";
 
     const visible = cards.filter(card => {
+      const cardCategory = (
+        card.dataset.category || ""
+      ).trim().toLowerCase();
+
+      const cardName = (
+        card.dataset.name ||
+        card.querySelector("h2, h3")?.textContent ||
+        ""
+      ).trim().toLowerCase();
+
       const matchesCategory =
         category === "all" ||
-        card.dataset.category === category;
+        cardCategory === category;
 
-      const matchesSearch = (
-        card.dataset.name || ""
-      ).toLowerCase().includes(search);
+      const matchesSearch =
+        !search ||
+        cardName.includes(search) ||
+        cardCategory.includes(search);
 
       return matchesCategory && matchesSearch;
     });
@@ -467,15 +481,18 @@ function initialiseProductFilters() {
   }
 
   categoryFilter?.addEventListener(
-    "change", updateProducts
+    "change",
+    updateProducts
   );
 
   searchInput?.addEventListener(
-    "input", updateProducts
+    "input",
+    updateProducts
   );
 
   sortSelect?.addEventListener(
-    "change", updateProducts
+    "change",
+    updateProducts
   );
 
   updateProducts();
@@ -501,12 +518,19 @@ function initialiseLiveSearchSuggestions() {
   function closeSuggestions() {
     container.hidden = true;
     container.innerHTML = "";
-    input.setAttribute("aria-expanded", "false");
+
+    input.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
     activeIndex = -1;
   }
 
   function renderSuggestions() {
-    const term = input.value.trim().toLowerCase();
+    const term = input.value
+      .trim()
+      .toLowerCase();
 
     container.innerHTML = "";
     activeIndex = -1;
@@ -528,9 +552,15 @@ function initialiseLiveSearchSuggestions() {
 
     if (!matches.length) {
       container.hidden = false;
+
       container.textContent =
         "No matching products found.";
-      input.setAttribute("aria-expanded", "true");
+
+      input.setAttribute(
+        "aria-expanded",
+        "true"
+      );
+
       return;
     }
 
@@ -541,7 +571,11 @@ function initialiseLiveSearchSuggestions() {
 
       suggestion.type = "button";
       suggestion.className = "search-suggestion";
-      suggestion.setAttribute("role", "option");
+
+      suggestion.setAttribute(
+        "role",
+        "option"
+      );
 
       suggestion.innerHTML = `
         <img
@@ -566,20 +600,30 @@ function initialiseLiveSearchSuggestions() {
         </span>
       `;
 
-      suggestion.addEventListener("click", () => {
-        window.location.href =
-          "product-details.html?id=" +
-          encodeURIComponent(product.id);
-      });
+      suggestion.addEventListener(
+        "click",
+        () => {
+          window.location.href =
+            "product-details.html?id=" +
+            encodeURIComponent(product.id);
+        }
+      );
 
       container.appendChild(suggestion);
     });
 
     container.hidden = false;
-    input.setAttribute("aria-expanded", "true");
+
+    input.setAttribute(
+      "aria-expanded",
+      "true"
+    );
   }
 
-  input.addEventListener("input", renderSuggestions);
+  input.addEventListener(
+    "input",
+    renderSuggestions
+  );
 
   input.addEventListener("focus", () => {
     if (input.value.trim().length >= 2) {
@@ -599,16 +643,22 @@ function initialiseLiveSearchSuggestions() {
       return;
     }
 
-    if (!suggestions.length || container.hidden) {
+    if (
+      !suggestions.length ||
+      container.hidden
+    ) {
       return;
     }
 
     if (event.key === "ArrowDown") {
       event.preventDefault();
+
       activeIndex =
-        (activeIndex + 1) % suggestions.length;
+        (activeIndex + 1) %
+        suggestions.length;
     } else if (event.key === "ArrowUp") {
       event.preventDefault();
+
       activeIndex =
         (activeIndex - 1 + suggestions.length) %
         suggestions.length;
@@ -617,29 +667,37 @@ function initialiseLiveSearchSuggestions() {
       activeIndex >= 0
     ) {
       event.preventDefault();
+
       suggestions[activeIndex].click();
       return;
     } else {
       return;
     }
 
-    suggestions.forEach((suggestion, index) => {
-      const active = index === activeIndex;
+    suggestions.forEach(
+      (suggestion, index) => {
+        const active =
+          index === activeIndex;
 
-      suggestion.classList.toggle(
-        "active", active
-      );
+        suggestion.classList.toggle(
+          "active",
+          active
+        );
 
-      suggestion.setAttribute(
-        "aria-selected", String(active)
-      );
-    });
+        suggestion.setAttribute(
+          "aria-selected",
+          String(active)
+        );
+      }
+    );
   });
 
   document.addEventListener("click", event => {
-    if (!event.target.closest(
-      ".live-search-wrapper"
-    )) {
+    if (
+      !event.target.closest(
+        ".live-search-wrapper"
+      )
+    ) {
       closeSuggestions();
     }
   });
@@ -670,12 +728,17 @@ function initialiseProductDetails() {
   }
 
   const fields = {
-    "#detail-product-category": product.category,
+    "#detail-product-category":
+      product.category,
+
     "#detail-product-price":
       formatPrice(product.price),
+
     "#detail-product-description":
       product.description,
-    "#breadcrumb-product": product.name
+
+    "#breadcrumb-product":
+      product.name
   };
 
   name.textContent = product.name;
@@ -686,7 +749,9 @@ function initialiseProductDetails() {
         selector
       );
 
-      if (element) element.textContent = value;
+      if (element) {
+        element.textContent = value;
+      }
     }
   );
 
@@ -704,6 +769,10 @@ function initialiseProductDetails() {
 
   initialiseDetailAddToCart(product);
 }
+
+/* ==========================================
+   PRODUCT DETAILS ADD TO CART
+========================================== */
 
 function initialiseDetailAddToCart(product) {
   const button = document.querySelector(
@@ -729,7 +798,8 @@ function initialiseDetailAddToCart(product) {
     button.textContent = "SOLD OUT";
 
     button.setAttribute(
-      "aria-disabled", "true"
+      "aria-disabled",
+      "true"
     );
 
     if (size) size.disabled = true;
@@ -744,7 +814,9 @@ function initialiseDetailAddToCart(product) {
   }
 
   button.addEventListener("click", () => {
-    const selectedSize = size?.value || "";
+    const selectedSize =
+      size?.value || "";
+
     const selectedQuantity = Number(
       quantity?.value || 1
     );
@@ -754,6 +826,7 @@ function initialiseDetailAddToCart(product) {
         message.textContent =
           "Please select a size.";
       }
+
       size?.focus();
       return;
     }
@@ -767,11 +840,14 @@ function initialiseDetailAddToCart(product) {
         message.textContent =
           "Choose a quantity between 1 and 10.";
       }
+
       return;
     }
 
     const cart = getCart();
-    const key = product.id + "-" + selectedSize;
+
+    const key =
+      product.id + "-" + selectedSize;
 
     const existing = cart.find(item =>
       item.cartItemId === key
@@ -786,6 +862,7 @@ function initialiseDetailAddToCart(product) {
           message.textContent =
             "Maximum quantity is 10.";
         }
+
         return;
       }
 
@@ -823,17 +900,67 @@ function initialiseDetailAddToCart(product) {
 }
 
 /* ==========================================
+   END OF PART 2
+========================================== */
+
+/* ==========================================
+   PART 3
    GLOBALSTEPPER WISHLIST
 ========================================== */
 
+/* ==========================================
+   READ SAVED WISHLIST
+========================================== */
+
 function getWishlist() {
-  return readStorage(WISHLIST_STORAGE_KEY)
-    .map(String);
+  const saved = readStorage(
+    WISHLIST_STORAGE_KEY
+  );
+
+  const ids = saved
+    .map(item => {
+      if (
+        item &&
+        typeof item === "object"
+      ) {
+        return String(
+          item.id ||
+          item.productId ||
+          ""
+        );
+      }
+
+      return String(item);
+    })
+    .filter(id => Boolean(getProduct(id)));
+
+  return [...new Set(ids)];
 }
+
+/* ==========================================
+   SAVE WISHLIST
+========================================== */
 
 function saveWishlist(wishlist) {
   const uniqueWishlist = [
-    ...new Set(wishlist.map(String))
+    ...new Set(
+      wishlist
+        .map(item => {
+          if (
+            item &&
+            typeof item === "object"
+          ) {
+            return String(
+              item.id ||
+              item.productId ||
+              ""
+            );
+          }
+
+          return String(item);
+        })
+        .filter(id => Boolean(getProduct(id)))
+    )
   ];
 
   writeStorage(
@@ -870,66 +997,104 @@ function updateWishlistCount() {
 }
 
 /* ==========================================
-   CLICKABLE WISHLIST HEARTS
+   UPDATE ALL WISHLIST HEARTS
 ========================================== */
 
-function initialiseWishlist() {
+function updateWishlistButtons() {
+  const wishlist = getWishlist();
 
-  function updateButtons() {
-    const wishlist = getWishlist();
+  document.querySelectorAll(
+    ".wishlist-button"
+  ).forEach(button => {
+    const id = String(
+      button.dataset.productId ||
+      button.dataset.id ||
+      ""
+    );
 
-    document.querySelectorAll(
-      ".wishlist-button"
-    ).forEach(button => {
+    if (!id) return;
 
-      const id = String(
-        button.dataset.productId || ""
-      );
+    const saved = wishlist.includes(id);
 
-      if (!id) return;
+    button.classList.toggle(
+      "active",
+      saved
+    );
 
-      const saved = wishlist.includes(id);
+    button.classList.toggle(
+      "is-active",
+      saved
+    );
 
-      button.classList.toggle(
+    button.setAttribute(
+      "aria-pressed",
+      String(saved)
+    );
+
+    button.setAttribute(
+      "aria-label",
+      saved
+        ? "Remove product from wishlist"
+        : "Add product to wishlist"
+    );
+
+    button.setAttribute(
+      "title",
+      saved
+        ? "Remove from wishlist"
+        : "Add to wishlist"
+    );
+
+    button.type = "button";
+    button.disabled = false;
+
+    const icon = button.querySelector(
+      "svg, i, .heart-icon"
+    );
+
+    if (icon) {
+      icon.classList.toggle(
         "active",
         saved
       );
 
-      button.textContent = saved ? "♥" : "♡";
+      if (
+        icon.tagName.toLowerCase() === "svg"
+      ) {
+        icon.setAttribute(
+          "fill",
+          saved ? "currentColor" : "none"
+        );
+      }
+    } else {
+      button.textContent =
+        saved ? "♥" : "♡";
+    }
+  });
+}
 
-      button.setAttribute(
-        "aria-pressed",
-        String(saved)
-      );
+/* ==========================================
+   INITIALISE WISHLIST HEARTS
+========================================== */
 
-      button.setAttribute(
-        "aria-label",
-        saved
-          ? "Remove product from wishlist"
-          : "Add product to wishlist"
-      );
+function initialiseWishlist() {
 
-      button.setAttribute(
-        "title",
-        saved
-          ? "Remove from wishlist"
-          : "Add to wishlist"
-      );
-
-      button.type = "button";
-      button.disabled = false;
-
-    });
+  if (
+    document.documentElement.dataset
+      .wishlistInitialised === "true"
+  ) {
+    updateWishlistButtons();
+    return;
   }
 
-  /* ==========================================
-     HANDLE ALL WISHLIST HEART CLICKS
-  ========================================== */
+  document.documentElement.dataset
+    .wishlistInitialised = "true";
+
+  /* HANDLE HEART CLICKS */
 
   document.addEventListener(
     "click",
     function(event) {
-
       const target = event.target;
 
       if (!(target instanceof Element)) {
@@ -946,12 +1111,14 @@ function initialiseWishlist() {
       event.stopPropagation();
 
       const id = String(
-        button.dataset.productId || ""
+        button.dataset.productId ||
+        button.dataset.id ||
+        ""
       );
 
       if (!id) {
         console.warn(
-          "Wishlist button missing data-product-id"
+          "GLOBALSTEPPER: Wishlist button is missing a product ID."
         );
         return;
       }
@@ -960,7 +1127,7 @@ function initialiseWishlist() {
 
       if (!product) {
         console.warn(
-          "Wishlist product not found:",
+          "GLOBALSTEPPER: Product not found:",
           id
         );
 
@@ -973,8 +1140,10 @@ function initialiseWishlist() {
 
       let wishlist = getWishlist();
 
-      if (wishlist.includes(id)) {
+      const alreadySaved =
+        wishlist.includes(id);
 
+      if (alreadySaved) {
         wishlist = wishlist.filter(
           item => item !== id
         );
@@ -985,9 +1154,7 @@ function initialiseWishlist() {
           product.name +
           " removed from wishlist."
         );
-
       } else {
-
         wishlist.push(id);
 
         saveWishlist(wishlist);
@@ -996,58 +1163,50 @@ function initialiseWishlist() {
           product.name +
           " added to wishlist."
         );
-
       }
 
-      updateButtons();
-
+      updateWishlistButtons();
     },
     true
   );
 
-  /* ==========================================
-     REFRESH HEARTS WHEN WISHLIST CHANGES
-  ========================================== */
+  /* UPDATE WHEN WISHLIST CHANGES */
 
   document.addEventListener(
     "globalstepper:wishlist-changed",
-    updateButtons
+    updateWishlistButtons
   );
 
-  /* ==========================================
-     REFRESH WHEN RETURNING TO PAGE
-  ========================================== */
+  /* UPDATE WHEN RETURNING TO PAGE */
 
   window.addEventListener(
     "pageshow",
-    updateButtons
+    function() {
+      updateWishlistCount();
+      updateWishlistButtons();
+    }
   );
 
-  /* ==========================================
-     SYNC WISHLIST BETWEEN BROWSER TABS
-  ========================================== */
+  /* SYNC BETWEEN BROWSER TABS */
 
   window.addEventListener(
     "storage",
     function(event) {
-
       if (
         event.key === WISHLIST_STORAGE_KEY
       ) {
         updateWishlistCount();
-        updateButtons();
+        updateWishlistButtons();
       }
-
     }
   );
 
   updateWishlistCount();
-  updateButtons();
-
+  updateWishlistButtons();
 }
 
 /* ==========================================
-   WISHLIST PAGE
+   GLOBALSTEPPER WISHLIST PAGE
 ========================================== */
 
 function initialiseWishlistPage() {
@@ -1062,15 +1221,16 @@ function initialiseWishlistPage() {
 
   if (!container) return;
 
-  function render() {
+  /* ==========================================
+     DISPLAY SAVED PRODUCTS
+  ========================================== */
 
+  function render() {
     const wishlist = getWishlist();
 
-    const savedProducts = products.filter(
-      product => wishlist.includes(
-        String(product.id)
-      )
-    );
+    const savedProducts = wishlist
+      .map(id => getProduct(id))
+      .filter(Boolean);
 
     container.innerHTML = "";
 
@@ -1080,7 +1240,6 @@ function initialiseWishlistPage() {
     }
 
     savedProducts.forEach(product => {
-
       const soldOut = isArchiveSoldOut(
         product.id
       );
@@ -1094,6 +1253,9 @@ function initialiseWishlistPage() {
         (soldOut ? " archive-product" : "");
 
       card.dataset.productId = product.id;
+      card.dataset.category = product.category;
+      card.dataset.name = product.name;
+      card.dataset.price = product.price;
 
       card.innerHTML = `
         <button
@@ -1116,6 +1278,7 @@ function initialiseWishlistPage() {
               src="${escapeHTML(product.image)}"
               alt="${escapeHTML(product.name)}"
               loading="lazy"
+              decoding="async"
             >
 
           </a>
@@ -1160,21 +1323,18 @@ function initialiseWishlistPage() {
       `;
 
       container.appendChild(card);
-
     });
 
     updateWishlistCount();
-
   }
 
   /* ==========================================
-     REMOVE PRODUCTS FROM WISHLIST PAGE
+     REMOVE PRODUCT FROM WISHLIST
   ========================================== */
 
   container.addEventListener(
     "click",
     function(event) {
-
       const target = event.target;
 
       if (!(target instanceof Element)) {
@@ -1198,9 +1358,10 @@ function initialiseWishlistPage() {
 
       const product = getProduct(id);
 
-      const updatedWishlist = getWishlist().filter(
-        item => item !== id
-      );
+      const updatedWishlist =
+        getWishlist().filter(
+          item => item !== id
+        );
 
       saveWishlist(updatedWishlist);
 
@@ -1208,15 +1369,15 @@ function initialiseWishlistPage() {
 
       showCartNotification(
         product
-          ? product.name + " removed from wishlist."
+          ? product.name +
+            " removed from wishlist."
           : "Product removed from wishlist."
       );
-
     }
   );
 
   /* ==========================================
-     UPDATE WISHLIST PAGE AUTOMATICALLY
+     REFRESH WISHLIST PAGE
   ========================================== */
 
   document.addEventListener(
@@ -1241,7 +1402,6 @@ function initialiseWishlistPage() {
   );
 
   render();
-
 }
 
 /* ==========================================
@@ -1265,16 +1425,21 @@ function initialiseWishlistStyles() {
   style.id = "globalstepper-wishlist-fix";
 
   style.textContent = `
+
+    /* PRODUCT CARDS */
+
     .shop-product-card,
     .product-card {
       position: relative;
     }
 
+    /* WISHLIST HEART BUTTON */
+
     .wishlist-button {
       position: absolute !important;
       top: 15px !important;
       right: 15px !important;
-      z-index: 99999 !important;
+      z-index: 100 !important;
 
       display: flex !important;
       align-items: center !important;
@@ -1311,7 +1476,10 @@ function initialiseWishlistStyles() {
       transform: scale(1.08);
     }
 
+    /* SAVED HEART */
+
     .wishlist-button.active,
+    .wishlist-button.is-active,
     .wishlist-button[aria-pressed="true"] {
       color: #e63946 !important;
     }
@@ -1321,16 +1489,20 @@ function initialiseWishlistStyles() {
       outline-offset: 3px;
     }
 
+    /* PRODUCT IMAGE WRAPPER */
+
     .shop-product-card .shop-product-image {
       position: relative;
       z-index: 1;
     }
 
+    /* WISHLIST REMOVE BUTTON */
+
     .wishlist-remove-button {
       position: absolute;
       top: 12px;
       right: 12px;
-      z-index: 9999;
+      z-index: 100;
 
       display: flex;
       align-items: center;
@@ -1347,6 +1519,7 @@ function initialiseWishlistStyles() {
 
       font-size: 25px;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
     .wishlist-remove-button:hover {
@@ -1354,21 +1527,47 @@ function initialiseWishlistStyles() {
       color: #ffffff;
     }
 
+    /* DISPLAY FULL PRODUCT IMAGES */
+
+    #wishlist-products .shop-product-image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    /* MOBILE */
+
     @media (max-width: 600px) {
+
       .wishlist-button {
         width: 42px !important;
         height: 42px !important;
         top: 12px !important;
         right: 12px !important;
       }
+
+      .wishlist-remove-button {
+        width: 34px;
+        height: 34px;
+        top: 10px;
+        right: 10px;
+      }
+
     }
+
   `;
 
   document.head.appendChild(style);
-
 }
 
 /* ==========================================
+   END OF PART 3
+========================================== */
+
+/* ==========================================
+   PART 4
    GLOBALSTEPPER SHOPPING CART PAGE
 ========================================== */
 
@@ -1404,7 +1603,9 @@ function initialiseCartPage() {
     "#cart-page-message"
   );
 
-  /* DISPLAY CART PRODUCTS */
+  /* ==========================================
+     DISPLAY CART PRODUCTS
+  ========================================== */
 
   function render() {
 
@@ -1512,7 +1713,9 @@ function initialiseCartPage() {
 
     });
 
-    /* CALCULATE SUBTOTAL */
+    /* ==========================================
+       CALCULATE SUBTOTAL
+    ========================================== */
 
     const subtotal = cart.reduce(
       (sum, item) => {
@@ -1537,7 +1740,9 @@ function initialiseCartPage() {
 
   }
 
-  /* INCREASE, DECREASE AND REMOVE */
+  /* ==========================================
+     INCREASE, DECREASE AND REMOVE
+  ========================================== */
 
   container.addEventListener(
     "click",
@@ -1624,7 +1829,9 @@ function initialiseCartPage() {
     }
   );
 
-  /* CLEAR ENTIRE CART */
+  /* ==========================================
+     CLEAR ENTIRE CART
+  ========================================== */
 
   if (clearButton) {
 
@@ -1656,7 +1863,9 @@ function initialiseCartPage() {
 
   }
 
-  /* CHECKOUT BUTTON */
+  /* ==========================================
+     CHECKOUT BUTTON
+  ========================================== */
 
   if (checkoutButton) {
 
@@ -1687,7 +1896,9 @@ function initialiseCartPage() {
 
   }
 
-  /* UPDATE CART WHEN STORAGE CHANGES */
+  /* ==========================================
+     UPDATE CART WHEN STORAGE CHANGES
+  ========================================== */
 
   window.addEventListener(
     "storage",
@@ -1700,6 +1911,11 @@ function initialiseCartPage() {
       }
 
     }
+  );
+
+  document.addEventListener(
+    "globalstepper:cart-changed",
+    render
   );
 
   render();
@@ -1742,7 +1958,9 @@ function initialiseCartDrawer() {
     "#cart-drawer-empty"
   );
 
-  /* OPEN CART DRAWER */
+  /* ==========================================
+     OPEN CART DRAWER
+  ========================================== */
 
   function openDrawer() {
 
@@ -1765,7 +1983,9 @@ function initialiseCartDrawer() {
 
   }
 
-  /* CLOSE CART DRAWER */
+  /* ==========================================
+     CLOSE CART DRAWER
+  ========================================== */
 
   function closeDrawer() {
 
@@ -1786,7 +2006,9 @@ function initialiseCartDrawer() {
 
   }
 
-  /* DISPLAY CART DRAWER ITEMS */
+  /* ==========================================
+     DISPLAY CART DRAWER ITEMS
+  ========================================== */
 
   function renderDrawer() {
 
@@ -1874,7 +2096,9 @@ function initialiseCartDrawer() {
 
   }
 
-  /* CART DRAWER BUTTON EVENTS */
+  /* ==========================================
+     CART DRAWER BUTTON EVENTS
+  ========================================== */
 
   openButtons.forEach(button => {
 
@@ -1909,7 +2133,9 @@ function initialiseCartDrawer() {
 
   }
 
-  /* REMOVE ITEM FROM DRAWER */
+  /* ==========================================
+     REMOVE ITEM FROM DRAWER
+  ========================================== */
 
   if (itemsContainer) {
 
@@ -1953,7 +2179,9 @@ function initialiseCartDrawer() {
 
   }
 
-  /* CLOSE WITH ESCAPE KEY */
+  /* ==========================================
+     CLOSE WITH ESCAPE KEY
+  ========================================== */
 
   document.addEventListener(
     "keydown",
@@ -1971,11 +2199,22 @@ function initialiseCartDrawer() {
     }
   );
 
-  /* KEEP DRAWER UPDATED */
+  /* ==========================================
+     KEEP DRAWER UPDATED
+  ========================================== */
 
   document.addEventListener(
     "globalstepper:cart-changed",
     renderDrawer
+  );
+
+  window.addEventListener(
+    "storage",
+    function(event) {
+      if (event.key === CART_STORAGE_KEY) {
+        renderDrawer();
+      }
+    }
   );
 
   renderDrawer();
@@ -1983,10 +2222,16 @@ function initialiseCartDrawer() {
 }
 
 /* ==========================================
+   END OF PART 4
+========================================== */
+
+/* ==========================================
+   PART 5
    GLOBALSTEPPER QUICK VIEW
 ========================================== */
 
 function initialiseQuickView() {
+
   const modal = document.querySelector(
     "#quick-view-modal"
   );
@@ -2032,7 +2277,12 @@ function initialiseQuickView() {
   let activeProduct = null;
   let lastFocusedButton = null;
 
+  /* ==========================================
+     OPEN QUICK VIEW
+  ========================================== */
+
   function openQuickView(button) {
+
     const card = button.closest(
       ".shop-product-card"
     );
@@ -2041,9 +2291,11 @@ function initialiseQuickView() {
 
     const id = String(
       button.dataset.productId ||
+      card.dataset.productId ||
       card.querySelector(
         ".add-to-cart-btn[data-id]"
-      )?.dataset.id || ""
+      )?.dataset.id ||
+      ""
     );
 
     const product = getProduct(id);
@@ -2056,6 +2308,8 @@ function initialiseQuickView() {
     if (image) {
       image.src = product.image;
       image.alt = product.name;
+      image.style.objectFit = "contain";
+      image.style.objectPosition = "center";
     }
 
     if (category) {
@@ -2067,8 +2321,9 @@ function initialiseQuickView() {
     }
 
     if (price) {
-      price.textContent =
-        formatPrice(product.price);
+      price.textContent = formatPrice(
+        product.price
+      );
     }
 
     if (description) {
@@ -2078,7 +2333,8 @@ function initialiseQuickView() {
 
     if (link) {
       link.href =
-        "product-details.html?id=" + product.id;
+        "product-details.html?id=" +
+        encodeURIComponent(product.id);
     }
 
     addButton.dataset.id = product.id;
@@ -2088,22 +2344,31 @@ function initialiseQuickView() {
     addButton.dataset.category = product.category;
 
     if (isArchiveSoldOut(product.id)) {
+
       addButton.disabled = true;
       addButton.textContent = "SOLD OUT";
+
       addButton.setAttribute(
-        "aria-disabled", "true"
+        "aria-disabled",
+        "true"
       );
+
     } else {
+
       addButton.disabled = false;
       addButton.textContent = "Add to Cart";
+
       addButton.removeAttribute(
         "aria-disabled"
       );
+
     }
 
     modal.classList.add("open");
+
     modal.setAttribute(
-      "aria-hidden", "false"
+      "aria-hidden",
+      "false"
     );
 
     document.body.classList.add(
@@ -2111,12 +2376,24 @@ function initialiseQuickView() {
     );
 
     closeButton?.focus();
+
   }
 
+  /* ==========================================
+     CLOSE QUICK VIEW
+  ========================================== */
+
   function closeQuickView() {
+
+    if (!modal.classList.contains("open")) {
+      return;
+    }
+
     modal.classList.remove("open");
+
     modal.setAttribute(
-      "aria-hidden", "true"
+      "aria-hidden",
+      "true"
     );
 
     document.body.classList.remove(
@@ -2124,42 +2401,91 @@ function initialiseQuickView() {
     );
 
     lastFocusedButton?.focus();
+
   }
 
-  document.querySelectorAll(
-    ".quick-view-button"
-  ).forEach(button => {
-    button.addEventListener("click", () => {
-      openQuickView(button);
-    });
-  });
+  /* ==========================================
+     QUICK VIEW BUTTON CLICKS
+  ========================================== */
 
-  addButton.addEventListener("click", () => {
-    if (!activeProduct) return;
+  document.addEventListener(
+    "click",
+    function(event) {
 
-    if (isArchiveSoldOut(activeProduct.id)) {
-      showCartNotification(
-        "This archive product is SOLD OUT."
+      const target = event.target;
+
+      if (!(target instanceof Element)) {
+        return;
+      }
+
+      const button = target.closest(
+        ".quick-view-button"
       );
-      return;
-    }
 
-    addProductToCart(addButton);
-  });
+      if (!button) return;
+
+      event.preventDefault();
+
+      openQuickView(button);
+
+    }
+  );
+
+  /* ==========================================
+     QUICK VIEW ADD TO CART
+  ========================================== */
+
+  addButton.addEventListener(
+    "click",
+    function(event) {
+
+      event.preventDefault();
+
+      if (!activeProduct) return;
+
+      if (isArchiveSoldOut(activeProduct.id)) {
+
+        showCartNotification(
+          "This archive product is SOLD OUT."
+        );
+
+        return;
+
+      }
+
+      addProductToCart(addButton);
+
+    }
+  );
+
+  /* ==========================================
+     CLOSE BUTTONS
+  ========================================== */
 
   overlay?.addEventListener(
-    "click", closeQuickView
+    "click",
+    closeQuickView
   );
 
   closeButton?.addEventListener(
-    "click", closeQuickView
+    "click",
+    closeQuickView
   );
 
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") {
-      closeQuickView();
+  document.addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.key === "Escape" &&
+        modal.classList.contains("open")
+      ) {
+        closeQuickView();
+      }
+
     }
-  });
+  );
+
 }
 
 /* ==========================================
@@ -2167,6 +2493,7 @@ function initialiseQuickView() {
 ========================================== */
 
 function initialiseThemeToggle() {
+
   const buttons = document.querySelectorAll(
     "#theme-toggle"
   );
@@ -2181,21 +2508,30 @@ function initialiseThemeToggle() {
     savedTheme = null;
   }
 
-  const systemDark = window.matchMedia &&
+  const systemDark =
+    window.matchMedia &&
     window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
 
+  /* ==========================================
+     APPLY SELECTED THEME
+  ========================================== */
+
   function applyTheme(theme) {
+
     const dark = theme === "dark";
 
     document.body.classList.toggle(
-      "dark-theme", dark
+      "dark-theme",
+      dark
     );
 
     buttons.forEach(button => {
+
       button.setAttribute(
-        "aria-pressed", String(dark)
+        "aria-pressed",
+        String(dark)
       );
 
       button.setAttribute(
@@ -2214,52 +2550,83 @@ function initialiseThemeToggle() {
       );
 
       if (icon) {
-        icon.textContent = dark ? "☀" : "☾";
+        icon.textContent =
+          dark ? "☀" : "☾";
       }
 
       if (text) {
         text.textContent =
           dark ? "Light" : "Dark";
       }
+
     });
+
   }
+
+  /* ==========================================
+     LOAD SAVED OR SYSTEM THEME
+  ========================================== */
 
   applyTheme(
     savedTheme ||
     (systemDark ? "dark" : "light")
   );
 
+  /* ==========================================
+     THEME BUTTON CLICKS
+  ========================================== */
+
   buttons.forEach(button => {
-    button.addEventListener("click", () => {
-      const next =
-        document.body.classList.contains(
-          "dark-theme"
-        )
-          ? "light"
-          : "dark";
 
-      try {
-        localStorage.setItem(
-          THEME_STORAGE_KEY, next
-        );
-      } catch (error) {}
+    button.addEventListener(
+      "click",
+      function() {
 
-      applyTheme(next);
-    });
+        const next =
+          document.body.classList.contains(
+            "dark-theme"
+          )
+            ? "light"
+            : "dark";
+
+        try {
+          localStorage.setItem(
+            THEME_STORAGE_KEY,
+            next
+          );
+        } catch (error) {
+          console.warn(
+            "GLOBALSTEPPER: Theme preference could not be saved."
+          );
+        }
+
+        applyTheme(next);
+
+      }
+    );
+
   });
+
 }
 
 /* ==========================================
-   NEWSLETTER
+   EMAIL VALIDATION
 ========================================== */
 
 function isValidEmail(email) {
+
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
     email
   );
+
 }
 
+/* ==========================================
+   GLOBALSTEPPER NEWSLETTER
+========================================== */
+
 function initialiseNewsletterForm() {
+
   const form = document.querySelector(
     "#newsletter-form"
   );
@@ -2276,28 +2643,46 @@ function initialiseNewsletterForm() {
 
   if (!email || !message) return;
 
-  form.addEventListener("submit", event => {
-    event.preventDefault();
+  form.addEventListener(
+    "submit",
+    function(event) {
 
-    if (!isValidEmail(email.value.trim())) {
+      event.preventDefault();
+
+      const emailAddress =
+        email.value.trim();
+
+      if (!isValidEmail(emailAddress)) {
+
+        message.textContent =
+          "Please enter a valid email address.";
+
+        email.focus();
+
+        return;
+
+      }
+
+      /*
+       IMPORTANT:
+       A mailing-list service must be connected
+       before email addresses can be collected.
+      */
+
       message.textContent =
-        "Please enter a valid email address.";
-      email.focus();
-      return;
+        "Newsletter registration is not available yet. Please check back soon.";
+
     }
+  );
 
-    message.textContent =
-      "Thank you for joining the GLOBALSTEPPER mailing list.";
-
-    form.reset();
-  });
 }
 
 /* ==========================================
-   CONTACT FORM
+   GLOBALSTEPPER CONTACT FORM
 ========================================== */
 
 function initialiseContactForm() {
+
   const form = document.querySelector(
     "#contact-form"
   );
@@ -2332,79 +2717,154 @@ function initialiseContactForm() {
     "#character-count"
   );
 
-  message?.addEventListener("input", () => {
-    if (characterCount) {
-      characterCount.textContent =
-        message.value.length + " / 500";
-    }
-  });
+  /* ==========================================
+     LIVE CHARACTER COUNTER
+  ========================================== */
 
-  form.addEventListener("submit", event => {
-    event.preventDefault();
+  message?.addEventListener(
+    "input",
+    function() {
 
-    const fields = [
-      ["#name-error", name?.value.trim().length >= 2,
-        "Please enter your full name.", name],
-      ["#email-error", isValidEmail(
-        email?.value.trim() || ""
-      ), "Please enter a valid email address.", email],
-      ["#subject-error", Boolean(subject?.value),
-        "Please choose an enquiry subject.", subject],
-      ["#message-error", (
-        message?.value.trim().length || 0
-      ) >= 10,
-        "Your message must contain at least 10 characters.",
-        message],
-      ["#consent-error", Boolean(consent?.checked),
-        "Please agree before submitting.", consent]
-    ];
+      if (characterCount) {
 
-    let valid = true;
-    let firstInvalid = null;
+        characterCount.textContent =
+          message.value.length +
+          " / 500";
 
-    fields.forEach(
-      ([selector, passed, errorText, input]) => {
-        const error = document.querySelector(
-          selector
-        );
-
-        if (error) {
-          error.textContent =
-            passed ? "" : errorText;
-        }
-
-        input?.classList.toggle(
-          "invalid", !passed
-        );
-
-        if (!passed) {
-          valid = false;
-          if (!firstInvalid) firstInvalid = input;
-        }
       }
-    );
 
-    if (!valid) {
-      firstInvalid?.focus();
-      return;
     }
+  );
 
-    if (result) {
-      result.textContent =
-        "Your message has passed validation. This demo does not send messages to an inbox.";
+  /* ==========================================
+     VALIDATE CONTACT FORM
+  ========================================== */
+
+  form.addEventListener(
+    "submit",
+    function(event) {
+
+      event.preventDefault();
+
+      const fields = [
+
+        [
+          "#name-error",
+          (name?.value.trim().length || 0) >= 2,
+          "Please enter your full name.",
+          name
+        ],
+
+        [
+          "#email-error",
+          isValidEmail(
+            email?.value.trim() || ""
+          ),
+          "Please enter a valid email address.",
+          email
+        ],
+
+        [
+          "#subject-error",
+          Boolean(subject?.value),
+          "Please choose an enquiry subject.",
+          subject
+        ],
+
+        [
+          "#message-error",
+          (
+            message?.value.trim().length || 0
+          ) >= 10 &&
+          (
+            message?.value.trim().length || 0
+          ) <= 500,
+          "Your message must contain between 10 and 500 characters.",
+          message
+        ],
+
+        [
+          "#consent-error",
+          Boolean(consent?.checked),
+          "Please agree before submitting.",
+          consent
+        ]
+
+      ];
+
+      let valid = true;
+      let firstInvalid = null;
+
+      fields.forEach(
+        ([selector, passed, errorText, input]) => {
+
+          const error = document.querySelector(
+            selector
+          );
+
+          if (error) {
+
+            error.textContent =
+              passed ? "" : errorText;
+
+          }
+
+          input?.classList.toggle(
+            "invalid",
+            !passed
+          );
+
+          if (!passed) {
+
+            valid = false;
+
+            if (!firstInvalid) {
+              firstInvalid = input;
+            }
+
+          }
+
+        }
+      );
+
+      if (!valid) {
+
+        firstInvalid?.focus();
+
+        return;
+
+      }
+
+      /* ==========================================
+         FORM VALIDATION SUCCESSFUL
+      ========================================== */
+
+      if (result) {
+
+        result.textContent =
+          "Your message is valid, but the contact form is not yet connected to an email service. No message has been sent.";
+
+      }
+
+      /*
+       Do not reset the form here.
+
+       The message has not been sent, so the
+       customer should not lose their details.
+      */
+
     }
+  );
 
-    form.reset();
-
-    if (characterCount) {
-      characterCount.textContent = "0 / 500";
-    }
-  });
 }
 
 /* ==========================================
-   GLOBALSTEPPER
+   END OF PART 5
+========================================== */
+
+/* ==========================================
    PART 6 - FINAL WEBSITE FUNCTIONS
+   GLOBALSTEPPER
 ========================================== */
 
 /* ==========================================
@@ -2418,13 +2878,20 @@ function initialisePageLoader() {
 
   if (!loader) return;
 
+  const reducedMotion =
+    window.matchMedia &&
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
   setTimeout(() => {
     loader.classList.add("hidden");
 
     setTimeout(() => {
       loader.remove();
-    }, 700);
-  }, 3000);
+    }, reducedMotion ? 0 : 700);
+
+  }, reducedMotion ? 0 : 3000);
 }
 
 /* ==========================================
@@ -2630,7 +3097,7 @@ function displayCurrentYear() {
 }
 
 /* ==========================================
-   MISSING HELPER FUNCTIONS
+   HELPER FUNCTIONS
 ========================================== */
 
 /* READ DATA FROM BROWSER STORAGE */
@@ -2733,7 +3200,7 @@ function escapeHTML(value) {
 
 function initialiseGlobalstepper() {
 
-  /* WISHLIST FIRST */
+  /* WISHLIST */
 
   initialiseWishlistStyles();
 
