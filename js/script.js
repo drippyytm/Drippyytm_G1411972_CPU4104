@@ -352,7 +352,6 @@ function initialiseMobileNavigation() {
   });
 }
 
-
 /* ==========================================
    PRODUCT FILTERS, SEARCH AND SORT
 ========================================== */
@@ -823,7 +822,6 @@ function initialiseDetailAddToCart(product) {
   });
 }
 
-
 /* ==========================================
    GLOBALSTEPPER WISHLIST
 ========================================== */
@@ -834,15 +832,21 @@ function getWishlist() {
 }
 
 function saveWishlist(wishlist) {
+  const uniqueWishlist = [
+    ...new Set(wishlist.map(String))
+  ];
+
   writeStorage(
     WISHLIST_STORAGE_KEY,
-    [...new Set(wishlist.map(String))]
+    uniqueWishlist
   );
 
   updateWishlistCount();
 
   document.dispatchEvent(
-    new CustomEvent("globalstepper:wishlist-changed")
+    new CustomEvent(
+      "globalstepper:wishlist-changed"
+    )
   );
 }
 
@@ -854,7 +858,7 @@ function updateWishlistCount() {
   const count = getWishlist().length;
 
   document.querySelectorAll(
-    "#wishlist-count"
+    "#wishlist-count, .wishlist-count"
   ).forEach(element => {
     element.textContent = count;
 
@@ -913,11 +917,14 @@ function initialiseWishlist() {
       );
 
       button.type = "button";
+      button.disabled = false;
 
     });
   }
 
-  /* HANDLE CLICKS ON ALL HEART BUTTONS */
+  /* ==========================================
+     HANDLE ALL WISHLIST HEART CLICKS
+  ========================================== */
 
   document.addEventListener(
     "click",
@@ -944,8 +951,23 @@ function initialiseWishlist() {
 
       if (!id) {
         console.warn(
-          "Wishlist button is missing data-product-id"
+          "Wishlist button missing data-product-id"
         );
+        return;
+      }
+
+      const product = getProduct(id);
+
+      if (!product) {
+        console.warn(
+          "Wishlist product not found:",
+          id
+        );
+
+        showCartNotification(
+          "Unable to find this product."
+        );
+
         return;
       }
 
@@ -957,42 +979,53 @@ function initialiseWishlist() {
           item => item !== id
         );
 
+        saveWishlist(wishlist);
+
         showCartNotification(
-          "Product removed from wishlist."
+          product.name +
+          " removed from wishlist."
         );
 
       } else {
 
         wishlist.push(id);
 
+        saveWishlist(wishlist);
+
         showCartNotification(
-          "Product added to wishlist."
+          product.name +
+          " added to wishlist."
         );
 
       }
 
-      saveWishlist(wishlist);
       updateButtons();
 
     },
     true
   );
 
-  /* UPDATE HEARTS WHEN WISHLIST CHANGES */
+  /* ==========================================
+     REFRESH HEARTS WHEN WISHLIST CHANGES
+  ========================================== */
 
   document.addEventListener(
     "globalstepper:wishlist-changed",
     updateButtons
   );
 
-  /* UPDATE HEARTS WHEN PAGE IS REVISITED */
+  /* ==========================================
+     REFRESH WHEN RETURNING TO PAGE
+  ========================================== */
 
   window.addEventListener(
     "pageshow",
     updateButtons
   );
 
-  /* UPDATE HEARTS WHEN OTHER TABS CHANGE */
+  /* ==========================================
+     SYNC WISHLIST BETWEEN BROWSER TABS
+  ========================================== */
 
   window.addEventListener(
     "storage",
@@ -1001,10 +1034,8 @@ function initialiseWishlist() {
       if (
         event.key === WISHLIST_STORAGE_KEY
       ) {
-
         updateWishlistCount();
         updateButtons();
-
       }
 
     }
@@ -1044,10 +1075,8 @@ function initialiseWishlistPage() {
     container.innerHTML = "";
 
     if (emptyMessage) {
-
       emptyMessage.hidden =
         savedProducts.length > 0;
-
     }
 
     savedProducts.forEach(product => {
@@ -1064,12 +1093,15 @@ function initialiseWishlistPage() {
         "shop-product-card" +
         (soldOut ? " archive-product" : "");
 
+      card.dataset.productId = product.id;
+
       card.innerHTML = `
         <button
           class="wishlist-remove-button"
           type="button"
           data-product-id="${escapeHTML(product.id)}"
           aria-label="Remove ${escapeHTML(product.name)} from wishlist"
+          title="Remove from wishlist"
         >×</button>
 
         <div class="shop-product-image">
@@ -1135,7 +1167,9 @@ function initialiseWishlistPage() {
 
   }
 
-  /* REMOVE PRODUCTS FROM WISHLIST PAGE */
+  /* ==========================================
+     REMOVE PRODUCTS FROM WISHLIST PAGE
+  ========================================== */
 
   container.addEventListener(
     "click",
@@ -1154,31 +1188,56 @@ function initialiseWishlistPage() {
       if (!button) return;
 
       event.preventDefault();
+      event.stopPropagation();
 
       const id = String(
         button.dataset.productId || ""
       );
 
-      const updated = getWishlist().filter(
+      if (!id) return;
+
+      const product = getProduct(id);
+
+      const updatedWishlist = getWishlist().filter(
         item => item !== id
       );
 
-      saveWishlist(updated);
+      saveWishlist(updatedWishlist);
 
       render();
 
       showCartNotification(
-        "Product removed from wishlist."
+        product
+          ? product.name + " removed from wishlist."
+          : "Product removed from wishlist."
       );
 
     }
   );
 
-  /* REFRESH WISHLIST WHEN SAVED ITEMS CHANGE */
+  /* ==========================================
+     UPDATE WISHLIST PAGE AUTOMATICALLY
+  ========================================== */
 
   document.addEventListener(
     "globalstepper:wishlist-changed",
     render
+  );
+
+  window.addEventListener(
+    "pageshow",
+    render
+  );
+
+  window.addEventListener(
+    "storage",
+    function(event) {
+      if (
+        event.key === WISHLIST_STORAGE_KEY
+      ) {
+        render();
+      }
+    }
   );
 
   render();
@@ -1186,7 +1245,7 @@ function initialiseWishlistPage() {
 }
 
 /* ==========================================
-   WISHLIST HEART POSITION FIX
+   WISHLIST HEART STYLING
 ========================================== */
 
 function initialiseWishlistStyles() {
@@ -1215,23 +1274,24 @@ function initialiseWishlistStyles() {
       position: absolute !important;
       top: 15px !important;
       right: 15px !important;
-      z-index: 9999 !important;
+      z-index: 99999 !important;
 
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
 
-      width: 42px !important;
-      height: 42px !important;
+      width: 44px !important;
+      height: 44px !important;
 
       padding: 0 !important;
-      border: 1px solid rgba(0,0,0,.12) !important;
+
+      border: 1px solid rgba(0,0,0,0.15) !important;
       border-radius: 50% !important;
 
       background: #ffffff !important;
       color: #111111 !important;
 
-      font-size: 27px !important;
+      font-size: 28px !important;
       line-height: 1 !important;
 
       cursor: pointer !important;
@@ -1242,17 +1302,18 @@ function initialiseWishlistStyles() {
       visibility: visible !important;
 
       transition:
-        transform .2s ease,
-        color .2s ease,
-        background .2s ease;
+        transform 0.2s ease,
+        color 0.2s ease,
+        background 0.2s ease;
     }
 
     .wishlist-button:hover {
       transform: scale(1.08);
     }
 
-    .wishlist-button.active {
-      color: #e53955 !important;
+    .wishlist-button.active,
+    .wishlist-button[aria-pressed="true"] {
+      color: #e63946 !important;
     }
 
     .wishlist-button:focus-visible {
@@ -1260,27 +1321,52 @@ function initialiseWishlistStyles() {
       outline-offset: 3px;
     }
 
-    .shop-product-card .shop-product-image,
-    .product-card .product-image-link {
+    .shop-product-card .shop-product-image {
       position: relative;
-    }
-
-    .shop-product-card .shop-product-image a,
-    .product-card .product-image-link {
       z-index: 1;
     }
 
     .wishlist-remove-button {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 9999;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 36px;
+      height: 36px;
+
+      background: #ffffff;
+      color: #111111;
+
+      border: 1px solid #dddddd;
+      border-radius: 50%;
+
+      font-size: 25px;
       cursor: pointer;
-      position: relative;
-      z-index: 10;
+    }
+
+    .wishlist-remove-button:hover {
+      background: #111111;
+      color: #ffffff;
+    }
+
+    @media (max-width: 600px) {
+      .wishlist-button {
+        width: 42px !important;
+        height: 42px !important;
+        top: 12px !important;
+        right: 12px !important;
+      }
     }
   `;
 
   document.head.appendChild(style);
 
 }
-
 
 /* ==========================================
    GLOBALSTEPPER SHOPPING CART PAGE
@@ -1318,9 +1404,7 @@ function initialiseCartPage() {
     "#cart-page-message"
   );
 
-  /* ==========================================
-     DISPLAY CART PRODUCTS
-  ========================================== */
+  /* DISPLAY CART PRODUCTS */
 
   function render() {
 
@@ -1341,8 +1425,6 @@ function initialiseCartPage() {
       clearButton.disabled =
         cart.length === 0;
     }
-
-    /* DISPLAY INDIVIDUAL CART ITEMS */
 
     cart.forEach(item => {
 
@@ -1430,9 +1512,7 @@ function initialiseCartPage() {
 
     });
 
-    /* ==========================================
-       CALCULATE SUBTOTAL
-    ========================================== */
+    /* CALCULATE SUBTOTAL */
 
     const subtotal = cart.reduce(
       (sum, item) => {
@@ -1457,9 +1537,7 @@ function initialiseCartPage() {
 
   }
 
-  /* ==========================================
-     INCREASE, DECREASE AND REMOVE
-  ========================================== */
+  /* INCREASE, DECREASE AND REMOVE */
 
   container.addEventListener(
     "click",
@@ -1546,9 +1624,7 @@ function initialiseCartPage() {
     }
   );
 
-  /* ==========================================
-     CLEAR ENTIRE CART
-  ========================================== */
+  /* CLEAR ENTIRE CART */
 
   if (clearButton) {
 
@@ -1580,9 +1656,7 @@ function initialiseCartPage() {
 
   }
 
-  /* ==========================================
-     CHECKOUT BUTTON
-  ========================================== */
+  /* CHECKOUT BUTTON */
 
   if (checkoutButton) {
 
@@ -1613,9 +1687,7 @@ function initialiseCartPage() {
 
   }
 
-  /* ==========================================
-     UPDATE CART WHEN STORAGE CHANGES
-  ========================================== */
+  /* UPDATE CART WHEN STORAGE CHANGES */
 
   window.addEventListener(
     "storage",
@@ -1670,9 +1742,7 @@ function initialiseCartDrawer() {
     "#cart-drawer-empty"
   );
 
-  /* ==========================================
-     OPEN CART DRAWER
-  ========================================== */
+  /* OPEN CART DRAWER */
 
   function openDrawer() {
 
@@ -1695,9 +1765,7 @@ function initialiseCartDrawer() {
 
   }
 
-  /* ==========================================
-     CLOSE CART DRAWER
-  ========================================== */
+  /* CLOSE CART DRAWER */
 
   function closeDrawer() {
 
@@ -1718,9 +1786,7 @@ function initialiseCartDrawer() {
 
   }
 
-  /* ==========================================
-     DISPLAY CART DRAWER ITEMS
-  ========================================== */
+  /* DISPLAY CART DRAWER ITEMS */
 
   function renderDrawer() {
 
@@ -1808,9 +1874,7 @@ function initialiseCartDrawer() {
 
   }
 
-  /* ==========================================
-     CART DRAWER BUTTON EVENTS
-  ========================================== */
+  /* CART DRAWER BUTTON EVENTS */
 
   openButtons.forEach(button => {
 
@@ -1889,9 +1953,7 @@ function initialiseCartDrawer() {
 
   }
 
-  /* ==========================================
-     CLOSE WITH ESCAPE KEY
-  ========================================== */
+  /* CLOSE WITH ESCAPE KEY */
 
   document.addEventListener(
     "keydown",
@@ -1909,9 +1971,7 @@ function initialiseCartDrawer() {
     }
   );
 
-  /* ==========================================
-     KEEP DRAWER UPDATED
-  ========================================== */
+  /* KEEP DRAWER UPDATED */
 
   document.addEventListener(
     "globalstepper:cart-changed",
@@ -1921,7 +1981,6 @@ function initialiseCartDrawer() {
   renderDrawer();
 
 }
-
 
 /* ==========================================
    GLOBALSTEPPER QUICK VIEW
@@ -2344,10 +2403,13 @@ function initialiseContactForm() {
 }
 
 /* ==========================================
-   LOADING SCREEN
+   GLOBALSTEPPER
+   PART 6 - FINAL WEBSITE FUNCTIONS
 ========================================== */
 
-
+/* ==========================================
+   LOADING SCREEN
+========================================== */
 
 function initialisePageLoader() {
   const loader = document.querySelector(
@@ -2376,15 +2438,20 @@ function initialiseScrollReveal() {
 
   if (!elements.length) return;
 
-  if (
-    !("IntersectionObserver" in window) ||
+  const reducedMotion =
+    window.matchMedia &&
     window.matchMedia(
       "(prefers-reduced-motion: reduce)"
-    ).matches
+    ).matches;
+
+  if (
+    !("IntersectionObserver" in window) ||
+    reducedMotion
   ) {
     elements.forEach(element => {
       element.classList.add("revealed");
     });
+
     return;
   }
 
@@ -2422,9 +2489,11 @@ function initialiseAboutPageEffects() {
 
   if (!page) return;
 
-  const reducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
+  const reducedMotion =
+    window.matchMedia &&
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
   const revealElements = document.querySelectorAll(
     ".about-story-section, " +
@@ -2458,7 +2527,9 @@ function initialiseAboutPageEffects() {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.15 }
+      {
+        threshold: 0.15
+      }
     );
 
     revealElements.forEach(element => {
@@ -2466,19 +2537,23 @@ function initialiseAboutPageEffects() {
     });
   }
 
-  const pointerFine = window.matchMedia(
-    "(hover: hover) and (pointer: fine)"
-  ).matches;
+  const pointerFine =
+    window.matchMedia &&
+    window.matchMedia(
+      "(hover: hover) and (pointer: fine)"
+    ).matches;
 
   if (!pointerFine || reducedMotion) return;
 
   page.addEventListener("mousemove", event => {
     page.style.setProperty(
-      "--mouse-x", event.clientX + "px"
+      "--mouse-x",
+      event.clientX + "px"
     );
 
     page.style.setProperty(
-      "--mouse-y", event.clientY + "px"
+      "--mouse-y",
+      event.clientY + "px"
     );
   });
 
@@ -2527,13 +2602,16 @@ function initialiseAboutPageEffects() {
       "scroll",
       () => {
         const movement = Math.min(
-          window.scrollY * 0.08, 35
+          window.scrollY * 0.08,
+          35
         );
 
         hero.style.transform =
           "translateY(" + movement + "px)";
       },
-      { passive: true }
+      {
+        passive: true
+      }
     );
   }
 }
@@ -2552,230 +2630,196 @@ function displayCurrentYear() {
 }
 
 /* ==========================================
-   START GLOBALSTEPPER WEBSITE
+   MISSING HELPER FUNCTIONS
 ========================================== */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-    initialisePageLoader();
+/* READ DATA FROM BROWSER STORAGE */
 
-    removeSoldOutFromCart();
+function readStorage(key) {
+  try {
+    const stored = localStorage.getItem(key);
 
-    initialiseMobileNavigation();
+    if (!stored) {
+      return [];
+    }
 
-    initialiseAddToCartButtons();
+    const parsed = JSON.parse(stored);
 
-    initialiseProductFilters();
+    return Array.isArray(parsed)
+      ? parsed
+      : [];
 
-    initialiseLiveSearchSuggestions();
+  } catch (error) {
+    console.warn(
+      "Unable to read storage:",
+      key,
+      error
+    );
 
-    initialiseProductDetails();
-
-    initialiseWishlist();
-
-    initialiseWishlistPage();
-
-    initialiseCartPage();
-
-    initialiseCartDrawer();
-
-    initialiseQuickView();
-
-    initialiseThemeToggle();
-
-    initialiseNewsletterForm();
-
-    initialiseContactForm();
-
-    initialiseScrollReveal();
-
-    initialiseAboutPageEffects();
-
-    updateCartCount();
-
-    updateWishlistCount();
-
-    displayCurrentYear();
-
-    disableSoldOutButtons();
+    return [];
   }
-);
+}
+
+/* SAVE DATA TO BROWSER STORAGE */
+
+function writeStorage(key, value) {
+  try {
+    localStorage.setItem(
+      key,
+      JSON.stringify(value)
+    );
+
+    return true;
+
+  } catch (error) {
+    console.warn(
+      "Unable to save storage:",
+      key,
+      error
+    );
+
+    return false;
+  }
+}
+
+/* FIND PRODUCT USING ITS ID */
+
+function getProduct(id) {
+  return products.find(product =>
+    String(product.id) === String(id)
+  ) || null;
+}
+
+/* CHECK WHETHER ARCHIVE PRODUCT IS SOLD OUT */
+
+function isArchiveSoldOut(id) {
+  return ARCHIVE_SOLD_OUT_IDS.has(
+    String(id)
+  );
+}
+
+/* FORMAT PRICES IN BRITISH POUNDS */
+
+function formatPrice(price) {
+  return new Intl.NumberFormat(
+    "en-GB",
+    {
+      style: "currency",
+      currency: "GBP"
+    }
+  ).format(
+    Number(price) || 0
+  );
+}
+
+/* PROTECT HTML WHEN DISPLAYING PRODUCT DATA */
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(
+    /[&<>"']/g,
+    character => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[character]
+  );
+}
 
 /* ==========================================
-   GLOBALSTEPPER
-   END OF JAVASCRIPT
+   GLOBALSTEPPER WEBSITE INITIALIZATION
 ========================================== */
 
+function initialiseGlobalstepper() {
+
+  /* WISHLIST FIRST */
+
+  initialiseWishlistStyles();
+
+  initialiseWishlist();
+
+  initialiseWishlistPage();
+
+  /* SHOPPING CART */
+
+  removeSoldOutFromCart();
+
+  initialiseAddToCartButtons();
+
+  initialiseCartPage();
+
+  initialiseCartDrawer();
+
+  /* WEBSITE NAVIGATION */
+
+  initialiseMobileNavigation();
+
+  /* PRODUCTS */
+
+  initialiseProductFilters();
+
+  initialiseLiveSearchSuggestions();
+
+  initialiseProductDetails();
+
+  initialiseQuickView();
+
+  /* WEBSITE APPEARANCE */
+
+  initialiseThemeToggle();
+
+  initialisePageLoader();
+
+  initialiseScrollReveal();
+
+  initialiseAboutPageEffects();
+
+  /* FORMS */
+
+  initialiseNewsletterForm();
+
+  initialiseContactForm();
+
+  /* COUNTERS */
+
+  updateCartCount();
+
+  updateWishlistCount();
+
+  /* FOOTER */
+
+  displayCurrentYear();
+
+  /* SOLD OUT PRODUCTS */
+
+  disableSoldOutButtons();
+
+  console.log(
+    "GLOBALSTEPPER website initialized."
+  );
+}
 
 /* ==========================================
-   GLOBALSTEPPER PRODUCT IMAGE FIX
-   Correct image paths across website
-   Existing prices remain unchanged
+   START WEBSITE WHEN HTML HAS LOADED
 ========================================== */
 
-(function () {
-  "use strict";
-
-  const PRODUCT_IMAGES = {
-    "Grey No Love Lost Tracksuit":
-      "images/global tracksuit 1.jpeg",
-
-    "Black Been Da Goat Tracksuit":
-      "images/global tracksuit 2.jpeg",
-
-    "Signature Tracksuit":
-      "images/global tracksuit 3.jpeg"
-  };
-
-  const PRODUCT_IDS = {
-    "1": "Grey No Love Lost Tracksuit",
-    "2": "Black Been Da Goat Tracksuit",
-    "3": "Signature Tracksuit"
-  };
-
-  function getProductName() {
-    const params = new URLSearchParams(
-      window.location.search
-    );
-
-    const id = params.get("id");
-
-    if (id && PRODUCT_IDS[id]) {
-      return PRODUCT_IDS[id];
-    }
-
-    const heading = document.getElementById(
-      "detail-product-name"
-    );
-
-    if (heading) {
-      const name = heading.textContent.trim();
-
-      if (PRODUCT_IMAGES[name]) {
-        return name;
-      }
-    }
-
-    return null;
-  }
-
-  function fixProductDetails() {
-    const image = document.getElementById(
-      "detail-product-image"
-    );
-
-    if (!image) return;
-
-    const name = getProductName();
-
-    if (!name || !PRODUCT_IMAGES[name]) {
-      return;
-    }
-
-    const correctImage = PRODUCT_IMAGES[name];
-
-    image.src = correctImage;
-    image.alt = name;
-    image.loading = "eager";
-    image.style.width = "100%";
-    image.style.height = "auto";
-    image.style.aspectRatio = "4 / 5";
-    image.style.objectFit = "cover";
-    image.style.display = "block";
-  }
-
-  function fixProductCards() {
-    const cards = document.querySelectorAll(
-      ".shop-product-card, .product-card"
-    );
-
-    cards.forEach(function (card) {
-      const image = card.querySelector("img");
-
-      if (!image) return;
-
-      const name = Object.keys(PRODUCT_IMAGES)
-        .find(function (productName) {
-          return card.textContent.includes(productName);
-        });
-
-      if (!name) return;
-
-      const correctImage = PRODUCT_IMAGES[name];
-
-      if (
-        image.getAttribute("src") !== correctImage
-      ) {
-        image.src = correctImage;
-      }
-
-      image.alt = name;
-    });
-  }
-
-  function fixImages() {
-    fixProductDetails();
-    fixProductCards();
-  }
+if (document.readyState === "loading") {
 
   document.addEventListener(
     "DOMContentLoaded",
-    function () {
-      fixImages();
-
-      const productGrid = document.getElementById(
-        "wishlist-products"
-      );
-
-      if (productGrid) {
-        const observer = new MutationObserver(
-          fixProductCards
-        );
-
-        observer.observe(productGrid, {
-          childList: true,
-          subtree: true
-        });
-      }
+    initialiseGlobalstepper,
+    {
+      once: true
     }
   );
 
-  window.addEventListener("load", fixImages);
+} else {
 
-})();
+  initialiseGlobalstepper();
 
+}
 
 /* ==========================================
-   GLOBALSTEPPER — WISHLIST HEART FIX
-   WORKS ON DESKTOP, TABLET AND MOBILE
+   END OF GLOBALSTEPPER SCRIPT.JS
 ========================================== */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  // Make wishlist hearts appear above product images.
-  const style = document.createElement("style");
-
-  style.textContent = `
-    #all-products-grid .shop-product-card {
-      position: relative !important;
-    }
-
-    #all-products-grid .shop-product-card > .wishlist-button {
-      position: absolute !important;
-      top: 15px !important;
-      right: 15px !important;
-      z-index: 99999 !important;
-      pointer-events: auto !important;
-      cursor: pointer !important;
-      touch-action: manipulation;
-    }
-
-    #all-products-grid .wishlist-button.active {
-      color: #e63946 !important;
-    }
-  `;
-
-  document.head.appendChild(style);
-
-});
