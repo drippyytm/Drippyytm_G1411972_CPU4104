@@ -19,7 +19,6 @@ const ARCHIVE_SOLD_OUT_IDS = new Set([
   "1", "2", "3", "4"
 ]);
 
-
 const products = [
   {
     id: "1",
@@ -352,6 +351,7 @@ function initialiseMobileNavigation() {
     }
   });
 }
+
 
 /* ==========================================
    PRODUCT FILTERS, SEARCH AND SORT
@@ -823,8 +823,9 @@ function initialiseDetailAddToCart(product) {
   });
 }
 
+
 /* ==========================================
-   WISHLIST
+   GLOBALSTEPPER WISHLIST
 ========================================== */
 
 function getWishlist() {
@@ -839,7 +840,15 @@ function saveWishlist(wishlist) {
   );
 
   updateWishlistCount();
+
+  document.dispatchEvent(
+    new CustomEvent("globalstepper:wishlist-changed")
+  );
 }
+
+/* ==========================================
+   UPDATE WISHLIST COUNTER
+========================================== */
 
 function updateWishlistCount() {
   const count = getWishlist().length;
@@ -848,6 +857,7 @@ function updateWishlistCount() {
     "#wishlist-count"
   ).forEach(element => {
     element.textContent = count;
+
     element.setAttribute(
       "aria-label",
       count + " items in wishlist"
@@ -855,57 +865,162 @@ function updateWishlistCount() {
   });
 }
 
+/* ==========================================
+   CLICKABLE WISHLIST HEARTS
+========================================== */
+
 function initialiseWishlist() {
+
   function updateButtons() {
     const wishlist = getWishlist();
 
     document.querySelectorAll(
       ".wishlist-button"
     ).forEach(button => {
-      const saved = wishlist.includes(
-        String(button.dataset.productId)
+
+      const id = String(
+        button.dataset.productId || ""
       );
 
+      if (!id) return;
+
+      const saved = wishlist.includes(id);
+
       button.classList.toggle(
-        "active", saved
+        "active",
+        saved
       );
 
       button.textContent = saved ? "♥" : "♡";
+
       button.setAttribute(
-        "aria-pressed", String(saved)
+        "aria-pressed",
+        String(saved)
       );
+
+      button.setAttribute(
+        "aria-label",
+        saved
+          ? "Remove product from wishlist"
+          : "Add product to wishlist"
+      );
+
+      button.setAttribute(
+        "title",
+        saved
+          ? "Remove from wishlist"
+          : "Add to wishlist"
+      );
+
+      button.type = "button";
+
     });
   }
 
-  document.addEventListener("click", event => {
-    const button = event.target.closest(
-      ".wishlist-button"
-    );
+  /* HANDLE CLICKS ON ALL HEART BUTTONS */
 
-    if (!button) return;
+  document.addEventListener(
+    "click",
+    function(event) {
 
-    const id = String(
-      button.dataset.productId
-    );
+      const target = event.target;
 
-    let wishlist = getWishlist();
+      if (!(target instanceof Element)) {
+        return;
+      }
 
-    if (wishlist.includes(id)) {
-      wishlist = wishlist.filter(
-        item => item !== id
+      const button = target.closest(
+        ".wishlist-button"
       );
-    } else {
-      wishlist.push(id);
+
+      if (!button) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      const id = String(
+        button.dataset.productId || ""
+      );
+
+      if (!id) {
+        console.warn(
+          "Wishlist button is missing data-product-id"
+        );
+        return;
+      }
+
+      let wishlist = getWishlist();
+
+      if (wishlist.includes(id)) {
+
+        wishlist = wishlist.filter(
+          item => item !== id
+        );
+
+        showCartNotification(
+          "Product removed from wishlist."
+        );
+
+      } else {
+
+        wishlist.push(id);
+
+        showCartNotification(
+          "Product added to wishlist."
+        );
+
+      }
+
+      saveWishlist(wishlist);
+      updateButtons();
+
+    },
+    true
+  );
+
+  /* UPDATE HEARTS WHEN WISHLIST CHANGES */
+
+  document.addEventListener(
+    "globalstepper:wishlist-changed",
+    updateButtons
+  );
+
+  /* UPDATE HEARTS WHEN PAGE IS REVISITED */
+
+  window.addEventListener(
+    "pageshow",
+    updateButtons
+  );
+
+  /* UPDATE HEARTS WHEN OTHER TABS CHANGE */
+
+  window.addEventListener(
+    "storage",
+    function(event) {
+
+      if (
+        event.key === WISHLIST_STORAGE_KEY
+      ) {
+
+        updateWishlistCount();
+        updateButtons();
+
+      }
+
     }
+  );
 
-    saveWishlist(wishlist);
-    updateButtons();
-  });
-
+  updateWishlistCount();
   updateButtons();
+
 }
 
+/* ==========================================
+   WISHLIST PAGE
+========================================== */
+
 function initialiseWishlistPage() {
+
   const container = document.querySelector(
     "#wishlist-products"
   );
@@ -917,20 +1032,26 @@ function initialiseWishlistPage() {
   if (!container) return;
 
   function render() {
+
     const wishlist = getWishlist();
 
     const savedProducts = products.filter(
-      product => wishlist.includes(product.id)
+      product => wishlist.includes(
+        String(product.id)
+      )
     );
 
     container.innerHTML = "";
 
     if (emptyMessage) {
+
       emptyMessage.hidden =
         savedProducts.length > 0;
+
     }
 
     savedProducts.forEach(product => {
+
       const soldOut = isArchiveSoldOut(
         product.id
       );
@@ -947,84 +1068,226 @@ function initialiseWishlistPage() {
         <button
           class="wishlist-remove-button"
           type="button"
-          data-product-id="${product.id}"
-          aria-label="Remove ${escapeHTML(product.name)}"
+          data-product-id="${escapeHTML(product.id)}"
+          aria-label="Remove ${escapeHTML(product.name)} from wishlist"
         >×</button>
 
         <div class="shop-product-image">
+
           ${soldOut
             ? '<span class="archive-badge">SOLD OUT</span>'
             : ""}
 
-          <a href="product-details.html?id=${product.id}">
+          <a href="product-details.html?id=${encodeURIComponent(product.id)}">
+
             <img
               src="${escapeHTML(product.image)}"
               alt="${escapeHTML(product.name)}"
               loading="lazy"
             >
+
           </a>
+
         </div>
 
         <div class="shop-product-info">
+
           <p class="product-category">
             ${escapeHTML(product.category)}
           </p>
 
-          <h2>${escapeHTML(product.name)}</h2>
+          <h2>
+            ${escapeHTML(product.name)}
+          </h2>
 
           <p class="product-price">
             ${formatPrice(product.price)}
           </p>
 
           <div class="product-actions">
+
             <a
-              href="product-details.html?id=${product.id}"
+              href="product-details.html?id=${encodeURIComponent(product.id)}"
               class="product-button"
-            >View Product</a>
+            >
+              View Product
+            </a>
 
             <button
               class="add-to-cart-btn"
               type="button"
-              data-id="${product.id}"
+              data-id="${escapeHTML(product.id)}"
               ${soldOut ? "disabled" : ""}
             >
               ${soldOut ? "SOLD OUT" : "Add to Cart"}
             </button>
+
           </div>
+
         </div>
       `;
 
       container.appendChild(card);
+
     });
+
+    updateWishlistCount();
+
   }
 
-  container.addEventListener("click", event => {
-    const button = event.target.closest(
-      ".wishlist-remove-button"
-    );
+  /* REMOVE PRODUCTS FROM WISHLIST PAGE */
 
-    if (!button) return;
+  container.addEventListener(
+    "click",
+    function(event) {
 
-    const updated = getWishlist().filter(
-      id => id !== button.dataset.productId
-    );
+      const target = event.target;
 
-    saveWishlist(updated);
-    render();
+      if (!(target instanceof Element)) {
+        return;
+      }
 
-    showCartNotification(
-      "Product removed from wishlist."
-    );
-  });
+      const button = target.closest(
+        ".wishlist-remove-button"
+      );
+
+      if (!button) return;
+
+      event.preventDefault();
+
+      const id = String(
+        button.dataset.productId || ""
+      );
+
+      const updated = getWishlist().filter(
+        item => item !== id
+      );
+
+      saveWishlist(updated);
+
+      render();
+
+      showCartNotification(
+        "Product removed from wishlist."
+      );
+
+    }
+  );
+
+  /* REFRESH WISHLIST WHEN SAVED ITEMS CHANGE */
+
+  document.addEventListener(
+    "globalstepper:wishlist-changed",
+    render
+  );
 
   render();
+
 }
 
 /* ==========================================
-   CART PAGE
+   WISHLIST HEART POSITION FIX
+========================================== */
+
+function initialiseWishlistStyles() {
+
+  if (
+    document.getElementById(
+      "globalstepper-wishlist-fix"
+    )
+  ) {
+    return;
+  }
+
+  const style = document.createElement(
+    "style"
+  );
+
+  style.id = "globalstepper-wishlist-fix";
+
+  style.textContent = `
+    .shop-product-card,
+    .product-card {
+      position: relative;
+    }
+
+    .wishlist-button {
+      position: absolute !important;
+      top: 15px !important;
+      right: 15px !important;
+      z-index: 9999 !important;
+
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+
+      width: 42px !important;
+      height: 42px !important;
+
+      padding: 0 !important;
+      border: 1px solid rgba(0,0,0,.12) !important;
+      border-radius: 50% !important;
+
+      background: #ffffff !important;
+      color: #111111 !important;
+
+      font-size: 27px !important;
+      line-height: 1 !important;
+
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      touch-action: manipulation !important;
+
+      opacity: 1 !important;
+      visibility: visible !important;
+
+      transition:
+        transform .2s ease,
+        color .2s ease,
+        background .2s ease;
+    }
+
+    .wishlist-button:hover {
+      transform: scale(1.08);
+    }
+
+    .wishlist-button.active {
+      color: #e53955 !important;
+    }
+
+    .wishlist-button:focus-visible {
+      outline: 2px solid #111111 !important;
+      outline-offset: 3px;
+    }
+
+    .shop-product-card .shop-product-image,
+    .product-card .product-image-link {
+      position: relative;
+    }
+
+    .shop-product-card .shop-product-image a,
+    .product-card .product-image-link {
+      z-index: 1;
+    }
+
+    .wishlist-remove-button {
+      cursor: pointer;
+      position: relative;
+      z-index: 10;
+    }
+  `;
+
+  document.head.appendChild(style);
+
+}
+
+
+/* ==========================================
+   GLOBALSTEPPER SHOPPING CART PAGE
 ========================================== */
 
 function initialiseCartPage() {
+
   const container = document.querySelector(
     "#cart-items"
   );
@@ -1055,7 +1318,12 @@ function initialiseCartPage() {
     "#cart-page-message"
   );
 
+  /* ==========================================
+     DISPLAY CART PRODUCTS
+  ========================================== */
+
   function render() {
+
     const cart = getCart();
 
     container.innerHTML = "";
@@ -1074,8 +1342,13 @@ function initialiseCartPage() {
         cart.length === 0;
     }
 
+    /* DISPLAY INDIVIDUAL CART ITEMS */
+
     cart.forEach(item => {
-      const key = item.cartItemId || item.id;
+
+      const key = String(
+        item.cartItemId || item.id
+      );
 
       const card = document.createElement(
         "article"
@@ -1088,14 +1361,20 @@ function initialiseCartPage() {
           class="cart-item-image"
           src="${escapeHTML(item.image)}"
           alt="${escapeHTML(item.name)}"
+          loading="lazy"
         >
 
         <div class="cart-item-details">
+
           <p class="product-category">
-            ${escapeHTML(item.category || "Streetwear")}
+            ${escapeHTML(
+              item.category || "Streetwear"
+            )}
           </p>
 
-          <h3>${escapeHTML(item.name)}</h3>
+          <h3>
+            ${escapeHTML(item.name)}
+          </h3>
 
           <p class="cart-item-meta">
             ${item.size
@@ -1108,10 +1387,12 @@ function initialiseCartPage() {
           </p>
 
           <div class="cart-item-controls">
+
             <button
               type="button"
               class="quantity-button decrease-quantity"
               data-item-id="${escapeHTML(key)}"
+              aria-label="Decrease quantity"
             >−</button>
 
             <span class="quantity-value">
@@ -1122,14 +1403,19 @@ function initialiseCartPage() {
               type="button"
               class="quantity-button increase-quantity"
               data-item-id="${escapeHTML(key)}"
+              aria-label="Increase quantity"
             >+</button>
 
             <button
               type="button"
               class="remove-cart-item"
               data-item-id="${escapeHTML(key)}"
-            >Remove</button>
+            >
+              Remove
+            </button>
+
           </div>
+
         </div>
 
         <p class="cart-item-total">
@@ -1141,13 +1427,19 @@ function initialiseCartPage() {
       `;
 
       container.appendChild(card);
+
     });
 
+    /* ==========================================
+       CALCULATE SUBTOTAL
+    ========================================== */
+
     const subtotal = cart.reduce(
-      (sum, item) =>
-        sum +
-        Number(item.price) *
-        Number(item.quantity),
+      (sum, item) => {
+        return sum +
+          Number(item.price) *
+          Number(item.quantity);
+      },
       0
     );
 
@@ -1162,203 +1454,342 @@ function initialiseCartPage() {
     }
 
     updateCartCount();
+
   }
 
-  container.addEventListener("click", event => {
-    const button = event.target.closest(
-      "[data-item-id]"
-    );
+  /* ==========================================
+     INCREASE, DECREASE AND REMOVE
+  ========================================== */
 
-    if (!button) return;
+  container.addEventListener(
+    "click",
+    function(event) {
 
-    const key = button.dataset.itemId;
-    let cart = getCart();
+      const target = event.target;
 
-    const item = cart.find(
-      product =>
-        String(product.cartItemId || product.id) ===
-        key
-    );
-
-    if (!item) return;
-
-    if (button.classList.contains(
-      "increase-quantity"
-    )) {
-      item.quantity = Math.min(
-        10, Number(item.quantity) + 1
-      );
-    }
-
-    if (button.classList.contains(
-      "decrease-quantity"
-    )) {
-      item.quantity =
-        Number(item.quantity) - 1;
-    }
-
-    if (button.classList.contains(
-      "remove-cart-item"
-    )) {
-      item.quantity = 0;
-    }
-
-    cart = cart.filter(
-      product => Number(product.quantity) > 0
-    );
-
-    saveCart(cart);
-    render();
-  });
-
-  clearButton?.addEventListener("click", () => {
-    if (!window.confirm(
-      "Remove all products from your cart?"
-    )) {
-      return;
-    }
-
-    saveCart([]);
-    render();
-
-    if (message) {
-      message.textContent =
-        "Your shopping cart has been cleared.";
-    }
-  });
-
-  checkoutButton?.addEventListener("click", () => {
-    if (!getCart().length) {
-      if (message) {
-        message.textContent =
-          "Your cart is empty.";
+      if (!(target instanceof Element)) {
+        return;
       }
-      return;
-    }
 
-    if (message) {
-      message.textContent =
-        "Checkout demonstration successful. No real payment has been processed.";
+      const button = target.closest(
+        "[data-item-id]"
+      );
+
+      if (!button) return;
+
+      event.preventDefault();
+
+      const key = String(
+        button.dataset.itemId || ""
+      );
+
+      let cart = getCart();
+
+      const item = cart.find(product =>
+        String(
+          product.cartItemId || product.id
+        ) === key
+      );
+
+      if (!item) return;
+
+      /* INCREASE QUANTITY */
+
+      if (
+        button.classList.contains(
+          "increase-quantity"
+        )
+      ) {
+
+        item.quantity = Math.min(
+          10,
+          Number(item.quantity) + 1
+        );
+
+      }
+
+      /* DECREASE QUANTITY */
+
+      if (
+        button.classList.contains(
+          "decrease-quantity"
+        )
+      ) {
+
+        item.quantity =
+          Number(item.quantity) - 1;
+
+      }
+
+      /* REMOVE ITEM */
+
+      if (
+        button.classList.contains(
+          "remove-cart-item"
+        )
+      ) {
+
+        item.quantity = 0;
+
+      }
+
+      /* REMOVE ZERO-QUANTITY ITEMS */
+
+      cart = cart.filter(product =>
+        Number(product.quantity) > 0
+      );
+
+      saveCart(cart);
+
+      render();
+
     }
-  });
+  );
+
+  /* ==========================================
+     CLEAR ENTIRE CART
+  ========================================== */
+
+  if (clearButton) {
+
+    clearButton.addEventListener(
+      "click",
+      function() {
+
+        const confirmed = window.confirm(
+          "Remove all products from your cart?"
+        );
+
+        if (!confirmed) return;
+
+        saveCart([]);
+
+        render();
+
+        if (message) {
+          message.textContent =
+            "Your shopping cart has been cleared.";
+        }
+
+        showCartNotification(
+          "Shopping cart cleared."
+        );
+
+      }
+    );
+
+  }
+
+  /* ==========================================
+     CHECKOUT BUTTON
+  ========================================== */
+
+  if (checkoutButton) {
+
+    checkoutButton.addEventListener(
+      "click",
+      function() {
+
+        const cart = getCart();
+
+        if (cart.length === 0) {
+
+          if (message) {
+            message.textContent =
+              "Your cart is empty.";
+          }
+
+          return;
+
+        }
+
+        if (message) {
+          message.textContent =
+            "Checkout demonstration successful. No real payment has been processed.";
+        }
+
+      }
+    );
+
+  }
+
+  /* ==========================================
+     UPDATE CART WHEN STORAGE CHANGES
+  ========================================== */
+
+  window.addEventListener(
+    "storage",
+    function(event) {
+
+      if (
+        event.key === CART_STORAGE_KEY
+      ) {
+        render();
+      }
+
+    }
+  );
 
   render();
+
 }
 
 /* ==========================================
-   SLIDE-OUT SHOPPING CART
+   GLOBALSTEPPER SLIDE-OUT CART
 ========================================== */
 
 function initialiseCartDrawer() {
+
   const drawer = document.querySelector(
     "#cart-drawer"
   );
+
+  if (!drawer) return;
 
   const overlay = document.querySelector(
     "#cart-drawer-overlay"
   );
 
-  const closeButton = document.querySelector(
-    "#cart-drawer-close"
+  const openButtons = document.querySelectorAll(
+    ".open-cart-drawer"
   );
 
-  const container = document.querySelector(
+  const closeButtons = drawer.querySelectorAll(
+    ".close-cart-drawer"
+  );
+
+  const itemsContainer = drawer.querySelector(
     "#cart-drawer-items"
   );
 
-  const emptyMessage = document.querySelector(
-    "#cart-drawer-empty"
-  );
-
-  const subtotalElement = document.querySelector(
+  const subtotalElement = drawer.querySelector(
     "#cart-drawer-subtotal"
   );
 
-  const checkoutButton = document.querySelector(
-    "#cart-drawer-checkout"
+  const emptyMessage = drawer.querySelector(
+    "#cart-drawer-empty"
   );
 
-  const floatingButton = document.querySelector(
-    "#floating-cart-button"
-  );
+  /* ==========================================
+     OPEN CART DRAWER
+  ========================================== */
 
-  if (!drawer || !container) return;
+  function openDrawer() {
 
-  function render() {
+    renderDrawer();
+
+    drawer.classList.add("open");
+
+    drawer.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    if (overlay) {
+      overlay.classList.add("active");
+    }
+
+    document.body.classList.add(
+      "cart-drawer-open"
+    );
+
+  }
+
+  /* ==========================================
+     CLOSE CART DRAWER
+  ========================================== */
+
+  function closeDrawer() {
+
+    drawer.classList.remove("open");
+
+    drawer.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    if (overlay) {
+      overlay.classList.remove("active");
+    }
+
+    document.body.classList.remove(
+      "cart-drawer-open"
+    );
+
+  }
+
+  /* ==========================================
+     DISPLAY CART DRAWER ITEMS
+  ========================================== */
+
+  function renderDrawer() {
+
     const cart = getCart();
 
-    container.innerHTML = "";
+    if (itemsContainer) {
+
+      itemsContainer.innerHTML = "";
+
+      cart.forEach(item => {
+
+        const key = String(
+          item.cartItemId || item.id
+        );
+
+        const row = document.createElement(
+          "div"
+        );
+
+        row.className = "cart-drawer-item";
+
+        row.innerHTML = `
+          <img
+            src="${escapeHTML(item.image)}"
+            alt="${escapeHTML(item.name)}"
+            loading="lazy"
+          >
+
+          <div class="cart-drawer-item-info">
+
+            <h4>
+              ${escapeHTML(item.name)}
+            </h4>
+
+            <p>
+              ${item.size
+                ? "Size: " + escapeHTML(item.size)
+                : ""}
+            </p>
+
+            <p>
+              ${formatPrice(item.price)}
+            </p>
+
+            <p>
+              Quantity: ${Number(item.quantity)}
+            </p>
+
+            <button
+              type="button"
+              class="drawer-remove-item"
+              data-item-id="${escapeHTML(key)}"
+            >
+              Remove
+            </button>
+
+          </div>
+        `;
+
+        itemsContainer.appendChild(row);
+
+      });
+
+    }
 
     if (emptyMessage) {
-      emptyMessage.hidden = cart.length > 0;
+      emptyMessage.hidden =
+        cart.length > 0;
     }
-
-    container.hidden = cart.length === 0;
-
-    if (checkoutButton) {
-      checkoutButton.disabled =
-        cart.length === 0;
-    }
-
-    cart.forEach(item => {
-      const key = item.cartItemId || item.id;
-
-      const card = document.createElement(
-        "article"
-      );
-
-      card.className = "cart-drawer-item";
-
-      card.innerHTML = `
-        <img
-          src="${escapeHTML(item.image)}"
-          alt="${escapeHTML(item.name)}"
-        >
-
-        <div>
-          <h3>${escapeHTML(item.name)}</h3>
-
-          <p>
-            ${item.size
-              ? "Size: " + escapeHTML(item.size)
-              : escapeHTML(item.category || "Streetwear")}
-          </p>
-
-          <p>${formatPrice(item.price)}</p>
-
-          <div class="cart-drawer-quantity">
-            <button
-              type="button"
-              class="drawer-decrease"
-              data-item-id="${escapeHTML(key)}"
-            >−</button>
-
-            <span>${Number(item.quantity)}</span>
-
-            <button
-              type="button"
-              class="drawer-increase"
-              data-item-id="${escapeHTML(key)}"
-            >+</button>
-          </div>
-
-          <button
-            type="button"
-            class="cart-drawer-remove"
-            data-item-id="${escapeHTML(key)}"
-          >Remove</button>
-        </div>
-
-        <p class="cart-drawer-item-total">
-          ${formatPrice(
-            Number(item.price) *
-            Number(item.quantity)
-          )}
-        </p>
-      `;
-
-      container.appendChild(card);
-    });
 
     const subtotal = cart.reduce(
       (sum, item) =>
@@ -1372,117 +1803,128 @@ function initialiseCartDrawer() {
       subtotalElement.textContent =
         formatPrice(subtotal);
     }
+
+    updateCartCount();
+
   }
 
-  function openDrawer() {
-    render();
-    drawer.classList.add("open");
-    drawer.setAttribute(
-      "aria-hidden", "false"
-    );
-    document.body.classList.add(
-      "cart-drawer-open"
-    );
-    closeButton?.focus();
-  }
+  /* ==========================================
+     CART DRAWER BUTTON EVENTS
+  ========================================== */
 
-  function closeDrawer() {
-    drawer.classList.remove("open");
-    drawer.setAttribute(
-      "aria-hidden", "true"
-    );
-    document.body.classList.remove(
-      "cart-drawer-open"
-    );
-  }
+  openButtons.forEach(button => {
 
-  container.addEventListener("click", event => {
-    const button = event.target.closest(
-      "[data-item-id]"
+    button.addEventListener(
+      "click",
+      function(event) {
+
+        event.preventDefault();
+
+        openDrawer();
+
+      }
     );
 
-    if (!button) return;
-
-    const key = button.dataset.itemId;
-    let cart = getCart();
-
-    const item = cart.find(
-      product =>
-        String(product.cartItemId || product.id) ===
-        key
-    );
-
-    if (!item) return;
-
-    if (button.classList.contains(
-      "drawer-increase"
-    )) {
-      item.quantity = Math.min(
-        10, Number(item.quantity) + 1
-      );
-    }
-
-    if (button.classList.contains(
-      "drawer-decrease"
-    )) {
-      item.quantity =
-        Number(item.quantity) - 1;
-    }
-
-    if (button.classList.contains(
-      "cart-drawer-remove"
-    )) {
-      item.quantity = 0;
-    }
-
-    cart = cart.filter(
-      product => Number(product.quantity) > 0
-    );
-
-    saveCart(cart);
-    render();
   });
 
-  overlay?.addEventListener(
-    "click", closeDrawer
-  );
+  closeButtons.forEach(button => {
 
-  closeButton?.addEventListener(
-    "click", closeDrawer
-  );
+    button.addEventListener(
+      "click",
+      closeDrawer
+    );
 
-  floatingButton?.addEventListener(
-    "click", openDrawer
-  );
+  });
+
+  if (overlay) {
+
+    overlay.addEventListener(
+      "click",
+      closeDrawer
+    );
+
+  }
+
+  /* REMOVE ITEM FROM DRAWER */
+
+  if (itemsContainer) {
+
+    itemsContainer.addEventListener(
+      "click",
+      function(event) {
+
+        const target = event.target;
+
+        if (!(target instanceof Element)) {
+          return;
+        }
+
+        const button = target.closest(
+          ".drawer-remove-item"
+        );
+
+        if (!button) return;
+
+        const key = String(
+          button.dataset.itemId || ""
+        );
+
+        const updatedCart = getCart().filter(
+          item =>
+            String(
+              item.cartItemId || item.id
+            ) !== key
+        );
+
+        saveCart(updatedCart);
+
+        renderDrawer();
+
+        showCartNotification(
+          "Product removed from cart."
+        );
+
+      }
+    );
+
+  }
+
+  /* ==========================================
+     CLOSE WITH ESCAPE KEY
+  ========================================== */
 
   document.addEventListener(
-    "globalstepper:cart-updated",
-    openDrawer
+    "keydown",
+    function(event) {
+
+      if (
+        event.key === "Escape" &&
+        drawer.classList.contains("open")
+      ) {
+
+        closeDrawer();
+
+      }
+
+    }
   );
+
+  /* ==========================================
+     KEEP DRAWER UPDATED
+  ========================================== */
 
   document.addEventListener(
     "globalstepper:cart-changed",
-    render
+    renderDrawer
   );
 
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") {
-      closeDrawer();
-    }
-  });
+  renderDrawer();
 
-  checkoutButton?.addEventListener(
-    "click",
-    () => {
-      window.location.href = "cart.html";
-    }
-  );
-
-  render();
 }
 
+
 /* ==========================================
-   QUICK VIEW MODAL
+   GLOBALSTEPPER QUICK VIEW
 ========================================== */
 
 function initialiseQuickView() {
@@ -1905,6 +2347,8 @@ function initialiseContactForm() {
    LOADING SCREEN
 ========================================== */
 
+
+
 function initialisePageLoader() {
   const loader = document.querySelector(
     "#page-loader"
@@ -2317,7 +2761,7 @@ document.addEventListener("DOMContentLoaded", function () {
       position: relative !important;
     }
 
-    #all-products-grid .wishlist-button {
+    #all-products-grid .shop-product-card > .wishlist-button {
       position: absolute !important;
       top: 15px !important;
       right: 15px !important;
