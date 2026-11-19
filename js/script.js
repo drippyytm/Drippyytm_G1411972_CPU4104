@@ -19,12 +19,13 @@ const ARCHIVE_SOLD_OUT_IDS = new Set([
   "1", "2", "3", "4"
 ]);
 
+
 const products = [
   {
     id: "1",
     name: "Grey No Love Lost Tracksuit",
     price: 185.99,
-    image: "media/images/global tracksuit 1.jpeg",
+    image: "images/global tracksuit 1.jpeg",
     category: "Tracksuits",
     description:
       "A premium grey tracksuit featuring the GLOBALSTEPPER No Love Lost design."
@@ -33,7 +34,7 @@ const products = [
     id: "2",
     name: "Black Been Da Goat Tracksuit",
     price: 185.99,
-    image: "media/images/global tracksuit 2.jpeg",
+    image: "images/global tracksuit 2.jpeg",
     category: "Tracksuits",
     description:
       "A statement black tracksuit featuring the GLOBALSTEPPER Been Da Goat design."
@@ -42,7 +43,7 @@ const products = [
     id: "3",
     name: "Signature Tracksuit",
     price: 179.99,
-    image: "media/images/global tracksuit 3.jpeg",
+    image: "images/global tracksuit 3.jpeg",
     category: "Tracksuits",
     description:
       "A signature GLOBALSTEPPER tracksuit made for a bold streetwear look."
@@ -57,57 +58,6 @@ const products = [
       "A matching grey T-shirt and shorts set with GLOBALSTEPPER branding."
   }
 ];
-
-function isArchiveSoldOut(id) {
-  return ARCHIVE_SOLD_OUT_IDS.has(String(id));
-}
-
-function getProduct(id) {
-  return products.find(
-    product => product.id === String(id)
-  );
-}
-
-function formatPrice(value) {
-  return "£" + Number(value).toFixed(2);
-}
-
-function escapeHTML(value) {
-  return String(value ?? "").replace(
-    /[&<>"']/g,
-    character => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    })[character]
-  );
-}
-
-function readStorage(key) {
-  try {
-    const data = JSON.parse(
-      localStorage.getItem(key) || "[]"
-    );
-
-    return Array.isArray(data) ? data : [];
-  } catch (error) {
-    console.warn("Storage could not be read:", error);
-    return [];
-  }
-}
-
-function writeStorage(key, data) {
-  try {
-    localStorage.setItem(
-      key,
-      JSON.stringify(data)
-    );
-  } catch (error) {
-    console.warn("Storage could not be saved:", error);
-  }
-}
 
 /* ==========================================
    SHOPPING CART
