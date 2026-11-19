@@ -2300,3 +2300,38 @@ document.addEventListener(
   window.addEventListener("load", fixImages);
 
 })();
+
+
+/* ==========================================
+   GLOBALSTEPPER — WISHLIST HEART FIX
+   WORKS ON DESKTOP, TABLET AND MOBILE
+========================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  // Make wishlist hearts appear above product images.
+  const style = document.createElement("style");
+
+  style.textContent = `
+    #all-products-grid .shop-product-card {
+      position: relative !important;
+    }
+
+    #all-products-grid .wishlist-button {
+      position: absolute !important;
+      top: 15px !important;
+      right: 15px !important;
+      z-index: 99999 !important;
+      pointer-events: auto !important;
+      cursor: pointer !important;
+      touch-action: manipulation;
+    }
+
+    #all-products-grid .wishlist-button.active {
+      color: #e63946 !important;
+    }
+  `;
+
+  document.head.appendChild(style);
+
+});
