@@ -2212,3 +2212,141 @@ document.addEventListener(
    GLOBALSTEPPER
    END OF JAVASCRIPT
 ========================================== */
+
+
+/* ==========================================
+   GLOBALSTEPPER PRODUCT IMAGE FIX
+   Correct image paths across website
+   Existing prices remain unchanged
+========================================== */
+
+(function () {
+  "use strict";
+
+  const PRODUCT_IMAGES = {
+    "Grey No Love Lost Tracksuit":
+      "images/global tracksuit 1.jpeg",
+
+    "Black Been Da Goat Tracksuit":
+      "images/global tracksuit 2.jpeg",
+
+    "Signature Tracksuit":
+      "images/global tracksuit 3.jpeg"
+  };
+
+  const PRODUCT_IDS = {
+    "1": "Grey No Love Lost Tracksuit",
+    "2": "Black Been Da Goat Tracksuit",
+    "3": "Signature Tracksuit"
+  };
+
+  function getProductName() {
+    const params = new URLSearchParams(
+      window.location.search
+    );
+
+    const id = params.get("id");
+
+    if (id && PRODUCT_IDS[id]) {
+      return PRODUCT_IDS[id];
+    }
+
+    const heading = document.getElementById(
+      "detail-product-name"
+    );
+
+    if (heading) {
+      const name = heading.textContent.trim();
+
+      if (PRODUCT_IMAGES[name]) {
+        return name;
+      }
+    }
+
+    return null;
+  }
+
+  function fixProductDetails() {
+    const image = document.getElementById(
+      "detail-product-image"
+    );
+
+    if (!image) return;
+
+    const name = getProductName();
+
+    if (!name || !PRODUCT_IMAGES[name]) {
+      return;
+    }
+
+    const correctImage = PRODUCT_IMAGES[name];
+
+    image.src = correctImage;
+    image.alt = name;
+    image.loading = "eager";
+    image.style.width = "100%";
+    image.style.height = "auto";
+    image.style.aspectRatio = "4 / 5";
+    image.style.objectFit = "cover";
+    image.style.display = "block";
+  }
+
+  function fixProductCards() {
+    const cards = document.querySelectorAll(
+      ".shop-product-card, .product-card"
+    );
+
+    cards.forEach(function (card) {
+      const image = card.querySelector("img");
+
+      if (!image) return;
+
+      const name = Object.keys(PRODUCT_IMAGES)
+        .find(function (productName) {
+          return card.textContent.includes(productName);
+        });
+
+      if (!name) return;
+
+      const correctImage = PRODUCT_IMAGES[name];
+
+      if (
+        image.getAttribute("src") !== correctImage
+      ) {
+        image.src = correctImage;
+      }
+
+      image.alt = name;
+    });
+  }
+
+  function fixImages() {
+    fixProductDetails();
+    fixProductCards();
+  }
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+      fixImages();
+
+      const productGrid = document.getElementById(
+        "wishlist-products"
+      );
+
+      if (productGrid) {
+        const observer = new MutationObserver(
+          fixProductCards
+        );
+
+        observer.observe(productGrid, {
+          childList: true,
+          subtree: true
+        });
+      }
+    }
+  );
+
+  window.addEventListener("load", fixImages);
+
+})();
