@@ -5,824 +5,888 @@
 <head>
   <meta charset="UTF-8">
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <meta name="description"
-        content="Your favourite GLOBALSTEPPER streetwear.">
+  <meta
+    name="description"
+    content="Your GLOBALSTEPPER wishlist. Save your favourite streetwear pieces and explore THE ARCHIVE."
+  >
 
-  <title>Wishlist | GLOBALSTEPPER</title>
+  <meta name="theme-color" content="#ffffff">
 
-  <!-- FAVICON -->
-  <link rel="icon"
-        type="image/png"
-        href="media/images/logo.png">
-
-  <!-- WEBSITE STYLES -->
-  <link rel="stylesheet" href="css/style.css?v=8">
-
-  <link rel="stylesheet"
-        href="css/globalstepper-footer.css">
-
-  <!-- FONT -->
-  <link rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-  <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
+  <title>MY WISHLIST | GLOBALSTEPPER</title>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&display=swap"
-    rel="stylesheet">
+    rel="icon"
+    type="image/png"
+    href="media/images/globalstepper-loader.png"
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="css/style.css">
 
   <style>
+    /* ======================================
+       GLOBALSTEPPER WISHLIST
+    ====================================== */
 
-    /* ==========================================
-       GLOBALSTEPPER PREMIUM WISHLIST
-       DESKTOP / TABLET / MOBILE
-    ========================================== */
-
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
     }
 
-    html, body {
-      width: 100%;
-      max-width: 100%;
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
       margin: 0;
-      overflow-x: hidden;
+      background: #fff;
+      color: #111;
+      font-family: "Barlow Condensed", Arial, sans-serif;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
     }
 
     [hidden] {
       display: none !important;
     }
 
+    /* HEADER */
+
+    .gs-header {
+      position: relative;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      min-height: 84px;
+      padding: 15px 5%;
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .gs-logo img {
+      width: 175px;
+      max-height: 58px;
+      object-fit: contain;
+    }
+
+    .gs-nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .gs-nav a {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: opacity .2s;
+    }
+
+    .gs-nav a:hover {
+      opacity: .55;
+    }
+
+    .gs-nav a.active {
+      text-decoration: underline;
+      text-underline-offset: 6px;
+    }
+
+    .gs-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .gs-header-actions a {
+      font-size: 17px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .gs-menu-toggle {
+      display: none;
+      padding: 0;
+      background: none;
+      border: 0;
+      color: #111;
+      font-size: 28px;
+    }
+
     /* HERO */
 
     .wishlist-hero {
-      position: relative;
-      width: 100%;
-      padding: 75px 20px;
-      background: #050505;
+      padding: 95px 5% 85px;
+      background: #111;
       color: #fff;
       text-align: center;
-      overflow: hidden;
-    }
-
-    .wishlist-hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(
-        ellipse at center,
-        rgba(255,255,255,.12),
-        transparent 70%
-      );
-      pointer-events: none;
-    }
-
-    .wishlist-hero-inner {
-      position: relative;
-      z-index: 1;
-      max-width: 1100px;
-      margin: auto;
     }
 
     .wishlist-eyebrow {
       margin: 0 0 15px;
-      color: #bbb;
-      font-family: 'Barlow Condensed', sans-serif;
       font-size: 15px;
-      font-weight: 800;
-      letter-spacing: 4px;
-      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 5px;
     }
 
     .wishlist-hero h1 {
       margin: 0;
-      color: white;
-      font-family: 'Barlow Condensed', Impact, sans-serif;
-      font-size: clamp(60px, 10vw, 140px);
+      font-size: clamp(65px, 11vw, 145px);
       font-weight: 900;
-      line-height: 1;
-      text-transform: uppercase;
+      line-height: .9;
+      letter-spacing: -2px;
     }
 
     .wishlist-hero-description {
-      margin: 20px auto 0;
+      max-width: 600px;
+      margin: 28px auto 0;
       color: #ccc;
-      font-family: Arial, sans-serif;
+      font-size: 19px;
+      line-height: 1.5;
+    }
+
+    /* MAIN CONTAINER */
+
+    .wishlist-container {
+      max-width: 1500px;
+      min-height: 55vh;
+      margin: auto;
+      padding: 65px 5% 110px;
+    }
+
+    .wishlist-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 25px 0;
+      margin-bottom: 40px;
+      border-top: 2px solid #111;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .wishlist-heading-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #777;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .wishlist-heading h2 {
+      margin: 0;
+      font-size: clamp(35px, 5vw, 65px);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .wishlist-heading a {
+      padding-bottom: 4px;
       font-size: 16px;
-      line-height: 1.6;
-    }
-
-    /* MAIN CONTENT */
-
-    .wishlist-page {
-      width: 100%;
-      min-height: 60vh;
-      background: #f7f7f7;
-    }
-
-    .wishlist-main {
-      width: 100%;
-      max-width: 1450px;
-      min-height: 450px;
-      margin: 0 auto;
-      padding: 60px 25px 90px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-decoration: underline;
+      text-underline-offset: 5px;
     }
 
     /* PRODUCT GRID */
 
     #wishlist-products {
       display: grid;
-      grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-      gap: 28px;
-      width: 100%;
-      max-width: 1350px;
-      margin: 0 auto;
-      align-items: stretch;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 25px;
+      align-items: start;
     }
 
-    #wishlist-products:empty {
-      display: none;
+    .shop-product-card {
+      position: relative;
+      min-width: 0;
+      background: #fff;
     }
 
-    /* CENTRE ONE PRODUCT */
-
-    #wishlist-products:has(> :only-child) {
-      grid-template-columns: minmax(0, 440px);
+    .shop-product-image {
+      position: relative;
+      display: flex;
+      align-items: center;
       justify-content: center;
-    }
-
-    #wishlist-products > * {
-      min-width: 0;
-      max-width: 100%;
-    }
-
-    /* PRODUCT CARDS */
-
-    #wishlist-products .shop-product-card,
-    #wishlist-products .product-card {
-      position: relative;
       width: 100%;
-      min-width: 0;
+      aspect-ratio: 3 / 4;
+      padding: 12px;
       overflow: hidden;
-      background: white;
-      border: 1px solid #e8e8e8;
-      border-radius: 16px;
-      box-shadow: 0 15px 40px rgba(0,0,0,.07);
-      transition: transform .3s ease;
+      background: #f5f5f5;
     }
 
-    #wishlist-products .shop-product-card:hover,
-    #wishlist-products .product-card:hover {
-      transform: translateY(-5px);
-    }
-
-    /* PRODUCT IMAGES */
-
-    #wishlist-products .shop-product-image,
-    #wishlist-products .product-image-link {
-      position: relative;
-      display: block;
+    .shop-product-image > a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
-      overflow: hidden;
-      background: #eee;
+      height: 100%;
     }
 
-    #wishlist-products .shop-product-image img,
-    #wishlist-products .product-image-link img {
-      display: block;
+    .shop-product-image img {
       width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-      transition: transform .4s ease;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      transition: transform .35s ease;
     }
 
-    #wishlist-products .shop-product-card:hover img,
-    #wishlist-products .product-card:hover img {
+    .shop-product-card:hover
+    .shop-product-image img {
       transform: scale(1.035);
     }
 
-    /* SOLD OUT BADGES */
+    /* SOLD OUT BADGE */
 
-    #wishlist-products .archive-badge,
-    #wishlist-products .sold-out-badge,
-    #wishlist-products .product-badge {
-      position: absolute !important;
-      top: 16px !important;
-      left: 16px !important;
-      z-index: 10 !important;
+    .archive-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 5;
+      padding: 8px 13px;
+      background: #111;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+    }
 
-      display: inline-flex !important;
+    /* REMOVE BUTTON */
+
+    .wishlist-remove-button {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 50;
+      display: flex;
       align-items: center;
       justify-content: center;
-
-      width: auto !important;
-      max-width: max-content;
-      margin: 0 !important;
-      padding: 10px 16px !important;
-
-      background: #000 !important;
-      color: #fff !important;
-
-      border-radius: 4px;
-
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 15px !important;
-      font-weight: 800;
-      line-height: 1 !important;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-
-      pointer-events: none;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      background: #fff;
+      color: #111;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      font-size: 30px;
+      line-height: 1;
+      cursor: pointer;
+      transition: background .2s, color .2s;
     }
 
-    /* PRODUCT INFO */
-
-    #wishlist-products .shop-product-info,
-    #wishlist-products .product-info {
-      padding: 25px;
-      min-width: 0;
+    .wishlist-remove-button:hover {
+      background: #111;
+      color: #fff;
     }
 
-    #wishlist-products .product-category {
-      margin: 0 0 12px;
+    /* PRODUCT INFORMATION */
+
+    .shop-product-info {
+      padding: 18px 2px 10px;
+    }
+
+    .product-category {
+      margin: 0 0 8px;
       color: #777;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 17px;
-      font-weight: 800;
+      font-size: 13px;
+      font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
     }
 
-    #wishlist-products .shop-product-info h2,
-    #wishlist-products .shop-product-info h3,
-    #wishlist-products .product-info h2,
-    #wishlist-products .product-info h3 {
-      margin: 0 0 20px;
-      color: #050505;
-      font-family: 'Barlow Condensed', Impact, sans-serif;
-      font-size: 28px;
-      font-weight: 900;
-      line-height: 1.2;
-      overflow-wrap: anywhere;
-    }
-
-    /* ORIGINAL PRICES UNCHANGED */
-
-    #wishlist-products .product-price,
-    #wishlist-products .shop-product-price {
-      margin: 15px 0 25px;
-      color: #050505;
-      font-family: 'Barlow Condensed', Impact, sans-serif;
-      font-size: 38px;
-      font-weight: 900;
-      line-height: 1.1;
-    }
-
-    /* PRODUCT BUTTONS */
-
-    #wishlist-products .product-actions {
-      display: grid;
-      grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      width: 100%;
-      margin-top: 20px;
-    }
-
-    #wishlist-products .product-actions > * {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      width: 100%;
-      min-width: 0;
-      min-height: 58px;
-
-      margin: 0;
-      padding: 12px 10px;
-
-      text-align: center;
-
-      font-family: 'Barlow Condensed', Impact, sans-serif;
-      font-size: 19px;
+    .shop-product-info h2 {
+      min-height: 48px;
+      margin: 0 0 12px;
+      font-size: 22px;
       font-weight: 900;
       line-height: 1.1;
       text-transform: uppercase;
-      text-decoration: none;
-      white-space: normal;
-
-      border-radius: 7px;
     }
 
-    /* SOLD OUT BUTTONS */
+    .product-price {
+      margin: 0 0 18px;
+      font-size: 21px;
+      font-weight: 800;
+    }
 
-    #wishlist-products .add-to-cart-btn:disabled {
-      background: #e5e5e5 !important;
-      color: #888 !important;
-      border: 1px solid #ccc !important;
-      opacity: 1 !important;
-      cursor: not-allowed !important;
+    .product-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .product-button,
+    .add-to-cart-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 44px;
+      padding: 10px;
+      border: 1px solid #111;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .product-button {
+      background: #fff;
+      color: #111;
+    }
+
+    .product-button:hover {
+      background: #111;
+      color: #fff;
+    }
+
+    .add-to-cart-btn:disabled {
+      background: #e8e8e8;
+      border-color: #e8e8e8;
+      color: #777;
+      cursor: not-allowed;
     }
 
     /* EMPTY WISHLIST */
 
     #empty-wishlist {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-
-      width: 100%;
-      max-width: 750px;
-      min-height: 380px;
-
-      margin: 0 auto;
-      padding: 45px 20px;
-
+      max-width: 650px;
+      margin: 35px auto;
+      padding: 70px 25px;
       text-align: center;
-      background: transparent;
     }
 
-    .wishlist-heart {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      width: 100px;
-      height: 100px;
-
-      margin: 0 auto 30px;
-
-      border: 2px solid #111;
-      border-radius: 50%;
-    }
-
-    .wishlist-heart svg {
-      width: 46px;
-      height: 46px;
-      fill: none;
-      stroke: #111;
-      stroke-width: 1.6;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    .empty-heart {
+      margin-bottom: 20px;
+      font-size: 85px;
+      line-height: 1;
     }
 
     #empty-wishlist h2 {
-      margin: 0 0 18px;
-      color: #111;
-
-      font-family: 'Barlow Condensed', Impact, sans-serif;
-      font-size: clamp(34px, 5vw, 55px);
+      margin: 0 0 15px;
+      font-size: clamp(35px, 6vw, 55px);
       font-weight: 900;
-      line-height: 1.1;
-      text-transform: uppercase;
+      line-height: 1;
     }
 
     #empty-wishlist p {
-      max-width: 490px;
-      margin: 0 auto 30px;
-
-      color: #666;
-      font-family: Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.8;
+      margin-bottom: 30px;
+      color: #777;
+      font-size: 19px;
+      line-height: 1.5;
     }
 
-    .wishlist-shop-button {
+    .explore-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-
-      min-height: 58px;
-      padding: 16px 40px;
-
-      background: #050505;
-      color: white;
-
-      border: 2px solid #050505;
-      border-radius: 7px;
-
-      font-family: 'Barlow Condensed', Impact, sans-serif;
-      font-size: 21px;
+      min-height: 52px;
+      padding: 15px 35px;
+      background: #111;
+      color: #fff;
+      font-size: 17px;
       font-weight: 900;
-      text-decoration: none;
-      text-transform: uppercase;
-
-      transition:
-        background .25s ease,
-        color .25s ease,
-        transform .25s ease;
+      letter-spacing: 2px;
+      transition: background .2s;
     }
 
-    .wishlist-shop-button:hover {
-      background: white;
-      color: #050505;
-      transform: translateY(-3px);
+    .explore-button:hover {
+      background: #444;
+    }
+
+    /* NOTIFICATION */
+
+    .cart-notification {
+      position: fixed;
+      right: 20px;
+      bottom: 25px;
+      z-index: 9999;
+      max-width: 340px;
+      padding: 16px 22px;
+      background: #111;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .3s, transform .3s;
+    }
+
+    .cart-notification.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* FOOTER */
+
+    .gs-footer {
+      padding: 65px 5% 25px;
+      background: #111;
+      color: #fff;
+    }
+
+    .gs-footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 50px;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .gs-footer-logo {
+      width: 180px;
+      max-height: 85px;
+      object-fit: contain;
+      margin-bottom: 15px;
+    }
+
+    .gs-footer h3 {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .gs-footer p,
+    .gs-footer a {
+      color: #ccc;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .gs-footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .gs-footer-bottom {
+      max-width: 1400px;
+      margin: 45px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid #444;
+      color: #aaa;
+      font-size: 14px;
+      letter-spacing: 1px;
     }
 
     /* TABLET */
 
-    @media (max-width: 1024px) {
-
+    @media (max-width: 1100px) {
       #wishlist-products {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(2, minmax(0,1fr));
       }
-
-      .wishlist-hero {
-        padding: 65px 20px;
-      }
-
     }
 
-    /* MOBILE */
+    /* MOBILE NAVIGATION */
 
-    @media (max-width: 600px) {
-
-      .wishlist-hero {
-        padding: 55px 15px;
+    @media (max-width: 800px) {
+      .gs-header {
+        flex-wrap: wrap;
+        min-height: 70px;
       }
 
-      .wishlist-eyebrow {
-        font-size: 12px;
-        letter-spacing: 3px;
+      .gs-logo img {
+        width: 135px;
+      }
+
+      .gs-menu-toggle {
+        display: block;
+      }
+
+      .gs-nav {
+        display: none;
+        order: 4;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        width: 100%;
+        padding: 12px 0;
+      }
+
+      .gs-nav.show {
+        display: flex;
+      }
+
+      .gs-nav a {
+        padding: 13px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .gs-header-actions {
+        margin-left: auto;
+        gap: 12px;
+      }
+
+      .wishlist-hero {
+        padding: 80px 5%;
+      }
+
+      .gs-footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .gs-footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    /* SMALL MOBILE */
+
+    @media (max-width: 600px) {
+      .wishlist-container {
+        padding: 40px 4% 70px;
       }
 
       .wishlist-hero h1 {
-        font-size: clamp(55px, 14vw, 85px);
+        font-size: clamp(54px, 13vw, 85px);
+        letter-spacing: -1px;
       }
 
       .wishlist-hero-description {
-        font-size: 14px;
+        font-size: 16px;
       }
 
-      .wishlist-main {
-        min-height: 400px;
-        padding: 35px 15px 60px;
+      .wishlist-heading {
+        align-items: center;
       }
 
-      #wishlist-products,
-      #wishlist-products:has(> :only-child) {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 22px;
+      .wishlist-heading h2 {
+        font-size: 35px;
       }
 
-      #wishlist-products .shop-product-info,
-      #wishlist-products .product-info {
-        padding: 20px;
+      .wishlist-heading a {
+        font-size: 13px;
       }
 
-      #wishlist-products .product-actions {
-        grid-template-columns: minmax(0, 1fr);
+      #wishlist-products {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 12px;
+      }
+
+      .shop-product-image {
+        aspect-ratio: 3 / 4;
+        padding: 6px;
+      }
+
+      .shop-product-info h2 {
+        min-height: 56px;
+        font-size: 17px;
+      }
+
+      .product-price {
+        font-size: 18px;
+      }
+
+      .archive-badge {
+        top: 8px;
+        left: 7px;
+        padding: 6px;
+        font-size: 10px;
+      }
+
+      .wishlist-remove-button {
+        top: 8px;
+        right: 7px;
+        width: 37px;
+        height: 37px;
+        font-size: 25px;
+      }
+
+      .product-button,
+      .add-to-cart-btn {
+        min-height: 40px;
+        font-size: 12px;
       }
 
       #empty-wishlist {
-        min-height: 350px;
-        padding: 35px 10px;
+        padding: 45px 15px;
       }
 
-      .wishlist-heart {
-        width: 85px;
-        height: 85px;
+      .gs-footer-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
       }
 
-      .wishlist-heart svg {
-        width: 40px;
-        height: 40px;
+      .gs-footer-brand {
+        grid-column: auto;
       }
-
-      #empty-wishlist h2 {
-        font-size: 36px;
-      }
-
-      #empty-wishlist p {
-        font-size: 14px;
-      }
-
-      .wishlist-shop-button {
-        width: 100%;
-        max-width: 300px;
-      }
-
     }
 
     @media (prefers-reduced-motion: reduce) {
-      #wishlist-products img,
-      .wishlist-shop-button {
-        transition: none;
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
       }
     }
-
   </style>
-
 </head>
 
-<body>
+<body class="wishlist-page">
 
-  <!-- GLOBALSTEPPER NAVIGATION -->
+  <!-- =====================================
+       HEADER
+  ===================================== -->
 
-  <header class="site-header">
+  <header class="gs-header">
 
-    <nav class="navbar" aria-label="Main navigation">
+    <a
+      class="gs-logo"
+      href="index.html"
+      aria-label="GLOBALSTEPPER home"
+    >
+      <img
+        src="media/images/globalstepper-loader.png"
+        alt="GLOBALSTEPPER"
+      >
+    </a>
 
-      <a href="index.html"
-         class="logo"
-         aria-label="GLOBALSTEPPER homepage">
+    <nav
+      class="gs-nav"
+      id="nav-links"
+      aria-label="Main navigation"
+    >
+      <a href="index.html">HOME</a>
+      <a href="products.html">SHOP</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT</a>
+    </nav>
 
-        <img
-          src="media/images/logo.png"
-          alt="GLOBALSTEPPER logo">
+    <div class="gs-header-actions">
+
+      <a
+        href="wishlist.html"
+        aria-label="View wishlist"
+      >
+        ♡ <span id="wishlist-count">0</span>
+      </a>
+
+      <a
+        href="cart.html"
+        aria-label="View shopping cart"
+      >
+        BAG (<span id="cart-count">0</span>)
       </a>
 
       <button
-        class="menu-toggle"
+        class="gs-menu-toggle"
         id="menu-toggle"
         type="button"
         aria-label="Open navigation menu"
         aria-expanded="false"
-        aria-controls="nav-links">
+      >
         ☰
       </button>
 
-      <ul class="nav-links" id="nav-links">
-
-        <li><a href="index.html">Home</a></li>
-        <li><a href="products.html">Shop</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-
-        <li>
-          <a href="wishlist.html"
-             class="wishlist-link"
-             aria-current="page">
-            Wishlist
-            <span id="wishlist-count">0</span>
-          </a>
-        </li>
-
-        <li>
-          <button
-            class="theme-toggle"
-            id="theme-toggle"
-            type="button"
-            aria-label="Switch to dark mode"
-            aria-pressed="false">
-            <span aria-hidden="true">☾</span>
-            <span class="theme-toggle-text">Dark</span>
-          </button>
-        </li>
-
-        <li>
-          <a href="cart.html" class="cart-link">
-            Cart
-            <span id="cart-count">0</span>
-          </a>
-        </li>
-
-      </ul>
-
-    </nav>
+    </div>
 
   </header>
 
-  <!-- WISHLIST HERO -->
+  <!-- =====================================
+       WISHLIST HERO
+  ===================================== -->
 
-  <section class="wishlist-hero">
+  <main>
 
-    <div class="wishlist-hero-inner">
+    <section class="wishlist-hero">
 
       <p class="wishlist-eyebrow">
-        YOUR PERSONAL COLLECTION
+        GLOBALSTEPPER — ESTABLISHED 2022
       </p>
 
-      <h1>WISHLIST</h1>
+      <h1>MY WISHLIST</h1>
 
       <p class="wishlist-hero-description">
-        Your favourite GLOBALSTEPPER pieces,
-        all in one place.
+        Your favourite pieces, all in one place.
+        Save the designs that represent your style
+        and revisit them whenever you want.
       </p>
 
-    </div>
+    </section>
 
-  </section>
+    <!-- =====================================
+         WISHLIST PRODUCTS
+    ===================================== -->
 
-  <!-- MAIN WISHLIST -->
+    <div class="wishlist-container">
 
-  <main class="wishlist-page">
+      <div class="wishlist-heading">
 
-    <div class="wishlist-main">
+        <div>
 
-      <!-- SAVED PRODUCTS -->
+          <span class="wishlist-heading-label">
+            YOUR SAVED PIECES
+          </span>
 
-      <div
-        id="wishlist-products"
-        class="all-products-grid wishlist-grid"
-        aria-live="polite">
+          <h2>THE COLLECTION</h2>
+
+        </div>
+
+        <a href="products.html">
+          EXPLORE THE ARCHIVE
+        </a>
+
       </div>
 
-      <!-- EMPTY WISHLIST -->
+      <!--
+        JavaScript automatically adds saved
+        products into this container.
+      -->
 
-      <div
+      <section
+        id="wishlist-products"
+        aria-label="Saved wishlist products"
+        aria-live="polite"
+      ></section>
+
+      <!-- =====================================
+           EMPTY WISHLIST MESSAGE
+      ===================================== -->
+
+      <section
         id="empty-wishlist"
-        class="empty-wishlist">
+        hidden
+      >
 
-        <div class="wishlist-heart"
-             aria-hidden="true">
-
-          <svg viewBox="0 0 24 24">
-            <path
-              d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>
-          </svg>
-
+        <div
+          class="empty-heart"
+          aria-hidden="true"
+        >
+          ♡
         </div>
 
         <h2>YOUR WISHLIST IS EMPTY</h2>
 
         <p>
-          Your next favourite piece is waiting.
-          Explore the GLOBALSTEPPER collection
-          and save the styles you love.
+          You haven't saved any pieces yet.
+          Explore THE ARCHIVE and tap the heart
+          on any product to add it to your wishlist.
         </p>
 
-        <a href="products.html"
-           class="wishlist-shop-button">
-          EXPLORE THE COLLECTION
+        <a
+          href="products.html"
+          class="explore-button"
+        >
+          EXPLORE THE ARCHIVE
         </a>
 
-      </div>
+      </section>
 
     </div>
 
   </main>
 
-  <!-- GLOBALSTEPPER PREMIUM FOOTER -->
+  <!-- =====================================
+       PREMIUM FOOTER
+  ===================================== -->
 
-  <footer class="gs-premium-footer">
+  <footer class="gs-footer">
 
-    <div class="gs-footer-container">
-
-      <!-- BRAND -->
+    <div class="gs-footer-grid">
 
       <div class="gs-footer-brand">
 
-        <a href="index.html"
-           class="gs-footer-logo-link">
+        <img
+          class="gs-footer-logo"
+          src="media/images/globalstepper-loader.png"
+          alt="GLOBALSTEPPER"
+        >
 
-          <img
-            src="media/images/globalstepper-loader.png"
-            alt="GLOBALSTEPPER"
-            class="gs-footer-loader-logo">
-        </a>
-
-        <p class="gs-footer-description">
+        <p>
           Premium streetwear representing ambition,
           confidence and progression.
         </p>
 
-      </div>
-
-      <!-- QUICK LINKS -->
-
-      <div class="gs-footer-column">
-
-        <h2 class="gs-footer-heading">
-          QUICK LINKS
-        </h2>
-
-        <a href="index.html">HOME</a>
-        <a href="products.html">SHOP</a>
-        <a href="about.html">ABOUT</a>
-        <a href="contact.html">CONTACT</a>
+        <p>
+          THE WORLD IS YOURS. STEP INTO IT.
+        </p>
 
       </div>
 
-      <!-- CUSTOMER SUPPORT -->
+      <div>
 
-      <div class="gs-footer-column">
+        <h3>QUICK LINKS</h3>
 
-        <h2 class="gs-footer-heading">
-          CUSTOMER SUPPORT
-        </h2>
+        <div class="gs-footer-links">
 
-        <a href="contact.html">CONTACT US</a>
-        <a href="wishlist.html">WISHLIST</a>
-        <a href="cart.html">SHOPPING CART</a>
+          <a href="index.html">HOME</a>
+          <a href="products.html">SHOP</a>
+          <a href="about.html">ABOUT</a>
+          <a href="contact.html">CONTACT</a>
+
+        </div>
+
+      </div>
+
+      <div>
+
+        <h3>CUSTOMER SUPPORT</h3>
+
+        <div class="gs-footer-links">
+
+          <a href="contact.html">CONTACT US</a>
+          <a href="wishlist.html">MY WISHLIST</a>
+          <a href="cart.html">SHOPPING BAG</a>
+
+        </div>
 
       </div>
 
     </div>
 
-    <!-- COPYRIGHT -->
-
     <div class="gs-footer-bottom">
-
-      <div class="gs-footer-copyright">
-        © <span id="current-year">2026</span>
-        GLOBALSTEPPER. ALL RIGHTS RESERVED.
-      </div>
-
-      <div class="gs-footer-signature">
-        BUILT FOR THOSE WHO KEEP STEPPING.
-      </div>
-
+      © <span id="current-year">2026</span>
+      GLOBALSTEPPER. ALL RIGHTS RESERVED.
+      ESTABLISHED IN 2022.
     </div>
 
   </footer>
 
-  <!-- EXISTING WEBSITE JAVASCRIPT -->
+  <!-- =====================================
+       GLOBALSTEPPER JAVASCRIPT
+  ===================================== -->
 
-  <script src="js/script.js"></script>
-
-  <!-- WISHLIST IMAGE & DISPLAY FIX -->
-
-  <script>
-
-    document.addEventListener("DOMContentLoaded", function () {
-
-      const grid = document.getElementById("wishlist-products");
-      const empty = document.getElementById("empty-wishlist");
-
-      if (!grid || !empty) return;
-
-      /* CORRECT PRODUCT IMAGE PATHS */
-
-      const knownImages = {
-
-        "Grey No Love Lost Tracksuit":
-          "images/global tracksuit 1.jpeg",
-
-        "Black Been Da Goat Tracksuit":
-          "images/global tracksuit 2.jpeg",
-
-        "Signature Tracksuit":
-          "images/global tracksuit 3.jpeg",
-
-        "Grey Logo Short Set":
-          "images/shortset.jpeg"
-
-      };
-
-      function updateWishlist() {
-
-        const cards = Array.from(grid.children);
-
-        empty.hidden = cards.length > 0;
-        grid.hidden = cards.length === 0;
-
-        cards.forEach(function (card) {
-
-          const image = card.querySelector("img");
-
-          if (!image || image.dataset.gsProcessed === "true") {
-            return;
-          }
-
-          image.dataset.gsProcessed = "true";
-
-          const cardText = card.textContent || "";
-
-          const productName = Object.keys(knownImages).find(
-            name => cardText.includes(name)
-          );
-
-          if (productName) {
-            image.src = knownImages[productName];
-          }
-
-          image.addEventListener("error", function () {
-
-            if (image.dataset.gsFallback === "true") {
-              return;
-            }
-
-            image.dataset.gsFallback = "true";
-            image.src = "media/images/logo.png";
-
-          });
-
-        });
-
-      }
-
-      updateWishlist();
-
-      const observer = new MutationObserver(updateWishlist);
-
-      observer.observe(grid, {
-        childList: true
-      });
-
-    });
-
-  </script>
+  <script src="js/script.js?v=20261119-final"></script>
 
 </body>
 </html>
