@@ -296,7 +296,7 @@
       width: 100%;
       height: auto;
       aspect-ratio: 4 / 5;
-      object-fit: cover;
+      object-fit: contain;
     }
 
     /* TABLETS */
@@ -388,243 +388,300 @@
       }
     }
 
-/* WHY SHOP WITH US - RESPONSIVE */
+    /* WHY SHOP WITH US - RESPONSIVE */
 
-.why-shop-heading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 20px auto 30px;
-  padding: 0 15px;
-  box-sizing: border-box;
-}
+    .why-shop-heading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin: 20px auto 30px;
+      padding: 0 15px;
+      box-sizing: border-box;
+    }
 
-.why-shop-logo {
-  display: block;
-  width: 100%;
-  max-width: 850px;
-  height: auto;
-  object-fit: contain;
-  margin: 0 auto;
-}
+    .why-shop-logo {
+      display: block;
+      width: 100%;
+      max-width: 850px;
+      height: auto;
+      object-fit: contain;
+      margin: 0 auto;
+    }
 
-@media (max-width: 1024px) {
-  .why-shop-logo {
-    max-width: 650px;
-  }
-}
+    @media (max-width: 1024px) {
+      .why-shop-logo {
+        max-width: 650px;
+      }
+    }
 
-@media (max-width: 600px) {
-  .why-shop-heading {
-    margin: 15px auto 25px;
-    padding: 0 10px;
-  }
+    @media (max-width: 600px) {
+      .why-shop-heading {
+        margin: 15px auto 25px;
+        padding: 0 10px;
+      }
 
-  .why-shop-logo {
-    max-width: 100%;
-  }
-}
+      .why-shop-logo {
+        max-width: 100%;
+      }
+    }
 
-/* GLOBALSTEPPER BRAND STORY REDESIGN */
-
-.brand-story {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: center;
-  gap: 50px;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 90px 5%;
-  background: #fff;
-}
-
-.brand-story-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  min-width: 0;
-}
-
-.brand-story-content .section-label {
-  margin-bottom: 25px;
-  color: #000;
-  font-weight: 800;
-  letter-spacing: 3px;
-}
-
-.globalstepper-story-slogan {
-  display: block;
-  width: 100%;
-  max-width: 700px;
-  height: auto;
-  object-fit: contain;
-  margin: 0 0 35px;
-}
-
-.brand-story-content .text-link {
-  display: inline-block;
-  margin-top: 0;
-  color: #000;
-  font-weight: 800;
-  border-bottom: 2px solid #000;
-}
-
-.brand-story-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 0;
-  padding: 0;
-  background: transparent !important;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.brand-story-image img {
-  display: block;
-  width: 100%;
-  max-width: 550px;
-  height: auto;
-  object-fit: contain;
-  margin: 0 auto;
-}
-
-/* MOBILE RESPONSIVE */
-
-@media (max-width: 768px) {
-  .brand-story {
-    grid-template-columns: 1fr;
-    gap: 35px;
-    padding: 60px 20px;
-  }
-
-  .brand-story-content {
-    align-items: center;
-    text-align: center;
-  }
-
-  .globalstepper-story-slogan {
-    max-width: 500px;
-    margin-bottom: 25px;
-  }
-
-  .brand-story-image img {
-    max-width: 400px;
-  }
-}
+    /* GLOBALSTEPPER BRAND STORY REDESIGN */
 
 
-/* GLOBALSTEPPER CENTRED BRAND STORY */
 
-.brand-story {
-  display: flex !important;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 100%;
-  min-height: 550px;
-  margin: 0 auto;
-  padding: 90px 20px;
-  background: #ffffff;
-  text-align: center;
-}
+    .brand-story {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 50px;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 90px 5%;
+      background: #fff;
+    }
 
-.brand-story-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  text-align: center;
-}
+    .brand-story-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      min-width: 0;
+    }
 
-.brand-story-content .section-label {
-  margin: 0 0 35px;
-  color: #000000;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 4px;
-}
+    .brand-story-content .section-label {
+      margin-bottom: 25px;
+      color: #000;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
 
-.brand-story-content .globalstepper-story-slogan {
-  display: block;
-  width: 100%;
-  max-width: 1000px;
-  height: auto;
-  margin: 0 auto 40px;
-  object-fit: contain;
-}
+    .globalstepper-story-slogan {
+      display: block;
+      width: 100%;
+      max-width: 700px;
+      height: auto;
+      object-fit: contain;
+      margin: 0 0 35px;
+    }
 
-.brand-story-content .text-link {
-  display: inline-block;
-  width: fit-content;
-  margin: 0 auto;
-  padding-bottom: 6px;
-  color: #000000;
-  font-size: 20px;
-  font-weight: 800;
-  border-bottom: 2px solid #000000;
-  text-decoration: none;
-}
+    .brand-story-content .text-link {
+      display: inline-block;
+      margin-top: 0;
+      color: #000;
+      font-weight: 800;
+      border-bottom: 2px solid #000;
+    }
 
-.brand-story-content .text-link:hover {
-  opacity: 0.6;
-}
+    .brand-story-image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+      padding: 0;
+      background: transparent !important;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
 
-/* MOBILE */
+    .brand-story-image img {
+      display: block;
+      width: 100%;
+      max-width: 550px;
+      height: auto;
+      object-fit: contain;
+      margin: 0 auto;
+    }
 
-@media (max-width: 768px) {
-  .brand-story {
-    min-height: 380px;
-    padding: 65px 15px;
-  }
+    /* MOBILE RESPONSIVE */
 
-  .brand-story-content .section-label {
-    margin-bottom: 25px;
-    font-size: 11px;
-    letter-spacing: 3px;
-  }
+    @media (max-width: 768px) {
+      .brand-story {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 60px 20px;
+      }
 
-  .brand-story-content .globalstepper-story-slogan {
-    max-width: 100%;
-    margin-bottom: 30px;
-  }
+      .brand-story-content {
+        align-items: center;
+        text-align: center;
+      }
 
-  .brand-story-content .text-link {
-    font-size: 16px;
-  }
-}
+      .globalstepper-story-slogan {
+        max-width: 500px;
+        margin-bottom: 25px;
+      }
 
-    
+      .brand-story-image img {
+        max-width: 400px;
+      }
+    }
+
+    /* GLOBALSTEPPER CENTRED BRAND STORY */
+
+    .brand-story {
+      display: flex !important;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 100%;
+      min-height: 550px;
+      margin: 0 auto;
+      padding: 90px 20px;
+      background: #ffffff;
+      text-align: center;
+    }
+
+    .brand-story-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .brand-story-content .section-label {
+      margin: 0 0 35px;
+      color: #000000;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 4px;
+    }
+
+    .brand-story-content .globalstepper-story-slogan {
+      display: block;
+      width: 100%;
+      max-width: 1000px;
+      height: auto;
+      margin: 0 auto 40px;
+      object-fit: contain;
+    }
+
+    .brand-story-content .text-link {
+      display: inline-block;
+      width: fit-content;
+      margin: 0 auto;
+      padding-bottom: 6px;
+      color: #000000;
+      font-size: 20px;
+      font-weight: 800;
+      border-bottom: 2px solid #000000;
+      text-decoration: none;
+    }
+
+    .brand-story-content .text-link:hover {
+      opacity: 0.6;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 768px) {
+      .brand-story {
+        min-height: 380px;
+        padding: 65px 15px;
+      }
+
+      .brand-story-content .section-label {
+        margin-bottom: 25px;
+        font-size: 11px;
+        letter-spacing: 3px;
+      }
+
+      .brand-story-content .globalstepper-story-slogan {
+        max-width: 100%;
+        margin-bottom: 30px;
+      }
+
+      .brand-story-content .text-link {
+        font-size: 16px;
+      }
+    }
+
+    /* ==========================================
+       HOMEPAGE SECTION VISIBILITY FIX
+       PREVENT INVENTORY FROM DISAPPEARING
+    ========================================== */
+
+    .featured-products,
+    .featured-products.reveal,
+    .brand-benefits,
+    .brand-benefits.reveal,
+    .brand-story,
+    .brand-story.reveal-left,
+    .newsletter-section,
+    .newsletter-section.reveal-right {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: none !important;
+    }
+
+    .featured-products .section-heading,
+    .featured-products .product-grid,
+    .brand-benefits .section-heading,
+    .brand-benefits .benefits-grid {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    /* ==========================================
+       PRODUCT IMAGE DISPLAY FIX
+    ========================================== */
+
+    .featured-products .product-image-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      background: #f4f4f4;
+    }
+
+    .featured-products .product-image-link img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      object-fit: contain !important;
+      object-position: center;
+      transform: none !important;
+    }
+
+    .featured-products .product-card:hover
+    .product-image-link img {
+      transform: none !important;
+    }
+
   </style>
 
+  <link rel="stylesheet"
+        href="css/globalstepper-footer.css">
 
-<link rel="stylesheet" href="css/globalstepper-footer.css">
-  
 </head>
 
 <body>
 
   <!-- GLOBALSTEPPER ANIMATED INTRO -->
 
-  <div id="gs-intro" aria-label="GLOBALSTEPPER loading">
-    <div id="falling-globes" aria-hidden="true"></div>
+  <div id="gs-intro"
+       aria-label="GLOBALSTEPPER loading">
+
+    <div id="falling-globes"
+         aria-hidden="true"></div>
 
     <div class="gs-intro-content">
+
       <img
         src="media/images/globalstepper-loader.png"
         alt="GLOBALSTEPPER graffiti logo"
         class="gs-intro-logo"
-        onerror="this.style.display='none';document.getElementById('intro-fallback').style.display='block';"
-      >
+        onerror="this.style.display='none';document.getElementById('intro-fallback').style.display='block';">
 
-      <div id="intro-fallback" class="gs-intro-fallback">
+      <div id="intro-fallback"
+           class="gs-intro-fallback">
         GLOBALSTEPPER
       </div>
 
@@ -635,16 +692,26 @@
       <div class="gs-intro-progress">
         <span></span>
       </div>
+
     </div>
+
   </div>
 
   <!-- NAVIGATION -->
 
   <header class="site-header">
-    <nav class="navbar" aria-label="Main navigation">
 
-      <a href="index.html" class="logo" aria-label="GLOBALSTEPPER homepage">
-        <img src="media/images/logo.png" alt="GLOBALSTEPPER globe logo">
+    <nav class="navbar"
+         aria-label="Main navigation">
+
+      <a href="index.html"
+         class="logo"
+         aria-label="GLOBALSTEPPER homepage">
+
+        <img
+          src="media/images/logo.png"
+          alt="GLOBALSTEPPER globe logo">
+
       </a>
 
       <button
@@ -653,14 +720,26 @@
         type="button"
         aria-label="Open navigation menu"
         aria-expanded="false"
-        aria-controls="nav-links"
-      >☰</button>
+        aria-controls="nav-links">☰</button>
 
       <ul class="nav-links" id="nav-links">
-        <li><a href="index.html" aria-current="page">Home</a></li>
-        <li><a href="products.html">Shop</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
+
+        <li>
+          <a href="index.html"
+             aria-current="page">Home</a>
+        </li>
+
+        <li>
+          <a href="products.html">Shop</a>
+        </li>
+
+        <li>
+          <a href="about.html">About</a>
+        </li>
+
+        <li>
+          <a href="contact.html">Contact</a>
+        </li>
 
         <li>
           <button
@@ -668,28 +747,36 @@
             id="theme-toggle"
             type="button"
             aria-label="Switch to dark mode"
-            aria-pressed="false"
-          >
+            aria-pressed="false">
+
             <span aria-hidden="true">☾</span>
-            <span class="theme-toggle-text">Dark</span>
+
+            <span class="theme-toggle-text">
+              Dark
+            </span>
+
           </button>
         </li>
 
         <li>
-          <a href="cart.html" class="cart-link">
+          <a href="cart.html"
+             class="cart-link">
             Cart <span id="cart-count">0</span>
           </a>
         </li>
+
       </ul>
 
     </nav>
+
   </header>
 
   <main>
 
     <!-- GLOBALSTEPPER VIDEO HERO -->
 
-    <section class="hero" aria-labelledby="hero-heading">
+    <section class="hero"
+             aria-labelledby="hero-heading">
 
       <video
         id="globalstepper-hero-video"
@@ -698,9 +785,12 @@
         muted
         loop
         playsinline
-        preload="metadata"
-      >
-        <source src="media/videos/Hero-small.mp4" type="video/mp4">
+        preload="metadata">
+
+        <source
+          src="media/videos/Hero-small.mp4"
+          type="video/mp4">
+
       </video>
 
       <div class="hero-overlay"></div>
@@ -711,17 +801,21 @@
           PREMIUM UNISEX STREETWEAR
         </p>
 
-        <h1 id="hero-heading" class="hero-logo-heading">
+        <h1 id="hero-heading"
+            class="hero-logo-heading">
+
           <img
             src="media/images/globalstepper-loader.png"
             alt="GLOBALSTEPPER"
             class="hero-brand-logo"
-            onerror="this.style.display='none';document.getElementById('hero-fallback').style.display='block';"
-          >
+            onerror="this.style.display='none';document.getElementById('hero-fallback').style.display='block';">
 
-          <span id="hero-fallback" class="hero-logo-fallback">
+          <span
+            id="hero-fallback"
+            class="hero-logo-fallback">
             GLOBALSTEPPER
           </span>
+
         </h1>
 
         <p class="hero-text">
@@ -729,40 +823,50 @@
         </p>
 
         <div class="hero-actions">
-          <a href="products.html" class="btn">
+
+          <a href="products.html"
+             class="btn">
             Shop Collection
           </a>
 
-          <a href="about.html" class="btn btn-outline">
+          <a href="about.html"
+             class="btn btn-outline">
             Our Story
           </a>
+
         </div>
 
       </div>
+
     </section>
 
     <!-- INVENTORY / FEATURED PRODUCTS -->
 
     <section
       class="featured-products reveal"
-      aria-labelledby="featured-heading"
-    >
+      aria-labelledby="featured-heading">
 
       <div class="section-heading">
 
-        <p class="section-label">LATEST DROP</p>
+        <p class="section-label">
+          LATEST DROP
+        </p>
 
-        <h2 id="featured-heading" class="inventory-heading">
+        <h2 id="featured-heading"
+            class="inventory-heading">
+
           <img
             src="media/images/inventory.png?v=3"
             alt="INVENTORY"
             class="inventory-logo"
-            onerror="this.style.display='none';document.getElementById('inventory-fallback').style.display='block';"
-          >
+            onerror="this.style.display='none';document.getElementById('inventory-fallback').style.display='block';">
 
-          <span id="inventory-fallback" class="inventory-fallback">
+          <span
+            id="inventory-fallback"
+            class="inventory-fallback">
             INVENTORY
           </span>
+
         </h2>
 
         <p class="section-description">
@@ -783,22 +887,34 @@
           <a
             href="product-details.html?id=1"
             class="product-image-link"
-            aria-label="View Grey No Love Lost Tracksuit"
-          >
+            aria-label="View Grey No Love Lost Tracksuit">
+
             <img
               src="images/global tracksuit 1.jpeg"
               alt="Grey No Love Lost Tracksuit"
-              loading="lazy"
-            >
+              loading="lazy">
+
           </a>
 
           <div class="product-info">
-            <p class="product-category">Tracksuits</p>
-            <h3>Grey No Love Lost Tracksuit</h3>
-            <p class="product-price">£185.99</p>
+
+            <p class="product-category">
+              Tracksuits
+            </p>
+
+            <h3>
+              Grey No Love Lost Tracksuit
+            </h3>
+
+            <p class="product-price">
+              £185.99
+            </p>
 
             <div class="product-actions">
-              <a href="product-details.html?id=1" class="product-button">
+
+              <a
+                href="product-details.html?id=1"
+                class="product-button">
                 View Product
               </a>
 
@@ -810,10 +926,13 @@
                 data-price="185.99"
                 data-image="images/global tracksuit 1.jpeg"
                 data-category="Tracksuits"
-              >
-              SOLD OUT
+                disabled
+                aria-disabled="true">
+                SOLD OUT
               </button>
+
             </div>
+
           </div>
 
         </article>
@@ -825,22 +944,34 @@
           <a
             href="product-details.html?id=2"
             class="product-image-link"
-            aria-label="View Black Been Da Goat Tracksuit"
-          >
+            aria-label="View Black Been Da Goat Tracksuit">
+
             <img
               src="images/global tracksuit 2.jpeg"
               alt="Black Been Da Goat Tracksuit"
-              loading="lazy"
-            >
+              loading="lazy">
+
           </a>
 
           <div class="product-info">
-            <p class="product-category">Tracksuits</p>
-            <h3>Black Been Da Goat Tracksuit</h3>
-            <p class="product-price">£185.99</p>
+
+            <p class="product-category">
+              Tracksuits
+            </p>
+
+            <h3>
+              Black Been Da Goat Tracksuit
+            </h3>
+
+            <p class="product-price">
+              £185.99
+            </p>
 
             <div class="product-actions">
-              <a href="product-details.html?id=2" class="product-button">
+
+              <a
+                href="product-details.html?id=2"
+                class="product-button">
                 View Product
               </a>
 
@@ -852,10 +983,13 @@
                 data-price="185.99"
                 data-image="images/global tracksuit 2.jpeg"
                 data-category="Tracksuits"
-              >
-                SOLD OUT 
+                disabled
+                aria-disabled="true">
+                SOLD OUT
               </button>
+
             </div>
+
           </div>
 
         </article>
@@ -865,39 +999,54 @@
         <article class="product-card">
 
           <a
-            href="product-details.html?id=3"
+            href="product-details.html?id=4"
             class="product-image-link"
-            aria-label="View Grey Logo Short Set"
-          >
+            aria-label="View Grey Logo Short Set">
+
             <img
               src="images/shortset.jpeg"
               alt="Grey Logo Short Set"
-              loading="lazy"
-            >
+              loading="lazy">
+
           </a>
 
           <div class="product-info">
-            <p class="product-category">Short Sets</p>
-            <h3>Grey Logo Short Set</h3>
-            <p class="product-price">£125.99</p>
+
+            <p class="product-category">
+              Short Sets
+            </p>
+
+            <h3>
+              Grey Logo Short Set
+            </h3>
+
+            <p class="product-price">
+              £125.99
+            </p>
 
             <div class="product-actions">
-              <a href="product-details.html?id=3" class="product-button">
+
+              <a
+                href="product-details.html?id=4"
+                class="product-button">
                 View Product
               </a>
 
               <button
                 class="add-to-cart-btn"
                 type="button"
-                data-id="3"
+                data-id="4"
                 data-name="Grey Logo Short Set"
                 data-price="125.99"
                 data-image="images/shortset.jpeg"
                 data-category="Short Sets"
-              >
+                disabled
+                aria-disabled="true">
                 SOLD OUT
               </button>
+
             </div>
+
           </div>
 
         </article>
@@ -905,9 +1054,12 @@
       </div>
 
       <div class="section-action">
-        <a href="products.html" class="btn">
+
+        <a href="products.html"
+           class="btn">
           View All Products
         </a>
+
       </div>
 
     </section>
@@ -916,128 +1068,155 @@
 
     <section class="brand-benefits reveal">
 
-     
-<div class="section-heading">
+      <div class="section-heading">
 
-  <p class="section-label">
-    THE GLOBALSTEPPER STANDARD
-  </p>
+        <p class="section-label">
+          THE GLOBALSTEPPER STANDARD
+        </p>
 
-  <h2 class="why-shop-heading">
-    <img
-      src="media/images/why-shop.png"
-      alt="Why Shop With Us?"
-      class="why-shop-logo"
-    >
-  </h2>
+        <h2 class="why-shop-heading">
 
-</div>
+          <img
+            src="media/images/why-shop.png"
+            alt="Why Shop With Us?"
+            class="why-shop-logo">
+
+        </h2>
+
+      </div>
 
       <div class="benefits-grid">
 
         <article class="benefit-card">
-          <span class="benefit-icon" aria-hidden="true">✦</span>
+
+          <span class="benefit-icon"
+                aria-hidden="true">✦</span>
+
           <h3>Premium Quality</h3>
+
           <p>
             Carefully designed streetwear made for comfort,
             confidence and everyday wear.
           </p>
+
         </article>
 
         <article class="benefit-card">
-          <span class="benefit-icon" aria-hidden="true">🚚</span>
+
+          <span class="benefit-icon"
+                aria-hidden="true">🚚</span>
+
           <h3>UK Delivery</h3>
+
           <p>
             Reliable delivery across the United Kingdom
             on every GLOBALSTEPPER order.
           </p>
+
         </article>
 
         <article class="benefit-card">
-          <span class="benefit-icon" aria-hidden="true">↻</span>
+
+          <span class="benefit-icon"
+                aria-hidden="true">↻</span>
+
           <h3>Simple Returns</h3>
+
           <p>
             Shop confidently with a straightforward
             returns process.
           </p>
+
         </article>
 
         <article class="benefit-card">
-          <span class="benefit-icon" aria-hidden="true">🔒</span>
+
+          <span class="benefit-icon"
+                aria-hidden="true">🔒</span>
+
           <h3>Secure Experience</h3>
+
           <p>
             The website is designed to provide a safe
             and user-friendly shopping experience.
           </p>
+
         </article>
 
       </div>
+
     </section>
 
+    
+    <!-- ========================================
+         GLOBALSTEPPER BRAND STORY
+    ======================================== -->
 
+    <section class="brand-story reveal-left">
 
-<!-- BRAND STORY -->
+      <div class="brand-story-content">
 
-<section class="brand-story reveal-left">
+        <p class="section-label">
+          ESTABLISHED 2022
+        </p>
 
-  <div class="brand-story-content">
+        <div class="gs-chrome-art">
 
-    <p class="section-label">ESTABLISHED 2022</p>
+          <img
+            src="media/images/the-world-is-yours.png"
+            alt="The World Is Yours. Step Into It."
+            class="globalstepper-story-slogan">
 
-   
-<div class="gs-chrome-art">
-  <img
-    src="media/images/the-world-is-yours.png"
-    alt="The World Is Yours. Step Into It."
-    class="globalstepper-story-slogan"
-  >
+          <span class="gs-star star-1"></span>
+          <span class="gs-star star-2"></span>
+          <span class="gs-star star-3"></span>
+          <span class="gs-star star-4"></span>
+          <span class="gs-star star-5"></span>
+          <span class="gs-star star-6"></span>
 
-  <span class="gs-star star-1"></span>
-  <span class="gs-star star-2"></span>
-  <span class="gs-star star-3"></span>
-  <span class="gs-star star-4"></span>
-  <span class="gs-star star-5"></span>
-  <span class="gs-star star-6"></span>
-</div>
+        </div>
 
-</div>
+        <a
+          href="about.html"
+          class="text-link">
+          Discover Our Story
+        </a>
 
-    <a href="about.html" class="text-link">
-      Discover Our Story
-    </a>
+      </div>
 
-  </div>
+    </section>
 
-</section>
-
-<!-- NEWSLETTER -->
-
-    <!-- NEWSLETTER -->
+    <!-- ========================================
+         GLOBALSTEPPER NEWSLETTER
+    ======================================== -->
 
     <section
       class="newsletter-section reveal-right"
-      aria-labelledby="newsletter-heading"
-    >
+      aria-labelledby="newsletter-heading">
 
       <div class="newsletter-content">
 
-        <p class="section-label">JOIN THE MOVEMENT</p>
+        <p class="section-label">
+          JOIN THE MOVEMENT
+        </p>
 
         <h2 id="newsletter-heading">
           Be First to Hear About New Drops
         </h2>
 
         <p>
-          Enter your email address to receive collection updates.
+          Enter your email address to receive
+          collection updates.
         </p>
 
         <form
           id="newsletter-form"
           class="newsletter-form"
-          novalidate
-        >
+          novalidate>
 
-          <label for="newsletter-email" class="sr-only">
+          <label
+            for="newsletter-email"
+            class="sr-only">
             Email address
           </label>
 
@@ -1047,103 +1226,132 @@
             name="email"
             placeholder="Enter your email address"
             autocomplete="email"
-            required
-          >
+            required>
 
-          <button type="submit" class="btn">
+          <button
+            type="submit"
+            class="btn">
             Subscribe
           </button>
 
           <p
             id="newsletter-message"
             class="form-message"
-            aria-live="polite"
-          ></p>
+            aria-live="polite"></p>
 
         </form>
 
       </div>
+
     </section>
 
   </main>
 
- 
-<!-- GLOBALSTEPPER PREMIUM FOOTER -->
+  <!-- ========================================
+       GLOBALSTEPPER PREMIUM FOOTER
+  ======================================== -->
 
-<footer class="gs-premium-footer">
+  <footer class="gs-premium-footer">
 
-  <div class="gs-footer-container">
+    <div class="gs-footer-container">
 
-    <!-- GLOBALSTEPPER BRAND -->
-    <div class="gs-footer-brand">
+      <!-- GLOBALSTEPPER BRAND -->
 
-      <a href="index.html" class="gs-footer-logo-link">
-        <img
-          src="media/images/globalstepper-loader.png"
-          alt="GLOBALSTEPPER"
-          class="gs-footer-loader-logo"
-        >
-      </a>
+      <div class="gs-footer-brand">
 
-      <p class="gs-footer-description">
-        Premium streetwear representing ambition,
-        confidence and progression.
-      </p>
+        <a
+          href="index.html"
+          class="gs-footer-logo-link">
+
+          <img
+            src="media/images/globalstepper-loader.png"
+            alt="GLOBALSTEPPER"
+            class="gs-footer-loader-logo">
+
+        </a>
+
+        <p class="gs-footer-description">
+          Premium streetwear representing ambition,
+          confidence and progression.
+        </p>
+
+      </div>
+
+      <!-- QUICK LINKS -->
+
+      <div class="gs-footer-column">
+
+        <h2 class="gs-footer-heading">
+          QUICK LINKS
+        </h2>
+
+        <a href="index.html">HOME</a>
+
+        <a href="products.html">SHOP</a>
+
+        <a href="about.html">ABOUT</a>
+
+        <a href="contact.html">CONTACT</a>
+
+      </div>
+
+      <!-- CUSTOMER SUPPORT -->
+
+      <div class="gs-footer-column">
+
+        <h2 class="gs-footer-heading">
+          CUSTOMER SUPPORT
+        </h2>
+
+        <a href="contact.html">
+          CONTACT US
+        </a>
+
+        <a href="wishlist.html">
+          WISHLIST
+        </a>
+
+        <a href="cart.html">
+          SHOPPING CART
+        </a>
+
+      </div>
 
     </div>
 
-    <!-- QUICK LINKS -->
-    <div class="gs-footer-column">
+    <!-- COPYRIGHT AND SLOGAN -->
 
-      <h2 class="gs-footer-heading">QUICK LINKS</h2>
+    <div class="gs-footer-bottom">
 
-      <a href="index.html">HOME</a>
-      <a href="products.html">SHOP</a>
-      <a href="about.html">ABOUT</a>
-      <a href="contact.html">CONTACT</a>
+      <div class="gs-footer-copyright">
 
-    </div>
+        © <span id="current-year">2026</span>
+        GLOBALSTEPPER. ALL RIGHTS RESERVED.
 
-    <!-- CUSTOMER SUPPORT -->
-    <div class="gs-footer-column">
+      </div>
 
-      <h2 class="gs-footer-heading">
-        CUSTOMER SUPPORT
-      </h2>
-
-      <a href="contact.html">CONTACT US</a>
-      <a href="wishlist.html">WISHLIST</a>
-      <a href="cart.html">SHOPPING CART</a>
+      <div class="gs-footer-signature">
+        BUILT FOR THOSE WHO KEEP STEPPING.
+      </div>
 
     </div>
 
-  </div>
+  </footer>
 
-  <!-- COPYRIGHT AND SLOGAN -->
-  <div class="gs-footer-bottom">
-
-    <div class="gs-footer-copyright">
-      © <span id="current-year">2026</span>
-      GLOBALSTEPPER. ALL RIGHTS RESERVED.
-    </div>
-
-    <div class="gs-footer-signature">
-      BUILT FOR THOSE WHO KEEP STEPPING.
-    </div>
-
-  </div>
-
-</footer>
-
-  
-  <!-- EXISTING WEBSITE JAVASCRIPT -->
+  <!-- ========================================
+       EXISTING GLOBALSTEPPER JAVASCRIPT
+  ======================================== -->
 
   <script src="js/script.js"></script>
 
-  <!-- BACKGROUND VIDEO -->
+  <!-- ========================================
+       BACKGROUND VIDEO PLAYBACK
+  ======================================== -->
 
   <script>
+
     (function () {
+
       const video = document.getElementById(
         "globalstepper-hero-video"
       );
@@ -1155,40 +1363,67 @@
       video.playsInline = true;
 
       function playVideo() {
+
         const attempt = video.play();
 
-        if (attempt && typeof attempt.catch === "function") {
+        if (
+          attempt &&
+          typeof attempt.catch === "function"
+        ) {
+
           attempt.catch(function (error) {
+
             console.warn(
               "GLOBALSTEPPER video could not autoplay:",
               error
             );
+
           });
+
         }
+
       }
 
-      video.addEventListener("canplay", playVideo, {
-        once: true
-      });
+      video.addEventListener(
+        "canplay",
+        playVideo,
+        { once: true }
+      );
 
-      video.addEventListener("error", function () {
-        console.error(
-          "Check media/videos/Hero-small.mp4"
-        );
-      });
+      video.addEventListener(
+        "error",
+        function () {
+
+          console.error(
+            "Check media/videos/Hero-small.mp4"
+          );
+
+        }
+      );
 
       if (video.readyState >= 2) {
         playVideo();
       }
+
     })();
+
   </script>
 
-  <!-- FALLING GLOBE ANIMATION -->
+  <!-- ========================================
+       GLOBALSTEPPER FALLING GLOBE ANIMATION
+  ======================================== -->
 
   <script>
+
     (function () {
-      const intro = document.getElementById("gs-intro");
-      const layer = document.getElementById("falling-globes");
+
+      const intro = document.getElementById(
+        "gs-intro"
+      );
+
+      const layer = document.getElementById(
+        "falling-globes"
+      );
 
       if (!intro || !layer) return;
 
@@ -1197,14 +1432,20 @@
       ).matches;
 
       if (!reducedMotion) {
+
         const globePath = "media/images/logo.png";
+
         const testImage = new Image();
 
         testImage.onload = function () {
+
           if (!intro.isConnected) return;
 
           for (let i = 0; i < 24; i++) {
-            const globe = document.createElement("img");
+
+            const globe = document.createElement(
+              "img"
+            );
 
             globe.src = globePath;
             globe.alt = "";
@@ -1232,44 +1473,69 @@
 
             globe.style.setProperty(
               "--drift",
-              (Math.random() - .5) * 110 + "px"
+              (Math.random() - 0.5) * 110 + "px"
             );
 
             globe.style.setProperty(
               "--spin",
-              (Math.random() > .5 ? 1 : -1) *
+              (Math.random() > 0.5 ? 1 : -1) *
               (120 + Math.random() * 300) + "deg"
             );
 
             layer.appendChild(globe);
+
           }
+
         };
 
         testImage.onerror = function () {
-          console.warn("Globe image not found:", globePath);
+
+          console.warn(
+            "Globe image not found:",
+            globePath
+          );
+
         };
 
         testImage.src = globePath;
+
       }
 
+      /* HIDE LOADING SCREEN AFTER 3 SECONDS */
+
       setTimeout(function () {
+
         intro.classList.add("gs-finished");
 
         setTimeout(function () {
+
           intro.remove();
+
         }, 750);
+
       }, 3000);
+
     })();
+
   </script>
 
-  <!-- CURRENT YEAR -->
+  <!-- ========================================
+       AUTOMATIC COPYRIGHT YEAR
+  ======================================== -->
 
   <script>
-    const year = document.getElementById("current-year");
+
+    const year = document.getElementById(
+      "current-year"
+    );
 
     if (year) {
-      year.textContent = new Date().getFullYear();
+
+      year.textContent =
+        new Date().getFullYear();
+
     }
+
   </script>
 
 </body>
