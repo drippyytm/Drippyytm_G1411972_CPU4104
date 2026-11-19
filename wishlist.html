@@ -4,6 +4,7 @@
 
 <head>
   <meta charset="UTF-8">
+
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
 
@@ -18,13 +19,15 @@
         href="media/images/logo.png">
 
   <!-- WEBSITE STYLES -->
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
+
   <link rel="stylesheet"
         href="css/globalstepper-footer.css">
 
   <!-- FONT -->
   <link rel="preconnect"
         href="https://fonts.googleapis.com">
+
   <link rel="preconnect"
         href="https://fonts.gstatic.com"
         crossorigin>
@@ -147,6 +150,8 @@
       display: none;
     }
 
+    /* CENTRE ONE PRODUCT */
+
     #wishlist-products:has(> :only-child) {
       grid-template-columns: minmax(0, 440px);
       justify-content: center;
@@ -157,7 +162,7 @@
       max-width: 100%;
     }
 
-    /* PRODUCT CARD */
+    /* PRODUCT CARDS */
 
     #wishlist-products .shop-product-card,
     #wishlist-products .product-card {
@@ -169,9 +174,15 @@
       border: 1px solid #e8e8e8;
       border-radius: 16px;
       box-shadow: 0 15px 40px rgba(0,0,0,.07);
+      transition: transform .3s ease;
     }
 
-    /* PRODUCT IMAGE */
+    #wishlist-products .shop-product-card:hover,
+    #wishlist-products .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* PRODUCT IMAGES */
 
     #wishlist-products .shop-product-image,
     #wishlist-products .product-image-link {
@@ -197,7 +208,7 @@
       transform: scale(1.035);
     }
 
-    /* SOLD OUT BADGE */
+    /* SOLD OUT BADGES */
 
     #wishlist-products .archive-badge,
     #wishlist-products .sold-out-badge,
@@ -206,22 +217,28 @@
       top: 16px !important;
       left: 16px !important;
       z-index: 10 !important;
+
       display: inline-flex !important;
       align-items: center;
       justify-content: center;
+
       width: auto !important;
       max-width: max-content;
       margin: 0 !important;
       padding: 10px 16px !important;
+
       background: #000 !important;
       color: #fff !important;
+
       border-radius: 4px;
+
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 15px !important;
       font-weight: 800;
       line-height: 1 !important;
       letter-spacing: 1px;
       text-transform: uppercase;
+
       pointer-events: none;
     }
 
@@ -268,7 +285,7 @@
       line-height: 1.1;
     }
 
-    /* BUTTONS */
+    /* PRODUCT BUTTONS */
 
     #wishlist-products .product-actions {
       display: grid;
@@ -283,12 +300,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
       width: 100%;
       min-width: 0;
       min-height: 58px;
+
       margin: 0;
       padding: 12px 10px;
+
       text-align: center;
+
       font-family: 'Barlow Condensed', Impact, sans-serif;
       font-size: 19px;
       font-weight: 900;
@@ -296,8 +317,11 @@
       text-transform: uppercase;
       text-decoration: none;
       white-space: normal;
+
       border-radius: 7px;
     }
+
+    /* SOLD OUT BUTTONS */
 
     #wishlist-products .add-to-cart-btn:disabled {
       background: #e5e5e5 !important;
@@ -314,11 +338,14 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
       width: 100%;
       max-width: 750px;
       min-height: 380px;
+
       margin: 0 auto;
       padding: 45px 20px;
+
       text-align: center;
       background: transparent;
     }
@@ -327,9 +354,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
       width: 100px;
       height: 100px;
+
       margin: 0 auto 30px;
+
       border: 2px solid #111;
       border-radius: 50%;
     }
@@ -347,6 +377,7 @@
     #empty-wishlist h2 {
       margin: 0 0 18px;
       color: #111;
+
       font-family: 'Barlow Condensed', Impact, sans-serif;
       font-size: clamp(34px, 5vw, 55px);
       font-weight: 900;
@@ -357,6 +388,7 @@
     #empty-wishlist p {
       max-width: 490px;
       margin: 0 auto 30px;
+
       color: #666;
       font-family: Arial, sans-serif;
       font-size: 16px;
@@ -367,17 +399,22 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+
       min-height: 58px;
       padding: 16px 40px;
+
       background: #050505;
       color: white;
+
       border: 2px solid #050505;
       border-radius: 7px;
+
       font-family: 'Barlow Condensed', Impact, sans-serif;
       font-size: 21px;
       font-weight: 900;
       text-decoration: none;
       text-transform: uppercase;
+
       transition:
         background .25s ease,
         color .25s ease,
@@ -490,7 +527,7 @@
 
 <body>
 
-  <!-- NAVIGATION -->
+  <!-- GLOBALSTEPPER NAVIGATION -->
 
   <header class="site-header">
 
@@ -577,7 +614,7 @@
 
   </section>
 
-  <!-- MAIN -->
+  <!-- MAIN WISHLIST -->
 
   <main class="wishlist-page">
 
@@ -591,7 +628,7 @@
         aria-live="polite">
       </div>
 
-      <!-- EMPTY STATE -->
+      <!-- EMPTY WISHLIST -->
 
       <div
         id="empty-wishlist"
@@ -626,11 +663,13 @@
 
   </main>
 
-  <!-- PREMIUM FOOTER -->
+  <!-- GLOBALSTEPPER PREMIUM FOOTER -->
 
   <footer class="gs-premium-footer">
 
     <div class="gs-footer-container">
+
+      <!-- BRAND -->
 
       <div class="gs-footer-brand">
 
@@ -650,6 +689,8 @@
 
       </div>
 
+      <!-- QUICK LINKS -->
+
       <div class="gs-footer-column">
 
         <h2 class="gs-footer-heading">
@@ -662,6 +703,8 @@
         <a href="contact.html">CONTACT</a>
 
       </div>
+
+      <!-- CUSTOMER SUPPORT -->
 
       <div class="gs-footer-column">
 
@@ -676,6 +719,8 @@
       </div>
 
     </div>
+
+    <!-- COPYRIGHT -->
 
     <div class="gs-footer-bottom">
 
@@ -692,10 +737,12 @@
 
   </footer>
 
-  <!-- EXISTING JAVASCRIPT -->
+  <!-- EXISTING WEBSITE JAVASCRIPT -->
+
   <script src="js/script.js"></script>
 
-  <!-- WISHLIST FIXES -->
+  <!-- WISHLIST IMAGE & DISPLAY FIX -->
+
   <script>
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -705,17 +752,22 @@
 
       if (!grid || !empty) return;
 
-      /* Known image paths from GLOBALSTEPPER homepage */
+      /* CORRECT PRODUCT IMAGE PATHS */
 
       const knownImages = {
+
         "Grey No Love Lost Tracksuit":
           "images/global tracksuit 1.jpeg",
 
         "Black Been Da Goat Tracksuit":
           "images/global tracksuit 2.jpeg",
 
+        "Signature Tracksuit":
+          "images/global tracksuit 3.jpeg",
+
         "Grey Logo Short Set":
           "images/shortset.jpeg"
+
       };
 
       function updateWishlist() {
