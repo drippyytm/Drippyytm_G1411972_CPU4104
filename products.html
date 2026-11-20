@@ -1,295 +1,309 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="Explore THE ARCHIVE by GLOBALSTEPPER. Premium streetwear from previous collections."
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
-
+  <meta name="description" content="Explore THE ARCHIVE by GLOBALSTEPPER. Premium unisex streetwear.">
   <title>THE ARCHIVE | GLOBALSTEPPER</title>
 
-  <link
-    rel="icon"
-    type="image/png"
-    href="media/images/globalstepper-loader.png"
-  >
-
+  <link rel="icon" href="media/images/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  >
-
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=5">
 
   <style>
-    /* =====================================
-       GLOBALSTEPPER THE ARCHIVE
-    ===================================== */
+    /* GLOBALSTEPPER SHOP — HOMEPAGE MATCH */
 
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
       box-sizing: border-box;
     }
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
-    body {
+    body.gs-shop {
       margin: 0;
+      min-width: 0;
       background: #fff;
-      color: #111;
+      color: #080808;
       font-family: "Barlow Condensed", Arial, sans-serif;
+      overflow-x: hidden;
     }
 
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
+    .gs-shop img {
       display: block;
       max-width: 100%;
     }
 
-    [hidden] {
+    .gs-shop a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .gs-shop button,
+    .gs-shop input,
+    .gs-shop select {
+      font: inherit;
+    }
+
+    .gs-shop [hidden] {
       display: none !important;
     }
 
-    /* HEADER */
+    .gs-shop button {
+      cursor: pointer;
+    }
 
-    .gs-header {
-      position: relative;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      min-height: 84px;
-      padding: 15px 5%;
+    .gs-shop a:focus-visible,
+    .gs-shop button:focus-visible,
+    .gs-shop input:focus-visible,
+    .gs-shop select:focus-visible {
+      outline: 3px solid #555;
+      outline-offset: 4px;
+    }
+
+    /* HEADER — SAME STRUCTURE AS HOMEPAGE */
+
+    .gs-shop .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
       background: #fff;
       border-bottom: 1px solid #e8e8e8;
     }
 
-    .gs-logo img {
-      width: 175px;
-      max-height: 58px;
-      object-fit: contain;
-    }
-
-    .gs-nav {
+    .gs-shop .navbar {
       display: flex;
       align-items: center;
-      gap: 30px;
+      justify-content: space-between;
+      gap: 25px;
+      width: 100%;
+      max-width: 1400px;
+      min-height: 84px;
+      margin: 0 auto;
+      padding: 10px 5%;
     }
 
-    .gs-nav a {
-      font-size: 16px;
+    .gs-shop .logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      width: 110px;
+      height: 64px;
+    }
+
+    .gs-shop .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform .3s ease;
+    }
+
+    .gs-shop .logo:hover img {
+      transform: scale(1.06);
+    }
+
+    .gs-shop .nav-links {
+      position: static;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      list-style: none;
+    }
+
+    .gs-shop .nav-links li {
+      margin: 0;
+      padding: 0;
+    }
+
+    .gs-shop .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 5px;
+      color: #111;
+      background: transparent;
+      border-radius: 0;
+      font-size: 15px;
       font-weight: 800;
-      letter-spacing: 1.5px;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      transition: opacity .2s;
+      transition: opacity .2s ease;
     }
 
-    .gs-nav a:hover {
+    .gs-shop .nav-links a:hover,
+    .gs-shop .nav-links a[aria-current="page"] {
+      color: #111;
+      background: transparent;
       opacity: .55;
     }
 
-    .gs-nav a.active {
+    .gs-shop .nav-links a[aria-current="page"] {
       text-decoration: underline;
       text-underline-offset: 6px;
     }
 
-    .gs-header-actions {
-      display: flex;
+    .gs-shop #cart-count,
+    .gs-shop #wishlist-count {
+      display: inline-flex;
       align-items: center;
-      gap: 18px;
+      justify-content: center;
+      min-width: 23px;
+      min-height: 23px;
+      padding: 2px 5px;
+      background: #111;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 12px;
     }
 
-    .gs-header-actions a {
-      font-size: 17px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .gs-menu-toggle {
+    .gs-shop .menu-toggle {
       display: none;
-      background: none;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
       border: 0;
+      background: transparent;
       color: #111;
-      font-size: 28px;
+      font-size: 27px;
+    }
+
+    .gs-shop .theme-toggle {
+      min-height: 40px;
+      padding: 6px 12px;
+      border: 1px solid #111;
+      border-radius: 0;
+      background: #fff;
+      color: #111;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
     }
 
     /* ARCHIVE HERO */
 
-    .archive-hero {
-      padding: 100px 5% 90px;
-      background: #111;
+    .gs-shop .archive-hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 380px;
+      padding: 95px 20px;
+      background: #080808;
       color: #fff;
       text-align: center;
+      overflow: hidden;
     }
 
-    .archive-eyebrow {
-      margin: 0 0 15px;
-      font-size: 15px;
-      font-weight: 700;
+    .gs-shop .archive-eyebrow {
+      margin: 0 0 22px;
+      color: #d0d0d0;
+      font-size: 14px;
+      font-weight: 800;
       letter-spacing: 5px;
-    }
-
-    .archive-hero h1 {
-      margin: 0;
-      font-size: clamp(65px, 12vw, 170px);
-      font-weight: 900;
-      line-height: .85;
-      letter-spacing: -3px;
       text-transform: uppercase;
     }
 
-    .archive-hero p:last-child {
-      max-width: 600px;
-      margin: 30px auto 0;
-      font-size: 19px;
-      line-height: 1.5;
-      letter-spacing: .5px;
-      color: #d4d4d4;
+    .gs-shop .archive-hero h1 {
+      margin: 0;
+      font-size: clamp(60px, 11vw, 150px);
+      font-weight: 900;
+      line-height: .9;
+      letter-spacing: -2px;
+      text-transform: uppercase;
     }
 
-    /* MAIN ARCHIVE */
+    .gs-shop .archive-hero-description {
+      max-width: 600px;
+      margin: 28px auto 0;
+      color: #ccc;
+      font-size: 19px;
+      line-height: 1.5;
+    }
 
-    .archive-container {
-      max-width: 1500px;
-      margin: auto;
-      padding: 65px 5% 110px;
+    /* MAIN CONTENT */
+
+    .gs-shop .archive-container {
+      max-width: 1450px;
+      margin: 0 auto;
+      padding: 75px 5% 110px;
+    }
+
+    .gs-shop .archive-introduction {
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .gs-shop .archive-introduction h2 {
+      margin: 0 0 14px;
+      font-size: clamp(35px, 6vw, 68px);
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .gs-shop .archive-introduction p {
+      max-width: 600px;
+      margin: 0 auto;
+      color: #666;
+      font-size: 18px;
     }
 
     /* FILTERS */
 
-    .shop-controls {
+    .gs-shop .shop-controls {
       display: grid;
       grid-template-columns: 1fr 1fr 1.4fr;
       gap: 20px;
       align-items: end;
-      margin-bottom: 45px;
+      margin-bottom: 50px;
     }
 
-    .filter-group,
-    .sort-group,
-    .search-group {
+    .gs-shop .filter-group,
+    .gs-shop .sort-group,
+    .gs-shop .search-group {
       min-width: 0;
     }
 
-    .shop-controls label {
+    .gs-shop .shop-controls label {
       display: block;
       margin-bottom: 9px;
       font-size: 14px;
       font-weight: 800;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
-    .shop-controls select,
-    .shop-controls input {
+    .gs-shop .shop-controls select,
+    .gs-shop .shop-controls input {
       width: 100%;
-      min-height: 48px;
-      padding: 12px 14px;
-      background: #fff;
-      color: #111;
+      min-height: 50px;
+      padding: 12px 15px;
       border: 1px solid #ccc;
       border-radius: 0;
+      background: #fff;
+      color: #111;
       font-size: 16px;
-      outline-offset: 3px;
     }
 
-    .live-search-wrapper {
-      position: relative;
-    }
-
-    .search-suggestions {
-      position: absolute;
-      top: calc(100% + 4px);
-      left: 0;
-      right: 0;
-      z-index: 200;
-      padding: 8px;
-      background: #fff;
-      border: 1px solid #ddd;
-      box-shadow: 0 12px 25px rgba(0,0,0,.12);
-    }
-
-    .search-suggestion {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      padding: 10px;
-      border: 0;
-      background: #fff;
-      text-align: left;
-    }
-
-    .search-suggestion:hover,
-    .search-suggestion.active {
-      background: #f1f1f1;
-    }
-
-    .search-suggestion img {
-      width: 45px;
-      height: 55px;
-      object-fit: contain;
-    }
-
-    .search-suggestion > span:nth-child(2) {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-    }
-
-    .search-suggestion-name {
-      font-weight: 800;
-      font-size: 15px;
-    }
-
-    .search-suggestion-category {
-      font-size: 13px;
-      color: #777;
-    }
-
-    .search-suggestion-price {
-      font-weight: 800;
-      font-size: 13px;
-    }
-
-    .product-count {
+    .gs-shop .product-count {
       grid-column: 1 / -1;
       margin: 0;
-      color: #666;
+      color: #777;
       font-size: 15px;
       font-weight: 700;
       letter-spacing: 1px;
@@ -297,72 +311,79 @@
 
     /* COLLECTION INDEX */
 
-    .gs-collection-index {
+    .gs-shop .gs-collection-index {
       display: flex;
-      align-items: flex-end;
       justify-content: space-between;
+      align-items: flex-end;
       gap: 20px;
-      padding: 28px 0;
       margin-bottom: 35px;
+      padding: 25px 0;
       border-top: 2px solid #111;
       border-bottom: 1px solid #ddd;
     }
 
-    .gs-index-eyebrow {
+    .gs-shop .gs-index-eyebrow {
       display: block;
-      margin-bottom: 8px;
-      color: #666;
+      margin-bottom: 10px;
+      color: #777;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 2px;
     }
 
-    .gs-index-title {
+    .gs-shop .gs-index-title {
       margin: 0;
-      font-size: clamp(34px, 5vw, 65px);
+      font-size: clamp(35px, 5vw, 65px);
       font-weight: 900;
       line-height: 1;
     }
 
-    .gs-index-numbers {
+    .gs-shop .gs-index-numbers {
       font-size: clamp(26px, 4vw, 48px);
       font-weight: 900;
-      line-height: 1;
+      white-space: nowrap;
     }
 
-    .gs-index-divider {
-      color: #999;
-    }
+    /* PRODUCT GRID — HOMEPAGE CARD STYLE */
 
-    /* PRODUCT GRID */
-
-    #all-products-grid {
+    .gs-shop #all-products-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 24px;
-      align-items: start;
+      gap: 25px;
+      align-items: stretch;
     }
 
-    .shop-product-card {
+    .gs-shop .shop-product-card {
       position: relative;
+      display: flex;
+      flex-direction: column;
       min-width: 0;
+      overflow: hidden;
+      border: 1px solid #e3e3e3;
+      border-radius: 6px;
       background: #fff;
-      overflow: visible;
+      box-shadow: 0 4px 15px rgba(0,0,0,.08);
+      transition: transform .3s ease, box-shadow .3s ease;
     }
 
-    .shop-product-image {
+    .gs-shop .shop-product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.14);
+    }
+
+    .gs-shop .shop-product-image {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      aspect-ratio: 3 / 4;
+      aspect-ratio: 4 / 5;
       padding: 12px;
       overflow: hidden;
-      background: #f5f5f5;
+      background: #f1f1f1;
     }
 
-    .shop-product-image > a {
+    .gs-shop .shop-product-image > a {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -370,175 +391,399 @@
       height: 100%;
     }
 
-    .shop-product-image img {
+    .gs-shop .shop-product-image img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      object-position: center;
-      transition: transform .35s ease;
+      transition: transform .4s ease;
     }
 
-    .shop-product-card:hover
-    .shop-product-image img {
-      transform: scale(1.035);
+    .gs-shop .shop-product-card:hover .shop-product-image img {
+      transform: scale(1.04);
     }
 
-    /* SOLD OUT BADGE */
-
-    .archive-badge {
+    .gs-shop .archive-badge {
       position: absolute;
-      top: 14px;
-      left: 14px;
+      top: 15px;
+      left: 15px;
       z-index: 5;
-      padding: 8px 13px;
+      padding: 8px 12px;
       background: #111;
       color: #fff;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 900;
       letter-spacing: 1.5px;
     }
 
-    /* WISHLIST HEART */
-
-    .wishlist-button {
+    .gs-shop .wishlist-button {
       position: absolute !important;
-      top: 14px !important;
-      right: 14px !important;
-      z-index: 50 !important;
+      top: 15px !important;
+      right: 15px !important;
+      z-index: 30 !important;
       display: flex !important;
       align-items: center;
       justify-content: center;
       width: 44px !important;
       height: 44px !important;
       padding: 0 !important;
-      background: #fff !important;
-      color: #111 !important;
       border: 1px solid #ddd !important;
       border-radius: 50% !important;
-      font-size: 29px !important;
+      background: #fff !important;
+      color: #111 !important;
+      font-size: 27px !important;
       line-height: 1 !important;
-      cursor: pointer !important;
-      pointer-events: auto !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-      touch-action: manipulation;
-      transition: transform .2s, color .2s;
+      cursor: pointer;
     }
 
-    .wishlist-button:hover {
-      transform: scale(1.1);
-    }
-
-    .wishlist-button.active,
-    .wishlist-button[aria-pressed="true"] {
+    .gs-shop .wishlist-button.active,
+    .gs-shop .wishlist-button[aria-pressed="true"] {
       color: #e63946 !important;
     }
 
-    /* QUICK VIEW */
-
-    .quick-view-button {
+    .gs-shop .quick-view-button {
       position: absolute;
-      left: 12px;
       right: 12px;
       bottom: 12px;
+      left: 12px;
       z-index: 6;
-      padding: 12px;
-      background: rgba(255,255,255,.96);
+      min-height: 42px;
+      padding: 10px;
       border: 1px solid #ddd;
+      border-radius: 0;
+      background: rgba(255,255,255,.96);
+      color: #111;
       font-size: 14px;
       font-weight: 900;
       letter-spacing: 1px;
       text-transform: uppercase;
     }
 
-    .quick-view-button:hover {
+    .gs-shop .quick-view-button:hover {
       background: #111;
       color: #fff;
     }
 
-    /* PRODUCT INFORMATION */
-
-    .shop-product-info {
-      padding: 18px 2px 10px;
+    .gs-shop .shop-product-info {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 22px 18px;
     }
 
-    .product-category {
-      margin: 0 0 8px;
+    .gs-shop .product-category {
+      margin: 0 0 9px;
       color: #777;
       font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 2px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
     }
 
-    .shop-product-info h2 {
-      min-height: 48px;
+    .gs-shop .shop-product-info h2 {
+      min-height: 52px;
       margin: 0 0 12px;
-      font-size: 22px;
+      font-size: 23px;
       font-weight: 900;
       line-height: 1.1;
       text-transform: uppercase;
     }
 
-    .product-price {
-      margin: 0 0 18px;
-      font-size: 21px;
+    .gs-shop .product-price {
+      margin: 0 0 20px;
+      font-size: 23px;
       font-weight: 800;
     }
 
-    .product-actions {
+    .gs-shop .product-actions {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 9px;
+      margin-top: auto;
     }
 
-    .product-button,
-    .add-to-cart-btn {
+    .gs-shop .product-button,
+    .gs-shop .add-to-cart-btn {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      min-height: 44px;
-      padding: 10px;
-      border: 1px solid #111;
+      min-height: 47px;
+      padding: 11px;
+      border: 2px solid #111;
+      border-radius: 4px;
       font-size: 15px;
       font-weight: 900;
       letter-spacing: 1px;
+      text-align: center;
       text-transform: uppercase;
+      transition: background .2s, color .2s;
     }
 
-    .product-button {
+    .gs-shop .product-button {
       background: #fff;
       color: #111;
     }
 
-    .product-button:hover {
+    .gs-shop .product-button:hover {
       background: #111;
       color: #fff;
     }
 
-    .add-to-cart-btn:disabled {
-      background: #e8e8e8;
+    .gs-shop .add-to-cart-btn:disabled {
       border-color: #e8e8e8;
+      background: #e8e8e8;
       color: #777;
       cursor: not-allowed;
     }
 
-    /* EMPTY SEARCH */
-
-    #no-products-message {
-      padding: 65px 15px;
+    .gs-shop #no-products-message {
+      padding: 60px 15px;
       text-align: center;
       font-size: 22px;
       font-weight: 800;
     }
 
+    /* BRAND MESSAGE */
+
+    .gs-shop .archive-brand-section {
+      padding: 85px 20px;
+      background: #ededed;
+      text-align: center;
+    }
+
+    .gs-shop .archive-brand-section h2 {
+      margin: 0 auto 20px;
+      font-size: clamp(35px, 7vw, 80px);
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .gs-shop .archive-brand-section p {
+      max-width: 650px;
+      margin: 0 auto 25px;
+      color: #555;
+      font-size: 19px;
+    }
+
+    .gs-shop .archive-brand-section a {
+      display: inline-flex;
+      padding: 13px 24px;
+      border: 2px solid #111;
+      border-radius: 4px;
+      background: #111;
+      color: #fff;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .gs-shop .archive-brand-section a:hover {
+      background: transparent;
+      color: #111;
+    }
+
+    /* FOOTER — HOMEPAGE STYLE */
+
+    .gs-shop .gs-premium-footer {
+      padding: 70px 5% 25px;
+      background: #111;
+      color: #fff;
+    }
+
+    .gs-shop .gs-footer-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 50px;
+      max-width: 1300px;
+      margin: 0 auto 60px;
+    }
+
+    .gs-shop .gs-footer-loader-logo {
+      width: min(100%, 270px);
+      height: auto;
+      object-fit: contain;
+    }
+
+    .gs-shop .gs-footer-description {
+      max-width: 360px;
+      margin-top: 20px;
+      color: #bdbdbd;
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .gs-shop .gs-footer-column {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .gs-shop .gs-footer-heading {
+      margin: 0 0 10px;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .gs-shop .gs-footer-column a {
+      color: #cfcfcf;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .gs-shop .gs-footer-column a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .gs-shop .gs-footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      max-width: 1300px;
+      margin: auto;
+      padding-top: 25px;
+      border-top: 1px solid #383838;
+      color: #aaa;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    /* RESPONSIVE DESIGN */
+
+    @media (max-width: 1100px) {
+      .gs-shop #all-products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .gs-shop .navbar {
+        gap: 12px;
+      }
+
+      .gs-shop .nav-links {
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .gs-shop .navbar {
+        min-height: 72px;
+        padding: 8px 5%;
+      }
+
+      .gs-shop .menu-toggle {
+        display: flex;
+        margin-left: auto;
+      }
+
+      .gs-shop .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 15px 5% 25px;
+        background: #fff;
+        border-bottom: 1px solid #ddd;
+        box-shadow: 0 12px 25px rgba(0,0,0,.08);
+      }
+
+      .gs-shop .nav-links.show {
+        display: flex;
+      }
+
+      .gs-shop .nav-links li {
+        width: 100%;
+      }
+
+      .gs-shop .nav-links a {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 13px 8px;
+      }
+
+      .gs-shop .archive-hero {
+        min-height: 300px;
+        padding: 75px 15px;
+      }
+
+      .gs-shop .archive-hero h1 {
+        font-size: clamp(55px, 12vw, 90px);
+      }
+
+      .gs-shop .archive-container {
+        padding: 55px 5% 80px;
+      }
+
+      .gs-shop .shop-controls {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .gs-shop .product-count {
+        grid-column: 1;
+      }
+
+      .gs-shop .gs-footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px;
+      }
+
+      .gs-shop .gs-footer-brand {
+        grid-column: 1 / -1;
+      }
+
+      .gs-shop .gs-footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .gs-shop #all-products-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .gs-shop .shop-product-info {
+        padding: 22px;
+      }
+
+      .gs-shop .shop-product-image {
+        aspect-ratio: 4 / 5;
+      }
+
+      .gs-shop .gs-collection-index {
+        align-items: center;
+      }
+
+      .gs-shop .gs-index-numbers {
+        font-size: 27px;
+      }
+
+      .gs-shop .gs-footer-container {
+        grid-template-columns: 1fr;
+      }
+
+      .gs-shop .gs-footer-brand {
+        grid-column: auto;
+      }
+    }
+
     /* QUICK VIEW MODAL */
 
-    #quick-view-modal {
+    .gs-shop #quick-view-modal {
       position: fixed;
       inset: 0;
-      z-index: 1000;
+      z-index: 5000;
       display: none;
       align-items: center;
       justify-content: center;
@@ -546,1003 +791,662 @@
       background: rgba(0,0,0,.75);
     }
 
-    #quick-view-modal.open {
+    .gs-shop #quick-view-modal.open {
       display: flex;
     }
 
-    .quick-view-panel {
+    .gs-shop .quick-view-content {
       position: relative;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 30px;
-      width: min(850px, 100%);
+      width: min(100%, 850px);
       max-height: 90vh;
-      padding: 30px;
+      padding: 35px;
       overflow-y: auto;
       background: #fff;
+      color: #111;
     }
 
-    .quick-view-panel > img {
+    .gs-shop .quick-view-content img {
       width: 100%;
-      max-height: 480px;
+      max-height: 450px;
       object-fit: contain;
-      background: #f5f5f5;
+      background: #f1f1f1;
     }
 
-    #quick-view-close {
+    .gs-shop .quick-view-close {
       position: absolute;
       top: 10px;
-      right: 12px;
-      z-index: 5;
+      right: 15px;
+      width: 38px;
+      height: 38px;
       border: 0;
-      background: #fff;
-      font-size: 30px;
-    }
-
-    #quick-view-title {
-      font-size: 36px;
-      font-weight: 900;
-      line-height: 1;
-    }
-
-    #quick-view-price {
+      background: #111;
+      color: #fff;
       font-size: 25px;
-      font-weight: 800;
     }
 
-    #quick-view-add-to-cart,
-    #quick-view-product-link {
-      display: block;
-      width: 100%;
-      margin-top: 12px;
-      padding: 14px;
-      border: 1px solid #111;
-      text-align: center;
+    .gs-shop .quick-view-details h2 {
+      margin: 0 0 15px;
+      font-size: 38px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .gs-shop .quick-view-details p {
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+
+    .gs-shop .quick-view-details a {
+      display: inline-block;
+      padding: 12px 22px;
+      background: #111;
+      color: #fff;
       font-weight: 900;
       text-transform: uppercase;
     }
 
-    #quick-view-add-to-cart:disabled {
-      background: #ddd;
-      color: #777;
-      border-color: #ddd;
-      cursor: not-allowed;
-    }
-
-    /* NOTIFICATIONS */
-
-    .cart-notification {
-      position: fixed;
-      right: 20px;
-      bottom: 25px;
-      z-index: 9999;
-      max-width: 340px;
-      padding: 16px 22px;
-      background: #111;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 800;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .3s, transform .3s;
-    }
-
-    .cart-notification.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* FOOTER */
-
-    .gs-footer {
-      padding: 65px 5% 25px;
-      background: #111;
-      color: #fff;
-    }
-
-    .gs-footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 50px;
-      max-width: 1400px;
-      margin: auto;
-    }
-
-    .gs-footer-logo {
-      width: 180px;
-      max-height: 85px;
-      object-fit: contain;
-      margin-bottom: 15px;
-    }
-
-    .gs-footer h3 {
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: 1px;
-    }
-
-    .gs-footer p,
-    .gs-footer a {
-      color: #ccc;
-      font-size: 17px;
-      line-height: 1.7;
-    }
-
-    .gs-footer-links {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .gs-footer-bottom {
-      max-width: 1400px;
-      margin: 45px auto 0;
-      padding-top: 20px;
-      border-top: 1px solid #444;
-      font-size: 14px;
-      letter-spacing: 1px;
-      color: #aaa;
-    }
-
-    /* TABLET */
-
-    @media (max-width: 1100px) {
-      #all-products-grid {
-        grid-template-columns: repeat(2, minmax(0,1fr));
-        gap: 26px;
-      }
-
-      .shop-controls {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .search-group {
-        grid-column: 1 / -1;
-      }
-    }
-
-    /* MOBILE NAVIGATION */
-
-    @media (max-width: 800px) {
-      .gs-header {
-        flex-wrap: wrap;
-        min-height: 70px;
-      }
-
-      .gs-logo img {
-        width: 135px;
-      }
-
-      .gs-menu-toggle {
-        display: block;
-      }
-
-      .gs-nav {
-        display: none;
-        order: 4;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        width: 100%;
-        padding: 12px 0;
-      }
-
-      .gs-nav.show {
-        display: flex;
-      }
-
-      .gs-nav a {
-        padding: 13px 0;
-        border-bottom: 1px solid #eee;
-      }
-
-      .gs-header-actions {
-        margin-left: auto;
-        gap: 12px;
-      }
-
-      .archive-hero {
-        padding: 80px 5%;
-      }
-
-      .gs-footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .gs-footer-brand {
-        grid-column: 1 / -1;
-      }
-    }
-
-    /* SMALL MOBILE */
-
     @media (max-width: 600px) {
-      .archive-container {
-        padding: 40px 4% 70px;
-      }
-
-      .archive-hero h1 {
-        font-size: clamp(54px, 14vw, 85px);
-        letter-spacing: -1px;
-      }
-
-      .archive-hero p:last-child {
-        font-size: 16px;
-      }
-
-      .shop-controls {
+      .gs-shop .quick-view-content {
         grid-template-columns: 1fr;
         gap: 15px;
+        padding: 35px 20px 20px;
       }
 
-      .search-group {
-        grid-column: auto;
-      }
-
-      .gs-collection-index {
-        align-items: center;
-      }
-
-      .gs-index-title {
-        font-size: 34px;
-      }
-
-      #all-products-grid {
-        grid-template-columns: repeat(2, minmax(0,1fr));
-        gap: 12px;
-      }
-
-      .shop-product-image {
-        padding: 6px;
-        aspect-ratio: 3 / 4;
-      }
-
-      .shop-product-info h2 {
-        font-size: 17px;
-        min-height: 56px;
-      }
-
-      .product-price {
-        font-size: 18px;
-      }
-
-      .archive-badge {
-        top: 8px;
-        left: 7px;
-        padding: 6px;
-        font-size: 10px;
-      }
-
-      .wishlist-button {
-        top: 8px !important;
-        right: 7px !important;
-        width: 37px !important;
-        height: 37px !important;
-        font-size: 25px !important;
-      }
-
-      .quick-view-button {
-        left: 5px;
-        right: 5px;
-        bottom: 5px;
-        padding: 8px 3px;
-        font-size: 11px;
-      }
-
-      .product-button,
-      .add-to-cart-btn {
-        font-size: 12px;
-        min-height: 40px;
-      }
-
-      .quick-view-panel {
-        grid-template-columns: 1fr;
-        padding: 20px;
-        gap: 12px;
-      }
-
-      .quick-view-panel > img {
+      .gs-shop .quick-view-content img {
         max-height: 280px;
-      }
-
-      #quick-view-title {
-        font-size: 28px;
-      }
-
-      .gs-footer-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .gs-footer-brand {
-        grid-column: auto;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
+      .gs-shop *,
+      .gs-shop *::before,
+      .gs-shop *::after {
         animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
       }
     }
   </style>
 </head>
 
-<body class="shop-page">
+<body class="gs-shop">
 
-  <!-- =====================================
-       HEADER
-  ===================================== -->
+  <!-- HEADER -->
 
-  <header class="gs-header">
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
 
-    <a
-      class="gs-logo"
-      href="index.html"
-      aria-label="GLOBALSTEPPER home"
-    >
-      <img
-        src="media/images/globalstepper-loader.png"
-        alt="GLOBALSTEPPER"
-      >
-    </a>
-
-    <nav
-      class="gs-nav"
-      id="nav-links"
-      aria-label="Main navigation"
-    >
-      <a href="index.html">HOME</a>
-      <a href="products.html" class="active">SHOP</a>
-      <a href="about.html">ABOUT</a>
-      <a href="contact.html">CONTACT</a>
-    </nav>
-
-    <div class="gs-header-actions">
-
-      <a
-        href="wishlist.html"
-        aria-label="View wishlist"
-      >
-        ♡ <span id="wishlist-count">0</span>
-      </a>
-
-      <a
-        href="cart.html"
-        aria-label="View shopping cart"
-      >
-        BAG (<span id="cart-count">0</span>)
+      <a href="index.html" class="logo" aria-label="GLOBALSTEPPER homepage">
+        <img src="media/images/logo.png" alt="GLOBALSTEPPER logo">
       </a>
 
       <button
-        class="gs-menu-toggle"
-        id="menu-toggle"
         type="button"
-        aria-label="Open navigation menu"
+        class="menu-toggle"
+        id="menu-toggle"
+        aria-label="Open navigation"
+        aria-controls="nav-links"
         aria-expanded="false"
-      >
-        ☰
-      </button>
+      >☰</button>
 
-    </div>
-
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" aria-current="page">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+          <a href="wishlist.html" class="wishlist-link">
+            Wishlist <span id="wishlist-count">0</span>
+          </a>
+        </li>
+        <li>
+          <a href="cart.html" class="cart-link">
+            Cart <span id="cart-count">0</span>
+          </a>
+        </li>
+        <li>
+          <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle colour theme">
+            <span class="theme-toggle-text">Dark</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
   </header>
-
-  <!-- =====================================
-       ARCHIVE HERO
-  ===================================== -->
 
   <main>
 
+    <!-- ARCHIVE HERO -->
+
     <section class="archive-hero">
-
-      <p class="archive-eyebrow">
-        GLOBALSTEPPER — ESTABLISHED 2022
-      </p>
-
+      <p class="archive-eyebrow">GLOBALSTEPPER / PREVIOUS COLLECTIONS</p>
       <h1>THE ARCHIVE</h1>
-
-      <p>
-        A look back at the pieces that shaped our journey.
-        Previous collections, signature designs and
-        streetwear that represents progression.
+      <p class="archive-hero-description">
+        A collection of previous GLOBALSTEPPER releases.
+        Every piece represents a chapter of our journey.
       </p>
-
     </section>
+
+    <!-- ARCHIVE PRODUCTS -->
 
     <div class="archive-container">
 
-      <!-- FILTERS -->
+      <div class="archive-introduction">
+        <h2>PREVIOUS DROPS</h2>
+        <p>
+          Explore the pieces that helped shape GLOBALSTEPPER.
+          All archive items are currently sold out.
+        </p>
+      </div>
 
-      <section
-        class="shop-controls"
-        aria-label="Product filters"
-      >
+      <!-- SEARCH, SORT & FILTER -->
+
+      <section class="shop-controls" aria-label="Product filters">
 
         <div class="filter-group">
-
-          <label for="category-filter">
-            FILTER BY CATEGORY
-          </label>
-
+          <label for="category-filter">FILTER BY CATEGORY</label>
           <select id="category-filter">
             <option value="all">All Products</option>
             <option value="tracksuits">Tracksuits</option>
             <option value="short-sets">Short Sets</option>
           </select>
-
         </div>
 
         <div class="sort-group">
-
-          <label for="product-sort">
-            SORT PRODUCTS
-          </label>
-
-          <select id="product-sort">
+          <label for="sort-filter">SORT BY</label>
+          <select id="sort-filter">
             <option value="default">Featured</option>
             <option value="price-low">Price: Low to High</option>
             <option value="price-high">Price: High to Low</option>
             <option value="name-az">Name: A to Z</option>
-            <option value="name-za">Name: Z to A</option>
           </select>
-
         </div>
 
         <div class="search-group">
-
-          <label for="product-search">
-            SEARCH PRODUCTS
-          </label>
-
-          <div class="live-search-wrapper">
-
-            <input
-              id="product-search"
-              type="search"
-              placeholder="Search the archive..."
-              autocomplete="off"
-              aria-controls="search-suggestions"
-              aria-expanded="false"
-            >
-
-            <div
-              id="search-suggestions"
-              class="search-suggestions"
-              role="listbox"
-              hidden
-            ></div>
-
-          </div>
-
+          <label for="product-search">SEARCH THE ARCHIVE</label>
+          <input
+            type="search"
+            id="product-search"
+            placeholder="Search products..."
+            autocomplete="off"
+          >
         </div>
 
-        <p
-          id="product-count"
-          class="product-count"
-          aria-live="polite"
-        >
+        <p class="product-count" id="product-count" aria-live="polite">
           Showing 4 products
         </p>
-
       </section>
 
       <!-- COLLECTION INDEX -->
 
-      <section class="gs-collection-index">
-
+      <div class="gs-collection-index">
         <div>
-
-          <span class="gs-index-eyebrow">
-            GLOBALSTEPPER — PREVIOUS DROPS
-          </span>
-
-          <h2 class="gs-index-title">
-            THE ARCHIVE
-          </h2>
-
+          <span class="gs-index-eyebrow">GLOBALSTEPPER COLLECTION</span>
+          <h2 class="gs-index-title">ARCHIVE</h2>
         </div>
+        <div class="gs-index-numbers">001 — 004</div>
+      </div>
 
-        <div>
+      <!-- PRODUCT GRID -->
 
-          <span class="gs-index-eyebrow">
-            COLLECTION INDEX
-          </span>
-
-          <div class="gs-index-numbers">
-            001 <span class="gs-index-divider">/</span> 004
-          </div>
-
-        </div>
-
-      </section>
-
-      <!-- =====================================
-           ALL FOUR ARCHIVE PRODUCTS
-      ===================================== -->
-
-      <section
-        id="all-products-grid"
-        class="all-products-grid"
-        aria-label="GLOBALSTEPPER archive products"
-      >
+      <div class="all-products-grid" id="all-products-grid">
 
         <!-- PRODUCT 1 -->
 
         <article
           class="shop-product-card archive-product"
-          data-sold-out="true"
+          data-product-id="1"
           data-category="tracksuits"
           data-name="grey no love lost tracksuit"
           data-price="185.99"
+          data-sold-out="true"
         >
-
-          <button
-            class="wishlist-button"
-            type="button"
-            data-product-id="1"
-            aria-label="Add Grey No Love Lost Tracksuit to wishlist"
-            aria-pressed="false"
-          >♡</button>
-
           <div class="shop-product-image">
-
-            <span class="archive-badge">
-              SOLD OUT
-            </span>
-
-            <a href="product-details.html?id=1">
-
-              <img
-                src="images/global tracksuit 1.jpeg"
-                alt="Grey No Love Lost Tracksuit"
-                loading="lazy"
-              >
-
-            </a>
+            <span class="archive-badge">SOLD OUT</span>
 
             <button
-              class="quick-view-button"
               type="button"
+              class="wishlist-button"
               data-product-id="1"
-            >
+              aria-label="Add Grey No Love Lost Tracksuit to wishlist"
+              aria-pressed="false"
+            >♡</button>
+
+            <a href="product-details.html?id=1">
+              <img
+                src="images/global tracksuit 1.jpeg"
+                alt="GLOBALSTEPPER Grey No Love Lost Tracksuit"
+                loading="lazy"
+              >
+            </a>
+
+            <button type="button" class="quick-view-button" data-product-id="1">
               QUICK VIEW
             </button>
-
           </div>
 
           <div class="shop-product-info">
-
-            <p class="product-category">
-              TRACKSUITS
-            </p>
-
+            <p class="product-category">TRACKSUITS</p>
             <h2>Grey No Love Lost Tracksuit</h2>
-
-            <p class="product-price">
-              £185.99
-            </p>
+            <p class="product-price">£185.99</p>
 
             <div class="product-actions">
-
-              <a
-                href="product-details.html?id=1"
-                class="product-button"
-              >
+              <a href="product-details.html?id=1" class="product-button">
                 VIEW PRODUCT
               </a>
-
-              <button
-                class="add-to-cart-btn"
-                type="button"
-                data-id="1"
-                disabled
-                aria-disabled="true"
-              >
+              <button type="button" class="add-to-cart-btn" data-id="1" disabled>
                 SOLD OUT
               </button>
-
             </div>
-
           </div>
-
         </article>
 
         <!-- PRODUCT 2 -->
 
         <article
           class="shop-product-card archive-product"
-          data-sold-out="true"
+          data-product-id="2"
           data-category="tracksuits"
           data-name="black been da goat tracksuit"
           data-price="185.99"
+          data-sold-out="true"
         >
-
-          <button
-            class="wishlist-button"
-            type="button"
-            data-product-id="2"
-            aria-label="Add Black Been Da Goat Tracksuit to wishlist"
-            aria-pressed="false"
-          >♡</button>
-
           <div class="shop-product-image">
-
-            <span class="archive-badge">
-              SOLD OUT
-            </span>
-
-            <a href="product-details.html?id=2">
-
-              <img
-                src="images/global tracksuit 2.jpeg"
-                alt="Black Been Da Goat Tracksuit"
-                loading="lazy"
-              >
-
-            </a>
+            <span class="archive-badge">SOLD OUT</span>
 
             <button
-              class="quick-view-button"
               type="button"
+              class="wishlist-button"
               data-product-id="2"
-            >
+              aria-label="Add Black Been Da Goat Tracksuit to wishlist"
+              aria-pressed="false"
+            >♡</button>
+
+            <a href="product-details.html?id=2">
+              <img
+                src="images/global tracksuit 2.jpeg"
+                alt="GLOBALSTEPPER Black Been Da Goat Tracksuit"
+                loading="lazy"
+              >
+            </a>
+
+            <button type="button" class="quick-view-button" data-product-id="2">
               QUICK VIEW
             </button>
-
           </div>
 
           <div class="shop-product-info">
-
-            <p class="product-category">
-              TRACKSUITS
-            </p>
-
+            <p class="product-category">TRACKSUITS</p>
             <h2>Black Been Da Goat Tracksuit</h2>
-
-            <p class="product-price">
-              £185.99
-            </p>
+            <p class="product-price">£185.99</p>
 
             <div class="product-actions">
-
-              <a
-                href="product-details.html?id=2"
-                class="product-button"
-              >
+              <a href="product-details.html?id=2" class="product-button">
                 VIEW PRODUCT
               </a>
-
-              <button
-                class="add-to-cart-btn"
-                type="button"
-                data-id="2"
-                disabled
-                aria-disabled="true"
-              >
+              <button type="button" class="add-to-cart-btn" data-id="2" disabled>
                 SOLD OUT
               </button>
-
             </div>
-
           </div>
-
         </article>
 
         <!-- PRODUCT 3 -->
 
         <article
           class="shop-product-card archive-product"
-          data-sold-out="true"
+          data-product-id="3"
           data-category="tracksuits"
           data-name="signature tracksuit"
           data-price="179.99"
+          data-sold-out="true"
         >
-
-          <button
-            class="wishlist-button"
-            type="button"
-            data-product-id="3"
-            aria-label="Add Signature Tracksuit to wishlist"
-            aria-pressed="false"
-          >♡</button>
-
           <div class="shop-product-image">
-
-            <span class="archive-badge">
-              SOLD OUT
-            </span>
-
-            <a href="product-details.html?id=3">
-
-              <img
-                src="images/global tracksuit 3.jpeg"
-                alt="Signature Tracksuit"
-                loading="lazy"
-              >
-
-            </a>
+            <span class="archive-badge">SOLD OUT</span>
 
             <button
-              class="quick-view-button"
               type="button"
+              class="wishlist-button"
               data-product-id="3"
-            >
+              aria-label="Add Signature Tracksuit to wishlist"
+              aria-pressed="false"
+            >♡</button>
+
+            <a href="product-details.html?id=3">
+              <img
+                src="images/global tracksuit 3.jpeg"
+                alt="GLOBALSTEPPER Signature Tracksuit"
+                loading="lazy"
+              >
+            </a>
+
+            <button type="button" class="quick-view-button" data-product-id="3">
               QUICK VIEW
             </button>
-
           </div>
 
           <div class="shop-product-info">
-
-            <p class="product-category">
-              TRACKSUITS
-            </p>
-
+            <p class="product-category">TRACKSUITS</p>
             <h2>Signature Tracksuit</h2>
-
-            <p class="product-price">
-              £179.99
-            </p>
+            <p class="product-price">£179.99</p>
 
             <div class="product-actions">
-
-              <a
-                href="product-details.html?id=3"
-                class="product-button"
-              >
+              <a href="product-details.html?id=3" class="product-button">
                 VIEW PRODUCT
               </a>
-
-              <button
-                class="add-to-cart-btn"
-                type="button"
-                data-id="3"
-                disabled
-                aria-disabled="true"
-              >
+              <button type="button" class="add-to-cart-btn" data-id="3" disabled>
                 SOLD OUT
               </button>
-
             </div>
-
           </div>
-
         </article>
 
         <!-- PRODUCT 4 -->
 
         <article
           class="shop-product-card archive-product"
-          data-sold-out="true"
+          data-product-id="4"
           data-category="short-sets"
           data-name="grey logo short set"
           data-price="125.99"
+          data-sold-out="true"
         >
-
-          <button
-            class="wishlist-button"
-            type="button"
-            data-product-id="4"
-            aria-label="Add Grey Logo Short Set to wishlist"
-            aria-pressed="false"
-          >♡</button>
-
           <div class="shop-product-image">
-
-            <span class="archive-badge">
-              SOLD OUT
-            </span>
-
-            <a href="product-details.html?id=4">
-
-              <img
-                src="images/shortset.jpeg"
-                alt="Grey Logo Short Set"
-                loading="lazy"
-              >
-
-            </a>
+            <span class="archive-badge">SOLD OUT</span>
 
             <button
-              class="quick-view-button"
               type="button"
+              class="wishlist-button"
               data-product-id="4"
-            >
+              aria-label="Add Grey Logo Short Set to wishlist"
+              aria-pressed="false"
+            >♡</button>
+
+            <a href="product-details.html?id=4">
+              <img
+                src="images/shortset.jpeg"
+                alt="GLOBALSTEPPER Grey Logo Short Set"
+                loading="lazy"
+              >
+            </a>
+
+            <button type="button" class="quick-view-button" data-product-id="4">
               QUICK VIEW
             </button>
-
           </div>
 
           <div class="shop-product-info">
-
-            <p class="product-category">
-              SHORT SETS
-            </p>
-
+            <p class="product-category">SHORT SETS</p>
             <h2>Grey Logo Short Set</h2>
-
-            <p class="product-price">
-              £125.99
-            </p>
+            <p class="product-price">£125.99</p>
 
             <div class="product-actions">
-
-              <a
-                href="product-details.html?id=4"
-                class="product-button"
-              >
+              <a href="product-details.html?id=4" class="product-button">
                 VIEW PRODUCT
               </a>
-
-              <button
-                class="add-to-cart-btn"
-                type="button"
-                data-id="4"
-                disabled
-                aria-disabled="true"
-              >
+              <button type="button" class="add-to-cart-btn" data-id="4" disabled>
                 SOLD OUT
               </button>
-
             </div>
-
           </div>
-
         </article>
 
-      </section>
-
-      <!-- NO SEARCH RESULTS -->
-
-      <div
-        id="no-products-message"
-        hidden
-      >
-        NO PRODUCTS FOUND.
-        <p>Try another search or category.</p>
       </div>
 
+      <p id="no-products-message" hidden>
+        No products match your search.
+      </p>
+
     </div>
+
+    <!-- BRAND STORY -->
+
+    <section class="archive-brand-section">
+      <h2>GLOBAL NOT LOCAL.</h2>
+      <p>
+        The world is yours. Step into it.
+        Discover the story behind GLOBALSTEPPER.
+      </p>
+      <a href="about.html">DISCOVER OUR STORY</a>
+    </section>
 
   </main>
 
-  <!-- =====================================
-       QUICK VIEW POPUP
-  ===================================== -->
+  <!-- PREMIUM FOOTER -->
 
-  <div
-    id="quick-view-modal"
-    aria-hidden="true"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Product quick view"
-  >
+  <footer class="gs-premium-footer">
 
-    <div
-      id="quick-view-overlay"
-      style="position:absolute;inset:0"
-    ></div>
-
-    <div
-      class="quick-view-panel"
-      style="z-index:1"
-    >
-
-      <button
-        id="quick-view-close"
-        type="button"
-        aria-label="Close quick view"
-      >
-        ×
-      </button>
-
-      <img
-        id="quick-view-image"
-        src=""
-        alt=""
-      >
-
-      <div>
-
-        <p id="quick-view-category"></p>
-
-        <h2 id="quick-view-title"></h2>
-
-        <p id="quick-view-price"></p>
-
-        <p id="quick-view-description"></p>
-
-        <button
-          id="quick-view-add-to-cart"
-          type="button"
-          disabled
-        >
-          SOLD OUT
-        </button>
-
-        <a
-          id="quick-view-product-link"
-          href="products.html"
-        >
-          VIEW PRODUCT
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- =====================================
-       FOOTER
-  ===================================== -->
-
-  <footer class="gs-footer">
-
-    <div class="gs-footer-grid">
+    <div class="gs-footer-container">
 
       <div class="gs-footer-brand">
+        <a href="index.html" aria-label="GLOBALSTEPPER homepage">
+          <img
+            src="media/images/globalstepper-loader.png"
+            alt="GLOBALSTEPPER"
+            class="gs-footer-loader-logo"
+          >
+        </a>
 
-        <img
-          class="gs-footer-logo"
-          src="media/images/globalstepper-loader.png"
-          alt="GLOBALSTEPPER"
-        >
-
-        <p>
+        <p class="gs-footer-description">
           Premium streetwear representing ambition,
           confidence and progression.
         </p>
-
-        <p>
-          THE WORLD IS YOURS. STEP INTO IT.
-        </p>
-
       </div>
 
-      <div>
-
-        <h3>QUICK LINKS</h3>
-
-        <div class="gs-footer-links">
-          <a href="index.html">HOME</a>
-          <a href="products.html">SHOP</a>
-          <a href="about.html">ABOUT</a>
-          <a href="contact.html">CONTACT</a>
-        </div>
-
+      <div class="gs-footer-column">
+        <h2 class="gs-footer-heading">QUICK LINKS</h2>
+        <a href="index.html">HOME</a>
+        <a href="products.html">SHOP</a>
+        <a href="about.html">ABOUT</a>
+        <a href="contact.html">CONTACT</a>
       </div>
 
-      <div>
-
-        <h3>CUSTOMER SUPPORT</h3>
-
-        <div class="gs-footer-links">
-          <a href="contact.html">CONTACT US</a>
-          <a href="wishlist.html">MY WISHLIST</a>
-          <a href="cart.html">SHOPPING BAG</a>
-        </div>
-
+      <div class="gs-footer-column">
+        <h2 class="gs-footer-heading">CUSTOMER SUPPORT</h2>
+        <a href="contact.html">CONTACT US</a>
+        <a href="cart.html">SHOPPING CART</a>
+        <a href="wishlist.html">WISHLIST</a>
       </div>
 
     </div>
 
     <div class="gs-footer-bottom">
-      © <span id="current-year">2026</span>
-      GLOBALSTEPPER. ALL RIGHTS RESERVED.
-      ESTABLISHED IN 2022.
+      <span>© 2026 GLOBALSTEPPER. ALL RIGHTS RESERVED.</span>
+      <span>ESTABLISHED IN 2022 — GLOBAL NOT LOCAL.</span>
     </div>
 
   </footer>
 
-  <!-- =====================================
-       WEBSITE JAVASCRIPT
-  ===================================== -->
+  <!-- QUICK VIEW MODAL -->
 
+  <div
+    id="quick-view-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="quick-view-title"
+    aria-hidden="true"
+  >
+    <div class="quick-view-content">
+      <button type="button" class="quick-view-close" aria-label="Close quick view">
+        ×
+      </button>
+
+      <img id="quick-view-image" src="" alt="">
+
+      <div class="quick-view-details">
+        <p>GLOBALSTEPPER / THE ARCHIVE</p>
+        <h2 id="quick-view-title"></h2>
+        <p id="quick-view-price"></p>
+        <p>THIS ITEM IS SOLD OUT.</p>
+        <a id="quick-view-link" href="products.html">
+          VIEW PRODUCT
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE FUNCTIONALITY -->
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      const menuButton = document.getElementById("menu-toggle");
+      const navLinks = document.getElementById("nav-links");
+
+      if (menuButton && navLinks) {
+        menuButton.addEventListener("click", function () {
+          const open = navLinks.classList.toggle("show");
+          menuButton.setAttribute("aria-expanded", String(open));
+          menuButton.setAttribute(
+            "aria-label",
+            open ? "Close navigation" : "Open navigation"
+          );
+          menuButton.textContent = open ? "×" : "☰";
+        });
+
+        navLinks.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            navLinks.classList.remove("show");
+            menuButton.setAttribute("aria-expanded", "false");
+            menuButton.textContent = "☰";
+          });
+        });
+      }
+
+      const grid = document.getElementById("all-products-grid");
+      const cards = Array.from(grid.querySelectorAll(".shop-product-card"));
+      const categoryFilter = document.getElementById("category-filter");
+      const sortFilter = document.getElementById("sort-filter");
+      const searchInput = document.getElementById("product-search");
+      const productCount = document.getElementById("product-count");
+      const noProducts = document.getElementById("no-products-message");
+
+      function updateProducts() {
+        const category = categoryFilter.value;
+        const search = searchInput.value.trim().toLowerCase();
+        const sort = sortFilter.value;
+
+        const visible = cards.filter(function (card) {
+          const matchesCategory =
+            category === "all" || card.dataset.category === category;
+
+          const matchesSearch =
+            card.dataset.name.includes(search);
+
+          return matchesCategory && matchesSearch;
+        });
+
+        const sorted = [...visible];
+
+        sorted.sort(function (a, b) {
+          if (sort === "price-low") {
+            return Number(a.dataset.price) - Number(b.dataset.price);
+          }
+
+          if (sort === "price-high") {
+            return Number(b.dataset.price) - Number(a.dataset.price);
+          }
+
+          if (sort === "name-az") {
+            return a.dataset.name.localeCompare(b.dataset.name);
+          }
+
+          return cards.indexOf(a) - cards.indexOf(b);
+        });
+
+        cards.forEach(function (card) {
+          card.hidden = !visible.includes(card);
+        });
+
+        sorted.forEach(function (card) {
+          grid.appendChild(card);
+        });
+
+        productCount.textContent =
+          "Showing " + visible.length + " of " + cards.length + " products";
+
+        noProducts.hidden = visible.length !== 0;
+      }
+
+      categoryFilter.addEventListener("change", updateProducts);
+      sortFilter.addEventListener("change", updateProducts);
+      searchInput.addEventListener("input", updateProducts);
+
+      updateProducts();
+
+      /* QUICK VIEW */
+
+      const modal = document.getElementById("quick-view-modal");
+      const modalImage = document.getElementById("quick-view-image");
+      const modalTitle = document.getElementById("quick-view-title");
+      const modalPrice = document.getElementById("quick-view-price");
+      const modalLink = document.getElementById("quick-view-link");
+      const closeButton = modal.querySelector(".quick-view-close");
+      let previousFocus = null;
+
+      function closeQuickView() {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        if (previousFocus) previousFocus.focus();
+      }
+
+      document.querySelectorAll(".quick-view-button").forEach(function (button) {
+        button.addEventListener("click", function () {
+          const card = button.closest(".shop-product-card");
+          const image = card.querySelector(".shop-product-image img");
+
+          previousFocus = document.activeElement;
+
+          modalImage.src = image.getAttribute("src");
+          modalImage.alt = image.alt;
+          modalTitle.textContent = card.querySelector(".shop-product-info h2").textContent;
+          modalPrice.textContent = card.querySelector(".product-price").textContent;
+          modalLink.href = "product-details.html?id=" + card.dataset.productId;
+
+          modal.classList.add("open");
+          modal.setAttribute("aria-hidden", "false");
+          document.body.style.overflow = "hidden";
+          closeButton.focus();
+        });
+      });
+
+      closeButton.addEventListener("click", closeQuickView);
+
+      modal.addEventListener("click", function (event) {
+        if (event.target === modal) closeQuickView();
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (!modal.classList.contains("open")) return;
+
+        if (event.key === "Escape") {
+          closeQuickView();
+        }
+
+        if (event.key === "Tab") {
+          const focusable = Array.from(
+            modal.querySelectorAll("button:not([disabled]), a[href]")
+          );
+
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        }
+      });
+
+    });
+  </script>
+
+  <!-- EXISTING GLOBALSTEPPER CART, WISHLIST AND THEME SCRIPT -->
   <script src="js/script.js?v=20261119-final"></script>
 
 </body>
